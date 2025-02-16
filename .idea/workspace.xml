@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="efzfz">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="second commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/services/AideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/services/AideService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,9 +17,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -111,7 +109,7 @@
       <workItem from="1739621673759" duration="3469000" />
       <workItem from="1739625407617" duration="14511000" />
       <workItem from="1739647528573" duration="16000" />
-      <workItem from="1739705504968" duration="6070000" />
+      <workItem from="1739705504968" duration="8262000" />
     </task>
     <task id="LOCAL-00001" summary="efzfz">
       <option name="closed" value="true" />
@@ -121,7 +119,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739706074669</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="second commit">
+      <option name="closed" value="true" />
+      <created>1739712610741</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739712610741</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,6 +135,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="efzfz" />
-    <option name="LAST_COMMIT_MESSAGE" value="efzfz" />
+    <MESSAGE value="second commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
   </component>
 </project>
