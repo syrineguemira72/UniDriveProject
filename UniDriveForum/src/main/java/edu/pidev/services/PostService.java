@@ -1,5 +1,6 @@
 package edu.pidev.services;
 
+import edu.pidev.entities.Interaction;
 import edu.pidev.entities.Post;
 import edu.pidev.interfaces.Iservice;
 import edu.pidev.tools.MyConnection;
@@ -29,7 +30,7 @@ public class PostService implements Iservice <Post> {
             }
             System.out.println("Success!");
         } catch (SQLException e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("error"+e.getMessage());
         }
     }
 
@@ -100,5 +101,24 @@ public class PostService implements Iservice <Post> {
             }
         }
         return null; // Retourne null si aucun post trouvé
+    }
+    public List<Interaction> getCommentsByPostId(int postId) {
+        List<Interaction> comments = new ArrayList<>();
+        String query = "SELECT * FROM interaction WHERE postId = ?"; // Assurez-vous que la table s'appelle bien "interaction"
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setInt(1, postId);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Interaction interaction = new Interaction();
+                interaction.setId(rs.getInt("id"));
+                interaction.setContent(rs.getString("content"));
+                interaction.setDate(rs.getDate("date").toLocalDate());
+                interaction.setPostId(rs.getInt("postId"));
+                comments.add(interaction);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des commentaires : " + e.getMessage());
+        }
+        return comments;
     }
 }

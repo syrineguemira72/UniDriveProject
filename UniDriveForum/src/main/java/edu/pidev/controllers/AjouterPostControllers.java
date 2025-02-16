@@ -26,10 +26,23 @@ public class AjouterPostControllers {
         this.homePostControllers = homePostControllers;
     }
 
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     @FXML
     void ajouterpost(ActionEvent event) {
         String description = descriptionpost.getText();
         String title = titlepost.getText();
+        if (title.isEmpty() || description.isEmpty()) {
+            showAlert("Erreur", "Veuillez remplir tous les champs obligatoires.");
+            return;
+        }
 
         // Créer un nouveau post
         Post post = new Post(description, title);

@@ -5,38 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3dd453b-7b41-4fdb-802b-c60f43385e8b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Profile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Utilisateur.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/interfaces/Iservice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/ProfileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tests/MainClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tools/MyConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/Home.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/ModifierPostControllers.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/entities/Interaction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/entities/InteractionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/entities/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/interfaces/Iservice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/InteractionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/PostService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tests/MainClass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tools/MyConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/AjouterPost.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/ModifierPost.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/InteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/InteractionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tests/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tests/MainClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -64,6 +53,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.MainClass.executor": "Run",
     "Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -88,6 +78,19 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="MainClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="edu.pidev.tests.MainClass" />
+      <module name="UniDrive" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="edu.pidev.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="UniDriveProject" />
       <method v="2">
@@ -185,6 +188,11 @@
       <option name="docutils_open_in_browser" value="false" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainClass" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -206,7 +214,7 @@
       <workItem from="1739700487507" duration="22000" />
       <workItem from="1739700587322" duration="328000" />
       <workItem from="1739700936651" duration="185000" />
-      <workItem from="1739701172916" duration="690000" />
+      <workItem from="1739701172916" duration="16797000" />
     </task>
     <servers />
   </component>

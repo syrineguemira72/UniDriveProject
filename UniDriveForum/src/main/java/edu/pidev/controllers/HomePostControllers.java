@@ -1,6 +1,8 @@
 package edu.pidev.controllers;
 
+import edu.pidev.entities.Interaction;
 import edu.pidev.entities.Post;
+import edu.pidev.services.InteractionService;
 import edu.pidev.services.PostService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,9 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.util.Callback;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,11 +25,9 @@ import java.util.Optional;
 
 public class HomePostControllers {
     @FXML
-    private Label homepage;
-    @FXML
-    private ListView<String> postListView; // ListView pour afficher les posts
+    private ListView<Post> postListView; // ListView pour afficher les posts
 
-    private ObservableList<String> postList = FXCollections.observableArrayList(); // Liste observable pour les posts
+    private ObservableList<Post> postList = FXCollections.observableArrayList(); // Liste observable pour les posts
 
     private final PostService postService = new PostService();
 
@@ -31,6 +35,86 @@ public class HomePostControllers {
     public void initialize() {
         // Charger les posts au démarrage
         refreshPostList();
+        // Configurer la ListView pour afficher les posts et les commentaires
+        postListView.setCellFactory(new Callback<>() {
+            @Override
+            public ListCell<Post> call(ListView<Post> param) {
+                return new ListCell<>() {
+                    @Override
+                    protected void updateItem(Post post, boolean empty) {
+                        super.updateItem(post, empty);
+
+                        if (empty || post == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            // Créer un conteneur pour le post et les commentaires
+                            VBox container = new VBox(10);
+
+                            // Afficher le post
+                            Text postText = new Text(post.getTitle() + " : " + post.getDescription());
+                            container.getChildren().add(postText);
+
+                            // Bouton "Commenter"
+                            Button commentButton = new Button("Commenter");
+                            commentButton.setOnAction(event -> {
+                                try {
+                                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Ajoutercommentaire.fxml"));
+                                    Parent root = fxmlLoader.load();
+
+                                    // Passer l'ID du post à Ajoutercommentairecontrollers
+                                    Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
+                                    ajouterCommentaireControllers.setPostId(post.getId());
+
+                                    // Changer la scène actuelle
+                                    postListView.getScene().setRoot(root);
+                                } catch (IOException e) {
+                                    System.err.println("Erreur lors du chargement de Ajoutercommentaire.fxml : " + e.getMessage());
+                                }
+                            });
+                            container.getChildren().add(commentButton);
+
+                            // Afficher les commentaires
+                            List<Interaction> comments = postService.getCommentsByPostId(post.getId());
+                            for (Interaction comment : comments) {
+                                Text commentText = new Text("Commentaire : " + comment.getContent());
+                                container.getChildren().add(commentText);
+
+                                // Bouton "Supprimer" pour chaque commentaire
+                                Button deleteCommentButton = new Button("Supprimer");
+                                deleteCommentButton.setOnAction(event -> {
+                                    InteractionService interactionService = new InteractionService();
+                                    interactionService.removeEntity(comment);
+                                    refreshPostList(); // Rafraîchir la liste après suppression
+                                });
+                                container.getChildren().add(deleteCommentButton);
+
+                                // Bouton "Modifier" pour chaque commentaire
+                                Button updateCommentButton = new Button("Modifier");
+                                updateCommentButton.setOnAction(event -> {
+                                    try {
+                                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ModifierCommentaire.fxml"));
+                                        Parent root = fxmlLoader.load();
+
+                                        // Passer le commentaire à modifier à ModifierCommentaireControllers
+                                        ModifierCommentaireControllers modifierCommentaireControllers = fxmlLoader.getController();
+                                        modifierCommentaireControllers.setCommentToUpdate(comment);
+
+                                        // Changer la scène actuelle
+                                        postListView.getScene().setRoot(root);
+                                    } catch (IOException e) {
+                                        System.err.println("Erreur lors du chargement de ModifierCommentaire.fxml : " + e.getMessage());
+                                    }
+                                });
+                                container.getChildren().add(updateCommentButton);
+                            }
+
+                            setGraphic(container);
+                        }
+                    }
+                };
+            }
+        });
     }
 
     @FXML
@@ -53,9 +137,9 @@ public class HomePostControllers {
 
     @FXML
     void updatee(ActionEvent event) {
-        String selectedPostText = postListView.getSelectionModel().getSelectedItem();
+        Post selectedPost = postListView.getSelectionModel().getSelectedItem();
 
-        if (selectedPostText == null) {
+        if (selectedPost == null) {
             showAlert("Erreur", "Veuillez sélectionner un post à modifier.");
             return;
         }
@@ -68,9 +152,7 @@ public class HomePostControllers {
             ModifierPostControllers modifierPostControllers = fxmlLoader.getController();
 
             // Passer les données du post sélectionné à ModifierPostControllers
-            int postId = extractIdFromText(selectedPostText);
-            Post postToUpdate = postService.getById(postId);
-            modifierPostControllers.setPostToUpdate(postToUpdate);
+            modifierPostControllers.setPostToUpdate(selectedPost);
             modifierPostControllers.setHomePostControllers(this);
 
             postListView.getScene().setRoot(root);
@@ -81,9 +163,9 @@ public class HomePostControllers {
 
     @FXML
     void removee(ActionEvent event) {
-        String selectedPostText = postListView.getSelectionModel().getSelectedItem();
+        Post selectedPost = postListView.getSelectionModel().getSelectedItem();
 
-        if (selectedPostText == null) {
+        if (selectedPost == null) {
             showAlert("Erreur", "Veuillez sélectionner un post à supprimer.");
             return;
         }
@@ -96,10 +178,7 @@ public class HomePostControllers {
 
         Optional<ButtonType> result = confirmation.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            int postId = extractIdFromText(selectedPostText);
-            Post postToDelete = new Post();
-            postToDelete.setId(postId);
-            postService.removeEntity(postToDelete);
+            postService.removeEntity(selectedPost);
 
             // Rafraîchir la liste après suppression
             refreshPostList();
@@ -107,22 +186,11 @@ public class HomePostControllers {
         }
     }
 
-    // Méthode pour extraire l'ID du texte affiché (ex: "5 - Mon Post")
-    private int extractIdFromText(String text) {
-        String[] parts = text.split(" - ");
-        return Integer.parseInt(parts[0]);
-    }
-
-    // Méthode pour rafraîchir la liste des posts
     public void refreshPostList() {
-        postList.clear();
-        List<Post> posts = postService.getAllData();
-
-        for (Post post : posts) {
-            postList.add(post.getId() + " - " + post.getTitle() + " : " + post.getDescription());
-        }
-
-        postListView.setItems(postList);
+        postList.clear(); // Vider la liste actuelle
+        List<Post> posts = postService.getAllData(); // Récupérer les posts depuis le service
+        postList.addAll(posts); // Ajouter les nouveaux posts à la liste observable
+        postListView.setItems(postList); // Mettre à jour la ListView
     }
 
     // Méthode pour afficher une alerte
