@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="efzfz">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/services/AideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/services/AideService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +21,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -68,7 +65,7 @@
     "Maven.gestion_aide [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "gestionAide",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/mrspe/Downloads/crud-operations-using-java-and-mysql-master",
     "node.js.detected.package.eslint": "true",
@@ -114,7 +111,7 @@
       <workItem from="1739621673759" duration="3469000" />
       <workItem from="1739625407617" duration="14511000" />
       <workItem from="1739647528573" duration="16000" />
-      <workItem from="1739705504968" duration="665000" />
+      <workItem from="1739705504968" duration="6070000" />
     </task>
     <task id="LOCAL-00001" summary="efzfz">
       <option name="closed" value="true" />

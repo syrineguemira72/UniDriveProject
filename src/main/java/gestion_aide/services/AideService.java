@@ -51,13 +51,13 @@ public class AideService implements Iservice<aide> {
 
     @Override
     public void updateEntity(int id, aide aide) {
-        String requete = "UPDATE aide SET type = ?, description = ?, montant = ?, WHERE id = ?";
+        String requete = "UPDATE aide SET type = ?, description = ?, montant = ? WHERE id = ?";
 
         try (PreparedStatement pst = cnx.prepareStatement(requete)) {
             pst.setString(1, aide.getType());
             pst.setString(2, aide.getDescription());
             pst.setString(3, aide.getMontant());
-            pst.setInt(4, id);
+            pst.setInt(4, id);  // Set the ID to match the row in the database
             int rowsAffected = pst.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Aide mise à jour avec succès!");
@@ -68,6 +68,7 @@ public class AideService implements Iservice<aide> {
             System.out.println("Erreur lors de la mise à jour: " + e.getMessage());
         }
     }
+
 
     @Override
     public List<aide> getallData() {

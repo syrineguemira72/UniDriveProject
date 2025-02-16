@@ -8,38 +8,47 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="469.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_aide.controller.AjouterAide">
+<AnchorPane prefHeight="469.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_aide.controller.AjouterAide">
     <children>
-        <TextField fx:id="typetextfield" layoutX="193.0" layoutY="24.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" />
-        <TextField fx:id="descriptiontextfield" layoutX="194.0" layoutY="61.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" />
-        <Label layoutX="112.0" layoutY="28.0" prefHeight="18.0" prefWidth="73.0" text="Type :" />
-        <Label layoutX="111.0" layoutY="64.0" prefHeight="18.0" prefWidth="74.0" text="Description :" />
-        <Button layoutX="94.0" layoutY="139.0" mnemonicParsing="false" onAction="#ajouterAideaction" text="Valider" />
-        <TextField fx:id="montanttextfield" layoutX="194.0" layoutY="98.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
-        <Label layoutX="111.0" layoutY="101.0" prefHeight="18.0" prefWidth="74.0" text="Montant :" />
-        <Button layoutX="375.0" layoutY="139.0" mnemonicParsing="false" text="Delete" />
-        <Button layoutX="279.0" layoutY="139.0" mnemonicParsing="false" text="Update" />
-        <Button layoutX="194.0" layoutY="139.0" mnemonicParsing="false" text="Save" />
-        <Label layoutX="52.0" layoutY="183.0" text="Search :" />
-        <TextField layoutX="105.0" layoutY="178.0" prefHeight="26.0" prefWidth="398.0" promptText="Search" />
-            <TableView fx:id="aideTable" layoutX="43.0" layoutY="216.0" prefHeight="238.0" prefWidth="527.0">
+        <TextField fx:id="typetextfield" layoutX="165.0" layoutY="37.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" />
+        <TextField fx:id="descriptiontextfield" layoutX="164.0" layoutY="74.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" />
+        <Label layoutX="75.0" layoutY="41.0" prefHeight="18.0" prefWidth="73.0" text="Type :" />
+        <Label layoutX="75.0" layoutY="78.0" prefHeight="18.0" prefWidth="74.0" text="Description :" />
+        <Button layoutX="122.0" layoutY="151.0" mnemonicParsing="false" onAction="#ajouterAideaction" text="Valider" />
+        <TextField fx:id="montanttextfield" layoutX="164.0" layoutY="111.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
+        <Label layoutX="74.0" layoutY="115.0" prefHeight="18.0" prefWidth="74.0" text="Montant :" />
+        <Label layoutX="422.0" layoutY="180.0" text="Search :" />
+        <TextField layoutX="472.0" layoutY="176.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" />
+            <TableView fx:id="aideTable" layoutX="24.0" layoutY="216.0" prefHeight="238.0" prefWidth="679.0">
                 <columns>
-                    <TableColumn fx:id="idColumn" prefWidth="100.0" text="ID">
+                    <TableColumn fx:id="idColumn" prefWidth="45.59994125366211" text="ID">
                         <cellValueFactory>
                             <PropertyValueFactory property="id" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="typeColumn" prefWidth="150.0" text="Type">
+                    <TableColumn fx:id="typeColumn" prefWidth="128.0" text="Type">
                         <cellValueFactory>
-                            <PropertyValueFactory property="nom" />
+                            <PropertyValueFactory property="type" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn fx:id="descriptionColumn" prefWidth="150.0" text="Description">
+                    <TableColumn fx:id="descriptionColumn" prefWidth="200.8000030517578" text="Description">
                         <cellValueFactory>
-                            <PropertyValueFactory property="prenom" />
+                            <PropertyValueFactory property="description" />
                         </cellValueFactory>
                     </TableColumn>
+                    <TableColumn fx:id="montantColumn" prefWidth="119.199951171875" text="Montant">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="montant" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="CreatedAtColumn" prefWidth="183.9999877929688" text="Created_at">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="CreatedAt" />
+                    </cellValueFactory>
+                </TableColumn>
                 </columns>
             </TableView>
+      <Button fx:id="deleteColumn1" layoutX="292.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Delete" />
+        <Button layoutX="208.0" layoutY="151.0" mnemonicParsing="false" onAction="#updateAction" text="Update" />
     </children>
 </AnchorPane>
