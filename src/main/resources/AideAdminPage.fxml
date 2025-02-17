@@ -8,15 +8,15 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="469.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_aide.controller.NextPageController">
+<AnchorPane prefHeight="469.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_aide.controller.AideAdmin">
 <children>
-    <TextField fx:id="typetextfield" layoutX="165.0" layoutY="37.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" />
-    <TextField fx:id="descriptiontextfield" layoutX="164.0" layoutY="74.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" />
-    <Label layoutX="75.0" layoutY="41.0" prefHeight="18.0" prefWidth="73.0" text="Type :" />
-    <Label layoutX="75.0" layoutY="78.0" prefHeight="18.0" prefWidth="74.0" text="Description :" />
-    <Button layoutX="122.0" layoutY="151.0" mnemonicParsing="false" onAction="#ajouterAideaction" text="Valider" />
-    <TextField fx:id="montanttextfield" layoutX="164.0" layoutY="111.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
-    <Label layoutX="74.0" layoutY="115.0" prefHeight="18.0" prefWidth="74.0" text="Montant :" />
+    <TextField fx:id="typetextfield" layoutX="182.0" layoutY="40.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" />
+    <TextField fx:id="descriptiontextfield" layoutX="181.0" layoutY="77.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" />
+    <Label layoutX="92.0" layoutY="44.0" prefHeight="18.0" prefWidth="73.0" text="Type :" />
+    <Label layoutX="92.0" layoutY="81.0" prefHeight="18.0" prefWidth="74.0" text="Description :" />
+    <Button layoutX="143.0" layoutY="154.0" mnemonicParsing="false" onAction="#ajouterAideaction" text="Valider" />
+    <TextField fx:id="montanttextfield" layoutX="181.0" layoutY="114.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
+    <Label layoutX="91.0" layoutY="118.0" prefHeight="18.0" prefWidth="74.0" text="Montant :" />
     <Label layoutX="422.0" layoutY="180.0" text="Search :" />
     <TextField layoutX="472.0" layoutY="176.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" />
     <TableView fx:id="aideTable" layoutX="24.0" layoutY="216.0" prefHeight="238.0" prefWidth="679.0">
@@ -48,9 +48,10 @@
             </TableColumn>
         </columns>
     </TableView>
-    <Button fx:id="deleteColumn1" layoutX="292.0" layoutY="151.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Delete" />
-    <Button layoutX="208.0" layoutY="151.0" mnemonicParsing="false" onAction="#updateAction" text="Update" />
-    <Button layoutX="662.0" layoutY="24.0" mnemonicParsing="false" onAction="#goToBack" text="Back" />
+    <Button fx:id="deleteColumn1" layoutX="313.0" layoutY="154.0" mnemonicParsing="false" onAction="#deleteSelectedRow" text="Delete" />
+    <Button layoutX="229.0" layoutY="154.0" mnemonicParsing="false" onAction="#updateAction" text="Update" />
+    <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToBack" text="Back" />
+    <Button layoutX="669.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToAnotherPage" text="Next" />
 
 </children>
 </AnchorPane>

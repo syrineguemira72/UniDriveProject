@@ -86,7 +86,7 @@ public class AjouterAide {
     @FXML
     void goToAnotherPage(ActionEvent event) {
         // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/NextPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AideAdminPage.fxml"));
         try {
             // Load the new page and set it as the root
             Parent root = fxmlLoader.load();

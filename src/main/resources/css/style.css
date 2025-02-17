@@ -1,0 +1,65 @@
+/* General Styles */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #f4f4f4;
+}
+
+/* Title Styles */
+.title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2C3E50;
+    -fx-padding: 10 0;
+}
+
+/* Label Styles */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495E;
+    -fx-padding: 5;
+}
+
+/* TextField Styles */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #BDC3C7;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* Submit Button */
+.submit-button {
+    -fx-background-color: #3498DB;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+/* Admin Button */
+.admin-button {
+    -fx-background-color: #2ECC71;
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);
+}
+
+/* Button Hover Effects */
+.submit-button:hover, .admin-button:hover {
+    -fx-background-color: #2980B9;
+}
+
+/* Spacing Between Components */
+.AnchorPane {
+    -fx-padding: 30 20 20 20;
+}
+
+/* Padding for text fields */
+.text-field {
+    -fx-padding: 5;
+}

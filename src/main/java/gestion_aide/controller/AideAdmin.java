@@ -8,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class NextPageController{
+public class AideAdmin {
 
     @FXML
     private TextField typetextfield;
@@ -45,7 +44,7 @@ public class NextPageController{
 
     private AideService aideService;  // Service class for interacting with the database
 
-    public NextPageController() {
+    public AideAdmin() {
         aideService = new AideService();
     }
 
@@ -196,7 +195,7 @@ public class NextPageController{
     @FXML
     void goToAnotherPage(ActionEvent event) {
         // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/NextPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/BeneficiaireAdminPage.fxml"));
         try {
             // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
@@ -234,6 +233,7 @@ public class NextPageController{
             System.out.println("Erreur de navigation : " + e.getMessage());
         }
     }
+
 
 }
 

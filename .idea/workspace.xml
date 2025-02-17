@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="second commit">
+    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="Third commit">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AideController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AjouterAide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/NextPageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gestion_aide/controller/AideAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/CRUD.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/NextPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/AideAdminPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,26 +23,27 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
+        <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "walidismail1"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;walidismail1&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/syrineguemira72/UniDriveProject.git",
-    "accountId": "334d85d5-2725-48db-b835-a172f734a6a0"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/syrineguemira72/UniDriveProject.git&quot;,
+    &quot;accountId&quot;: &quot;334d85d5-2725-48db-b835-a172f734a6a0&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -57,24 +63,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.Unknown [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "Maven.gestion_aide [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "gestionAide",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/mrspe/Downloads/crud-operations-using-java-and-mysql-master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.Unknown [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.gestion_aide [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;gestionAide&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mrspe/Downloads/crud-operations-using-java-and-mysql-master&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="gestion_aide.controller" />
@@ -83,11 +90,11 @@
       <recent name="C:\Users\mrspe\IdeaProjects\GEstion_aide" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gestion_aide.controller" />
       <recent name="gestion_aide.tools" />
       <recent name="gestion_aide.services" />
       <recent name="gestion_aide.interfaces" />
       <recent name="gestion_aide.entities" />
-      <recent name="gestion_aide.controller" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -109,7 +116,11 @@
       <workItem from="1739621673759" duration="3469000" />
       <workItem from="1739625407617" duration="14511000" />
       <workItem from="1739647528573" duration="16000" />
-      <workItem from="1739705504968" duration="8262000" />
+      <workItem from="1739705504968" duration="10943000" />
+      <workItem from="1739781148906" duration="4599000" />
+      <workItem from="1739796413425" duration="3340000" />
+      <workItem from="1739802256029" duration="2730000" />
+      <workItem from="1739812024943" duration="2919000" />
     </task>
     <task id="LOCAL-00001" summary="efzfz">
       <option name="closed" value="true" />
@@ -127,15 +138,35 @@
       <option name="project" value="LOCAL" />
       <updated>1739712610741</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Third commit">
+      <option name="closed" value="true" />
+      <created>1739714547260</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739714547260</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="efzfz" />
     <MESSAGE value="second commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="second commit" />
+    <MESSAGE value="Third commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Third commit" />
   </component>
 </project>
