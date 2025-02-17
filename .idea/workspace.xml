@@ -5,15 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3dd453b-7b41-4fdb-802b-c60f43385e8b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Profile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Utilisateur.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/interfaces/Iservice.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/ProfileService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tests/MainClass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tools/MyConnection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/ModifierCommentaireControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/ModifierCommentaireControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/AjouterCommentaire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/AjouterCommentaire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/AjouterPost.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/AjouterPost.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/CSS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/ModifierCommentaire.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/ModifierCommentaire.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/ModifierPost.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/ModifierPost.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +58,7 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.MainClass.executor": "Run",
+    "Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:jlink].executor": "Run",
     "Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -219,6 +223,7 @@
       <workItem from="1739780531951" duration="157000" />
       <workItem from="1739789645619" duration="84000" />
       <workItem from="1739789752922" duration="1333000" />
+      <workItem from="1739812000560" duration="13599000" />
     </task>
     <servers />
   </component>

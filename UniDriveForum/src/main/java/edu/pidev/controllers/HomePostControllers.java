@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -80,16 +81,18 @@ public class HomePostControllers {
                                 Text commentText = new Text("Commentaire : " + comment.getContent());
                                 container.getChildren().add(commentText);
 
-                                // Bouton "Supprimer" pour chaque commentaire
+                                // Créer un HBox pour les boutons "Supprimer" et "Modifier"
+                                HBox buttonContainer = new HBox(10); // 10 est l'espacement entre les boutons
+
+                                // Bouton "Supprimer"
                                 Button deleteCommentButton = new Button("Supprimer");
                                 deleteCommentButton.setOnAction(event -> {
                                     InteractionService interactionService = new InteractionService();
                                     interactionService.removeEntity(comment);
                                     refreshPostList(); // Rafraîchir la liste après suppression
                                 });
-                                container.getChildren().add(deleteCommentButton);
 
-                                // Bouton "Modifier" pour chaque commentaire
+                                // Bouton "Modifier"
                                 Button updateCommentButton = new Button("Modifier");
                                 updateCommentButton.setOnAction(event -> {
                                     try {
@@ -97,8 +100,12 @@ public class HomePostControllers {
                                         Parent root = fxmlLoader.load();
 
                                         // Passer le commentaire à modifier à ModifierCommentaireControllers
+
                                         ModifierCommentaireControllers modifierCommentaireControllers = fxmlLoader.getController();
+
+
                                         modifierCommentaireControllers.setCommentToUpdate(comment);
+                                        modifierCommentaireControllers.setHomePostControllers(HomePostControllers.this);
 
                                         // Changer la scène actuelle
                                         postListView.getScene().setRoot(root);
@@ -106,7 +113,12 @@ public class HomePostControllers {
                                         System.err.println("Erreur lors du chargement de ModifierCommentaire.fxml : " + e.getMessage());
                                     }
                                 });
-                                container.getChildren().add(updateCommentButton);
+
+                                // Ajouter les boutons au HBox
+                                buttonContainer.getChildren().addAll(deleteCommentButton, updateCommentButton);
+
+                                // Ajouter le HBox au VBox principal
+                                container.getChildren().add(buttonContainer);
                             }
 
                             setGraphic(container);

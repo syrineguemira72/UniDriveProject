@@ -36,7 +36,7 @@ public class AjouterPostControllers {
     }
 
     @FXML
-    void ajouterpost(ActionEvent event) {
+    void ajouterpost (ActionEvent event) {
         String description = descriptionpost.getText();
         String title = titlepost.getText();
         if (title.isEmpty() || description.isEmpty()) {

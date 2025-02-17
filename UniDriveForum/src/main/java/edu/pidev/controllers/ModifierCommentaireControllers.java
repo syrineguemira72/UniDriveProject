@@ -1,6 +1,7 @@
 package edu.pidev.controllers;
 
 import edu.pidev.entities.Interaction;
+import edu.pidev.entities.Post;
 import edu.pidev.services.InteractionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,17 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
 public class ModifierCommentaireControllers {
-    private HomePostControllers homePostControllers;
 
-    public void setHomePostControllers(HomePostControllers homePostControllers) {
-        this.homePostControllers = homePostControllers;
-        System.out.println("homePostControllers a été défini avec succès."); // Log de débogage
-    }
 
     @FXML
     private TextField textcomment;
@@ -28,6 +25,11 @@ public class ModifierCommentaireControllers {
     public void setCommentToUpdate(Interaction comment) {
         this.commentToUpdate = comment;
         textcomment.setText(comment.getContent()); // Pré-remplir le champ avec le contenu actuel du commentaire
+    }
+    private HomePostControllers homePostControllers;
+
+    public void setHomePostControllers( HomePostControllers homePostControllers) {
+        this.homePostControllers = homePostControllers;
     }
 
 
@@ -77,4 +79,6 @@ public class ModifierCommentaireControllers {
         alert.setHeaderText(message);
         alert.showAndWait();
     }
+
+
 }
