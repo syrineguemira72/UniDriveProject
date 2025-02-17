@@ -21,7 +21,7 @@ public class RecompenseService implements IRecompenseService {
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete);
 
              pst.setInt(1, recompense.getIdOP());
-            pst.setFloat(2, recompense.getReduction());
+            pst.setDouble(2, recompense.getReduction());
             pst.setInt(3, recompense.getIdUser());
 
             // Execute the update
@@ -40,7 +40,7 @@ public class RecompenseService implements IRecompenseService {
             PreparedStatement pre = cnx.prepareStatement(req);
 
              pre.setInt(1, recompense.getIdOP());
-            pre.setFloat(2, recompense.getReduction());
+            pre.setDouble(2, recompense.getReduction());
             pre.setInt(3, recompense.getIdUser());
             pre.setInt(4, id);
             pre.executeUpdate();

@@ -62,6 +62,46 @@ public class ObjetPerdu implements Initializable {
     private ObservableList<Objet> destinationList = FXCollections.observableArrayList();
     private Connection connection;
 
+    public boolean controlSaisie() {
+        // Vérification de l'entier (par exemple, le champ pour la quantité ou un autre champ)
+
+
+
+
+        // Vérification de la chaîne de caractères (par exemple, le champ pour le nom ou autre)
+
+
+
+
+        if (datetf.getValue()==null){
+
+
+            showAlert("Erreur", "Date ne peut pas être vide.");
+            return false;
+        }
+        if (nomtf.getText()==null || nomtf.getText().trim().isEmpty()){
+
+
+            showAlert("Erreur", "nom ne peut pas être vide.");
+            return false;
+        }
+
+        if (usertf.getText()==null || usertf.getText().trim().isEmpty()){
+
+
+            showAlert("Erreur", "Lieu ne peut pas être vide.");
+            return false;
+        }
+
+
+
+
+
+
+
+
+        return true;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -95,22 +135,24 @@ public class ObjetPerdu implements Initializable {
 
     @FXML
     void addDestination(ActionEvent event) throws SQLException {
-        String name = nomtf.getText();
-        String description = desctf.getText();
-        String user = usertf.getText();
-        String date = datetf.getValue().toString();
-        String status = "Pending"; // Default status
+       if(controlSaisie()) {
+           String name = nomtf.getText();
+           String description = usertf.getText();
+           String user = usertf.getText();
+           String date = datetf.getValue().toString();
+           String status = "Pending"; // Default status
 
-        if (name.isEmpty() || description.isEmpty() || user.isEmpty()) {
-            showAlert("Error", "All fields must be filled!");
-            return;
-        }
+           if (name.isEmpty() || description.isEmpty() || date.isEmpty()) {
+               showAlert("Error", "All fields must be filled!");
+               return;
+           }
 
-        ObjetPerduService service = new ObjetPerduService();
-        Objet destination = new Objet( name,1, description, date ,status );
-        service.ajouterObjet(destination);
-        showAlert("Success", "Objet added successfully!");
-        loadDestinations();
+           ObjetPerduService service = new ObjetPerduService();
+           Objet destination = new Objet(name, 1, description, date, status);
+           service.ajouterObjet(destination);
+           showAlert("Success", "Objet added successfully!");
+           loadDestinations();
+       }
     }
 
     @FXML
@@ -123,7 +165,7 @@ public class ObjetPerdu implements Initializable {
             showAlert("Success", "Objet deleted successfully!");
             loadDestinations();
         } else {
-            showAlert("Error", "Please select a destination to delete!");
+            showAlert("Error", "Please select an object to delete!");
         }
     }
 
@@ -225,33 +267,37 @@ System.out.println("hello");
     }
     @FXML
     void approveDestination(ActionEvent event) {
-        try {
-            cnx = MyConnection.getInstance().getCnx();
-            String value0 = idtf.getText();
+        if (controlSaisie()) {
+            try {
+                cnx = MyConnection.getInstance().getCnx();
+                String value0 = idtf.getText();
 
-            String value1 = "Approved";
+                String value1 = "trouvé";
+                String value2 = "2";
 
-            String sql = "update destination set status='"+value1+"'  where id='"+value0+"' ";
-            System.out.println(sql);
+                String sql = "update objets_perdu set status='" + value1 + "',idT='" + value2 + "'  where id='" + value0 + "' ";
+                System.out.println(sql);
 
-            pst= cnx.prepareStatement(sql);
-            pst.execute();
+                pst = cnx.prepareStatement(sql);
+                pst.execute();
 
-            nomtf.setText("");
+                nomtf.setText("");
 
-            idtf.setText("");
+                idtf.setText("");
 
-            desctf.setText("");
-            loadDestinations();
+                desctf.setText("");
+                loadDestinations();
 
 
-        } catch ( SQLException e) {
+            } catch (SQLException e) {
+            }
         }
     }
     public Objet gettempReclamation(TableColumn.CellEditEvent edittedCell) {
         Objet test = recTab.getSelectionModel().getSelectedItem();
         return test;
     }
+
     @FXML
     private void getSelected(javafx.scene.input.MouseEvent event) {
         int index = recTab.getSelectionModel().getSelectedIndex();

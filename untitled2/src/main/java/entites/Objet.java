@@ -10,7 +10,7 @@ package entites;
        public String date;
        public String status;
 
-
+public int idT;
 
        public Objet(int id, String nom, int idP, String lieuP, String date,String status) {
            this.id = id;
@@ -59,6 +59,13 @@ package entites;
        return date;
    }
 
+       public int getIdT() {
+           return idT;
+       }
+
+       public void setIdT(int idT) {
+           this.idT = idT;
+       }
 
        public void setId(int id) {
            this.id = id;
@@ -92,6 +99,7 @@ package entites;
                ", idP=" + idP +
                ", lieuP='" + lieuP + '\'' +
                ", date=" + date +
+               ", idT=" + idT +
                '}';
    }
 

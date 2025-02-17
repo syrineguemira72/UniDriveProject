@@ -2,14 +2,19 @@ package entites;
 
 public class Recompense {
     public int id;
-    public float reduction;
+    public double reduction;
     public int idOP;
     public int idUser;
 
 
-    public Recompense(int id, float reduction, int idOP, int idUser) {
+    public Recompense(int id, double reduction, int idOP, int idUser) {
         this.id = id;
         this.reduction = reduction;
+        this.idOP = idOP;
+        this.idUser = idUser;
+    }
+    public Recompense(double reduction, int idOP, int idUser) {
+         this.reduction = reduction;
         this.idOP = idOP;
         this.idUser = idUser;
     }
@@ -22,7 +27,7 @@ public class Recompense {
         return id;
     }
 
-    public float getReduction() {
+    public double getReduction() {
         return reduction;
     }
 
@@ -39,7 +44,7 @@ public class Recompense {
         this.id = id;
     }
 
-    public void setReduction(float reduction) {
+    public void setReduction(double reduction) {
         this.reduction = reduction;
     }
 
@@ -63,15 +68,6 @@ public class Recompense {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Recompense that = (Recompense) o;
-        return id == that.id &&
-                Float.compare(that.reduction, reduction) == 0 &&
-                idOP == that.idOP &&
-                idUser == that.idUser;
-    }
+
 
 }
