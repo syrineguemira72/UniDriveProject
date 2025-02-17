@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3dd453b-7b41-4fdb-802b-c60f43385e8b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/AjouterPostControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/controllers/HomePostControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/InteractionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/InteractionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/services/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tests/MainClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/java/edu/pidev/tests/MainClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UniDriveForum/src/main/resources/HomePost.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Profile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/entities/Utilisateur.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/interfaces/Iservice.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/ProfileService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tests/MainClass.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UniDriveForum/UniDrive/src/main/java/edu/unidrive/tools/MyConnection.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +66,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.general",
@@ -214,7 +215,10 @@
       <workItem from="1739700487507" duration="22000" />
       <workItem from="1739700587322" duration="328000" />
       <workItem from="1739700936651" duration="185000" />
-      <workItem from="1739701172916" duration="16797000" />
+      <workItem from="1739701172916" duration="17204000" />
+      <workItem from="1739780531951" duration="157000" />
+      <workItem from="1739789645619" duration="84000" />
+      <workItem from="1739789752922" duration="1333000" />
     </task>
     <servers />
   </component>
