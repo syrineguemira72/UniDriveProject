@@ -65,7 +65,14 @@ public class BeneficiaireService implements Iservice<Beneficiaire> {
             pst.setString(4, beneficiaire.getAdresse());
             pst.setString(5, beneficiaire.getTelephone());
             pst.setString(6, beneficiaire.getEmail());
-            pst.setInt(7, beneficiaire.getAideId());  // Set the aide_id
+
+            // Correctly handle aide_id (can be NULL)
+            if (beneficiaire.getAideId() == null) {
+                pst.setNull(7, java.sql.Types.INTEGER);
+            } else {
+                pst.setInt(7, beneficiaire.getAideId());
+            }
+
             pst.setInt(8, id);
 
             int rowsAffected = pst.executeUpdate();
@@ -78,6 +85,8 @@ public class BeneficiaireService implements Iservice<Beneficiaire> {
             System.out.println("Erreur lors de la mise à jour: " + e.getMessage());
         }
     }
+
+
 
 
     @Override

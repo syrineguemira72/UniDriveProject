@@ -48,6 +48,7 @@ public class BeneficiaireAdmin {
 
     @FXML
     private void initialize() {
+        // Initialize TableView columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomColumn.setCellValueFactory(new PropertyValueFactory<>("prenom"));
@@ -56,9 +57,36 @@ public class BeneficiaireAdmin {
         telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+        // Load initial data
         loadData();
         loadAideData();
+
+        // Add listener for row selection in TableView
+        beneficiaireTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                populateFields(newValue);
+            }
+        });
     }
+
+    // Method to populate the fields when a row is selected
+    private void populateFields(Beneficiaire beneficiaire) {
+        nomtextfield.setText(beneficiaire.getNom());
+        prenomtextfield.setText(beneficiaire.getPrenom());
+        agetextfield.setText(String.valueOf(beneficiaire.getAge()));
+        adressetextfield.setText(beneficiaire.getAdresse());
+        telephonetextfield.setText(beneficiaire.getTelephone());
+        emailtextfield.setText(beneficiaire.getEmail());
+
+        // Find and select the corresponding aide in ChoiceBox
+        for (aide a : aideChoiceBox.getItems()) {
+            if (a.getId() == beneficiaire.getAideId()) {
+                aideChoiceBox.setValue(a);
+                break;
+            }
+        }
+    }
+
 
     private void loadData() {
         List<Beneficiaire> beneficiaires = beneficiaireService.getallData();
@@ -153,13 +181,23 @@ public class BeneficiaireAdmin {
 
         try {
             selectedBeneficiaire.setAge(Integer.parseInt(agetextfield.getText()));
-            beneficiaireService.updateEntity(selectedBeneficiaire.getId(),selectedBeneficiaire);
+
+            // Get aide_id from ChoiceBox
+            aide selectedAide = aideChoiceBox.getValue();
+            if (selectedAide != null) {
+                selectedBeneficiaire.setAideId(selectedAide.getId());  // Set valid aide_id
+            } else {
+                selectedBeneficiaire.setAideId(null); // Set null if no aide is selected
+            }
+
+            beneficiaireService.updateEntity(selectedBeneficiaire.getId(), selectedBeneficiaire);
             showAlert("Succès", "Bénéficiaire mis à jour.", Alert.AlertType.INFORMATION);
             loadData();
         } catch (NumberFormatException e) {
             showAlert("Erreur", "L'âge doit être un nombre valide.", Alert.AlertType.ERROR);
         }
     }
+
     @FXML
     void goToBack(ActionEvent event) {
         // Load the new FXML file

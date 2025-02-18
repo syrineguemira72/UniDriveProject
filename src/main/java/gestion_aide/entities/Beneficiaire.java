@@ -121,15 +121,16 @@ public class Beneficiaire {
         this.email.set(email);
     }
 
-    public int getAideId() {
-        return aideId.get();
+    public Integer getAideId() {
+        return aideId.get() == 0 ? null : aideId.get(); // Return null if it's 0 (or another default value)
     }
+
 
     public IntegerProperty aideIdProperty() {
         return aideId;
     }
 
-    public void setAideId(int aideId) {
+    public void setAideId(Integer aideId) {
         this.aideId.set(aideId);
     }
 }
