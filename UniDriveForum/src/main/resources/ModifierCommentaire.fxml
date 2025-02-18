@@ -11,12 +11,10 @@
 <?import java.net.URL?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.pidev.controllers.ModifierCommentaireControllers">
     <stylesheets>
-        <URL value="@./Css/styles.css" /> <!-- Lier le fichier CSS -->
+        <URL value="@./Css/styles.css" />
     </stylesheets>
     <children>
-        <!-- Conteneur principal (HBox pour diviser la page en deux) -->
         <HBox prefHeight="400.0" prefWidth="600.0">
-            <!-- Section gauche (Formulaire) -->
             <VBox styleClass="form-section" prefWidth="300.0" prefHeight="400.0">
                 <children>
                     <TextField fx:id="textcomment" styleClass="form-field" promptText="Entrez votre commentaire" />
@@ -24,11 +22,10 @@
                 </children>
             </VBox>
 
-            <!-- Section droite (Fond bleu avec logo) -->
             <VBox styleClass="logo-section" prefWidth="300.0" prefHeight="400.0" alignment="CENTER">
                 <children>
                     <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">                        <image>
-                            <Image url="@images/logo.png" /> <!-- Chemin relatif vers l'image -->
+                            <Image url="@images/logo.png" />
                         </image>
                     </ImageView>
                 </children>

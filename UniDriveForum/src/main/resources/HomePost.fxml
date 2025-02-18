@@ -13,16 +13,13 @@
         <URL value="@./Css/styles.css" />
     </stylesheets>
     <children>
-        <!-- Titre de la page -->
-        <Label fx:id="homepage" layoutX="181.0" layoutY="14.0" prefHeight="30.0" prefWidth="199.0" text="Bienvenue dans votre Forum" textAlignment="CENTER">
+        <Label fx:id="homepage" layoutX="181.0" layoutY="14.0" prefHeight="30.0" prefWidth="199.0" text="Bienvenue dans Notre Forum" textAlignment="CENTER">
          <font>
             <Font size="19.0" />
          </font></Label>
 
-        <!-- ListView pour afficher les posts -->
         <ListView fx:id="postListView" layoutX="22.0" layoutY="56.0" prefHeight="287.0" prefWidth="556.0" />
 
-        <!-- Boutons pour créer, mettre à jour et supprimer des posts -->
         <HBox layoutX="140.0" layoutY="350.0" prefHeight="30.0" prefWidth="304.0" spacing="10">
             <Button mnemonicParsing="false" onAction="#createe" prefHeight="21.0" prefWidth="93.0" text="Poster" />
             <Button mnemonicParsing="false" onAction="#updatee" prefHeight="24.0" prefWidth="94.0" text="Modifier" />

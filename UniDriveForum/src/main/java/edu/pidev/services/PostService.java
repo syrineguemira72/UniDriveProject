@@ -58,11 +58,11 @@ public class PostService implements Iservice <Post> {
         String requete = "UPDATE `post` SET `title` = ?, `description` = ? WHERE `id` = ?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, entity.getTitle()); // Met à jour le titre
-            pst.setString(2, entity.getDescription()); // Met à jour la description
-            pst.setInt(3, entity.getId()); // Identifie le post à mettre à jour avec l'ID
+            pst.setString(1, entity.getTitle());
+            pst.setString(2, entity.getDescription());
+            pst.setInt(3, entity.getId());
 
-            int rowsAffected = pst.executeUpdate(); // Exécute la mise à jour
+            int rowsAffected = pst.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Post mis à jour avec succès !");
             } else {
@@ -94,17 +94,17 @@ public class PostService implements Iservice <Post> {
         return result;
     }
     public Post getById(int id) {
-        List<Post> posts = getAllData(); // Récupérer tous les posts
+        List<Post> posts = getAllData();
         for (Post post : posts) {
             if (post.getId() == id) {
-                return post; // Retourne le post correspondant à l'ID
+                return post;
             }
         }
-        return null; // Retourne null si aucun post trouvé
+        return null;
     }
     public List<Interaction> getCommentsByPostId(int postId) {
         List<Interaction> comments = new ArrayList<>();
-        String query = "SELECT * FROM interaction WHERE postId = ?"; // Assurez-vous que la table s'appelle bien "interaction"
+        String query = "SELECT * FROM interaction WHERE postId = ?";
         try (PreparedStatement pst = cnx.prepareStatement(query)) {
             pst.setInt(1, postId);
             ResultSet rs = pst.executeQuery();

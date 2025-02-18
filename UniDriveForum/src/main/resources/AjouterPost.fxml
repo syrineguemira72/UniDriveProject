@@ -15,20 +15,17 @@
       <URL value="@./Css/styles.css" />
    </stylesheets>
    <children>
-      <!-- Conteneur principal (HBox pour diviser la page en deux) -->
       <HBox prefHeight="400.0" prefWidth="600.0">
-         <!-- Section gauche (Formulaire) -->
          <VBox prefHeight="400.0" prefWidth="300.0" styleClass="form-section">
             <children>
-               <Label prefHeight="20.0" prefWidth="76.0" styleClass="form-label" text="TITLE:" textAlignment="RIGHT" />
+               <Label prefHeight="20.0" prefWidth="76.0" styleClass="form-label" text="Titre:" textAlignment="RIGHT" />
                <TextField fx:id="titlepost" styleClass="form-field" />
-               <Label styleClass="form-label" text="DESCRIPTION:" />
+               <Label styleClass="form-label" text="Description:" />
                <TextField fx:id="descriptionpost" prefHeight="100.0" styleClass="form-field" />
                <Button onAction="#ajouterpost" prefHeight="40.0" prefWidth="142.0" styleClass="form-button" text="Créer Post" />
             </children>
          </VBox>
 
-         <!-- Section droite (Fond bleu avec logo) -->
          <VBox alignment="CENTER" prefHeight="375.0" prefWidth="300.0" styleClass="logo-section">
             <children>
                <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">

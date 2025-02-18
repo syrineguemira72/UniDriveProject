@@ -1,187 +1,161 @@
-/* styles.css */
 
-/* Importer la police Poppins */
 @font-face {
     src: url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
     font-family: 'Poppins';
 }
 
-/* Appliquer la police Poppins à tous les éléments */
 .root {
     -fx-font-family: 'Poppins', sans-serif;
-    -fx-background-color: #F0F8FF; /* Fond clair (bleu très clair) */
+    -fx-background-color: #F0F8FF;
     -fx-padding: 20;
 }
 
-/* Style pour le titre de la page */
 #homepage {
-    -fx-font-size: 32px; /* Taille agrandie */
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-font-style: italic; /* Italique */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-font-style: italic;
+    -fx-text-fill: #000080;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 1);
 }
 
-/* Style pour la ListView */
 #postListView {
-    -fx-background-color: #FFFFFF; /* Fond blanc */
-    -fx-border-color: #008000; /* Vert */
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #008000;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.5, 0, 1);
 }
 
-/* Style pour les boutons */
 .button {
-    -fx-background-color: #87CEEB; /* Bleu ciel */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
     -fx-font-weight: bold;
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-border-color: #000080;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-padding: 6 12; /* Taille ajustée */
-    -fx-border-width: 2px; /* Épaisseur du contour */
+    -fx-padding: 6 12;
+    -fx-border-width: 2px;
 }
 
-/* Désactiver l'effet de survol */
 .button:hover {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Désactiver l'effet de clic */
 .button:armed {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Style pour les boutons dans la ListView */
 .list-cell .button {
-    -fx-padding: 2 4; /* Taille réduite pour les boutons dans la ListView */
-    -fx-min-width: 10px; /* Largeur minimale */
-    -fx-min-height: 10px; /* Hauteur minimale */
+    -fx-padding: 2 4;
+    -fx-min-width: 10px;
+    -fx-min-height: 10px;
 }
 
-/* Style pour les commentaires */
 .text {
-    -fx-fill: #000080; /* Bleu marine */
+    -fx-fill: #000080;
     -fx-font-size: 14px;
 }
 
-/* Style pour les boutons de commentaire */
 .comment-button {
-    -fx-background-color: #87CEEB; /* Bleu ciel */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
     -fx-font-weight: bold;
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-border-color: #000080;
     -fx-border-radius: 3;
     -fx-background-radius: 3;
-    -fx-padding:2 4; /* Taille réduite */
-    -fx-border-width: 2px; /* Épaisseur du contour */
+    -fx-padding:2 4;
+    -fx-border-width: 2px;
 }
 
-/* Désactiver l'effet de survol pour les boutons de commentaire */
 .comment-button:hover {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Désactiver l'effet de clic pour les boutons de commentaire */
 .comment-button:armed {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Style pour les boutons de suppression */
 .delete-button {
-    -fx-background-color: #87CEEB; /* Bleu ciel */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
     -fx-font-weight: bold;
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-border-color: #000080;
     -fx-border-radius: 3;
     -fx-background-radius: 3;
-    -fx-padding: 2 4; /* Taille réduite */
-    -fx-border-width: 2px; /* Épaisseur du contour */
+    -fx-padding: 2 4;
+    -fx-border-width: 2px;
 }
 
-/* Désactiver l'effet de survol pour les boutons de suppression */
 .delete-button:hover {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Désactiver l'effet de clic pour les boutons de suppression */
 .delete-button:armed {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Style pour les boutons de modification */
 .update-button {
-    -fx-background-color: #87CEEB; /* Bleu ciel */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
     -fx-font-weight: bold;
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-border-color: #000080;
     -fx-border-radius: 3;
     -fx-background-radius: 3;
-    -fx-padding: 2 4; /* Taille réduite */
-    -fx-border-width: 2px; /* Épaisseur du contour */
+    -fx-padding: 2 4;
+    -fx-border-width: 2px;
 }
 
-/* Désactiver l'effet de survol pour les boutons de modification */
 .update-button:hover {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
 
-/* Désactiver l'effet de clic pour les boutons de modification */
 .update-button:armed {
-    -fx-background-color: #87CEEB; /* Même couleur que l'état normal */
+    -fx-background-color: #87CEEB;
 }
-/* Style de base pour l'AnchorPane */
 .root {
-    -fx-background-color: #F0F8FF; /* Fond clair (bleu très clair) */
+    -fx-background-color: #F0F8FF;
     -fx-padding: 0;
 }
 
-/* styles.css */
 
-/* Style pour la section du formulaire (gauche) */
 .form-section {
-    -fx-background-color: #FFFFFF; /* Fond blanc */
+    -fx-background-color: #FFFFFF;
     -fx-padding: 20;
-    -fx-spacing: 10; /* Espacement entre les éléments */
+    -fx-spacing: 10;
 }
 
-/* Style pour les labels du formulaire */
 .form-label {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-text-fill: #000080;
 }
 
-/* Style pour les champs de formulaire */
 .form-field {
-    -fx-background-color: #F0F8FF; /* Fond bleu clair */
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-background-color: #F0F8FF;
+    -fx-border-color: #000080;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
     -fx-padding: 5;
     -fx-font-size: 14px;
 }
 
-/* Style pour le bouton du formulaire */
 .form-button {
-    -fx-background-color: #87CEEB; /* Bleu ciel */
-    -fx-text-fill: #000080; /* Bleu marine */
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
     -fx-font-weight: bold;
-    -fx-border-color: #000080; /* Contour bleu marine */
+    -fx-border-color: #000080;
     -fx-border-radius: 5;
     -fx-background-radius: 5;
-    -fx-padding: 8 16; /* Taille ajustée */
-    -fx-border-width: 2px; /* Épaisseur du contour */
+    -fx-padding: 8 16;
+    -fx-border-width: 2px;
 }
 
 .form-button:hover {
-    -fx-background-color: #ADD8E6; /* Bleu ciel plus clair au survol */
+    -fx-background-color: #ADD8E6;
 }
 
-/* Style pour la section du logo (droite) */
 .logo-section {
-    -fx-background-color: #87CEEB; /* Fond bleu marine */
+    -fx-background-color: #87CEEB;
     -fx-alignment: center;
     -fx-spacing: 10;
 }

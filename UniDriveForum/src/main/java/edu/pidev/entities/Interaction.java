@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class Interaction {
     private int id;
-    private String content; // Texte du commentaire ou null pour les réactions
-    private LocalDate date; // Date de l'interaction
-    private int postId; // ID du post associé
+    private String content;
+    private LocalDate date;
+    private int postId;
 
     public Interaction() {
     }
@@ -15,7 +15,6 @@ public class Interaction {
     public String toString() {
         return "Interaction{" +
                 "id=" + id +
-
                 ", content='" + content + '\'' +
                 ", date=" + date +
                 ", postId=" + postId +
@@ -29,11 +28,6 @@ public class Interaction {
     public void setId(int id) {
         this.id = id;
     }
-
-
-
-
-
 
     public String getContent() {
         return content;

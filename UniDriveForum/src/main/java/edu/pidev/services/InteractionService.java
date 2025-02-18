@@ -23,7 +23,6 @@ public class InteractionService implements Iservice<Interaction> {
 
             pst.executeUpdate();
 
-            // Récupérer l'ID généré
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 entity.setId(rs.getInt(1));
@@ -62,7 +61,7 @@ public class InteractionService implements Iservice<Interaction> {
             pst.setDate(2, Date.valueOf(entity.getDate()));
             pst.setInt(3, entity.getId());
 
-            int rowsAffected = pst.executeUpdate(); // Exécute la mise à jour
+            int rowsAffected = pst.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Post mis à jour avec succès !");
             } else {

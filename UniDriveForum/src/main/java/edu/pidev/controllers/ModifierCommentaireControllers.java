@@ -1,5 +1,4 @@
 package edu.pidev.controllers;
-
 import edu.pidev.entities.Interaction;
 import edu.pidev.entities.Post;
 import edu.pidev.services.InteractionService;
@@ -24,7 +23,7 @@ public class ModifierCommentaireControllers {
 
     public void setCommentToUpdate(Interaction comment) {
         this.commentToUpdate = comment;
-        textcomment.setText(comment.getContent()); // Pré-remplir le champ avec le contenu actuel du commentaire
+        textcomment.setText(comment.getContent());
     }
     private HomePostControllers homePostControllers;
 
@@ -39,26 +38,20 @@ public class ModifierCommentaireControllers {
         if (commentToUpdate != null) {
             String newContent = textcomment.getText();
             commentToUpdate.setContent(newContent);
-
             InteractionService interactionService = new InteractionService();
             interactionService.updateEntity(commentToUpdate);
-
-            // Afficher un message de succès
             showAlert("Succès", "Le commentaire a été mis à jour avec succès.");
-
-            // Rediriger vers HomePostControllers
             if (homePostControllers != null) {
-                homePostControllers.refreshPostList(); // Rafraîchir la liste des posts
+                homePostControllers.refreshPostList();
 
-                // Charger la scène HomePost.fxml
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
                     Parent root = fxmlLoader.load();
 
-                    // Récupérer la scène actuelle
+
                     Scene scene = textcomment.getScene();
                     if (scene != null) {
-                        scene.setRoot(root); // Définir la nouvelle racine
+                        scene.setRoot(root);
                     } else {
                         System.err.println("La scène actuelle est null.");
                     }
