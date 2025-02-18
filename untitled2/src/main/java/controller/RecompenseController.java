@@ -107,8 +107,7 @@ public class RecompenseController implements Initializable {
         objp.setCellValueFactory(new PropertyValueFactory<>("idOP"));
         idT.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         reduction.setCellValueFactory(new PropertyValueFactory<>("reduction"));
-        id.setCellValueFactory(new PropertyValueFactory<>("idT"));
-        idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
+         idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
 
