@@ -81,6 +81,13 @@ public class SignUpController {
             return;
         }
 
+        // Vérification si l'email est unique
+        UserService userService = new UserService();
+        if (!userService.isEmailUnique(email)) {
+            showAlert(Alert.AlertType.ERROR, "Email déjà utilisé", "Cet email est déjà utilisé. Veuillez en choisir un autre.");
+            return;
+        }
+
         // Vérification du mot de passe
         if (!isValidPassword(pass)) {
             showAlert(Alert.AlertType.ERROR, "Mot de passe faible",
@@ -104,7 +111,6 @@ public class SignUpController {
         profile.setUtilisateur(user);
         user.setProfile(profile);
 
-        UserService userService = new UserService();
         ProfileService profileService = new ProfileService();
 
         try {
@@ -123,6 +129,7 @@ public class SignUpController {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
         }
     }
+
 
 
 

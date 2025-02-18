@@ -166,4 +166,19 @@ public class UserService implements Iservice<Utilisateur> {
             throw new RuntimeException("Erreur lors de la connexion : " + e.getMessage());
         }
     }
+
+    public boolean isEmailUnique(String email) {
+        String query = "SELECT COUNT(*) FROM utilisateur WHERE email = ?";
+        try {
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) == 0; // If the count is 0, the email is unique
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification de l'unicité de l'email : " + e.getMessage());
+        }
+        return false;
+    }
 }

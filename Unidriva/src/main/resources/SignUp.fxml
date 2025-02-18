@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.SignUpController">
     <children>
-        <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color:#000080;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color: #000080;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label alignment="CENTER" layoutX="128.0" layoutY="51.0" prefHeight="23.0" prefWidth="173.0" text="Sign Up" textFill="WHITE">
                     <font>

@@ -11,25 +11,36 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" prefHeight="469.0" prefWidth="607.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.HomeUniDriveController">
+<AnchorPane minHeight="-Infinity" prefHeight="469.0" prefWidth="607.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.HomeUniDriveController">
    <children>
-      <BorderPane layoutX="-2.0" layoutY="-1.0" prefHeight="400.0" prefWidth="607.0">
+      <BorderPane layoutX="-2.0" layoutY="-1.0" prefHeight="483.0" prefWidth="634.0">
          <top>
-            <HBox prefHeight="98.0" prefWidth="609.0" style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
+            <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="634.0" style="-fx-background-color: #cef0ef;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox alignment="TOP_RIGHT">
+                  <ImageView fitHeight="91.0" fitWidth="106.0" pickOnBounds="true" preserveRatio="true">
                      <HBox.margin>
-                        <Insets left="550.0" />
+                        <Insets />
+                     </HBox.margin>
+                     <image>
+                        <Image url="@images/received_945642877767257.jpeg" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="TOP_RIGHT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="90.0" prefWidth="132.0" style="-fx-background-color: #cef0ef;">
+                     <HBox.margin>
+                        <Insets left="300.0" />
                      </HBox.margin>
                      <children>
                         <ImageView fitHeight="58.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/OIP__6_-removebg-preview.png" />
                            </image>
-                        </ImageView>
-                        <Button fx:id="Profile" mnemonicParsing="false" onAction="#goprofile" text="Profile">
                            <VBox.margin>
-                              <Insets right="5.0" />
+                              <Insets left="100.0" />
+                           </VBox.margin>
+                        </ImageView>
+                        <Button fx:id="Profile" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goprofile" prefHeight="34.0" prefWidth="86.0" text="Profile">
+                           <VBox.margin>
+                              <Insets left="100.0" right="5.0" />
                            </VBox.margin>
                         </Button>
                      </children>
@@ -38,9 +49,9 @@
             </HBox>
          </top>
          <left>
-            <VBox style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="344.0" prefWidth="186.0" style="-fx-background-color: #cef0ef;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="332.0" prefWidth="155.0" style="-fx-background-color: #000080;">
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="155.0" style="-fx-background-color: #cef0ef;">
                      <children>
                         <Label text="Covoiturage" textFill="WHITE" underline="true">
                            <font>
@@ -82,22 +93,22 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="logoutbtn" onMouseClicked="#Logout" text="LogOut" textFill="WHITE" underline="true">
-                           <font>
-                              <Font name="System Bold Italic" size="17.0" />
-                           </font>
-                           <padding>
-                              <Insets left="20.0" />
-                           </padding>
-                           <VBox.margin>
-                              <Insets top="100.0" />
-                           </VBox.margin>
-                        </Label>
                      </children>
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
                   </VBox>
+                  <Label fx:id="logoutbtn" onMouseClicked="#Logout" text="LogOut" textFill="WHITE" underline="true">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="60.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </left>
