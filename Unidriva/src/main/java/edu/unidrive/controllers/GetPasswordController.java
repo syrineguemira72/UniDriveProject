@@ -49,7 +49,7 @@ public class GetPasswordController {
     private TextField usernametxt;
 
     public GetPasswordController() {
-        this.userService = new UserService(); // Instantiate your service here
+        this.userService = new UserService();
     }
 
 

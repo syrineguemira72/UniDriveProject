@@ -86,29 +86,4 @@ public class ProfileService implements Iservice<Profile> {
         return List.of();
     }
 
-    public Profile getProfileByUserId(int userId) {
-        Profile profile = null;
-        try {
-            String query = "SELECT * FROM profile WHERE utilisateur_id = ?";
-            PreparedStatement pstmt = connection.prepareStatement(query);
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                profile = new Profile(
-                        rs.getInt("id"),
-                        rs.getString("photo"),
-                        rs.getString("bio"),
-                        rs.getString("telephone"),
-                        rs.getString("adresse")
-                );
-                System.out.println("Profil trouvé : " + profile);
-            } else {
-                System.out.println("Aucun profil trouvé pour l'utilisateur ID : " + userId);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return profile;
-    }
 }

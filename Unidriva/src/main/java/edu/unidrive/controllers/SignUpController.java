@@ -68,46 +68,46 @@ public class SignUpController {
         String pass = password.getText();
         LocalDate dobDate = txtDOB.getValue();
 
-        // Vérification des champs vides
+
         if (email.isEmpty() || firstname.isEmpty() || lastname.isEmpty() ||
                 pass.isEmpty() || gender == null || dobDate == null) {
-            showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs.");
+            showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please fill in all the fields.");
             return;
         }
 
-        // Vérification du format de l'email
+
         if (!isValidEmail(email)) {
-            showAlert(Alert.AlertType.ERROR, "Email invalide", "Veuillez entrer un email valide.");
+            showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address.");
             return;
         }
 
-        // Vérification si l'email est unique
+
         UserService userService = new UserService();
         if (!userService.isEmailUnique(email)) {
-            showAlert(Alert.AlertType.ERROR, "Email déjà utilisé", "Cet email est déjà utilisé. Veuillez en choisir un autre.");
+            showAlert(Alert.AlertType.ERROR, "Email Already Used", "This email is already taken. Please choose another one.");
             return;
         }
 
-        // Vérification du mot de passe
+
         if (!isValidPassword(pass)) {
-            showAlert(Alert.AlertType.ERROR, "Mot de passe faible",
-                    "Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre.");
+            showAlert(Alert.AlertType.ERROR, "Weak Password",
+                    "The password must be at least 8 characters long, contain an uppercase letter, and a number.");
             return;
         }
 
-        // Vérification du genre
+
         if (!gender.equalsIgnoreCase("Male") && !gender.equalsIgnoreCase("Female")) {
-            showAlert(Alert.AlertType.ERROR, "Genre invalide", "Veuillez choisir 'Male' ou 'Female'.");
+            showAlert(Alert.AlertType.ERROR, "Invalid Gender", "Please select 'Male' or 'Female'.");
             return;
         }
 
-        // Convertir la date
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dobString = dobDate.format(formatter);
 
-        // Création de l'utilisateur et du profil
+
         Utilisateur user = new Utilisateur(email, dobString, gender, firstname, lastname, pass);
-        Profile profile = new Profile("default_photo_url", "Bio par défaut", "0000000000", "Adresse par défaut");
+        Profile profile = new Profile("default_photo_url", "Default bio", "00000000", email);
         profile.setUtilisateur(user);
         user.setProfile(profile);
 
@@ -116,9 +116,9 @@ public class SignUpController {
         try {
             userService.add(user);
             profileService.add(profile);
-            showAlert(Alert.AlertType.INFORMATION, "Succès", "Utilisateur ajouté avec succès !");
+            showAlert(Alert.AlertType.INFORMATION, "Success", "User successfully registered!");
 
-            // Redirection vers la page de connexion
+
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -126,7 +126,7 @@ public class SignUpController {
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite : " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred: " + e.getMessage());
         }
     }
 

@@ -182,7 +182,7 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <DatePicker prefHeight="26.0" prefWidth="256.0">
+                        <DatePicker fx:id="dob" prefHeight="26.0" prefWidth="256.0">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
@@ -261,11 +261,6 @@
             </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="addbtn" mnemonicParsing="false" onAction="#add" text="Add">
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="deletebtn" mnemonicParsing="false" onAction="#delete" text="Delete">
                      <HBox.margin>
                         <Insets left="20.0" />

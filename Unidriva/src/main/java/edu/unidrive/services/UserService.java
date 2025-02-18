@@ -40,7 +40,6 @@ public class UserService implements Iservice<Utilisateur> {
                 utilisateur.setFirstname(rs.getString("firstname"));
                 utilisateur.setPassword(rs.getString("password"));
 
-                // Récupérer le profil associé
                 Profile profile = new Profile();
                 profile.setId(rs.getInt("profile_id"));
                 profile.setPhoto(rs.getString("photo"));

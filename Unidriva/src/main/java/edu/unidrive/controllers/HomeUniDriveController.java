@@ -41,7 +41,7 @@ public class HomeUniDriveController {
 
     public void setCurrentUserEmail(String email) {
         this.currentUserEmail = email;
-        System.out.println("Email de l'utilisateur connecté : " + currentUserEmail);
+        System.out.println("Email of the logged in user: " + currentUserEmail);
     }
 
     @FXML

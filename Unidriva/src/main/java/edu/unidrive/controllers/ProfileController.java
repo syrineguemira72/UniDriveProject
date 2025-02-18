@@ -68,7 +68,7 @@ public class ProfileController {
         Utilisateur utilisateur = userService.getUserByEmail(email);
 
         if (utilisateur != null) {
-            System.out.println("Utilisateur trouvé : " + utilisateur);
+            System.out.println("User found: " + utilisateur);
 
             if (username != null) {
                 username.setText(utilisateur.getFirstname() + " " + utilisateur.getLastname());
@@ -83,6 +83,12 @@ public class ProfileController {
                     LocalDate dobDate = LocalDate.parse(dobString, formatter);
                     dob.setValue(dobDate);
                 }
+
+                dob.valueProperty().addListener((observable, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        System.out.println("Date of Birth changed to: " + newValue);
+                    }
+                });
             }
             if (this.email != null) {
                 this.email.setText(utilisateur.getEmail());
@@ -94,104 +100,132 @@ public class ProfileController {
                     phone.setText(profile.getTelephone());
                 }
             } else {
-                System.out.println("Aucun profil trouvé pour l'utilisateur ID : " + utilisateur.getId());
+                System.out.println("No profiles found for user ID : " + utilisateur.getId());
             }
         } else {
-            System.out.println("Utilisateur non trouvé !");
+            System.out.println("User not found!");
         }
     }
 
-    @FXML
-    void add(ActionEvent event) {
-        System.out.println("Current User Email: " + currentUserEmail); // Log pour vérifier l'email
 
-        Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
-
-
-        String photo = "photo par defaut ";
-        String bio = "Bio par défaut";
-        String telephone = phone.getText();
-        String adresse = email.getText();
-
-
-        if (utilisateur == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Utilisateur non trouvé !");
-            return;
-        }
-
-        Profile profile = new Profile(photo, bio, telephone, adresse);
-        profile.setUtilisateur(utilisateur);
-
-        profileService.add(profile);
-        showAlert(Alert.AlertType.INFORMATION, "Succès", "Profil ajouté avec succès !");
-    }
 
     @FXML
     void delete(ActionEvent event) {
-        phone.requestFocus();
-
         Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
         if (utilisateur == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Utilisateur non trouvé !");
+            showAlert(Alert.AlertType.ERROR, "Error", "User Not Found !");
             return;
         }
 
         Profile profile = utilisateur.getProfile();
         if (profile == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Profil non trouvé !");
+            showAlert(Alert.AlertType.ERROR, "Error", "Profil Not Found!");
             return;
         }
 
-        if (phone.isFocused()) {
-            System.out.println("Phone field is focused.");
+        boolean deleted = false;
+
+        if (phone.getText().isEmpty()) {
+            System.out.println("Phone field is empty.");
             profile.setTelephone("");
-            phone.clear();
-        } else if (email.isFocused()) {
-            System.out.println("Email field is focused.");
+            deleted = true;
+        }
+
+        if (email.getText().isEmpty()) {
+            System.out.println("Email field is empty.");
             profile.setAdresse("");
-            email.clear();
-        } else if (username.isFocused()) {
-            System.out.println("Username field is focused.");
+            deleted = true;
+        }
+
+        if (username.getText().isEmpty()) {
+            System.out.println("Username field is empty.");
             utilisateur.setLastname("");
-            username.clear();
-        } else {
-            System.out.println("No field is focused.");
+            deleted = true;
+        }
+
+        if (dob.getValue() == null) {
+            System.out.println("Date of Birth field is cleared.");
+            utilisateur.setDob("");
+            deleted = true;
+        }
+
+        if (!deleted) {
             showAlert(Alert.AlertType.WARNING, "Avertissement", "Aucun champ sélectionné pour suppression.");
             return;
         }
 
         profileService.update(profile);
         userService.update(utilisateur);
-        showAlert(Alert.AlertType.INFORMATION, "Suppression", "Champ supprimé avec succès !");
+        showAlert(Alert.AlertType.INFORMATION, "Delete", "Field deleted successfully !");
     }
 
     @FXML
     void edit(ActionEvent event) {
         Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
         if (utilisateur == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Utilisateur non trouvé !");
+            showAlert(Alert.AlertType.ERROR, "Error", "User Not Found !");
             return;
         }
 
         Profile profile = utilisateur.getProfile();
         if (profile == null) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Profil non trouvé !");
+            showAlert(Alert.AlertType.ERROR, "Error", "Profil Not Found !");
             return;
         }
 
-        profile.setPhoto("photo_url");
-        profile.setBio("User bio");
-        profile.setTelephone(phone.getText());
-        profile.setAdresse(email.getText());
+        boolean updated = false;
 
-        utilisateur.setLastname(username.getText());
-        utilisateur.setEmail(email.getText());
+        // Vérifier si le champ username a été modifié
+        String newUsername = username.getText();
+        String oldUsername = utilisateur.getFirstname() + " " + utilisateur.getLastname();
+        if (!newUsername.equals(oldUsername)) {
+            System.out.println("Username field is updated.");
+            utilisateur.setLastname(newUsername);
+            updated = true;
+        }
+
+        // Vérifier si le champ email a été modifié
+        String newEmail = email.getText();
+        String oldEmail = utilisateur.getEmail();
+        if (!newEmail.equals(oldEmail)) {
+            System.out.println("Email field is updated.");
+            utilisateur.setEmail(newEmail);
+            updated = true;
+        }
+
+        // Vérifier si le champ phone a été modifié
+        String newPhone = phone.getText();
+        String oldPhone = profile.getTelephone();
+        if (!newPhone.equals(oldPhone)) {
+            System.out.println("Phone field is updated.");
+            profile.setTelephone(newPhone);
+            updated = true;
+        }
+
+        // Vérifier si le champ dob a été modifié
+        LocalDate newDob = dob.getValue();
+        String oldDobString = utilisateur.getDob();
+        if (newDob != null) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String newDobString = newDob.format(formatter);
+            if (!newDobString.equals(oldDobString)) {
+                System.out.println("Date of Birth field is updated.");
+                utilisateur.setDob(newDobString);
+                updated = true;
+            }
+        }
+
+        if (!updated) {
+            showAlert(Alert.AlertType.WARNING, "Avertissement", "No fields selected for editing.");
+            return;
+        }
 
         profileService.update(profile);
         userService.update(utilisateur);
 
-        showAlert(Alert.AlertType.INFORMATION, "Mise à jour", "Profil et utilisateur mis à jour avec succès !");
+        showAlert(Alert.AlertType.INFORMATION, "Mise à jour", "The selected field has been updated successfully!");
     }
+
 
 
     @FXML

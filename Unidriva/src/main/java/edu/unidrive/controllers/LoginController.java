@@ -77,7 +77,7 @@ public class LoginController {
         String password = txtPassword.getText();
 
         if (email.isEmpty() || password.isEmpty()) {
-            lblErrors.setText("Veuillez remplir tous les champs.");
+            lblErrors.setText("Please fill in all fields.");
             lblErrors.setStyle("-fx-text-fill: red;");
             return;
         }
@@ -86,7 +86,7 @@ public class LoginController {
         boolean isAuthenticated = userService.loginUser(email, password);
 
         if (isAuthenticated) {
-            System.out.println("Bienvenue, " + email + " !");
+            System.out.println("Welcome, " + email + " !");
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                 Parent root = loader.load();
@@ -103,7 +103,7 @@ public class LoginController {
                 e.printStackTrace();
             }
         } else {
-            lblErrors.setText("Nom d'utilisateur ou mot de passe incorrect.");
+            lblErrors.setText("Incorrect username or password.");
             lblErrors.setStyle("-fx-text-fill: red;");
         }
     }
