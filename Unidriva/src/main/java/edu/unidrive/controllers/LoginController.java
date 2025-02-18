@@ -12,6 +12,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javafx.scene.input.MouseEvent;
+
 import java.io.IOException;
 
 public class LoginController {
@@ -38,13 +40,27 @@ public class LoginController {
     private TextField txtUsername;
 
     @FXML
+    void Forgot(MouseEvent event) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GetPassword.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btnForgot.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void SignUp(ActionEvent event) {
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("SignUp.fxml"));
             Parent root = loader.load();
-
-            // Obtenez la scène actuelle et remplacez-la par la scène d'accueil
             Scene scene = new Scene(root);
             Stage stage = (Stage) login.getScene().getWindow();
             stage.setScene(scene);
@@ -60,6 +76,11 @@ public class LoginController {
         String email = txtUsername.getText();
         String password = txtPassword.getText();
 
+        if (email.isEmpty() || password.isEmpty()) {
+            lblErrors.setText("Veuillez remplir tous les champs.");
+            lblErrors.setStyle("-fx-text-fill: red;");
+            return;
+        }
 
         UserService userService = new UserService();
         boolean isAuthenticated = userService.loginUser(email, password);
@@ -67,12 +88,17 @@ public class LoginController {
         if (isAuthenticated) {
             System.out.println("Bienvenue, " + email + " !");
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Profile.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                 Parent root = loader.load();
+
+                HomeUniDriveController homeController = loader.getController();
+                homeController.setCurrentUserEmail(email);
+
                 Stage stage = (Stage) login.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -12,31 +12,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="564.0" prefWidth="200.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.SignUpController">
+<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.SignUpController">
     <children>
-        <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color: #0C39FF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color:#000080;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="75.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-
-                    </image>
-                </ImageView>
-                <Label alignment="CENTER" layoutX="127.0" layoutY="103.0" prefHeight="23.0" prefWidth="173.0" text="Sign Up" textFill="WHITE">
+                <Label alignment="CENTER" layoutX="128.0" layoutY="51.0" prefHeight="23.0" prefWidth="173.0" text="Sign Up" textFill="WHITE">
                     <font>
-                        <Font name="Segoe UI Bold Italic" size="18.0" />
+                        <Font name="Segoe UI Bold Italic" size="22.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtFirstname" layoutX="76.0" layoutY="162.0" prefHeight="32.0" prefWidth="278.0" promptText="firstname" />
-                <TextField fx:id="txtLastname" layoutX="75.0" layoutY="217.0" prefHeight="32.0" prefWidth="278.0" promptText="lastname" />
-                <TextField fx:id="txtEmail" layoutX="75.0" layoutY="276.0" prefHeight="32.0" prefWidth="278.0" promptText="email" />
-                <DatePicker fx:id="txtDOB" layoutX="75.0" layoutY="432.0" prefHeight="32.0" prefWidth="278.0" promptText="dob" />
-                <ComboBox fx:id="txtGender" editable="true" layoutX="76.0" layoutY="376.0" prefHeight="32.0" prefWidth="278.0" promptText="gender">
+                <TextField fx:id="txtFirstname" layoutX="75.0" layoutY="99.0" prefHeight="32.0" prefWidth="278.0" promptText="firstname" />
+                <TextField fx:id="txtLastname" layoutX="75.0" layoutY="151.0" prefHeight="32.0" prefWidth="278.0" promptText="lastname" />
+                <TextField fx:id="txtEmail" layoutX="75.0" layoutY="204.0" prefHeight="32.0" prefWidth="278.0" promptText="email" />
+                <DatePicker fx:id="txtDOB" layoutX="75.0" layoutY="359.0" prefHeight="32.0" prefWidth="278.0" promptText="dob" />
+                <ComboBox fx:id="txtGender" editable="false" layoutX="75.0" layoutY="302.0" prefHeight="32.0" prefWidth="278.0" promptText="gender">
                 </ComboBox>
-                <PasswordField fx:id="password" layoutX="75.0" layoutY="324.0" prefHeight="32.0" prefWidth="278.0" promptText="Password" />
-                <Button fx:id="btnSave" layoutX="75.0" layoutY="494.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="278.0" text="Save" />
-            <ImageView fitHeight="368.0" fitWidth="343.0" layoutX="443.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+
+                <PasswordField fx:id="password" layoutX="75.0" layoutY="253.0" prefHeight="32.0" prefWidth="278.0" promptText="Password" />
+                <Button fx:id="btnSave" layoutX="75.0" layoutY="414.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="278.0" text="Save" />
+            <ImageView fitHeight="515.0" fitWidth="456.0" layoutX="398.0" layoutY="-5.0">
                <image>
-                  <Image url="@../../../../../Downloads/car-outline-icon-vector-21302930-removebg-preview.png" />
+                  <Image url="@images/received_945642877767257.jpeg" />
                </image>
             </ImageView>
             </children>

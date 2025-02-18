@@ -18,7 +18,7 @@ public class Home extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        } catch (IOException e) {
+        }catch (IOException e) {
             System.out.println("Erreur de lecture"+e.getMessage());
         }
 

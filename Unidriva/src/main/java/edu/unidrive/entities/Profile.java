@@ -6,6 +6,9 @@ public class Profile {
     private String bio;
     private String telephone;
     private String adresse;
+    private Utilisateur utilisateur;
+
+
 
     public Profile() {
     }
@@ -17,13 +20,20 @@ public class Profile {
         this.telephone = telephone;
         this.adresse = adresse;
     }
-    public Profile( String photo, String bio, String telephone, String adresse) {
+    public Profile(String photo, String bio, String telephone, String adresse ) {
         this.photo = photo;
         this.bio = bio;
         this.telephone = telephone;
         this.adresse = adresse;
     }
 
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
 
     public int getId() {
         return id;
@@ -75,6 +85,7 @@ public class Profile {
                 ", bio='" + bio + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", adresse='" + adresse + '\'' +
+                ", utilisateur=" + utilisateur +
                 '}';
     }
 }

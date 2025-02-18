@@ -14,6 +14,8 @@ public class Utilisateur {
 
     private String firstname;
     private String password;
+    private Profile profile;
+
 
     public Utilisateur() {
     }
@@ -35,8 +37,16 @@ public class Utilisateur {
         this.lastname = lastname;
         this.firstname = firstname;
         this.password = password;
+
     }
 
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
     public String getPassword() {
         return password;
     }
@@ -103,6 +113,7 @@ public class Utilisateur {
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", password='" + password + '\'' +
+                ", profile=" + profile +
                 '}';
     }
 }

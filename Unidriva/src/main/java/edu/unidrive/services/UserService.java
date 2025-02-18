@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import edu.unidrive.entities.Profile;
+
 
 public class UserService implements Iservice<Utilisateur> {
 
@@ -18,23 +20,62 @@ public class UserService implements Iservice<Utilisateur> {
         this.connection = MyConnection.getInstance().getCnx();
     }
 
-    @Override
-    public void add(Utilisateur entity) {
+    public Utilisateur getUserByEmail(String email) {
+        Utilisateur utilisateur = null;
+        String requete = "SELECT u.*, p.id as profile_id, p.photo, p.bio, p.telephone, p.adresse " +
+                "FROM utilisateur u " +
+                "LEFT JOIN profile p ON u.id = p.utilisateur_id " +
+                "WHERE u.email = ?";
         try {
-            String requete = "INSERT INTO utilisateur (id, email, dob, gender, lastname, firstname, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(requete);
-            pst.setInt(1, entity.getId());
-            pst.setString(2, entity.getEmail());
-            pst.setString(3, entity.getDob());
-            pst.setString(4, entity.getGender());
-            pst.setString(5, entity.getLastname());
-            pst.setString(6, entity.getFirstname());
-            pst.setString(7, entity.getPassword());
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                utilisateur = new Utilisateur();
+                utilisateur.setId(rs.getInt("id"));
+                utilisateur.setEmail(rs.getString("email"));
+                utilisateur.setDob(rs.getString("dob"));
+                utilisateur.setGender(rs.getString("gender"));
+                utilisateur.setLastname(rs.getString("lastname"));
+                utilisateur.setFirstname(rs.getString("firstname"));
+                utilisateur.setPassword(rs.getString("password"));
+
+                // Récupérer le profil associé
+                Profile profile = new Profile();
+                profile.setId(rs.getInt("profile_id"));
+                profile.setPhoto(rs.getString("photo"));
+                profile.setBio(rs.getString("bio"));
+                profile.setTelephone(rs.getString("telephone"));
+                profile.setAdresse(rs.getString("adresse"));
+
+                utilisateur.setProfile(profile);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération de l'utilisateur : " + e.getMessage());
+        }
+        return utilisateur;
+    }
+
+    public void add(Utilisateur user) {
+        try {
+            String requete = "INSERT INTO utilisateur (email, dob, gender, lastname, firstname, password) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pst = connection.prepareStatement(requete, PreparedStatement.RETURN_GENERATED_KEYS);
+            pst.setString(1, user.getEmail());
+            pst.setString(2, user.getDob());
+            pst.setString(3, user.getGender());
+            pst.setString(4, user.getLastname());
+            pst.setString(5, user.getFirstname());
+            pst.setString(6, user.getPassword());
 
             pst.executeUpdate();
-            System.out.println("✅ Utilisateur ajouté avec succès !");
+
+            ResultSet rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                int userId = rs.getInt(1);
+                user.setId(userId);
+            }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
 
@@ -47,12 +88,12 @@ public class UserService implements Iservice<Utilisateur> {
 
             int rowsDeleted = pst.executeUpdate();
             if (rowsDeleted > 0) {
-                System.out.println("✅ Utilisateur supprimé avec succès !");
+                System.out.println(" Utilisateur supprimé avec succès !");
             } else {
-                System.out.println("❌ Aucun utilisateur trouvé avec cet ID.");
+                System.out.println(" Aucun utilisateur trouvé avec cet ID.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
+            throw new RuntimeException(" Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
         }
     }
 
@@ -67,16 +108,16 @@ public class UserService implements Iservice<Utilisateur> {
             pst.setString(4, entity.getLastname());
             pst.setString(5, entity.getFirstname());
             pst.setString(6, entity.getPassword());
-            pst.setInt(7, entity.getId()); // Correction de l'index
+            pst.setInt(7, entity.getId());
 
             int rowsUpdated = pst.executeUpdate();
             if (rowsUpdated > 0) {
-                System.out.println("✅ Utilisateur mis à jour avec succès !");
+                System.out.println("Utilisateur mis à jour avec succès !");
             } else {
-                System.out.println("❌ Aucun utilisateur trouvé avec cet ID.");
+                System.out.println(" Aucun utilisateur trouvé avec cet ID.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
+            throw new RuntimeException(" Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
         }
     }
 
@@ -101,7 +142,7 @@ public class UserService implements Iservice<Utilisateur> {
                 utilisateurs.add(user);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de la récupération des utilisateurs : " + e.getMessage());
+            throw new RuntimeException(" Erreur lors de la récupération des utilisateurs : " + e.getMessage());
         }
         return utilisateurs;
     }
@@ -114,15 +155,15 @@ public class UserService implements Iservice<Utilisateur> {
             pst.setString(2, password);
 
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) { // Un utilisateur a été trouvé
-                System.out.println("✅ Connexion réussie !");
+            if (rs.next()) {
+                System.out.println("Connexion réussie !");
                 return true;
             } else {
-                System.out.println("❌ Nom d'utilisateur ou mot de passe incorrect !");
+                System.out.println("Nom d'utilisateur ou mot de passe incorrect !");
                 return false;
             }
         } catch (SQLException e) {
-            throw new RuntimeException("❌ Erreur lors de la connexion : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la connexion : " + e.getMessage());
         }
     }
 }

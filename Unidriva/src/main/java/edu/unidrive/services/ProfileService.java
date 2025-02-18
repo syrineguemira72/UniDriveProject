@@ -4,33 +4,48 @@ import edu.unidrive.entities.Profile;
 import edu.unidrive.interfaces.Iservice;
 import edu.unidrive.tools.MyConnection;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class ProfileService implements Iservice<Profile> {
+    private Connection connection;
+
+    public ProfileService() {
+        this.connection = MyConnection.getInstance().getCnx();
+    }
+
     @Override
     public void add(Profile entity) {
         try {
-            String requete = "INSERT INTO `profile`(`id`, `photo`, `bio`, `telephone`, `adresse`) VALUES (?,?,?,?,?)";
+            String requete = "INSERT INTO profile (photo, bio, telephone, adresse, utilisateur_id) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete);
-            pst.setInt(1, entity.getId());
-            pst.setString(2, entity.getPhoto());
-            pst.setString(3, entity.getBio());
-            pst.setString(4, entity.getTelephone());
-            pst.setString(5, entity.getAdresse());
+
+            pst.setString(1, entity.getPhoto());
+            pst.setString(2, entity.getBio());
+            pst.setString(3, entity.getTelephone());
+            pst.setString(4, entity.getAdresse());
+
+            if (entity.getUtilisateur() == null) {
+                throw new RuntimeException("L'utilisateur associé au profil est null.");
+            }
+
+            pst.setInt(5, entity.getUtilisateur().getId());
+
             pst.executeUpdate();
-            System.out.println("Profile ajouté avec succès !");
+            System.out.println("Profil ajouté avec succès !");
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de l'ajout de profile : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de l'ajout du profil : " + e.getMessage());
         }
     }
 
     @Override
     public void remove(Profile entity) {
         try {
-            String requete = "DELETE FROM `profile` WHERE `id` = ?";
-            PreparedStatement pst =MyConnection.getInstance().getCnx().prepareStatement(requete);
+            String requete = "DELETE FROM profile WHERE id = ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete);
             pst.setInt(1, entity.getId());
             int rowsDeleted = pst.executeUpdate();
 
@@ -42,13 +57,12 @@ public class ProfileService implements Iservice<Profile> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la suppression de profile : " + e.getMessage());
         }
-
     }
 
     @Override
     public void update(Profile entity) {
         try {
-            String requete = "UPDATE `profile` SET  `photo`=?, `bio`=?, `telephone`=?, `adresse`=? WHERE `id`=?";
+            String requete = "UPDATE profile SET  photo=?, bio=?, telephone=?, adresse=? WHERE id=?";
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete);
             pst.setString(1, entity.getPhoto());
             pst.setString(2, entity.getBio());
@@ -70,5 +84,31 @@ public class ProfileService implements Iservice<Profile> {
     @Override
     public List<Profile> getAllData() {
         return List.of();
+    }
+
+    public Profile getProfileByUserId(int userId) {
+        Profile profile = null;
+        try {
+            String query = "SELECT * FROM profile WHERE utilisateur_id = ?";
+            PreparedStatement pstmt = connection.prepareStatement(query);
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                profile = new Profile(
+                        rs.getInt("id"),
+                        rs.getString("photo"),
+                        rs.getString("bio"),
+                        rs.getString("telephone"),
+                        rs.getString("adresse")
+                );
+                System.out.println("Profil trouvé : " + profile);
+            } else {
+                System.out.println("Aucun profil trouvé pour l'utilisateur ID : " + userId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return profile;
     }
 }
