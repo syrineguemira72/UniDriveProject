@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RecompenseController">
+<AnchorPane fx:id="recpane" prefHeight="400.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RecompenseController">
    <children>
-      <TableView fx:id="recTab" layoutX="322.0" layoutY="100.0" onMouseClicked="#getSelected" prefHeight="146.0" prefWidth="225.0">
+      <TableView fx:id="recTab" layoutX="322.0" layoutY="100.0" onMouseClicked="#getSelected" prefHeight="146.0" prefWidth="394.0">
         <columns>
           <TableColumn fx:id="objp" prefWidth="75.0" text="Objet" />
             <TableColumn fx:id="idT" prefWidth="75.0" text="idUser" />
@@ -21,7 +21,7 @@
         </columns>
       </TableView>
       <TextField fx:id="reductiontf" layoutX="69.0" layoutY="218.0" />
-      <Label layoutX="68.0" layoutY="122.0" text="Nom" />
+      <Label layoutX="68.0" layoutY="122.0" text="User" />
       <Label layoutX="68.0" layoutY="190.0" text="Reduction" />
       <Button layoutX="75.0" layoutY="319.0" mnemonicParsing="false" onAction="#addRecompense" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #d44141;" text="Add" textFill="WHITE">
          <font>
@@ -39,9 +39,14 @@
             <Font size="16.0" />
          </font>
       </Button>
-      <TextField fx:id="idtf" layoutX="110.0" layoutY="-26.0" />
+      <TextField fx:id="idtf" layoutX="110.0" layoutY="26.0" />
       <ComboBox fx:id="combo" layoutX="67.0" layoutY="85.0" onAction="#loadNom" prefWidth="150.0" />
       <Label layoutX="70.0" layoutY="56.0" text="Objet" />
       <TextField fx:id="usertf" layoutX="70.0" layoutY="154.0" />
+      <Button layoutX="558.0" layoutY="36.0" mnemonicParsing="false" onAction="#NavRecompense" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #39cb12;" text="objets perdus" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

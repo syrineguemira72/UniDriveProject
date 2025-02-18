@@ -1,8 +1,9 @@
-package Controller;
+package controller;
 
 import Services.RecompenseService;
 import entites.Recompense;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -10,8 +11,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import tools.MyConnection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +43,8 @@ public class RecompenseController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> idcol;
-
+    @FXML
+    private AnchorPane recpane;
     @FXML
     private TextField idtf;
 
@@ -61,6 +65,7 @@ public class RecompenseController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("hello");
         connection = MyConnection.getInstance().getCnx();
         initializeTable();
         loadBillets();
@@ -70,20 +75,25 @@ public class RecompenseController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         while(true)
 
         // Now add the comboBox addAll statement
         {
+
             try {
                 if (!rs.next()) break;
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+
             try {
                 combo.getItems().addAll(rs.getString("nom"));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
         }
 
 
@@ -97,7 +107,8 @@ public class RecompenseController implements Initializable {
         objp.setCellValueFactory(new PropertyValueFactory<>("idOP"));
         idT.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         reduction.setCellValueFactory(new PropertyValueFactory<>("reduction"));
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id.setCellValueFactory(new PropertyValueFactory<>("idT"));
+        idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
     }
 
 
@@ -122,7 +133,7 @@ public class RecompenseController implements Initializable {
                 return false;
             }
         } catch (NumberFormatException e) {
-            showAlert("Erreur", "Le format de prix est invalide.");
+            showAlert("Erreur", "Le format de recompense est invalide.");
             return false;
         }
 
@@ -155,16 +166,14 @@ public class RecompenseController implements Initializable {
         int value4=0;
         int value5=0;
         Connection cnx = MyConnection.getInstance().getCnx();
-        rs = cnx.createStatement().executeQuery("SELECT id FROM objets_perdu where nom ='"+combo.getValue().toString()+"' ");
-        while(rs.next())
+        rs = cnx.createStatement().executeQuery("SELECT id,idT FROM objets_perdu where nom ='"+combo.getValue().toString()+"' ");
+        while(rs.next()) {
             value4 = rs.getInt("id");
-        System.out.println(value4);
-        rs = cnx.createStatement().executeQuery("SELECT idT FROM objets_perdu where id ='"+value4+"' ");
-        while(rs.next())
+
             value5 = rs.getInt("idT");
-        // Now add the comboBox addAll statement
+            // Now add the comboBox addAll statement
 
-
+        }
 
         if(controlSaisie()) {
             Recompense a = new Recompense(Double.parseDouble(reductiontf.getText()), value4,value5 );
@@ -205,6 +214,7 @@ public class RecompenseController implements Initializable {
 
             return;
         }
+        System.out.println(idcol.getCellData(index).toString());
         idtf.setText(idcol.getCellData(index).toString());
         reductiontf.setText(reduction.getCellData(index).toString());
 
@@ -235,6 +245,13 @@ public class RecompenseController implements Initializable {
 
     }
     @FXML
+    void NavRecompense(ActionEvent event) throws IOException {
+        AnchorPane newvalscene = (AnchorPane) FXMLLoader.load(getClass().getResource("/ObjetPerdu.fxml"));
+        recpane.getChildren().setAll(newvalscene.getChildren());
+        recpane = new AnchorPane();
+
+    }
+    @FXML
     void updateRecompense(ActionEvent event) {
         int value4 = 0 ;
         int value5 = 0 ;
@@ -249,13 +266,12 @@ public class RecompenseController implements Initializable {
 
             if(controlSaisie()){
                 Connection cnx = MyConnection.getInstance().getCnx();
-                rs = cnx.createStatement().executeQuery("SELECT id FROM objets_perdu where nom='"+combo.getValue().toString()+"'");
-                while(rs.next())
+                rs = cnx.createStatement().executeQuery("SELECT id,idT FROM objets_perdu where nom='"+combo.getValue().toString()+"'");
+                while(rs.next()) {
                     value4 = rs.getInt("id");
-                rs = cnx.createStatement().executeQuery("SELECT id FROM user where nom='"+combo.getValue().toString()+"'");
-                while(rs.next())
-                    value5 = rs.getInt("id");
 
+                    value5 = rs.getInt("id");
+                }
                 String sql = "update recompense set idOP= '"+value4+"',idUser= '"+value5+"',reductionn='"+value1+"' where id='"+value0+"' ";
                 pst= cnx.prepareStatement(sql);
                 System.out.println(sql);

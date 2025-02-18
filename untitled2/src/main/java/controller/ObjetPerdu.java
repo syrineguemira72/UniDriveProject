@@ -1,4 +1,4 @@
-package Controller;
+package controller;
 
 import Services.ObjetPerduService;
 import entites.Objet;
@@ -8,17 +8,24 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import tools.MyConnection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +33,9 @@ public class ObjetPerdu implements Initializable {
 
     @FXML
     private TableColumn<?, ?> User;
+    @FXML
+    private AnchorPane recpane;
+
 
     @FXML
     private TableColumn<?, ?> description;
@@ -58,48 +68,41 @@ public class ObjetPerdu implements Initializable {
     private TableColumn<?, ?> dateCol;
 
     @FXML
+    void NavRecompense(ActionEvent event) throws IOException {
+
+
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Consultation");
+            Parent root = FXMLLoader.load(getClass().getResource("/Recompense.fxml"));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+
+    @FXML
     private TextField usertf;
     private ObservableList<Objet> destinationList = FXCollections.observableArrayList();
     private Connection connection;
 
     public boolean controlSaisie() {
-        // Vérification de l'entier (par exemple, le champ pour la quantité ou un autre champ)
-
-
-
-
-        // Vérification de la chaîne de caractères (par exemple, le champ pour le nom ou autre)
-
-
-
-
+    // Vérification de la chaîne de caractères (par exemple, le champ pour le nom ou autre)
         if (datetf.getValue()==null){
-
-
             showAlert("Erreur", "Date ne peut pas être vide.");
             return false;
         }
         if (nomtf.getText()==null || nomtf.getText().trim().isEmpty()){
-
-
             showAlert("Erreur", "nom ne peut pas être vide.");
             return false;
         }
-
         if (usertf.getText()==null || usertf.getText().trim().isEmpty()){
-
-
             showAlert("Erreur", "Lieu ne peut pas être vide.");
             return false;
         }
-
-
-
-
-
-
-
-
         return true;
     }
 
