@@ -129,13 +129,28 @@ public class BeneficiaireAdmin {
         aide selectedAide = aideChoiceBox.getValue();
         int aideId = selectedAide != null ? selectedAide.getId() : -1; // Default to -1 if no aide is selected
 
+        // Validate that all fields are filled
         if (nom.isEmpty() || prenom.isEmpty() || ageStr.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
             showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
             return;
         }
 
+        // Validate the telephone number (must be 8 digits)
+        if (!telephone.matches("\\d{8}")) {
+            showAlert("Erreur", "Le numéro de téléphone doit contenir exactement 8 chiffres.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validate the email format (basic check for '@' and domain)
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            showAlert("Erreur", "L'email doit être dans un format valide (ex: exemple@domaine.com).", Alert.AlertType.ERROR);
+            return;
+        }
+
         try {
+            // Validate the age (must be a valid integer)
             int age = Integer.parseInt(ageStr);
+
             // Create Beneficiaire with aideId
             Beneficiaire beneficiaire = new Beneficiaire(nom, prenom, age, adresse, telephone, email, aideId);
             beneficiaireService.addEntity(beneficiaire);
