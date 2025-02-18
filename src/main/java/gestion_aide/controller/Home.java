@@ -1,4 +1,4 @@
-package gestion_aide.test;
+package gestion_aide.controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

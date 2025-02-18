@@ -39,7 +39,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>gestion_aide.test.Home</mainClass>
+                    <mainClass>gestion_aide.controller.Home</mainClass>
                 </configuration>
             </plugin>
         </plugins>
