@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="Sixth commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="Sixth commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,7 +112,7 @@
       <workItem from="1739796413425" duration="3340000" />
       <workItem from="1739802256029" duration="2730000" />
       <workItem from="1739812024943" duration="3729000" />
-      <workItem from="1739876212336" duration="14019000" />
+      <workItem from="1739876212336" duration="14402000" />
     </task>
     <task id="LOCAL-00001" summary="efzfz">
       <option name="closed" value="true" />
@@ -172,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739893066809</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Sixth commit">
+      <option name="closed" value="true" />
+      <created>1739913967177</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739913967177</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
