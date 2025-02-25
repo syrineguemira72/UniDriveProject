@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.AideAdmin">
+    <children>
+        <!-- Type TextField -->
+        <TextField fx:id="typetextfield" layoutX="139.0" layoutY="88.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" styleClass="text-field" />
+
+        <!-- Description TextField -->
+        <TextField fx:id="descriptiontextfield" layoutX="139.0" layoutY="126.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" styleClass="text-field" />
+
+        <!-- Montant TextField -->
+        <TextField fx:id="montanttextfield" layoutX="139.0" layoutY="162.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" styleClass="text-field" />
+
+        <!-- Labels -->
+        <Label layoutX="37.0" layoutY="93.0" prefHeight="18.0" prefWidth="73.0" styleClass="label" text="Type :" />
+        <Label layoutX="37.0" layoutY="130.0" prefHeight="18.0" prefWidth="90.0" styleClass="label" text="Description :" />
+        <Label layoutX="36.0" layoutY="167.0" prefHeight="18.0" prefWidth="74.0" styleClass="label" text="Montant :" />
+
+        <!-- Buttons -->
+        <Button layoutX="54.0" layoutY="213.0" mnemonicParsing="false" onAction="#ajouterAideaction" styleClass="button" text="Ajouter Aide" />
+        <Button fx:id="deleteColumn1" layoutX="254.0" layoutY="213.0" mnemonicParsing="false" onAction="#deleteSelectedRow" styleClass="delete-button" text="Delete" />
+        <Button layoutX="180.0" layoutY="213.0" mnemonicParsing="false" onAction="#updateAction" styleClass="update-button" text="Update" />
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToBack" styleClass="back-button" text="Back" />
+        <Button layoutX="669.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="button" text="Next" />
+
+        <!-- Search Label and TextField -->
+        <Label layoutX="394.0" layoutY="224.0" styleClass="label" text="Search :" />
+        <TextField layoutX="456.0" layoutY="217.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" styleClass="text-field" />
+
+        <!-- TableView for Aide -->
+        <TableView fx:id="aideTable" layoutX="14.0" layoutY="270.0" prefHeight="238.0" prefWidth="700.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="45.59994125366211" text="ID">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="typeColumn" prefWidth="128.0" text="Type">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="type" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="descriptionColumn" prefWidth="200.8000030517578" text="Description">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="description" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="montantColumn" prefWidth="119.199951171875" text="Montant">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="montant" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="CreatedAtColumn" prefWidth="186.4000244140625" text="Created_at">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="CreatedAt" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
