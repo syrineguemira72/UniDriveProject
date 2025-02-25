@@ -1,0 +1,55 @@
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.pane {
+    -fx-background-color: linear-gradient(to bottom right, #000080, #0044cc);
+}
+
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.text-field, .password-field, .date-picker, .combo-box {
+    -fx-pref-height: 40px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .password-field:focused, .date-picker:focused, .combo-box:focused {
+    -fx-border-color: #00bfff;
+    -fx-border-width: 2px;
+}
+
+.button {
+    -fx-background-color: #00bfff;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.button:hover {
+    -fx-background-color: #009acd;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-background-color: #007bb5;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+}
+
+/* Animation légère sur les champs de texte */
+.text-field, .password-field, .date-picker, .combo-box {
+    -fx-transition: all 0.3s ease-in-out;
+}
