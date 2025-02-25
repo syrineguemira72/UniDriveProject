@@ -1,4 +1,4 @@
-package gestion_aide.entities;
+package gestion_utilisateur.entities;
 
 import javafx.beans.property.*;
 

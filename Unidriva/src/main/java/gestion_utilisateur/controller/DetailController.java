@@ -1,6 +1,5 @@
-package gestion_aide.controller;
+package gestion_utilisateur.controller;
 
-import gestion_aide.entities.aide;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 

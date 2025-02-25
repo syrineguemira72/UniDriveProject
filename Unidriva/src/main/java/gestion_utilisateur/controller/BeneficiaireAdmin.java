@@ -1,9 +1,9 @@
-package gestion_aide.controller;
+package gestion_utilisateur.controller;
 
-import gestion_aide.entities.Beneficiaire;
-import gestion_aide.entities.aide;
-import gestion_aide.services.BeneficiaireService;
-import gestion_aide.services.AideService;
+import gestion_utilisateur.entities.Beneficiaire;
+import gestion_utilisateur.entities.aide;
+import gestion_utilisateur.services.BeneficiaireService;
+import gestion_utilisateur.services.AideService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,8 +1,8 @@
-package gestion_aide.controller;
+package gestion_utilisateur.controller;
 
-import gestion_aide.entities.aide;
-import gestion_aide.services.AideService;
-import gestion_aide.entities.AideType;
+import gestion_utilisateur.entities.aide;
+import gestion_utilisateur.services.AideService;
+import gestion_utilisateur.entities.AideType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

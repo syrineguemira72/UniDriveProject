@@ -1,4 +1,4 @@
-package gestion_aide.interfaces;
+package gestion_utilisateur.interfaces;
 
 import java.util.List;
 

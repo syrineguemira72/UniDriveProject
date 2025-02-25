@@ -1,8 +1,8 @@
-package gestion_aide.services;
+package gestion_utilisateur.services;
 
-import gestion_aide.entities.aide;
-import gestion_aide.interfaces.Iservice;
-import gestion_aide.tools.MyConnection;
+import gestion_utilisateur.entities.aide;
+import gestion_utilisateur.interfaces.Iservice;
+import gestion_utilisateur.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

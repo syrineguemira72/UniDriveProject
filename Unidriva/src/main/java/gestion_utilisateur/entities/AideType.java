@@ -1,4 +1,4 @@
-package gestion_aide.entities;
+package gestion_utilisateur.entities;
 
 public enum AideType {
     ALIMENTAIRE("alimentaire"),
