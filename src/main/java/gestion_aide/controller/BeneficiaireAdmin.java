@@ -151,6 +151,12 @@ public class BeneficiaireAdmin {
             // Validate the age (must be a valid integer)
             int age = Integer.parseInt(ageStr);
 
+            // Check if age is between 18 and 99
+            if (age < 18 || age > 99) {
+                showAlert("Erreur", "L'âge doit être compris entre 18 et 99 ans.", Alert.AlertType.ERROR);
+                return;
+            }
+
             // Create Beneficiaire with aideId
             Beneficiaire beneficiaire = new Beneficiaire(nom, prenom, age, adresse, telephone, email, aideId);
             beneficiaireService.addEntity(beneficiaire);
@@ -160,6 +166,7 @@ public class BeneficiaireAdmin {
             showAlert("Erreur", "L'âge doit être un nombre valide.", Alert.AlertType.ERROR);
         }
     }
+
 
 
     @FXML
@@ -188,30 +195,65 @@ public class BeneficiaireAdmin {
             return;
         }
 
-        selectedBeneficiaire.setNom(nomtextfield.getText());
-        selectedBeneficiaire.setPrenom(prenomtextfield.getText());
-        selectedBeneficiaire.setAdresse(adressetextfield.getText());
-        selectedBeneficiaire.setTelephone(telephonetextfield.getText());
-        selectedBeneficiaire.setEmail(emailtextfield.getText());
+        String nom = nomtextfield.getText();
+        String prenom = prenomtextfield.getText();
+        String ageStr = agetextfield.getText();
+        String adresse = adressetextfield.getText();
+        String telephone = telephonetextfield.getText();
+        String email = emailtextfield.getText();
+
+        // Validation des champs obligatoires
+        if (nom.isEmpty() || prenom.isEmpty() || ageStr.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
+            showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validation du numéro de téléphone (8 chiffres)
+        if (!telephone.matches("\\d{8}")) {
+            showAlert("Erreur", "Le numéro de téléphone doit contenir exactement 8 chiffres.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Validation du format de l'email
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            showAlert("Erreur", "L'email doit être dans un format valide (ex: exemple@domaine.com).", Alert.AlertType.ERROR);
+            return;
+        }
 
         try {
-            selectedBeneficiaire.setAge(Integer.parseInt(agetextfield.getText()));
-
-            // Get aide_id from ChoiceBox
-            aide selectedAide = aideChoiceBox.getValue();
-            if (selectedAide != null) {
-                selectedBeneficiaire.setAideId(selectedAide.getId());  // Set valid aide_id
-            } else {
-                selectedBeneficiaire.setAideId(null); // Set null if no aide is selected
+            // Validation et conversion de l'âge
+            int age = Integer.parseInt(ageStr);
+            if (age < 18 || age > 99) {
+                showAlert("Erreur", "L'âge doit être compris entre 18 et 99 ans.", Alert.AlertType.ERROR);
+                return;
             }
 
+            // Mise à jour du bénéficiaire
+            selectedBeneficiaire.setNom(nom);
+            selectedBeneficiaire.setPrenom(prenom);
+            selectedBeneficiaire.setAge(age);
+            selectedBeneficiaire.setAdresse(adresse);
+            selectedBeneficiaire.setTelephone(telephone);
+            selectedBeneficiaire.setEmail(email);
+
+            // Mise à jour de l'aide sélectionnée
+            aide selectedAide = aideChoiceBox.getValue();
+            if (selectedAide != null) {
+                selectedBeneficiaire.setAideId(selectedAide.getId());
+            } else {
+                selectedBeneficiaire.setAideId(null);
+            }
+
+            // Mise à jour dans la base de données
             beneficiaireService.updateEntity(selectedBeneficiaire.getId(), selectedBeneficiaire);
-            showAlert("Succès", "Bénéficiaire mis à jour.", Alert.AlertType.INFORMATION);
+            showAlert("Succès", "Bénéficiaire mis à jour avec succès.", Alert.AlertType.INFORMATION);
             loadData();
+
         } catch (NumberFormatException e) {
             showAlert("Erreur", "L'âge doit être un nombre valide.", Alert.AlertType.ERROR);
         }
     }
+
 
     @FXML
     void goToBack(ActionEvent event) {

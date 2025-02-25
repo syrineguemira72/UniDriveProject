@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AideService implements Iservice<aide> {
 
-    private Connection cnx;
+    private final Connection cnx;
 
     public AideService() {
         cnx = MyConnection.getInstance().getCnx();

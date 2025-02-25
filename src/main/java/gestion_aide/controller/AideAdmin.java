@@ -160,7 +160,7 @@ public class AideAdmin {
 
     @FXML
     void updateAction(ActionEvent event) {
-        // Get the selected row from the TableView
+        // Récupérer la ligne sélectionnée
         aide selectedAide = aideTable.getSelectionModel().getSelectedItem();
 
         if (selectedAide == null) {
@@ -168,30 +168,49 @@ public class AideAdmin {
             return;
         }
 
-        // Get the updated values from the TextFields
-        String updatedType = typetextfield.getText();
-        String updatedDescription = descriptiontextfield.getText();
-        String updatedMontant = montanttextfield.getText();
+        // Récupérer les nouvelles valeurs
+        String updatedType = typetextfield.getText().trim();
+        String updatedDescription = descriptiontextfield.getText().trim();
+        String updatedMontant = montanttextfield.getText().trim();
 
-        // Validate the inputs before updating
+        // Vérifier si tous les champs sont remplis
         if (updatedType.isEmpty() || updatedDescription.isEmpty() || updatedMontant.isEmpty()) {
             showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Create a new aide object with the updated values
+        // Vérifier que le type est valide
+        if (!AideType.isValidType(updatedType)) {
+            showAlert("Erreur", "Le type doit être 'alimentaire', 'financier' ou 'médical'.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Vérifier que le montant est un nombre valide et positif
+        try {
+            double montant = Double.parseDouble(updatedMontant);
+            if (montant <= 0) {
+                showAlert("Erreur", "Le montant doit être un nombre positif.", Alert.AlertType.ERROR);
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Erreur", "Le montant doit être un nombre valide.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Si toutes les validations sont passées, poursuivre avec la mise à jour
         aide updatedAide = new aide(updatedType, updatedDescription, updatedMontant);
 
-        // Call the service method to update the entity in the database
+        // Appel du service pour mettre à jour la base de données
         AideService aideService = new AideService();
         aideService.updateEntity(selectedAide.getId(), updatedAide);
 
-        // Refresh the TableView after updating
+        // Rafraîchir la TableView
         loadData();
 
-        // Show success message
+        // Affichage d'un message de succès
         showAlert("Succès", "Aide mise à jour avec succès.", Alert.AlertType.INFORMATION);
     }
+
     @FXML
     void goToAnotherPage(ActionEvent event) {
         // Load the new FXML file
