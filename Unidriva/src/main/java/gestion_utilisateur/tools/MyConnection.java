@@ -1,3 +1,4 @@
+package gestion_forum.tools;
 package gestion_utilisateur.tools;
 
 import java.sql.Connection;
@@ -11,6 +12,16 @@ public class MyConnection {
     private Connection cnx;
     private static MyConnection instance;
 
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+    public String getPwd() {
+        return pwd;
     private MyConnection() {
         try {
             cnx = DriverManager.getConnection(url,login,pwd);
@@ -24,10 +35,25 @@ public class MyConnection {
         return cnx;
     }
 
+    public static MyConnection getInstance(){
+        if(instance == null){
     public static MyConnection getInstance() {
         if (instance == null) {
             instance = new MyConnection();
         }
         return instance;
     }
+
+    public MyConnection() {
+        try {
+            cnx=DriverManager.getConnection(url,login,pwd);
+            System.out.println("connection established!");
+
+        } catch (SQLException e) {
+            System.out.println("error,connection not established! /"+e.getMessage());
+        }
+
+    }
+}
+
 }
