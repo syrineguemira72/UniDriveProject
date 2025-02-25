@@ -8,6 +8,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
+
+    <list default="true" id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="quelque modification">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+
     <list default="true" id="80e2fd35-2b07-46d0-b35f-b7ee41b30b49" name="Changes" comment="Initial commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +22,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
+        <option value="FxmlFile" />
+        <option value="Class" />
+        <option value="CSS File" />
+
         <option value="Interface" />
         <option value="Enum" />
         <option value="FxmlFile" />
@@ -36,7 +46,12 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
+
     &quot;assignee&quot;: &quot;syrineguemira72&quot;
+
+    &quot;assignee&quot;: &quot;walidismail1&quot;
+
+
     &quot;assignee&quot;: &quot;khaled424&quot;
   }
 }</component>
@@ -50,6 +65,25 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2t7OnU5lmoU7wP9KYhWOXJac5xn" />
+    &quot;accountId&quot;: &quot;334d85d5-2725-48db-b835-a172f734a6a0&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2t4qPUYFXQTB7vjix5PeOMJjZT1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+
 
     &quot;accountId&quot;: &quot;17327638-1d40-44fd-8a2d-6e00ddc6d400&quot;
   }
@@ -102,6 +136,15 @@
           <option name="PATTERN" value="edu.pidev.tests.*" />
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.Unknown [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "Maven.gestion_aide [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "#3 on gestionAide",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/mrspe/Downloads/crud-operations-using-java-and-mysql-master",
+    "list.type.of.created.stylesheet": "CSS",
+
     "Application.HomeController.executor": "Run",
     "Application.MainClass.executor": "Run",
     "Maven.Covoiturage [org.openjfx:javafx-maven-plugin:0.0.7:run].executor": "Run",
@@ -109,16 +152,33 @@
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Esprit/java/Prosit/pidev3A8",
+
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+
+    "settings.editor.selected.configurable": "vcs.Git",
     "settings.editor.selected.configurable": "preferences.externalResources",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="gestion_aide.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\mrspe\IdeaProjects\GEstion_aide" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gestion_aide.controller" />
+      <recent name="gestion_aide.tools" />
+      <recent name="gestion_aide.services" />
+      <recent name="gestion_aide.interfaces" />
+      <recent name="gestion_aide.entities" />
+    </key>
+  </component>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Cov.pidev3A8.controllers" />
     </key>
@@ -284,6 +344,117 @@
       <workItem from="1740488476647" duration="701000" />
     </task>
 
+
+      <changelist id="77163edd-c384-427b-9a30-d7518cfea640" name="Changes" comment="" />
+      <created>1739621672633</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739621672633</updated>
+      <workItem from="1739621673759" duration="3469000" />
+      <workItem from="1739625407617" duration="14511000" />
+      <workItem from="1739647528573" duration="16000" />
+      <workItem from="1739705504968" duration="10943000" />
+      <workItem from="1739781148906" duration="4599000" />
+      <workItem from="1739796413425" duration="3340000" />
+      <workItem from="1739802256029" duration="2730000" />
+      <workItem from="1739812024943" duration="3729000" />
+      <workItem from="1739876212336" duration="15353000" />
+      <workItem from="1739954349911" duration="3758000" />
+      <workItem from="1740426189189" duration="1197000" />
+      <workItem from="1740478579759" duration="396000" />
+      <workItem from="1740478990591" duration="1557000" />
+      <workItem from="1740485587785" duration="664000" />
+      <workItem from="1740486315397" duration="423000" />
+    </task>
+    <task id="LOCAL-00001" summary="efzfz">
+      <option name="closed" value="true" />
+      <created>1739706074669</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739706074669</updated>
+    </task>
+    <task id="LOCAL-00002" summary="second commit">
+      <option name="closed" value="true" />
+      <created>1739712610741</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739712610741</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Third commit">
+      <option name="closed" value="true" />
+      <created>1739714547260</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739714547260</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fourth commit">
+      <option name="closed" value="true" />
+      <created>1739815743010</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739815743010</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fifth commit">
+      <option name="closed" value="true" />
+      <created>1739879019623</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739879019623</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fifth commit">
+      <option name="closed" value="true" />
+      <created>1739879186104</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739879186104</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Sixth commit">
+      <option name="closed" value="true" />
+      <created>1739893066809</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739893066809</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Sixth commit">
+      <option name="closed" value="true" />
+      <created>1739913967177</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739913967177</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Sixth commit">
+      <option name="closed" value="true" />
+      <created>1739914032791</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1739914032791</updated>
+    </task>
+    <task id="LOCAL-00010" summary="quelque modification">
+      <option name="closed" value="true" />
+      <created>1740485771841</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1740485771841</updated>
+    </task>
+    <task id="LOCAL-00011" summary="quelque modification">
+      <option name="closed" value="true" />
+      <created>1740489854474</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1740489854474</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
       <changelist id="80e2fd35-2b07-46d0-b35f-b7ee41b30b49" name="Changes" comment="" />
       <created>1739299787451</created>
       <option name="number" value="Default" />
@@ -371,6 +542,15 @@
   </component>
 
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="efzfz" />
+    <MESSAGE value="second commit" />
+    <MESSAGE value="Third commit" />
+    <MESSAGE value="Fourth commit" />
+    <MESSAGE value="Fifth commit" />
+    <MESSAGE value="Sixth commit" />
+    <MESSAGE value="another file" />
+    <MESSAGE value="quelque modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="quelque modification" />
     <MESSAGE value="Initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
   </component>

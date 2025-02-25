@@ -1,4 +1,5 @@
 package gestion_forum.tools;
+package gestion_utilisateur.tools;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,6 +22,13 @@ public class MyConnection {
     }
     public String getPwd() {
         return pwd;
+    private MyConnection() {
+        try {
+            cnx = DriverManager.getConnection(url,login,pwd);
+            System.out.println("Connection Established!");
+        } catch (SQLException e) {
+            System.out.println("Connection error/" + e.getMessage());
+        }
     }
 
     public Connection getCnx() {
@@ -29,6 +37,8 @@ public class MyConnection {
 
     public static MyConnection getInstance(){
         if(instance == null){
+    public static MyConnection getInstance() {
+        if (instance == null) {
             instance = new MyConnection();
         }
         return instance;
@@ -46,3 +56,4 @@ public class MyConnection {
     }
 }
 
+}
