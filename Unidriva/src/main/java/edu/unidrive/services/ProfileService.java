@@ -86,4 +86,34 @@ public class ProfileService implements Iservice<Profile> {
         return List.of();
     }
 
+    @Override
+    public void removeEntity(Profile entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Profile entity) {
+
+    }
+
+    @Override
+    public void addEntity(Profile profile) {
+
+    }
+
+    @Override
+    public void deleteEntity(int id, Profile profile) {
+
+    }
+
+    @Override
+    public void updateEntity(int id, Profile profile) {
+
+    }
+
+    @Override
+    public List<Profile> getallData() {
+        return List.of();
+    }
+
 }

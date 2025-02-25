@@ -61,7 +61,7 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <Label text="Forum" textFill="WHITE" underline="true">
+                        <Label fx:id="btnforum" alignment="CENTER" layoutX="9.0" layoutY="128.0" onMouseClicked="#forum" prefHeight="23.0" prefWidth="248.0" text="Forum" textFill="#5383ff" underline="true" />
                            <font>
                               <Font name="System Bold Italic" size="17.0" />
                            </font>

@@ -1,9 +1,9 @@
-package gestion_utilisateur.controller;
+package edu.unidrive.controllers;
 
-import gestion_utilisateur.entities.Beneficiaire;
-import gestion_utilisateur.entities.aide;
-import gestion_utilisateur.services.BeneficiaireService;
-import gestion_utilisateur.services.AideService;
+import edu.unidrive.entities.Beneficiaire;
+import edu.unidrive.entities.aide;
+import edu.unidrive.services.BeneficiaireService;
+import edu.unidrive.services.AideService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

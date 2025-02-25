@@ -1,4 +1,4 @@
-package gestion_forum.entities;
+package edu.unidrive.entities;
 
 public class Post {
     private int id;

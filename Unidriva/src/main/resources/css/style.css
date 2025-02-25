@@ -62,8 +62,6 @@
 .image-view {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
     -fx-padding: 10;
-    -fx-image: url("file:///C:/Users/mrspe/IdeaProjects/GEstion_aide/Image/Logo.jpg"); /* Use three slashes after 'file:' */
-
 * {
     -fx-font-family: "Segoe UI", sans-serif;
     -fx-font-size: 14px;
@@ -215,4 +213,4 @@ ComboBox .cell {
 
 .button:hover, #Profile:hover, #logoutbtn:hover {
     -fx-transition: all 0.3s ease-in-out;
-}
+}}

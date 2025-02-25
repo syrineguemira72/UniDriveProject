@@ -1,4 +1,4 @@
-package gestion_forum.entities;
+package edu.unidrive.entities;
 
 import java.time.LocalDate;
 

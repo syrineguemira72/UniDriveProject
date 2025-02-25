@@ -17,7 +17,6 @@
       <Pane layoutX="488.0" layoutY="100.0" AnchorPane.bottomAnchor="73.0" AnchorPane.topAnchor="100.0">
          <children>
             <TextField fx:id="txtUsername" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
-            <Label fx:id="btnForgot" alignment="CENTER" layoutX="9.0" layoutY="128.0" onMouseClicked="#Forgot" prefHeight="23.0" prefWidth="248.0" text="Forgot Password" textFill="#5383ff" underline="true" />
 
             <Button fx:id="login" layoutX="4.0" layoutY="206.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="275.0" style="-fx-background-color: #000080;" text="Login" textFill="WHITE" />
             <Separator layoutX="7.0" layoutY="172.0" prefHeight="7.0" prefWidth="275.0" />

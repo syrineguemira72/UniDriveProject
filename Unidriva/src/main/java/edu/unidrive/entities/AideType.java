@@ -1,4 +1,4 @@
-package gestion_utilisateur.entities;
+package edu.unidrive.entities;
 
 public enum AideType {
     ALIMENTAIRE("alimentaire"),

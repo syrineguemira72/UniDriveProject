@@ -1,8 +1,8 @@
-package gestion_utilisateur.services;
+package edu.unidrive.services;
 
-import gestion_utilisateur.entities.Beneficiaire;
-import gestion_utilisateur.interfaces.Iservice;
-import gestion_utilisateur.tools.MyConnection;
+import edu.unidrive.entities.Beneficiaire;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +14,36 @@ public class BeneficiaireService implements Iservice<Beneficiaire> {
 
     public BeneficiaireService() {
         cnx = MyConnection.getInstance().getCnx();
+    }
+
+    @Override
+    public void add(Beneficiaire entity) {
+
+    }
+
+    @Override
+    public void remove(Beneficiaire entity) {
+
+    }
+
+    @Override
+    public void update(Beneficiaire entity) {
+
+    }
+
+    @Override
+    public List<Beneficiaire> getAllData() {
+        return List.of();
+    }
+
+    @Override
+    public void removeEntity(Beneficiaire entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Beneficiaire entity) {
+
     }
 
     @Override

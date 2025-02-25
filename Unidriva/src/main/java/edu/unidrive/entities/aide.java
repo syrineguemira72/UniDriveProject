@@ -1,4 +1,4 @@
-package gestion_utilisateur.entities;
+package edu.unidrive.entities;
 
 import javafx.beans.property.*;
 

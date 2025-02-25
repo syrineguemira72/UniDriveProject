@@ -1,9 +1,9 @@
-package gestion_forum.services;
+package edu.unidrive.services;
 
-import gestion_forum.entities.Interaction;
-import gestion_forum.entities.Post;
-import gestion_forum.interfaces.Iservice;
-import gestion_forum.tools.MyConnection;
+import edu.unidrive.entities.Interaction;
+import edu.unidrive.entities.Post;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -33,6 +33,20 @@ public class PostService implements Iservice <Post> {
         }
     }
 
+    @Override
+    public void deleteEntity(int id, Post post) {
+
+    }
+
+    @Override
+    public void updateEntity(int id, Post post) {
+
+    }
+
+    @Override
+    public List<Post> getallData() {
+        return List.of();
+    }
 
 
     @Override
@@ -70,6 +84,21 @@ public class PostService implements Iservice <Post> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la mise à jour du post : " + e.getMessage());
         }
+
+    }
+
+    @Override
+    public void add(Post entity) {
+
+    }
+
+    @Override
+    public void remove(Post entity) {
+
+    }
+
+    @Override
+    public void update(Post entity) {
 
     }
 

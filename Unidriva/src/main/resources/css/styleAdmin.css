@@ -91,7 +91,6 @@
 .image-view {
     -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
     -fx-padding: 10;
-    -fx-image: url("file:///C:/Users/mrspe/IdeaProjects/GEstion_aide/Image/Logo.jpg");
 }
 
 /* Add specific style for the Delete, Update, and Back buttons */

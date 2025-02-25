@@ -1,7 +1,7 @@
-package gestion_forum.controllers;
+package edu.unidrive.controllers;
 
-import gestion_forum.entities.Post;
-import gestion_forum.services.PostService;
+import edu.unidrive.entities.Post;
+import edu.unidrive.services.PostService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

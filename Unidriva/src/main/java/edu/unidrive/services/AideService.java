@@ -1,8 +1,8 @@
-package gestion_utilisateur.services;
+package edu.unidrive.services;
 
-import gestion_utilisateur.entities.aide;
-import gestion_utilisateur.interfaces.Iservice;
-import gestion_utilisateur.tools.MyConnection;
+import edu.unidrive.entities.aide;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +14,36 @@ public class AideService implements Iservice<aide> {
 
     public AideService() {
         cnx = MyConnection.getInstance().getCnx();
+    }
+
+    @Override
+    public void add(aide entity) {
+
+    }
+
+    @Override
+    public void remove(aide entity) {
+
+    }
+
+    @Override
+    public void update(aide entity) {
+
+    }
+
+    @Override
+    public List<aide> getAllData() {
+        return List.of();
+    }
+
+    @Override
+    public void removeEntity(aide entity) {
+
+    }
+
+    @Override
+    public void updateEntity(aide entity) {
+
     }
 
     @Override

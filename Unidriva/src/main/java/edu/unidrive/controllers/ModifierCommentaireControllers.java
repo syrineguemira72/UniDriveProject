@@ -1,6 +1,6 @@
-package gestion_forum.controllers;
-import gestion_forum.entities.Interaction;
-import gestion_forum.services.InteractionService;
+package edu.unidrive.controllers;
+import edu.unidrive.entities.Interaction;
+import edu.unidrive.services.InteractionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

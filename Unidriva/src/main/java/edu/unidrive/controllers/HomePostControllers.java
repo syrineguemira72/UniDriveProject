@@ -1,8 +1,8 @@
-package gestion_forum.controllers;
-import gestion_forum.entities.Interaction;
-import gestion_forum.entities.Post;
-import gestion_forum.services.InteractionService;
-import gestion_forum.services.PostService;
+package edu.unidrive.controllers;
+import edu.unidrive.entities.Interaction;
+import edu.unidrive.entities.Post;
+import edu.unidrive.services.InteractionService;
+import edu.unidrive.services.PostService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

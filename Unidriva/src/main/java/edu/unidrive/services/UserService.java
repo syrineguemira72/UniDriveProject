@@ -146,6 +146,36 @@ public class UserService implements Iservice<Utilisateur> {
         return utilisateurs;
     }
 
+    @Override
+    public void removeEntity(Utilisateur entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Utilisateur entity) {
+
+    }
+
+    @Override
+    public void addEntity(Utilisateur utilisateur) {
+
+    }
+
+    @Override
+    public void deleteEntity(int id, Utilisateur utilisateur) {
+
+    }
+
+    @Override
+    public void updateEntity(int id, Utilisateur utilisateur) {
+
+    }
+
+    @Override
+    public List<Utilisateur> getallData() {
+        return List.of();
+    }
+
     public boolean loginUser(String email, String password) {
         try {
             String requete = "SELECT * FROM utilisateur WHERE email = ? AND password = ?";
