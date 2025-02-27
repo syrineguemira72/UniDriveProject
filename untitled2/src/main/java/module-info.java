@@ -4,6 +4,7 @@ module UniDriveProject {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.controlsfx.controls;
     opens edu.unidrive.controllers;
     opens edu.unidrive.entities;
      opens edu.unidrive.tools;

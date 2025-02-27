@@ -44,7 +44,7 @@
          </font>
       </Button>
       <TextField fx:id="idtf" layoutX="112.0" layoutY="1.0" visible="false" />
-      <Button layoutX="434.0" layoutY="319.0" mnemonicParsing="false" onAction="#approveDestination" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #39cb12;" text="Find" textFill="WHITE">
+      <Button layoutX="434.0" layoutY="319.0" mnemonicParsing="false" onAction="#find" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #39cb12;" text="Find" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

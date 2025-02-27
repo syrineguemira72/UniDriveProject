@@ -29,6 +29,22 @@
             <artifactId>javafx-fxml</artifactId>
             <version>21</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.controlsfx/controlsfx -->
+             <!-- JavaFX Dependencies -->
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-controls</artifactId>
+                <version>17.0.2</version>
+            </dependency>
+
+            <!-- ControlsFX Dependency (for JavaFX 11+) -->
+            <dependency>
+                <groupId>org.controlsfx</groupId>
+                <artifactId>controlsfx</artifactId>
+                <version>11.1.2</version>
+            </dependency>
+
+
     </dependencies>
 
     <build>

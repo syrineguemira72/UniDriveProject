@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="recpane" prefHeight="400.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.RecompenseController">
+<AnchorPane fx:id="recpane" prefHeight="400.0" prefWidth="736.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.RecompenseController">
    <children>
       <TableView fx:id="recTab" layoutX="376.0" layoutY="117.0" onMouseClicked="#getSelected" prefHeight="146.0" prefWidth="233.0">
         <columns>
@@ -29,7 +29,7 @@
          </font>
       </Button>
       <TextField fx:id="filterField" layoutX="311.0" layoutY="39.0" onKeyTyped="#recherche" />
-      <Button layoutX="260.0" layoutY="319.0" mnemonicParsing="false" onAction="#deleteRecompense" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #d44141;" text="Delete" textFill="WHITE">
+      <Button layoutX="248.0" layoutY="319.0" mnemonicParsing="false" onAction="#deleteRecompense" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #d44141;" text="Delete" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -44,6 +44,11 @@
       <Label layoutX="70.0" layoutY="56.0" text="Objet" />
       <TextField fx:id="usertf" layoutX="70.0" layoutY="154.0" />
       <Button layoutX="558.0" layoutY="36.0" mnemonicParsing="false" onAction="#NavRecompense" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #39cb12;" text="objets perdus" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="651.0" layoutY="192.0" mnemonicParsing="false" onAction="#printRecompense" prefHeight="6.0" prefWidth="70.0" style="-fx-background-color: #f5r4d1;" text="Print" textFill="#7b0909">
          <font>
             <Font size="16.0" />
          </font>

@@ -1,4 +1,10 @@
 package edu.unidrive.controllers;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import edu.unidrive.entities.Objet;
 import edu.unidrive.services.ObjetPerduService;
@@ -15,6 +21,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -112,8 +119,8 @@ public class ObjetPerdu implements Initializable {
         connection = MyConnection.getInstance().getCnx();
         initializeTable();
         loadDestinations();
-        setupSearchFilter();
-    }
+        recherche();
+     }
 
     private void initializeTable() {
         User.setCellValueFactory(new PropertyValueFactory<>("idP"));
@@ -172,66 +179,8 @@ public class ObjetPerdu implements Initializable {
             showAlert("Error", "Please select an object to delete!");
         }
     }
-    @FXML
-    public void recherche(){
-        ObjetPerduService ff= new ObjetPerduService();
-        List<Objet>results = new ArrayList<>();
-        results = ff.afficherObjets();
-        FilteredList<Objet> filteredData = new FilteredList<>(destinationList , b -> true);
-        Objet r = new Objet();
-        // 2. Set the filter Predicate whenever the filter changes.
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(feedback -> {
-                // If filter text is empty, display all persons.
-
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                // Compare first name and last name of every person with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (feedback.getStatus().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true; // Filter matches last name.
-                }
-                else if (String.valueOf(r.getStatus()).indexOf(lowerCaseFilter)!=-1)
-                    return true;
-                else
-                    return false; // Does not match.
-            });
-        });
-
-        // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Objet> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        // 	  Otherwise, sorting the TableView would have no effect.
-        sortedData.comparatorProperty().bind(recTab.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
-        recTab.setItems(sortedData);
 
 
-    }
-
-
-    private void setupSearchFilter() {
-        FilteredList<Objet> filteredData = new FilteredList<>(destinationList, b -> true);
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(destination -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return destination.getNom().toLowerCase().contains(lowerCaseFilter) ||
-                        destination.getLieuP().toLowerCase().contains(lowerCaseFilter) ;
-            });
-        });
-
-        SortedList<Objet> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(recTab.comparatorProperty());
-        recTab.setItems(sortedData);
-    }
 
     private void showAlert(String title, String message) {
        Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -270,38 +219,93 @@ System.out.println("hello");
         } catch ( SQLException e) {
         }
     }
+
     @FXML
-    void approveDestination(ActionEvent event) {
-        if (controlSaisie()) {
-            try {
-                cnx = MyConnection.getInstance().getCnx();
-                String value0 = idtf.getText();
+    void find(ActionEvent event) {
+        try {
+            // Get the database connection
+            cnx = MyConnection.getInstance().getCnx();
 
-                String value1 = "trouvé";
-                String value2 = "2";
+            // Get user input
+            String objectId = idtf.getText().trim();
+            String newStatus = "trouvé";
 
-                String sql = "update objets_perdu set status='" + value1 + "',idT='" + value2 + "'  where id='" + value0 + "' ";
-                System.out.println(sql);
+            if (objectId.isEmpty()) {
+                showNotification("Erreur", "Veuillez entrer un ID valide.", NotificationType.ERROR);
+                return;
+            }
 
-                pst = cnx.prepareStatement(sql);
-                pst.execute();
+            // Prepare the SQL query with a parameter
+            String sql = "UPDATE objets_perdu SET status = ? WHERE id = ?";
+            pst = cnx.prepareStatement(sql);
+            pst.setString(1, newStatus);
+            pst.setString(2, objectId);
 
-                nomtf.setText("");
+            // Execute the update
+            int rowsUpdated = pst.executeUpdate();
 
-                idtf.setText("");
+            if (rowsUpdated > 0) {
+                // Clear fields
+                idtf.clear();
+                nomtf.clear();
+                desctf.clear();
 
-                desctf.setText("");
+                // Reload data in the table
                 loadDestinations();
 
-
-            } catch (SQLException e) {
+                // Show success notification
+                showNotification("Succès", "Objet marqué comme trouvé !", NotificationType.SUCCESS);
+            } else {
+                showNotification("Attention", "Aucun objet trouvé avec cet ID.", NotificationType.WARNING);
             }
+        } catch (SQLException e) {
+            showNotification("Erreur", "Une erreur s'est produite: " + e.getMessage(), NotificationType.ERROR);
+            e.printStackTrace();  // Log the error
         }
     }
+
     public Objet gettempReclamation(TableColumn.CellEditEvent edittedCell) {
         Objet test = recTab.getSelectionModel().getSelectedItem();
         return test;
     }
+
+    private void showNotification(String title, String message, NotificationType type) {
+        Image img = new Image(getClass().getResourceAsStream("/OKAY.jpg"));
+        ImageView icon = new ImageView(img);
+
+        // Set a smaller image size
+        icon.setFitWidth(30);  // Adjust width
+        icon.setFitHeight(30); // Adjust height
+
+        Notifications notification = Notifications.create()
+                .title(title)
+                .text(message)
+                .graphic(icon)
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.TOP_RIGHT)
+                .onAction(e -> System.out.println("Notification clicked!"));
+
+        // Apply custom icons based on notification type
+        switch (type) {
+            case SUCCESS:
+                icon.setImage(new Image(getClass().getResourceAsStream("/OKAY.jpg")));
+                break;
+            case ERROR:
+                icon.setImage(new Image(getClass().getResourceAsStream("/OKAY.jpg")));
+                break;
+            case WARNING:
+                icon.setImage(new Image(getClass().getResourceAsStream("/OKAY.jpg")));
+                break;
+        }
+
+        notification.show();
+    }
+
+    // Enum for notification types
+    enum NotificationType {
+        SUCCESS, ERROR, WARNING
+    }
+
 
     @FXML
     private void getSelected(javafx.scene.input.MouseEvent event) {
@@ -313,5 +317,23 @@ System.out.println("hello");
         idtf.setText(idcol.getCellData(index).toString());
         nomtf.setText(nom.getCellData(index).toString());
         usertf.setText(description.getCellData(index).toString());
+    }
+
+
+    @FXML
+    public void recherche(){
+        if (filterField == null || filterField.getText().isEmpty()) {
+            recTab.setItems(destinationList);  // Show all data if no filter
+        } else {
+            ObservableList<Objet> filteredData = FXCollections.observableArrayList();
+            for (Objet item : destinationList) {
+                if (item.getStatus().toLowerCase().contains(filterField.getText().toLowerCase()) ||
+                        item.getNom().toLowerCase().contains(filterField.getText().toLowerCase())) {
+                    filteredData.add(item);
+                }
+            }
+            recTab.setItems(filteredData);
+        }
+
     }
 }
