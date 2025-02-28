@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="editTripPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.unidrive.controllers.ModifierTrajetController">
+    <Label layoutX="250.0" layoutY="20.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Modifier Trajet" />
+
+    <!-- Form Fields -->
+    <Label layoutX="50.0" layoutY="80.0" text="Point de départ:" />
+    <TextField fx:id="startPointField" layoutX="200.0" layoutY="80.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <Label layoutX="50.0" layoutY="120.0" text="Destination:" />
+    <TextField fx:id="destinationField" layoutX="200.0" layoutY="120.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <Label layoutX="50.0" layoutY="160.0" text="Durée Estimée (min):" />
+    <TextField fx:id="dureeField" layoutX="200.0" layoutY="160.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <Label layoutX="50.0" layoutY="200.0" text="Distance (km):" />
+    <TextField fx:id="distanceField" layoutX="200.0" layoutY="200.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <Label layoutX="50.0" layoutY="240.0" text="Places Disponibles:" />
+    <TextField fx:id="seatsField" layoutX="200.0" layoutY="240.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <Label layoutX="50.0" layoutY="280.0" text="Date Heure:" />
+    <TextField fx:id="dateField" layoutX="200.0" layoutY="280.0" prefHeight="26.0" prefWidth="214.0" />
+
+    <!-- Save Button -->
+    <Button fx:id="saveButton"  layoutX="257.0" layoutY="319.0" prefWidth="100.0" text="Save" onAction="#saveEditedTrip" />
+</AnchorPane>
+

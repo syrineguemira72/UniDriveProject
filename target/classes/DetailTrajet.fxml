@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="manageAddedTripsPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.DetailTrajetController">
+    <!-- Titre de la page -->
+    <Label layoutX="346.0" layoutY="34.0" text="Liste des trajets" />
+
+    <!-- TableView pour afficher les trajets ajoutés -->
+    <TableView fx:id="addedTripsTable" layoutX="50.0" layoutY="80.0" prefHeight="300.0" prefWidth="726.0">
+        <columns>
+            <TableColumn fx:id="idTrajetColumn" prefWidth="64.0" text="ID Trajet" />
+            <TableColumn fx:id="startPointColumn" prefWidth="109.60003662109375" text="Point de départ" />
+            <TableColumn fx:id="destinationColumn" prefWidth="105.5999755859375" text="Destination" />
+            <TableColumn fx:id="dureeColumn" prefWidth="98.4000244140625" text="Durée Estimée" />
+            <TableColumn fx:id="distanceColumn" prefWidth="60.79998779296875" text="Distance" />
+            <TableColumn fx:id="dateColumn" prefWidth="141.5999755859375" text="Date Heure" />
+            <TableColumn fx:id="seatsColumn" prefWidth="145.5999755859375" text="Places disponibles" />
+        </columns>
+    </TableView>
+
+    <!-- Boutons pour Modifier et Annuler -->
+    <Button fx:id="editTripButton" layoutX="130.0" layoutY="420.0" prefWidth="150.0" text="Modifier Trajet" onAction="#openModifierTrajetWindow" />
+    <Button fx:id="cancelTripButton" layoutX="353.0" layoutY="420.0" prefWidth="150.0" text="Annuler Trajet" />
+
+    <Button fx:id="backButton" layoutX="578.0" layoutY="420.0" prefWidth="150.0" text="Retour" />
+
+</AnchorPane>
