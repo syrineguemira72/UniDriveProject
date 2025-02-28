@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="manageAddedTripsPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cov.pidev3A8.controllers.DetailTrajetController">
+<AnchorPane fx:id="manageAddedTripsPane" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.DetailTrajetController">
     <!-- Titre de la page -->
     <Label layoutX="346.0" layoutY="34.0" text="Liste des trajets" />
 

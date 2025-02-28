@@ -1,4 +1,4 @@
-package cov.pidev3A8.controllers;
+package edu.unidrive.controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

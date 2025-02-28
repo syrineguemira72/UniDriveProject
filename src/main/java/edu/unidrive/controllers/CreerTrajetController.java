@@ -1,7 +1,7 @@
-package cov.pidev3A8.controllers;
+package edu.unidrive.controllers;
 
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.services.TrajetService;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.services.TrajetService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;

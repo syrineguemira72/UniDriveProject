@@ -1,7 +1,7 @@
-package cov.pidev3A8.controllers;
+package edu.unidrive.controllers;
 
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.services.TrajetService;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.services.TrajetService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class ModifierTrajetController {
 

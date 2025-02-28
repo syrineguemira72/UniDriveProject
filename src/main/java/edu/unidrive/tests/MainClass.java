@@ -1,15 +1,14 @@
-package cov.pidev3A8.tests;
+package edu.unidrive.tests;
 
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.entities.Reservation;
-import cov.pidev3A8.services.ReservationService;
-import cov.pidev3A8.entities.Etat;
-import cov.pidev3A8.tools.MyConnection;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.entities.Reservation;
+import edu.unidrive.services.ReservationService;
+import edu.unidrive.tools.MyConnection;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static cov.pidev3A8.entities.Etat.En_attente;
+import static edu.unidrive.entities.Etat.En_attente;
 
 public class MainClass {
 
