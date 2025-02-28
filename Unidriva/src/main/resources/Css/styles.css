@@ -1,0 +1,161 @@
+
+@font-face {
+    src: url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    font-family: 'Poppins';
+}
+
+.root {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-background-color: #F0F8FF;
+    -fx-padding: 20;
+}
+
+#homepage {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+    -fx-text-fill: #000080;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 1);
+}
+
+#postListView {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #008000;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.5, 0, 1);
+}
+
+.button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
+    -fx-font-weight: bold;
+    -fx-border-color: #000080;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 6 12;
+    -fx-border-width: 2px;
+}
+
+.button:hover {
+    -fx-background-color: #87CEEB;
+}
+
+.button:armed {
+    -fx-background-color: #87CEEB;
+}
+
+.list-cell .button {
+    -fx-padding: 2 4;
+    -fx-min-width: 10px;
+    -fx-min-height: 10px;
+}
+
+.text {
+    -fx-fill: #000080;
+    -fx-font-size: 14px;
+}
+
+.comment-button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
+    -fx-font-weight: bold;
+    -fx-border-color: #000080;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding:2 4;
+    -fx-border-width: 2px;
+}
+
+.comment-button:hover {
+    -fx-background-color: #87CEEB;
+}
+
+.comment-button:armed {
+    -fx-background-color: #87CEEB;
+}
+
+.delete-button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
+    -fx-font-weight: bold;
+    -fx-border-color: #000080;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 2 4;
+    -fx-border-width: 2px;
+}
+
+.delete-button:hover {
+    -fx-background-color: #87CEEB;
+}
+
+.delete-button:armed {
+    -fx-background-color: #87CEEB;
+}
+
+.update-button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
+    -fx-font-weight: bold;
+    -fx-border-color: #000080;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 2 4;
+    -fx-border-width: 2px;
+}
+
+.update-button:hover {
+    -fx-background-color: #87CEEB;
+}
+
+.update-button:armed {
+    -fx-background-color: #87CEEB;
+}
+.root {
+    -fx-background-color: #F0F8FF;
+    -fx-padding: 0;
+}
+
+
+.form-section {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000080;
+}
+
+.form-field {
+    -fx-background-color: #F0F8FF;
+    -fx-border-color: #000080;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+.form-button {
+    -fx-background-color: #87CEEB;
+    -fx-text-fill: #000080;
+    -fx-font-weight: bold;
+    -fx-border-color: #000080;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 8 16;
+    -fx-border-width: 2px;
+}
+
+.form-button:hover {
+    -fx-background-color: #ADD8E6;
+}
+
+.logo-section {
+    -fx-background-color: #87CEEB;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}

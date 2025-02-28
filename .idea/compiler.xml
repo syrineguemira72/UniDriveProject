@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="untitled2" />
         <module name="gestion_aide" />
+        <module name="Unidriva" />
       </profile>
     </annotationProcessing>
   </component>

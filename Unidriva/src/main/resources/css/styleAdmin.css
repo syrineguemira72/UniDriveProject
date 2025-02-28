@@ -1,0 +1,132 @@
+/* General Styles */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f8ff; /* Alice Blue */
+}
+
+/* Title Styles */
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a8a; /* Indigo Blue */
+    -fx-padding: 10 0;
+}
+
+/* Label Styles */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2f855a; /* Green */
+    -fx-font-weight: bold;
+}
+
+/* TextField Styles */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e3a8a; /* Indigo Blue */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* ChoiceBox Styles */
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e3a8a; /* Indigo Blue */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* Button Styles */
+.button {
+    -fx-background-color: #319795; /* Teal */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+}
+
+/* Buttons Hover Effects */
+.button:hover {
+    -fx-background-color: #2c7a7b; /* Darker Teal */
+}
+
+/* TableView Styles */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e3a8a; /* Indigo Blue */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* TableColumn Styles */
+.table-column {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2f855a; /* Green */
+}
+
+/* Column Header Styles */
+.table-column .column-header {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a8a; /* Indigo Blue */
+}
+
+/* Table Row Styles */
+.table-row-cell {
+    -fx-padding: 10;
+    -fx-background-color: #f1f5f9; /* Light Gray */
+}
+
+/* Add custom styles to your TableView cells */
+.table-view .table-row-cell:filled:hover {
+    -fx-background-color: #e2e8f0; /* Lighter Gray */
+}
+
+/* Logo Styles */
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+    -fx-padding: 10;
+}
+
+/* Add specific style for the Delete, Update, and Back buttons */
+.delete-button {
+    -fx-background-color: #e53e3e; /* Red */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.update-button {
+    -fx-background-color: #38b2ac; /* Light Teal */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.back-button {
+    -fx-background-color: #2d3748; /* Dark Gray */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+/* Hover effects for the Delete, Update, and Back buttons */
+.delete-button:hover {
+    -fx-background-color: #c53030; /* Darker Red */
+}
+
+.update-button:hover {
+    -fx-background-color: #319795; /* Darker Teal */
+}
+
+.back-button:hover {
+    -fx-background-color: #4a5568; /* Darker Gray */
+}

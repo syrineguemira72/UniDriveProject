@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_forum.controllers.ModifierCommentaireControllers">
+    <stylesheets>
+        <URL value="@./Css/styles.css" />
+    </stylesheets>
+    <children>
+        <HBox prefHeight="400.0" prefWidth="600.0">
+            <VBox styleClass="form-section" prefWidth="300.0" prefHeight="400.0">
+                <children>
+                    <TextField fx:id="textcomment" styleClass="form-field" promptText="Entrez votre commentaire" />
+                    <Button text="Mettre à jour" styleClass="form-button" onAction="#updatecomment" />
+                </children>
+            </VBox>
+
+            <VBox styleClass="logo-section" prefWidth="300.0" prefHeight="400.0" alignment="CENTER">
+                <children>
+                    <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">                        <image>
+                            <Image url="@images/logo.png" />
+                        </image>
+                    </ImageView>
+                </children>
+            </VBox>
+        </HBox>
+    </children>
+</AnchorPane>
