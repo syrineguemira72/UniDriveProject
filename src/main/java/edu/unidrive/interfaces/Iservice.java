@@ -1,4 +1,4 @@
-package cov.pidev3A8.interfaces;
+package edu.unidrive.interfaces;
 
 import java.util.List;
 

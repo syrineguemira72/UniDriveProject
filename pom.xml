@@ -41,7 +41,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.7</version>
                 <configuration>
-                    <mainClass>cov.pidev3A8.controllers.HomeController</mainClass>
+                    <mainClass>edu.unidrive.controllers.HomeController</mainClass>
                 </configuration>
             </plugin>
         </plugins>

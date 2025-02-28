@@ -1,10 +1,10 @@
-package cov.pidev3A8.services;
+package edu.unidrive.services;
 
-import cov.pidev3A8.entities.Reservation;
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.entities.Etat;
-import cov.pidev3A8.interfaces.Iservice;
-import cov.pidev3A8.tools.MyConnection;
+import edu.unidrive.entities.Reservation;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.entities.Etat;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

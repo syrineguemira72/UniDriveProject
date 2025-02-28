@@ -1,4 +1,4 @@
-package cov.pidev3A8.entities;
+package edu.unidrive.entities;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

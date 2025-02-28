@@ -1,7 +1,6 @@
-package cov.pidev3A8.entities;
+package edu.unidrive.entities;
 
 
-import javax.print.attribute.standard.PresentationDirection;
 import java.sql.Date;
 import java.time.LocalDate;
 
