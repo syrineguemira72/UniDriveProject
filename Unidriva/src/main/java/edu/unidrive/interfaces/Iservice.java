@@ -14,4 +14,7 @@ public interface Iservice<T> {
     public void deleteEntity(int id,T t);
     public void updateEntity(int id,T t);
     public List<T> getallData();
+    public T getEntity(int id);
+    public void deleteEntity(T t);
+
 }
