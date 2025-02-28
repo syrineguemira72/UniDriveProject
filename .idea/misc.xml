@@ -5,6 +5,9 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/untitled2/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+
         <option value="$PROJECT_DIR$/UniDriveForum/pom.xml" />
       </list>
     </option>
