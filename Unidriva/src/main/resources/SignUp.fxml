@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" stylesheets="@css/sign.css" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.SignUpController">
+<AnchorPane id="AnchorPane" stylesheets="@Css/sign.css" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.SignUpController">
     <children>
         <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color: #000080;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>

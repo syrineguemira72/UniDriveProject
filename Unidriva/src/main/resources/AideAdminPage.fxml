@@ -8,7 +8,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.AideAdmin">
+<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@Css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AideAdmin">
     <children>
         <!-- Type TextField -->
         <TextField fx:id="typetextfield" layoutX="139.0" layoutY="88.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" styleClass="text-field" />
