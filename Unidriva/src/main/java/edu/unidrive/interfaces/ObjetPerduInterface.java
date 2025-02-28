@@ -1,4 +1,4 @@
-package edu.unidrive.Iservices;
+package edu.unidrive.interfaces;
 
 import edu.unidrive.entities.Objet;
 

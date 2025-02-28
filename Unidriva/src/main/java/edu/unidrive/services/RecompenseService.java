@@ -1,6 +1,6 @@
 package edu.unidrive.services;
 
-import edu.unidrive.Iservices.IRecompenseService;
+import edu.unidrive.interfaces.IRecompenseService;
 import edu.unidrive.entities.Recompense;
 import edu.unidrive.tools.MyConnection;
 

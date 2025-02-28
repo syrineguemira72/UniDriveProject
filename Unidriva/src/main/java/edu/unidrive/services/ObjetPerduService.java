@@ -1,8 +1,8 @@
-package Services;
+package edu.unidrive.services;
 
-import Iservices.ObjetPerduInterface;
-import entites.Objet;
-import tools.MyConnection;
+import edu.unidrive.interfaces.ObjetPerduInterface;
+import edu.unidrive.entities.Objet;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
