@@ -2,10 +2,12 @@ package edu.unidrive.controllers;
 
 import edu.unidrive.entities.Beneficiaire;
 import edu.unidrive.entities.aide;
-import edu.unidrive.services.BeneficiaireService;
 import edu.unidrive.services.AideService;
+import edu.unidrive.services.BeneficiaireService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +26,9 @@ public class BeneficiaireAdmin {
 
     @FXML
     private TextField nomtextfield, prenomtextfield, agetextfield, adressetextfield, telephonetextfield, emailtextfield;
+
+    @FXML
+    private TextField searchField;
 
     @FXML
     private ChoiceBox<aide> aideChoiceBox;
@@ -57,11 +62,39 @@ public class BeneficiaireAdmin {
         telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        // Load initial data
+        // Load data into TableView
         loadData();
         loadAideData();
 
-        // Add listener for row selection in TableView
+        // Wrap beneficiaire list in a FilteredList
+        FilteredList<Beneficiaire> filteredData = new FilteredList<>(beneficiaireTable.getItems(), p -> true);
+
+        // Add listener to search field
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(beneficiaire -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true; // Show all if search is empty
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                // Filter by name, prenom, address, telephone, or email
+                return beneficiaire.getNom().toLowerCase().contains(lowerCaseFilter)
+                        || beneficiaire.getPrenom().toLowerCase().contains(lowerCaseFilter)
+                        || beneficiaire.getAdresse().toLowerCase().contains(lowerCaseFilter)
+                        || beneficiaire.getTelephone().toLowerCase().contains(lowerCaseFilter)
+                        || beneficiaire.getEmail().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
+        // Wrap FilteredList in a SortedList
+        SortedList<Beneficiaire> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(beneficiaireTable.comparatorProperty());
+
+        // Bind sorted and filtered data to TableView
+        beneficiaireTable.setItems(sortedData);
+
+        // Handle row selection
         beneficiaireTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 populateFields(newValue);
@@ -172,20 +205,27 @@ public class BeneficiaireAdmin {
     @FXML
     void deleteSelectedRow(ActionEvent event) {
         Beneficiaire selectedBeneficiaire = beneficiaireTable.getSelectionModel().getSelectedItem();
+
         if (selectedBeneficiaire != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Voulez-vous supprimer ce bénéficiaire?");
             Optional<ButtonType> result = alert.showAndWait();
+
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                beneficiaireService.deleteEntity(selectedBeneficiaire.getId(),selectedBeneficiaire);
-                beneficiaireTable.getItems().remove(selectedBeneficiaire);
+                // Delete the selected entity
+                beneficiaireService.deleteEntity(selectedBeneficiaire.getId(), selectedBeneficiaire);
+
+                // Reload the table data
+                loadData();
+
                 showAlert("Succès", "Bénéficiaire supprimé.", Alert.AlertType.INFORMATION);
             }
         } else {
             showAlert("Erreur", "Veuillez sélectionner un bénéficiaire à supprimer.", Alert.AlertType.ERROR);
         }
     }
+
 
     @FXML
     void updateAction(ActionEvent event) {

@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 public class DetailController {
 
     @FXML
-    private TextField typetextfield;
+    private TextField currencytextfield;
 
     @FXML
     private TextField descriptiontextfield;
@@ -15,12 +15,12 @@ public class DetailController {
     private TextField montanttextfield;
 
 
-    public TextField getTypetextfield() {
-        return typetextfield;
+    public TextField getCurrencytextfield() {
+        return currencytextfield;
     }
 
-    public void setTypetextfield(String typetextfield) {
-        this.typetextfield.setText(typetextfield);
+    public void setCurrencytextfield(String currencytextfield) {
+        this.currencytextfield.setText(currencytextfield);
     }
 
     public TextField getDescriptiontextfield() {

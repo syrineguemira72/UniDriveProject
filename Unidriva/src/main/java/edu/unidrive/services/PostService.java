@@ -48,6 +48,16 @@ public class PostService implements Iservice <Post> {
         return List.of();
     }
 
+    @Override
+    public Post getEntity(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteEntity(Post post) {
+
+    }
+
 
     @Override
     public void removeEntity(Post entity) {

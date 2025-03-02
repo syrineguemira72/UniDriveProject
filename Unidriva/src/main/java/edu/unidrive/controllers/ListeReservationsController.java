@@ -1,8 +1,8 @@
-package cov.pidev3A8.controllers;
+package edu.unidrive.controllers;
 
-import cov.pidev3A8.entities.Reservation;
-import cov.pidev3A8.entities.Etat;
-import cov.pidev3A8.services.ReservationService;
+import edu.unidrive.entities.Reservation;
+import edu.unidrive.entities.Etat;
+import edu.unidrive.services.ReservationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

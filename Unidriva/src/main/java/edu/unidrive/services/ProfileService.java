@@ -116,4 +116,14 @@ public class ProfileService implements Iservice<Profile> {
         return List.of();
     }
 
+    @Override
+    public Profile getEntity(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteEntity(Profile profile) {
+
+    }
+
 }

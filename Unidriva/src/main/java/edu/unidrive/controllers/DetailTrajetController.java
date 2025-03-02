@@ -1,6 +1,6 @@
-package cov.pidev3A8.controllers;
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.services.TrajetService;
+package edu.unidrive.controllers;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.services.TrajetService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

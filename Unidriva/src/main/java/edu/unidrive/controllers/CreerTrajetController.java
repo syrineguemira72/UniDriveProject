@@ -1,7 +1,7 @@
-package cov.pidev3A8.controllers;
+package edu.unidrive.controllers;
 
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.services.TrajetService;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.services.TrajetService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

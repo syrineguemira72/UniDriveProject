@@ -145,4 +145,14 @@ public class BeneficiaireService implements Iservice<Beneficiaire> {
         return result;
     }
 
+    @Override
+    public Beneficiaire getEntity(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteEntity(Beneficiaire beneficiaire) {
+
+    }
+
 }

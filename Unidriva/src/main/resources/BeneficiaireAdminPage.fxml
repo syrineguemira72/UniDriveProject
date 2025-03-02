@@ -9,7 +9,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@Css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.BeneficiaireAdmin">
+<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.BeneficiaireAdmin">
 
     <children>
         <Button fx:id="deleteColumn1" layoutX="315.0" layoutY="213.0" mnemonicParsing="false" onAction="#deleteSelectedRow" prefHeight="37.0" prefWidth="66.0" styleClass="delete-button" text="Delete" />
@@ -83,7 +83,9 @@
             </columns>
         </TableView>
       <Label layoutX="419.0" layoutY="225.0" styleClass="label" text="Search :" />
-      <TextField layoutX="481.0" layoutY="218.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" styleClass="text-field" />
-      <Label layoutX="278.0" layoutY="16.0" prefHeight="38.0" prefWidth="151.0" styleClass="title-label" text="Interface Bénéficiaires" />
+        <TextField fx:id="searchField" layoutX="481.0" layoutY="218.0" prefHeight="26.0" prefWidth="218.0"
+                   promptText="Search Beneficiary" styleClass="text-field" />
+
+        <Label layoutX="278.0" layoutY="16.0" prefHeight="38.0" prefWidth="151.0" styleClass="title-label" text="Interface Bénéficiaires" />
     </children>
 </AnchorPane>

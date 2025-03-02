@@ -49,6 +49,16 @@ public class InteractionService implements Iservice<Interaction> {
     }
 
     @Override
+    public Interaction getEntity(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteEntity(Interaction interaction) {
+
+    }
+
+    @Override
     public void removeEntity(Interaction entity) {
         String requete = "DELETE FROM `interaction` WHERE id = ?";
         try {

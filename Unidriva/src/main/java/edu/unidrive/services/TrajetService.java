@@ -1,8 +1,8 @@
-package cov.pidev3A8.services;
+package edu.unidrive.services;
 
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.interfaces.Iservice;
-import cov.pidev3A8.tools.MyConnection;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -36,6 +36,11 @@ public class TrajetService implements Iservice<Trajet> {
     }
 
     @Override
+    public void deleteEntity(int id, Trajet trajet) {
+
+    }
+
+    @Override
     public void updateEntity(int id, Trajet trajet) {
         try {
             String req = "UPDATE trajet SET " +
@@ -66,6 +71,11 @@ public class TrajetService implements Iservice<Trajet> {
     }
 
     @Override
+    public List<Trajet> getallData() {
+        return List.of();
+    }
+
+    @Override
     public void deleteEntity(Trajet trajet) {
         try {
             String req = "DELETE FROM trajet WHERE id = ?";
@@ -79,6 +89,21 @@ public class TrajetService implements Iservice<Trajet> {
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression du trajet : " + e.getMessage());
         }
+    }
+
+    @Override
+    public void add(Trajet entity) {
+
+    }
+
+    @Override
+    public void remove(Trajet entity) {
+
+    }
+
+    @Override
+    public void update(Trajet entity) {
+
     }
 
     @Override
@@ -104,6 +129,16 @@ public class TrajetService implements Iservice<Trajet> {
             System.out.println("Erreur lors de la récupération des trajets : " + e.getMessage());
         }
         return result;
+    }
+
+    @Override
+    public void removeEntity(Trajet entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Trajet entity) {
+
     }
 
     @Override

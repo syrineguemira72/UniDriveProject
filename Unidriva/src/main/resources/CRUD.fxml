@@ -4,36 +4,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AjouterAide">
+<AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.AjouterAide">
     <stylesheets>
-        <URL value="@Css/style.css" />
+        <URL value="@css/style.css" />
     </stylesheets>
     <children>
-        <!-- Logo -->
-        <ImageView fitHeight="96.0" fitWidth="105.0" layoutX="608.0" layoutY="14.0" />
+        <!-- Logo Image -->
+        <ImageView fx:id="Card" fitHeight="122.0" fitWidth="301.0" layoutX="364.0" layoutY="111.0">
+            <image>
+                <Image url="@Image/logo-Stripe.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="Logo" fitHeight="96.0" fitWidth="105.0" layoutX="14.0" layoutY="15.0">
+            <image>
+                <Image url="@Image/Logo.jpg" />
+            </image>
+        </ImageView>
 
         <!-- Title -->
         <Label layoutX="321.0" layoutY="44.0" prefHeight="37.0" prefWidth="86.0" styleClass="title-label" text="Ajouter Aide" />
 
         <!-- Type Field -->
-        <Label layoutX="226.0" layoutY="211.0" text="Type :" />
-        <TextField fx:id="typetextfield" layoutX="315.0" layoutY="205.0" prefHeight="26.0" prefWidth="197.0" promptText="Type" />
+        <Label layoutX="39.0" layoutY="193.0" prefHeight="16.0" prefWidth="86.0" text="Currency :" />
+        <TextField fx:id="currencytextfield" layoutX="143.0" layoutY="187.0" prefHeight="26.0" prefWidth="197.0" promptText="Currency" />
 
         <!-- Description Field -->
-        <Label layoutX="214.0" layoutY="251.0" text="Description :" />
-        <TextField fx:id="descriptiontextfield" layoutX="315.0" layoutY="245.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" />
+        <Label layoutX="39.0" layoutY="233.0" text="Description :" />
+        <TextField fx:id="descriptiontextfield" layoutX="143.0" layoutY="227.0" prefHeight="105.0" prefWidth="198.0" promptText="Description" />
 
         <!-- Montant Field -->
-        <Label layoutX="225.0" layoutY="296.0" text="Montant :" />
-        <TextField fx:id="montanttextfield" layoutX="315.0" layoutY="290.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
+        <Label layoutX="364.0" layoutY="349.0" text="Montant :" />
+        <TextField fx:id="montanttextfield" layoutX="469.0" layoutY="343.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" />
 
         <!-- Submit Button -->
-        <Button layoutX="331.0" layoutY="337.0" mnemonicParsing="false" onAction="#ajouterAideaction" styleClass="submit-button" text="Valider" />
+        <Button layoutX="190.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterAideaction" prefHeight="37.0" prefWidth="98.0" styleClass="submit-button" text="Confirmer" />
 
         <!-- Admin Page Button -->
         <Button layoutX="615.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="admin-button" text="Admin Page" />
+
+        <!-- Payment Fields -->
+        <TextField fx:id="cardNumberField" layoutX="468.0" layoutY="260.0" prefWidth="200" promptText="Card Number" />
+        <TextField fx:id="cvcField" layoutX="468.0" layoutY="301.0" prefWidth="200" promptText="CVC" />
+        <Label fx:id="statusLabel" layoutX="50" layoutY="300" text="" />
+        <Label layoutX="364.0" layoutY="307.0" text="CVC :" />
+        <Label layoutX="364.0" layoutY="266.0" text="Card Number :" />
     </children>
 </AnchorPane>

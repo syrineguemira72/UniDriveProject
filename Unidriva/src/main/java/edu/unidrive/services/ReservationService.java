@@ -1,10 +1,10 @@
-package cov.pidev3A8.services;
+package edu.unidrive.services;
 
-import cov.pidev3A8.entities.Reservation;
-import cov.pidev3A8.entities.Trajet;
-import cov.pidev3A8.entities.Etat;
-import cov.pidev3A8.interfaces.Iservice;
-import cov.pidev3A8.tools.MyConnection;
+import edu.unidrive.entities.Reservation;
+import edu.unidrive.entities.Trajet;
+import edu.unidrive.entities.Etat;
+import edu.unidrive.interfaces.Iservice;
+import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,6 +30,11 @@ public class ReservationService implements Iservice<Reservation> {
     }
 
     @Override
+    public void deleteEntity(int id, Reservation reservation) {
+
+    }
+
+    @Override
     public void updateEntity(int id, Reservation reservation) {
         try {
             String req = "UPDATE reservation SET trajet = ?, etat = ?, dateReservation = ? WHERE id = ?";
@@ -50,6 +55,11 @@ public class ReservationService implements Iservice<Reservation> {
     }
 
     @Override
+    public List<Reservation> getallData() {
+        return List.of();
+    }
+
+    @Override
     public void deleteEntity(Reservation reservation) {
         try {
             String req = "DELETE FROM reservation WHERE id = ?";
@@ -63,6 +73,21 @@ public class ReservationService implements Iservice<Reservation> {
         } catch (SQLException e) {
             System.err.println(" Erreur lors de la suppression de la réservation : " + e.getMessage());
         }
+    }
+
+    @Override
+    public void add(Reservation entity) {
+
+    }
+
+    @Override
+    public void remove(Reservation entity) {
+
+    }
+
+    @Override
+    public void update(Reservation entity) {
+
     }
 
     @Override
@@ -100,6 +125,16 @@ public class ReservationService implements Iservice<Reservation> {
             System.err.println("Erreur lors du chargement des réservations : " + e.getMessage());
         }
         return reservations;
+    }
+
+    @Override
+    public void removeEntity(Reservation entity) {
+
+    }
+
+    @Override
+    public void updateEntity(Reservation entity) {
+
     }
 
     @Override

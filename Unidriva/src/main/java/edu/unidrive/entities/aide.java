@@ -4,27 +4,30 @@ import javafx.beans.property.*;
 
 public class aide {
     private IntegerProperty id;
-    private StringProperty type;
+    private StringProperty currency;
     private StringProperty description;
     private StringProperty montant;
+    private StringProperty createdAt; // New field
 
-    // No-argument constructor
+    // Constructeur sans argument
     public aide() {
         this.id = new SimpleIntegerProperty();
-        this.type = new SimpleStringProperty();
+        this.currency = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
         this.montant = new SimpleStringProperty();
+        this.createdAt = new SimpleStringProperty();
     }
 
-    // Constructor with parameters for type, description, and montant
-    public aide(String type, String description, String montant) {
+    // Constructeur avec paramètres
+    public aide(String currency, String description, String montant) {
         this.id = new SimpleIntegerProperty();
-        this.type = new SimpleStringProperty(type);
+        this.currency = new SimpleStringProperty(currency);
         this.description = new SimpleStringProperty(description);
         this.montant = new SimpleStringProperty(montant);
+        this.createdAt = new SimpleStringProperty();
     }
 
-    // Getter and setter methods for all fields
+    // Getters et Setters
 
     public int getId() {
         return id.get();
@@ -38,16 +41,16 @@ public class aide {
         this.id.set(id);
     }
 
-    public String getType() {
-        return type.get();
+    public String getCurrency() {
+        return currency.get();
     }
 
-    public StringProperty typeProperty() {
-        return type;
+    public StringProperty currencyProperty() {
+        return currency;
     }
 
-    public void setType(String type) {
-        this.type.set(type);
+    public void setCurrency(String currency) {
+        this.currency.set(currency);
     }
 
     public String getDescription() {
@@ -72,5 +75,17 @@ public class aide {
 
     public void setMontant(String montant) {
         this.montant.set(montant);
+    }
+
+    public String getCreatedAt() {
+        return createdAt.get();
+    }
+
+    public StringProperty createdAtProperty() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt.set(createdAt);
     }
 }

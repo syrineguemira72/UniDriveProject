@@ -2,9 +2,10 @@ package edu.unidrive.controllers;
 
 import edu.unidrive.entities.aide;
 import edu.unidrive.services.AideService;
-import edu.unidrive.entities.AideType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,135 +23,111 @@ import java.util.Optional;
 public class AideAdmin {
 
     @FXML
-    private TextField typetextfield;
-
+    private TextField searchField;
+    @FXML
+    private TextField currencytextfield;
     @FXML
     private TextField descriptiontextfield;
-
     @FXML
     private TextField montanttextfield;
 
     @FXML
-    private TableView<aide> aideTable;  // TableView to display aides
+    private TableView<aide> aideTable;
 
     @FXML
-    private TableColumn<aide, Integer> idColumn;  // Column for ID
+    private TableColumn<aide, Integer> idColumn;
     @FXML
-    private TableColumn<aide, String> typeColumn;  // Column for Nom
+    private TableColumn<aide, String> currencyColumn;
     @FXML
-    private TableColumn<aide, String> descriptionColumn;  // Column for Prenom
+    private TableColumn<aide, String> descriptionColumn;
     @FXML
     private TableColumn<aide, String> montantColumn;
+    @FXML
+    private TableColumn<aide, String> createdAtColumn;
 
-    private AideService aideService;  // Service class for interacting with the database
+    private AideService aideService;
 
     public AideAdmin() {
         aideService = new AideService();
     }
 
-    // Method to initialize the TableView with data
     @FXML
     private void initialize() {
-        // Set up the columns with PropertyValueFactory
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        currencyColumn.setCellValueFactory(new PropertyValueFactory<>("currency"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         montantColumn.setCellValueFactory(new PropertyValueFactory<>("montant"));
+        createdAtColumn.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
-        // Add listener to handle row selection
-        aideTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                // Populate the TextFields with the selected row data
-                typetextfield.setText(newValue.getType());
-                descriptiontextfield.setText(newValue.getDescription());
-                montanttextfield.setText(newValue.getMontant());
-            }
+        loadData();
+
+        // Wrap data in a FilteredList
+        FilteredList<aide> filteredData = new FilteredList<>(aideTable.getItems(), p -> true);
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(aide -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                return aide.getCurrency().toLowerCase().contains(lowerCaseFilter)
+                        || aide.getDescription().toLowerCase().contains(lowerCaseFilter)
+                        || aide.getMontant().toLowerCase().contains(lowerCaseFilter);
+            });
         });
 
-        // Load the data into the TableView
-        loadData();
+        SortedList<aide> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(aideTable.comparatorProperty());
+        aideTable.setItems(sortedData);
     }
 
-    // Method to load data from the database and bind to the TableView
     private void loadData() {
-        List<aide> aides = aideService.getallData();  // Get all data from the database
-        ObservableList<aide> aideList = FXCollections.observableArrayList(aides);  // Convert list to ObservableList
-        aideTable.setItems(aideList);  // Set the data in the TableView
+        List<aide> aides = aideService.getallData();
+        ObservableList<aide> aideList = FXCollections.observableArrayList(aides);
+        aideTable.setItems(aideList);
     }
 
     @FXML
     void ajouterAideaction(ActionEvent event) {
-        String type = typetextfield.getText();
+        String currency = currencytextfield.getText();
         String description = descriptiontextfield.getText();
         String montant = montanttextfield.getText();
 
-        // Check if any field is empty
-        if (type.isEmpty() || description.isEmpty() || montant.isEmpty()) {
-            showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
+        if (currency.isEmpty() || description.isEmpty() || montant.isEmpty()) {
+            showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.INFORMATION);
             return;
         }
 
-        // Validate that the type is one of the predefined values
-        if (!AideType.isValidType(type)) {
-            showAlert("Erreur", "Le type doit être 'alimentaire', 'financier', ou 'médical'.", Alert.AlertType.ERROR);
-            return;
-        }
-
-        // Validate that the montant is a valid number
+        // Validate montant
         try {
             Double montantValue = Double.parseDouble(montant);
             if (montantValue <= 0) {
-                showAlert("Erreur", "Le montant doit être un nombre positif.", Alert.AlertType.ERROR);
+                showAlert("Erreur", "Le montant doit être un nombre positif.", Alert.AlertType.INFORMATION);
                 return;
             }
         } catch (NumberFormatException e) {
-            showAlert("Erreur", "Le montant doit être un nombre valide.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Le montant doit être un nombre valide.", Alert.AlertType.INFORMATION);
             return;
         }
-
-        // Create the aide object and add it using the service
-        aide aide = new aide(type, description, montant);
-        AideService aideService = new AideService();
-        aideService.addEntity(aide);
-
-        // Show success alert
-        showAlert("Succès", "L'aide a été ajoutée avec succès.", Alert.AlertType.INFORMATION);
-
-        // Load the detail view
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Detail.fxml"));
-        try {
-            Parent root = fxmlLoader.load();
-            DetailController detailController = fxmlLoader.getController();
-            detailController.setTypetextfield(type);
-            detailController.setDescriptiontextfield(description);
-            detailController.setMontanttextfield(montant);
-            typetextfield.getScene().setRoot(root);
-        } catch (IOException e) {
-            System.out.println("Erreur ajout: " + e.getMessage());
-        }
     }
+
     @FXML
     void deleteSelectedRow(ActionEvent event) {
-        // Get the selected aide from the table
         aide selectedAide = aideTable.getSelectionModel().getSelectedItem();
 
         if (selectedAide != null) {
-            // Confirm with the user before deleting
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Are you sure you want to delete this aide?");
-            alert.setContentText("Type: " + selectedAide.getType() + "\nDescription: " + selectedAide.getDescription());
+            alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cette aide ?");
+            alert.setContentText("Currency: " + selectedAide.getCurrency() + "\nDescription: " + selectedAide.getDescription());
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Call the deleteEntity method to remove the aide from the database
-                AideService aideService = new AideService();
                 aideService.deleteEntity(selectedAide.getId(), selectedAide);
 
-                // Remove the item from the TableView after deletion
-                aideTable.getItems().remove(selectedAide);
+                // Reload the TableView with updated data
+                loadData();
 
-                // Show success alert
                 showAlert("Succès", "L'aide a été supprimée avec succès.", Alert.AlertType.INFORMATION);
             }
         } else {
@@ -158,9 +135,11 @@ public class AideAdmin {
         }
     }
 
+
+
+
     @FXML
     void updateAction(ActionEvent event) {
-        // Récupérer la ligne sélectionnée
         aide selectedAide = aideTable.getSelectionModel().getSelectedItem();
 
         if (selectedAide == null) {
@@ -168,24 +147,15 @@ public class AideAdmin {
             return;
         }
 
-        // Récupérer les nouvelles valeurs
-        String updatedType = typetextfield.getText().trim();
+        String updatedCurrency = currencytextfield.getText().trim();
         String updatedDescription = descriptiontextfield.getText().trim();
         String updatedMontant = montanttextfield.getText().trim();
 
-        // Vérifier si tous les champs sont remplis
-        if (updatedType.isEmpty() || updatedDescription.isEmpty() || updatedMontant.isEmpty()) {
+        if (updatedCurrency.isEmpty() || updatedDescription.isEmpty() || updatedMontant.isEmpty()) {
             showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Vérifier que le type est valide
-        if (!AideType.isValidType(updatedType)) {
-            showAlert("Erreur", "Le type doit être 'alimentaire', 'financier' ou 'médical'.", Alert.AlertType.ERROR);
-            return;
-        }
-
-        // Vérifier que le montant est un nombre valide et positif
         try {
             double montant = Double.parseDouble(updatedMontant);
             if (montant <= 0) {
@@ -197,20 +167,13 @@ public class AideAdmin {
             return;
         }
 
-        // Si toutes les validations sont passées, poursuivre avec la mise à jour
-        aide updatedAide = new aide(updatedType, updatedDescription, updatedMontant);
-
-        // Appel du service pour mettre à jour la base de données
-        AideService aideService = new AideService();
+        // Update the aide with the new values
+        aide updatedAide = new aide(updatedCurrency, updatedDescription, updatedMontant);
         aideService.updateEntity(selectedAide.getId(), updatedAide);
 
-        // Rafraîchir la TableView
         loadData();
-
-        // Affichage d'un message de succès
         showAlert("Succès", "Aide mise à jour avec succès.", Alert.AlertType.INFORMATION);
     }
-
     @FXML
     void goToAnotherPage(ActionEvent event) {
         // Load the new FXML file
@@ -226,15 +189,6 @@ public class AideAdmin {
         } catch (IOException e) {
             System.out.println("Erreur de navigation : " + e.getMessage());
         }
-    }
-
-    // Helper method to show alerts
-    private void showAlert(String title, String content, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(content);
-        alert.showAndWait();
     }
     @FXML
     void goToBack(ActionEvent event) {
@@ -252,8 +206,12 @@ public class AideAdmin {
             System.out.println("Erreur de navigation : " + e.getMessage());
         }
     }
-
-
+    // Helper method to show alerts
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
-
-

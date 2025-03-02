@@ -1,12 +1,17 @@
 package edu.unidrive.services;
 
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Charge;
 import edu.unidrive.entities.aide;
 import edu.unidrive.interfaces.Iservice;
 import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AideService implements Iservice<aide> {
 
@@ -48,15 +53,21 @@ public class AideService implements Iservice<aide> {
 
     @Override
     public void addEntity(aide aide) {
-        String requete = "INSERT INTO aide (id, type, description, montant) VALUES (?, ?, ?, ?)";
+        String requete = "INSERT INTO aide (currency, description, montant, created_at) VALUES (?, ?, ?, NOW())";
 
-        try (PreparedStatement pst = cnx.prepareStatement(requete)) {
-            pst.setInt(1, aide.getId());
-            pst.setString(2, aide.getType());
-            pst.setString(3, aide.getDescription());
-            pst.setString(4, aide.getMontant());
+        try (PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS)) {
+            pst.setString(1, aide.getCurrency());  // Ensure column name matches database
+            pst.setString(2, aide.getDescription());
+            pst.setString(3, aide.getMontant());
             pst.executeUpdate();
             System.out.println("Aide ajoutée avec succès!");
+
+            // Retrieve generated ID
+            try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    aide.setId(generatedKeys.getInt(1));
+                }
+            }
         } catch (SQLException e) {
             System.out.println("Erreur lors de l'ajout: " + e.getMessage());
         }
@@ -81,13 +92,13 @@ public class AideService implements Iservice<aide> {
 
     @Override
     public void updateEntity(int id, aide aide) {
-        String requete = "UPDATE aide SET type = ?, description = ?, montant = ? WHERE id = ?";
+        String requete = "UPDATE aide SET currency = ?, description = ?, montant = ? WHERE id = ?";
 
         try (PreparedStatement pst = cnx.prepareStatement(requete)) {
-            pst.setString(1, aide.getType());
+            pst.setString(1, aide.getCurrency());
             pst.setString(2, aide.getDescription());
             pst.setString(3, aide.getMontant());
-            pst.setInt(4, id);  // Set the ID to match the row in the database
+            pst.setInt(4, id);
             int rowsAffected = pst.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Aide mise à jour avec succès!");
@@ -98,7 +109,6 @@ public class AideService implements Iservice<aide> {
             System.out.println("Erreur lors de la mise à jour: " + e.getMessage());
         }
     }
-
 
     @Override
     public List<aide> getallData() {
@@ -111,14 +121,52 @@ public class AideService implements Iservice<aide> {
             while (rs.next()) {
                 aide p = new aide();
                 p.setId(rs.getInt("id"));
-                p.setType(rs.getString("type"));
+                p.setCurrency(rs.getString("currency"));
                 p.setDescription(rs.getString("description"));
                 p.setMontant(rs.getString("montant"));
+                p.setCreatedAt(rs.getString("created_at"));
                 result.add(p);
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la récupération des données: " + e.getMessage());
         }
         return result;
+    }
+
+    @Override
+    public aide getEntity(int id) {
+        return null;
+    }
+
+    @Override
+    public void deleteEntity(aide aide) {
+
+    }
+
+    // Set Stripe API key (Use Secret Key, not Publishable Key)
+    static {
+        Stripe.apiKey = "sk_test_51Qx9PzQMMc132QGJ0mcQXGv3GNdLd8aULDN3CuHZLLQM58oBsDL4QWcQjZo5F3PwVEeUcc5l82x2QSmWyckQNL7d0028c0fDIu";  // Replace with your real secret key
+    }
+
+    public boolean payerAvecStripe(double montant, String token) {
+        try {
+            Map<String, Object> chargeParams = new HashMap<>();
+            chargeParams.put("amount", (int) (montant * 100)); // Convert to cents
+            chargeParams.put("currency", "eur");
+            chargeParams.put("source", token);
+            chargeParams.put("description", "Paiement aide sociale");
+
+            Charge charge = Charge.create(chargeParams);
+            if (charge.getPaid()) {
+                System.out.println("Paiement réussi!");
+                return true;
+            } else {
+                System.out.println("Échec du paiement.");
+                return false;
+            }
+        } catch (StripeException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
