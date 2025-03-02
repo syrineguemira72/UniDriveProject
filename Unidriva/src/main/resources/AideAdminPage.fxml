@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,65 +13,77 @@
 
 <!-- Added import -->
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.AideAdmin">
+<AnchorPane prefHeight="601.0" prefWidth="796.0" stylesheets="@Css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AideAdmin">
     <children>
         <!-- Type TextField -->
-        <TextField fx:id="currencytextfield" layoutX="139.0" layoutY="88.0" prefHeight="26.0" prefWidth="197.0" promptText="Currency" styleClass="text-field" />
+        <TextField fx:id="currencytextfield" layoutX="129.0" layoutY="130.0" prefHeight="26.0" prefWidth="197.0" promptText="Currency" styleClass="text-field" />
 
         <!-- Description TextField -->
-        <TextField fx:id="descriptiontextfield" layoutX="139.0" layoutY="126.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" styleClass="text-field" />
+        <TextField fx:id="descriptiontextfield" layoutX="128.0" layoutY="166.0" prefHeight="26.0" prefWidth="198.0" promptText="Description" styleClass="text-field" />
 
         <!-- Montant TextField -->
-        <TextField fx:id="montanttextfield" layoutX="139.0" layoutY="162.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" styleClass="text-field" />
+        <TextField fx:id="montanttextfield" layoutX="128.0" layoutY="202.0" prefHeight="26.0" prefWidth="198.0" promptText="Montant" styleClass="text-field" />
 
         <!-- Labels -->
-        <Label layoutX="37.0" layoutY="93.0" prefHeight="18.0" prefWidth="90.0" styleClass="label" text="Currency :" />
-        <Label layoutX="37.0" layoutY="130.0" prefHeight="18.0" prefWidth="90.0" styleClass="label" text="Description :" />
-        <Label layoutX="36.0" layoutY="167.0" prefHeight="18.0" prefWidth="74.0" styleClass="label" text="Montant :" />
+        <Label layoutX="27.0" layoutY="135.0" prefHeight="18.0" prefWidth="90.0" styleClass="label" text="Currency :" />
+        <Label layoutX="27.0" layoutY="171.0" prefHeight="18.0" prefWidth="90.0" styleClass="label" text="Description :" />
+        <Label layoutX="29.0" layoutY="207.0" prefHeight="18.0" prefWidth="74.0" styleClass="label" text="Montant :" />
 
         <!-- Buttons -->
-        <Button layoutX="66.0" layoutY="213.0" mnemonicParsing="false" onAction="#ajouterAideaction" styleClass="button" text="Ajouter Aide" />
-        <Button fx:id="deleteColumn1" layoutX="266.0" layoutY="213.0" mnemonicParsing="false" onAction="#deleteSelectedRow" styleClass="delete-button" text="Delete" />
-        <Button layoutX="192.0" layoutY="213.0" mnemonicParsing="false" onAction="#updateAction" styleClass="update-button" text="Update" />
+        <Button layoutX="50.0" layoutY="242.0" mnemonicParsing="false" onAction="#ajouterAideaction" styleClass="button" text="Ajouter Aide" />
+        <Button fx:id="deleteColumn1" layoutX="250.0" layoutY="242.0" mnemonicParsing="false" onAction="#deleteSelectedRow" styleClass="delete-button" text="Delete" />
+        <Button layoutX="176.0" layoutY="242.0" mnemonicParsing="false" onAction="#updateAction" styleClass="update-button" text="Update" />
         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToBack" styleClass="back-button" text="Back" />
-        <Button layoutX="669.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="button" text="Next" />
+        <Button layoutX="732.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="button" text="Next" />
 
         <!-- Search Label and TextField -->
-        <Label layoutX="394.0" layoutY="224.0" styleClass="label" text="Search :" />
-        <TextField fx:id="searchField" layoutX="456.0" layoutY="217.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" styleClass="text-field" />
+        <Label layoutX="32.0" layoutY="305.0" styleClass="label" text="Search :" />
+        <TextField fx:id="searchField" layoutX="94.0" layoutY="298.0" prefHeight="26.0" prefWidth="218.0" promptText="Search" styleClass="text-field" />
 
         <!-- TableView for Aide -->
-        <TableView fx:id="aideTable" layoutX="14.0" layoutY="270.0" prefHeight="238.0" prefWidth="700.0">
+        <TableView fx:id="aideTable" layoutX="61.0" layoutY="340.0" prefHeight="246.0" prefWidth="674.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="45.59994125366211" text="ID">
                     <cellValueFactory>
                         <PropertyValueFactory property="id" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="currencyColumn" prefWidth="72.79998779296875" text="Currency">
+                <TableColumn fx:id="currencyColumn" prefWidth="86.39998626708984" text="Currency">
                     <cellValueFactory>
                         <PropertyValueFactory property="type" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="descriptionColumn" prefWidth="162.4001007080078" text="Description">
+                <TableColumn fx:id="descriptionColumn" prefWidth="203.199951171875" text="Description">
                     <cellValueFactory>
                         <PropertyValueFactory property="description" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="montantColumn" prefWidth="92.0" text="Montant">
+                <TableColumn fx:id="montantColumn" prefWidth="100.00006103515625" text="Montant">
                     <cellValueFactory>
                         <PropertyValueFactory property="montant" />
                     </cellValueFactory>
                 </TableColumn>
                 <!-- New Created At Column -->
-                <TableColumn fx:id="createdAtColumn" prefWidth="154.39996337890625" text="Created At">
+                <TableColumn fx:id="createdAtColumn" prefWidth="201.60006713867188" text="Created At">
                     <cellValueFactory>
                         <PropertyValueFactory property="createdAt" />
                     </cellValueFactory>
                 </TableColumn>
             </columns>
         </TableView>
-      <Label layoutX="311.0" layoutY="31.0" prefHeight="38.0" prefWidth="106.0" styleClass="title-label" text="Interface Aides" />
+      <Label layoutX="333.0" layoutY="30.0" prefHeight="38.0" prefWidth="106.0" styleClass="title-label" text="Interface Aides" />
+
+                <!-- Your existing elements -->
+
+                <!-- Add LineChart for Montant per Day -->
+                <LineChart fx:id="montantChart" layoutX="348.0" layoutY="69.0" prefHeight="258.0" prefWidth="433.0">
+                    <xAxis>
+                        <CategoryAxis fx:id="xAxis" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis fx:id="yAxis" />
+                    </yAxis>
+                </LineChart>
 
     </children>
 </AnchorPane>

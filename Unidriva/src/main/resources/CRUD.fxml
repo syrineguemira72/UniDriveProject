@@ -8,20 +8,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gestion_utilisateur.controller.AjouterAide">
+<AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AjouterAide">
     <stylesheets>
-        <URL value="@css/style.css" />
+        <URL value="@Css/style.css" />
     </stylesheets>
     <children>
         <!-- Logo Image -->
         <ImageView fx:id="Card" fitHeight="122.0" fitWidth="301.0" layoutX="364.0" layoutY="111.0">
             <image>
-                <Image url="@Image/logo-Stripe.png" />
+                <Image url="@images/logo-Stripe.png" />
             </image>
         </ImageView>
         <ImageView fx:id="Logo" fitHeight="96.0" fitWidth="105.0" layoutX="14.0" layoutY="15.0">
             <image>
-                <Image url="@Image/Logo.jpg" />
+                <Image url="@images/Logo.jpg" />
             </image>
         </ImageView>
 

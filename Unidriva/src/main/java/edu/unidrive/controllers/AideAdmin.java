@@ -2,6 +2,7 @@ package edu.unidrive.controllers;
 
 import edu.unidrive.entities.aide;
 import edu.unidrive.services.AideService;
+import edu.unidrive.tools.MyConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -12,11 +13,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +54,12 @@ public class AideAdmin {
     private TableColumn<aide, String> montantColumn;
     @FXML
     private TableColumn<aide, String> createdAtColumn;
+    @FXML
+    private LineChart<String, Number> montantChart;
+    @FXML
+    private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
 
     private AideService aideService;
 
@@ -60,6 +76,14 @@ public class AideAdmin {
         createdAtColumn.setCellValueFactory(new PropertyValueFactory<>("createdAt"));
 
         loadData();
+        loadMontantPerDayData(); // Load the chart data
+
+        // Add selection listener
+        aideTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                populateFields(newValue);
+            }
+        });
 
         // Wrap data in a FilteredList
         FilteredList<aide> filteredData = new FilteredList<>(aideTable.getItems(), p -> true);
@@ -81,11 +105,55 @@ public class AideAdmin {
         aideTable.setItems(sortedData);
     }
 
+
+    private void loadMontantPerDayData() {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Montant Per Day");
+
+        try {
+            Connection connection = MyConnection.getInstance().getCnx(); // Ensure connection is valid
+            if (connection == null || connection.isClosed()) {
+                throw new SQLException("Database connection is closed.");
+            }
+
+            String query = "SELECT DATE(created_at) AS day, SUM(montant) AS totalMontant FROM aide GROUP BY day ORDER BY day";
+            try (PreparedStatement stmt = connection.prepareStatement(query);
+                 ResultSet rs = stmt.executeQuery()) {
+
+                boolean hasResults = false;
+                while (rs.next()) {
+                    hasResults = true;
+                    LocalDate day = rs.getDate("day").toLocalDate();
+                    double totalMontant = rs.getDouble("totalMontant");
+
+                    series.getData().add(new XYChart.Data<>(day.toString(), totalMontant));
+                }
+
+                if (!hasResults) {
+                    System.out.println("No data found for the query.");
+                    showAlert("Erreur", "Aucune donnée n'a été trouvée pour afficher le graphique.", Alert.AlertType.INFORMATION);
+                }
+
+                montantChart.getData().add(series);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Erreur", "Erreur lors de la récupération des données pour le graphique: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
     private void loadData() {
         List<aide> aides = aideService.getallData();
         ObservableList<aide> aideList = FXCollections.observableArrayList(aides);
         aideTable.setItems(aideList);
     }
+
+    private void populateFields(aide selectedAide) {
+        currencytextfield.setText(selectedAide.getCurrency());
+        descriptiontextfield.setText(selectedAide.getDescription());
+        montanttextfield.setText(selectedAide.getMontant());
+    }
+
 
     @FXML
     void ajouterAideaction(ActionEvent event) {
