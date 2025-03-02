@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.HomePostControllers">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.HomePostControllers">
     <stylesheets>
         <URL value="@./Css/styles.css" />
     </stylesheets>
     <children>
         <Label fx:id="homepage" layoutX="181.0" layoutY="14.0" prefHeight="30.0" prefWidth="199.0" text="Bienvenue dans Notre Forum" textAlignment="CENTER">
-         <font>
-            <Font size="19.0" />
-         </font></Label>
+            <font>
+                <Font size="19.0" />
+            </font></Label>
 
         <ListView fx:id="postListView" layoutX="22.0" layoutY="56.0" prefHeight="287.0" prefWidth="556.0" />
 

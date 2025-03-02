@@ -9,17 +9,31 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostService implements Iservice <Post> {
+public class PostService implements Iservice<Post> {
 
-    private final Connection cnx = MyConnection.getInstance().getCnx();//singleton
+    private final Connection cnx = MyConnection.getInstance().getCnx(); // Singleton
+    private final edu.unidrive.services.TextFilterService textFilterService = new TextFilterService(); // Ajoutez cette ligne
 
+    public List<String> getInterestedUsers(String postTitle) {
+        List<String> interestedUsers = new ArrayList<>();
+        String query = "SELECT u.email FROM utilisateur u JOIN user_interests ui ON u.id = ui.user_id WHERE ui.interest LIKE ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setString(1, "%" + postTitle + "%");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                interestedUsers.add(rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des utilisateurs intéressés : " + e.getMessage());
+        }
+        return interestedUsers;
+    }
 
     @Override
     public void addEntity(Post entity) {
         try {
-
-            String requete = " INSERT INTO `post`( `title`, `description`) VALUES (?,?)" ;
-            PreparedStatement pst = cnx.prepareStatement(requete,Statement.RETURN_GENERATED_KEYS);
+            String requete = "INSERT INTO `post`(`title`, `description`) VALUES (?,?)";
+            PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, entity.getTitle());
             pst.setString(2, entity.getDescription());
             pst.executeUpdate();
@@ -28,8 +42,15 @@ public class PostService implements Iservice <Post> {
                 entity.setId(rs.getInt(1));
             }
             System.out.println("Success!");
+
+            List<String> interestedUsers = getInterestedUsers(entity.getTitle());
+            edu.unidrive.services.EmailPService emailPService = new edu.unidrive.services.EmailPService();
+            for (String userEmail : interestedUsers) {
+                emailPService.sendEmail(userEmail, "Nouveau post ajouté", "Un nouveau post a été ajouté: " + entity.getTitle());
+            }
+
         } catch (SQLException e) {
-            throw new RuntimeException("error"+e.getMessage());
+            throw new RuntimeException("error" + e.getMessage());
         }
     }
 
@@ -57,7 +78,6 @@ public class PostService implements Iservice <Post> {
     public void deleteEntity(Post post) {
 
     }
-
 
     @Override
     public void removeEntity(Post entity) {
@@ -94,7 +114,6 @@ public class PostService implements Iservice <Post> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la mise à jour du post : " + e.getMessage());
         }
-
     }
 
     @Override
@@ -118,7 +137,7 @@ public class PostService implements Iservice <Post> {
         String requete = "SELECT * FROM post";
         try {
             Statement st = cnx.createStatement();
-            ResultSet rs=st.executeQuery(requete);
+            ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
                 Post p = new Post();
                 p.setId(rs.getInt("id"));
@@ -131,6 +150,7 @@ public class PostService implements Iservice <Post> {
         }
         return result;
     }
+
     public Post getById(int id) {
         List<Post> posts = getAllData();
         for (Post post : posts) {
@@ -140,6 +160,51 @@ public class PostService implements Iservice <Post> {
         }
         return null;
     }
+    public Post getPostByTitle(String title) {
+        String query = "SELECT * FROM post WHERE title = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setString(1, title);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setDescription(rs.getString("description"));
+                return post;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération du post par titre : " + e.getMessage());
+        }
+        return null; // Retourne null si aucun post n'est trouvé
+    }
+    public void saveUserInterests(int userId, String centresInteret) {
+        String[] interests = centresInteret.split(","); // Séparez les centres d'intérêt par une virgule
+        String query = "INSERT INTO user_interests (user_id, interest) VALUES (?, ?)";
+
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            for (String interest : interests) {
+                pst.setInt(1, userId);
+                pst.setString(2, interest.trim()); // Supprime les espaces inutiles
+                pst.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de l'enregistrement des centres d'intérêt : " + e.getMessage());
+        }
+    }
+    public boolean hasUserInterests(int userId) {
+        String query = "SELECT COUNT(*) FROM user_interests WHERE user_id = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Retourne true si l'utilisateur a des centres d'intérêt
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la vérification des centres d'intérêt : " + e.getMessage());
+        }
+        return false;
+    }
+
     public List<Interaction> getCommentsByPostId(int postId) {
         List<Interaction> comments = new ArrayList<>();
         String query = "SELECT * FROM interaction WHERE postId = ?";
@@ -158,5 +223,29 @@ public class PostService implements Iservice <Post> {
             throw new RuntimeException("Erreur lors de la récupération des commentaires : " + e.getMessage());
         }
         return comments;
+    }
+
+
+
+    public List<Post> getPostsWithBadWords() {
+        List<Post> badPosts = new ArrayList<>();
+        String query = "SELECT * FROM post WHERE title LIKE ? OR description LIKE ?";
+        try (PreparedStatement pst = cnx.prepareStatement(query)) {
+            for (String badWord : textFilterService.getBadWords()) {
+                pst.setString(1, "%" + badWord + "%");
+                pst.setString(2, "%" + badWord + "%");
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    Post post = new Post();
+                    post.setId(rs.getInt("id"));
+                    post.setTitle(rs.getString("title"));
+                    post.setDescription(rs.getString("description"));
+                    badPosts.add(post);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération des posts contenant des mots inappropriés : " + e.getMessage());
+        }
+        return badPosts;
     }
 }

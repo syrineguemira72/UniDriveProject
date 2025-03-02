@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import edu.unidrive.services.TextFilterService;
+
 
 import java.io.IOException;
 
@@ -19,9 +21,11 @@ public class AjouterPostControllers {
     @FXML
     private TextField titlepost;
 
-    private HomePostControllers homePostControllers;
+    private edu.unidrive.controllers.HomePostControllers homePostControllers;
+    private final TextFilterService textFilterService = new TextFilterService();
+    private final PostService postService = new PostService(); // Déclarer postService
 
-    public void setHomePostControllers(HomePostControllers homePostControllers) {
+    public void setHomePostControllers(edu.unidrive.controllers.HomePostControllers homePostControllers) {
         this.homePostControllers = homePostControllers;
     }
 
@@ -34,6 +38,7 @@ public class AjouterPostControllers {
         alert.showAndWait();
     }
 
+
     @FXML
     void ajouterpost (ActionEvent event) {
         String description = descriptionpost.getText();
@@ -43,9 +48,15 @@ public class AjouterPostControllers {
             return;
         }
 
-        Post post = new Post(description, title);
+
+        // Filtrer les mots inappropriés dans le titre et la description
+        String filteredTitle = textFilterService.filterBadWords(title);
+        String filteredDescription = textFilterService.filterBadWords(description);
+
+        // Créer un nouveau post avec le texte filtré
+        Post post = new Post(filteredTitle, filteredDescription);
         PostService postservice = new PostService();
-        postservice.addEntity(post);
+        postService.addEntity(post);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Succès");

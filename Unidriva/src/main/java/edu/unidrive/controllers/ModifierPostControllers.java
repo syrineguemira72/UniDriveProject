@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import edu.unidrive.services.TextFilterService;
+
 
 import java.io.IOException;
 
@@ -24,7 +26,9 @@ public class ModifierPostControllers {
     private Button updatepost;
 
     private Post postToUpdate;
-    private HomePostControllers homePostControllers;
+    private edu.unidrive.controllers.HomePostControllers homePostControllers;
+    private final TextFilterService textFilterService = new TextFilterService();
+
 
     public void setPostToUpdate(Post post) {
         this.postToUpdate = post;
@@ -32,7 +36,7 @@ public class ModifierPostControllers {
         descriptionmo.setText(post.getDescription());
     }
 
-    public void setHomePostControllers(HomePostControllers homePostControllers) {
+    public void setHomePostControllers(edu.unidrive.controllers.HomePostControllers homePostControllers) {
         this.homePostControllers = homePostControllers;
     }
 
@@ -40,9 +44,11 @@ public class ModifierPostControllers {
     void updatepost (ActionEvent event) {
         String newTitle = titlemo.getText();
         String newDescription = descriptionmo.getText();
+        String filteredTitle = textFilterService.filterBadWords(newTitle);
+        String filteredDescription = textFilterService.filterBadWords(newDescription);
 
-        postToUpdate.setTitle(newTitle);
-        postToUpdate.setDescription(newDescription);
+        postToUpdate.setTitle(filteredTitle);
+        postToUpdate.setDescription(filteredDescription);
 
         PostService postservice = new PostService();
         postservice.updateEntity(postToUpdate);

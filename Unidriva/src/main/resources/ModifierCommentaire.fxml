@@ -25,8 +25,8 @@
             <VBox styleClass="logo-section" prefWidth="300.0" prefHeight="400.0" alignment="CENTER">
                 <children>
                     <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">                        <image>
-                            <Image url="@images/logo.png" />
-                        </image>
+                        <Image url="@images/logo.png" />
+                    </image>
                     </ImageView>
                 </children>
             </VBox>

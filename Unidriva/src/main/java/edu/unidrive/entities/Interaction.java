@@ -62,7 +62,7 @@ public class Interaction {
 
     public Interaction(String content, LocalDate date, int postId) {
 
-       this.content = content;
+        this.content = content;
         this.date = date;
         this.postId = postId;
     }

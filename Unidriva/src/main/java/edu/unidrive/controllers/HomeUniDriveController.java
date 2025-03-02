@@ -1,5 +1,6 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.services.PostService;
 import edu.unidrive.tools.JwtUtil;
 import io.jsonwebtoken.Claims;
 import javafx.event.ActionEvent;
@@ -129,18 +130,43 @@ public class HomeUniDriveController {
         alert.showAndWait(); // Afficher la boîte de dialogue et attendre une réponse
     }
     @FXML
+    private Label btnforum;
+
+    private final PostService postService = new PostService();
+
+    @FXML
+    public void initialize() {
+        // Ajouter un gestionnaire d'événements pour le clic sur "Forum"
+        btnforum.setOnMouseClicked(this::forum);
+    }
+    @FXML
     void forum(MouseEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomePost.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) logoutbtn.getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
+
+        if (!postService.hasUserInterests(userId)) {
+            // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
+                Parent root = fxmlLoader.load();
+                btnforum.getScene().setRoot(root);
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
+            }
+        } else {
+            // Rediriger l'utilisateur vers l'interface principale des posts
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
+                Parent root = fxmlLoader.load();
+                btnforum.getScene().setRoot(root);
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de l'interface principale des posts : " + e.getMessage());
+            }
         }
 
+    }
+    private int getCurrentUserId() {
+        // Implémentez cette méthode pour récupérer l'ID de l'utilisateur connecté
+        return 39; // Exemple : remplacez par la logique réelle
     }
 
     @FXML

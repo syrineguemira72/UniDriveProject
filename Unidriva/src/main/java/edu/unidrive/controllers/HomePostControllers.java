@@ -1,4 +1,5 @@
 package edu.unidrive.controllers;
+
 import edu.unidrive.entities.Interaction;
 import edu.unidrive.entities.Post;
 import edu.unidrive.services.InteractionService;
@@ -18,9 +19,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 
 public class HomePostControllers {
     @FXML
@@ -32,7 +36,22 @@ public class HomePostControllers {
 
     @FXML
     public void initialize() {
-        refreshPostList();
+        // Vérifier si l'utilisateur a déjà des centres d'intérêt
+        int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
+        if (!postService.hasUserInterests(userId)) {
+            // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
+                Parent root = fxmlLoader.load();
+                postListView.getScene().setRoot(root);
+            } catch (IOException e) {
+                System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
+            }
+        } else {
+            // Charger la liste des posts
+            refreshPostList();
+        }
+
         postListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Post> call(ListView<Post> param) {
@@ -56,7 +75,7 @@ public class HomePostControllers {
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Ajoutercommentaire.fxml"));
                                     Parent root = fxmlLoader.load();
 
-                                    Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
+                                    edu.unidrive.controllers.Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
                                     ajouterCommentaireControllers.setPostId(post.getId());
 
                                     postListView.getScene().setRoot(root);
@@ -109,7 +128,7 @@ public class HomePostControllers {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AjouterPost.fxml"));
             Parent root = fxmlLoader.load();
-            AjouterPostControllers ajouterPostControllers = fxmlLoader.getController();
+            edu.unidrive.controllers.AjouterPostControllers ajouterPostControllers = fxmlLoader.getController();
             ajouterPostControllers.setHomePostControllers(this);
             postListView.getScene().setRoot(root);
         } catch (IOException e) {
@@ -168,5 +187,10 @@ public class HomePostControllers {
         alert.setTitle(title);
         alert.setHeaderText(message);
         alert.showAndWait();
+    }
+
+    private int getCurrentUserId() {
+        // Implémentez cette méthode pour récupérer l'ID de l'utilisateur connecté
+        return 39; // Exemple : remplacez par la logique réelle
     }
 }

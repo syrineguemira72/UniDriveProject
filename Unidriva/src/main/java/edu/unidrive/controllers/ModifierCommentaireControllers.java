@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import edu.unidrive.services.TextFilterService;
+
 
 import java.io.IOException;
 
@@ -18,14 +20,16 @@ public class ModifierCommentaireControllers {
     private TextField textcomment;
 
     private Interaction commentToUpdate;
+    private final TextFilterService textFilterService = new TextFilterService();
+
 
     public void setCommentToUpdate(Interaction comment) {
         this.commentToUpdate = comment;
         textcomment.setText(comment.getContent());
     }
-    private HomePostControllers homePostControllers;
+    private edu.unidrive.controllers.HomePostControllers homePostControllers;
 
-    public void setHomePostControllers( HomePostControllers homePostControllers) {
+    public void setHomePostControllers( edu.unidrive.controllers.HomePostControllers homePostControllers) {
         this.homePostControllers = homePostControllers;
     }
 
@@ -35,7 +39,9 @@ public class ModifierCommentaireControllers {
     void updatecomment(ActionEvent event) {
         if (commentToUpdate != null) {
             String newContent = textcomment.getText();
-            commentToUpdate.setContent(newContent);
+            String filteredContent = textFilterService.filterBadWords(newContent);
+
+            commentToUpdate.setContent(filteredContent);
             InteractionService interactionService = new InteractionService();
             interactionService.updateEntity(commentToUpdate);
             showAlert("Succès", "Le commentaire a été mis à jour avec succès.");
