@@ -10,12 +10,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javafx.scene.input.MouseEvent;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 public class ProfileController {
 
     @FXML
@@ -54,6 +61,12 @@ public class ProfileController {
     @FXML
     private TextField username;
 
+    @FXML
+    private ImageView profileImage; // ImageView pour afficher la photo de profil
+
+    @FXML
+    private Button uploadPhotoBtn; // Bouton pour télécharger une nouvelle photo
+
     private ProfileService profileService = new ProfileService();
     private UserService userService = new UserService();
 
@@ -83,12 +96,6 @@ public class ProfileController {
                     LocalDate dobDate = LocalDate.parse(dobString, formatter);
                     dob.setValue(dobDate);
                 }
-
-                dob.valueProperty().addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        System.out.println("Date of Birth changed to: " + newValue);
-                    }
-                });
             }
             if (this.email != null) {
                 this.email.setText(utilisateur.getEmail());
@@ -99,6 +106,24 @@ public class ProfileController {
                 if (phone != null) {
                     phone.setText(profile.getTelephone());
                 }
+                if (profileImage != null && profile.getPhoto() != null) {
+                    // Vérifier si le fichier existe avant de le charger
+                    File photoFile = new File(profile.getPhoto());
+                    if (photoFile.exists()) {
+                        try {
+                            Image image = new Image(new FileInputStream(photoFile));
+                            profileImage.setImage(image);
+                        } catch (IOException e) {
+                            System.err.println("Failed to load profile photo: " + e.getMessage());
+                            // Afficher une image par défaut en cas d'erreur
+                            profileImage.setImage(new Image(getClass().getResource("/images/1.png").toString()));
+                        }
+                    } else {
+                        System.err.println("Profile photo file not found: " + profile.getPhoto());
+                        // Afficher une image par défaut si le fichier n'existe pas
+                        profileImage.setImage(new Image(getClass().getResource("/images/1.png").toString()));
+                    }
+                }
             } else {
                 System.out.println("No profiles found for user ID : " + utilisateur.getId());
             }
@@ -107,8 +132,51 @@ public class ProfileController {
         }
     }
 
+    @FXML
+    void uploadPhoto(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Profile Photo");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
 
+        File selectedFile = fileChooser.showOpenDialog(uploadPhotoBtn.getScene().getWindow());
+        if (selectedFile != null) {
+            try {
+                // Convertir l'image en tableau de bytes
+                byte[] photoBytes = Files.readAllBytes(selectedFile.toPath());
 
+                // Mettre à jour la photo de profil dans la base de données
+                Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
+                if (utilisateur != null) {
+                    Profile profile = utilisateur.getProfile();
+                    if (profile != null) {
+                        profile.setPhoto(selectedFile.getAbsolutePath()); // Enregistrer le chemin de l'image
+                        profileService.update(profile);
+
+                        // Afficher la nouvelle photo
+                        Image image = new Image(selectedFile.toURI().toString());
+                        profileImage.setImage(image);
+
+                        showAlert(Alert.AlertType.INFORMATION, "Success", "Profile photo updated successfully!");
+
+                        // Retourner à HomeUniDriveController avec la nouvelle photo
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
+                        Parent root = loader.load();
+                        HomeUniDriveController homeController = loader.getController();
+                        homeController.setProfileImage(selectedFile.toURI().toString()); // Mettre à jour la photo dans HomeUniDriveController
+
+                        Stage stage = (Stage) backbtn.getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                    }
+                }
+            } catch (IOException e) {
+                showAlert(Alert.AlertType.ERROR, "Error", "Failed to upload photo: " + e.getMessage());
+            }
+        }
+    }
     @FXML
     void delete(ActionEvent event) {
         Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
@@ -245,13 +313,19 @@ public class ProfileController {
 
     }
 
+
+
+
     @FXML
     void notifcation(MouseEvent event) {
+        // Logique de notification existante
     }
 
     @FXML
     void password(MouseEvent event) {
     }
+
+
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

@@ -30,11 +30,11 @@
 
                 <PasswordField fx:id="password" layoutX="75.0" layoutY="253.0" prefHeight="32.0" prefWidth="278.0" promptText="Password" />
                 <Button fx:id="btnSave" layoutX="75.0" layoutY="414.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="278.0" text="Save" />
-            <ImageView fitHeight="515.0" fitWidth="456.0" layoutX="398.0" layoutY="-5.0">
-               <image>
-                  <Image url="@images/received_945642877767257.jpeg" />
-               </image>
-            </ImageView>
+                <ImageView fitHeight="515.0" fitWidth="456.0" layoutX="398.0" layoutY="-5.0">
+                    <image>
+                        <Image url="@images/received_945642877767257.jpeg" />
+                    </image>
+                </ImageView>
             </children>
         </Pane>
     </children>

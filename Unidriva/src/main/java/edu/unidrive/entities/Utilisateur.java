@@ -3,24 +3,19 @@ package edu.unidrive.entities;
 public class Utilisateur {
 
     private int id;
-
     private String email;
-
     private String dob;
-
     private String gender;
-
     private String lastname;
-
     private String firstname;
     private String password;
+    private String role; // Nouvel attribut pour le rôle
     private Profile profile;
-
 
     public Utilisateur() {
     }
 
-    public Utilisateur(int id, String email, String dob, String gender, String lastname, String firstname, String password) {
+    public Utilisateur(int id, String email, String dob, String gender, String lastname, String firstname, String password, String role) {
         this.id = id;
         this.email = email;
         this.dob = dob;
@@ -28,16 +23,26 @@ public class Utilisateur {
         this.lastname = lastname;
         this.firstname = firstname;
         this.password = password;
+        this.role = role;
     }
 
-    public Utilisateur(String email, String dob, String gender, String lastname, String firstname, String password) {
+    public Utilisateur(String email, String dob, String gender, String lastname, String firstname, String password, String role) {
         this.email = email;
         this.dob = dob;
         this.gender = gender;
         this.lastname = lastname;
         this.firstname = firstname;
         this.password = password;
+        this.role = role;
+    }
 
+    // Getters et setters
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Profile getProfile() {
@@ -47,6 +52,7 @@ public class Utilisateur {
     public void setProfile(Profile profile) {
         this.profile = profile;
     }
+
     public String getPassword() {
         return password;
     }
@@ -113,6 +119,7 @@ public class Utilisateur {
                 ", lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 ", profile=" + profile +
                 '}';
     }

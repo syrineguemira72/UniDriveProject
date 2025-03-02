@@ -1,0 +1,165 @@
+/* Styles généraux */
+* {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-base: #e5e5e5;
+    -fx-smoothing: true;
+}
+
+/* Style pour l'AnchorPane principal */
+#AnchorPane {
+    -fx-background-color: #f5f6fa;
+}
+
+/* Style pour les labels */
+.label {
+    -fx-text-fill: #000080; /* Couleur du texte en bleu marine */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+/* Style pour les TextField */
+.text-field {
+    -fx-background-color: transparent; /* Fond transparent */
+    -fx-border-color: black; /* Bordure noire */
+    -fx-border-width: 0 0 1 0; /* Bordure uniquement en bas */
+    -fx-prompt-text-fill: #a9a9a9; /* Couleur du texte d'invite en gris */
+}
+
+/* Style pour les boutons */
+.button {
+    -fx-background-color: #16a085; /* Fond vert */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-padding: 10px 20px; /* Espacement interne */
+    -fx-background-radius: 30px; /* Coins arrondis */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-font-weight: bold; /* Texte en gras */
+}
+
+.button:hover {
+    -fx-background-color: #1abc9c; /* Fond vert clair au survol */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0.4, 0, 0); /* Ombre portée */
+}
+
+/* Style pour le bouton "Back" */
+#backBtn {
+    -fx-background-color: #000080; /* Fond bleu marine */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 13px; /* Taille de la police */
+}
+
+/* Style pour les messages d'erreur */
+#errorLb, #errorAnswer, #codeErrorLb {
+    -fx-text-fill: #c66510; /* Couleur du texte en orange */
+    -fx-font-size: 12px; /* Taille de la police */
+}
+
+/* Style pour l'ImageView */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.5), 15, 0.3, 1, 1); /* Ombre portée */
+    -fx-padding: 5px; /* Espacement interne */
+    -fx-background-radius: 5px; /* Coins arrondis */
+}
+
+/* Styles pour HBox */
+HBox {
+    -fx-background-color: #2c3e50; /* Fond bleu foncé */
+    -fx-padding: 15px 25px; /* Espacement interne */
+    -fx-alignment: center; /* Alignement au centre */
+}
+
+HBox .button {
+    -fx-background-color: #2c3e50; /* Fond bleu foncé */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-border-width: 0; /* Pas de bordure */
+    -fx-padding: 8px 16px; /* Espacement interne */
+    -fx-background-radius: 25px; /* Coins arrondis */
+}
+
+HBox .button:hover {
+    -fx-background-color: #34495e; /* Fond bleu foncé clair au survol */
+}
+
+/* Styles pour VBox */
+VBox {
+    -fx-background-color: #34495e; /* Fond bleu foncé */
+    -fx-spacing: 15px; /* Espacement entre les éléments */
+    -fx-padding: 25px 15px; /* Espacement interne */
+    -fx-alignment: center; /* Alignement au centre */
+}
+
+VBox Label {
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-font-weight: 600; /* Texte en gras */
+    -fx-opacity: 0.8; /* Opacité */
+    -fx-padding: 10px 0; /* Espacement interne */
+    -fx-cursor: hand; /* Curseur en forme de main */
+}
+
+VBox Label:hover {
+    -fx-opacity: 1; /* Opacité totale au survol */
+    -fx-background-color: #1abc9c; /* Fond vert au survol */
+    -fx-background-radius: 5px; /* Coins arrondis */
+    -fx-text-fill: white; /* Texte blanc */
+}
+
+/* Style pour le bouton de déconnexion */
+#logoutbtn {
+    -fx-background-color: #e74c3c; /* Fond rouge */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-padding: 8px 20px; /* Espacement interne */
+    -fx-background-radius: 25px; /* Coins arrondis */
+}
+
+#logoutbtn:hover {
+    -fx-background-color: #c0392b; /* Fond rouge foncé au survol */
+}
+
+/* Style pour le bouton de profil */
+#Profile {
+    -fx-background-color: #16a085; /* Fond vert */
+    -fx-text-fill: white; /* Texte blanc */
+    -fx-font-size: 16px; /* Taille de la police */
+    -fx-padding: 8px 20px; /* Espacement interne */
+    -fx-background-radius: 25px; /* Coins arrondis */
+}
+
+#Profile:hover {
+    -fx-background-color: #1abc9c; /* Fond vert clair au survol */
+}
+
+/* Style pour les labels centrés */
+.center Label {
+    -fx-text-fill: #2c3e50; /* Texte bleu foncé */
+    -fx-font-size: 38px; /* Taille de la police */
+    -fx-font-weight: bold; /* Texte en gras */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.5, 1, 1); /* Ombre portée */
+    -fx-padding: 100px 0; /* Espacement interne */
+    -fx-alignment: center; /* Alignement au centre */
+}
+
+/* Style pour les ComboBox */
+ComboBox {
+    -fx-background-color: #ecf0f1; /* Fond gris clair */
+    -fx-border-radius: 25px; /* Coins arrondis */
+    -fx-padding: 5px 10px; /* Espacement interne */
+    -fx-font-size: 14px; /* Taille de la police */
+    -fx-font-weight: 500; /* Texte en gras */
+    -fx-border-color: #BDC3C7; /* Bordure grise */
+}
+
+ComboBox:hover {
+    -fx-border-color: #16a085; /* Bordure verte au survol */
+}
+
+ComboBox .cell {
+    -fx-font-size: 14px; /* Taille de la police */
+    -fx-text-fill: #2c3e50; /* Texte bleu foncé */
+}
+
+/* Transition pour les boutons au survol */
+.button:hover, #Profile:hover, #logoutbtn:hover {
+    -fx-transition: all 0.3s ease-in-out; /* Transition fluide */
+}

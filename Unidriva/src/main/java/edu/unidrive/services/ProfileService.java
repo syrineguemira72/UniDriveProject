@@ -17,7 +17,6 @@ public class ProfileService implements Iservice<Profile> {
         this.connection = MyConnection.getInstance().getCnx();
     }
 
-    @Override
     public void add(Profile entity) {
         try {
             String requete = "INSERT INTO profile (photo, bio, telephone, adresse, utilisateur_id) VALUES (?, ?, ?, ?, ?)";
@@ -124,6 +123,18 @@ public class ProfileService implements Iservice<Profile> {
     @Override
     public void deleteEntity(Profile profile) {
 
+    }
+
+    public void updateProfilePhoto(int profileId, String photoPath) {
+        String query = "UPDATE profile SET photo = ? WHERE id = ?";
+        try (
+                PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, photoPath);
+            statement.setInt(2, profileId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

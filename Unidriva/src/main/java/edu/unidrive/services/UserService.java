@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import edu.unidrive.entities.Profile;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 public class UserService implements Iservice<Utilisateur> {
@@ -39,6 +40,7 @@ public class UserService implements Iservice<Utilisateur> {
                 utilisateur.setLastname(rs.getString("lastname"));
                 utilisateur.setFirstname(rs.getString("firstname"));
                 utilisateur.setPassword(rs.getString("password"));
+                utilisateur.setRole(rs.getString("role")); // Ajoutez cette ligne
 
                 Profile profile = new Profile();
                 profile.setId(rs.getInt("profile_id"));
@@ -55,24 +57,29 @@ public class UserService implements Iservice<Utilisateur> {
         return utilisateur;
     }
 
-    public void add(Utilisateur user) {
-        try {
-            String requete = "INSERT INTO utilisateur (email, dob, gender, lastname, firstname, password) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement pst = connection.prepareStatement(requete, PreparedStatement.RETURN_GENERATED_KEYS);
-            pst.setString(1, user.getEmail());
-            pst.setString(2, user.getDob());
-            pst.setString(3, user.getGender());
-            pst.setString(4, user.getLastname());
-            pst.setString(5, user.getFirstname());
-            pst.setString(6, user.getPassword());
+    public void add(Utilisateur utilisateur) {
+        String requete = "INSERT INTO utilisateur (email, dob, gender, firstname, lastname, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+            pst.setString(1, utilisateur.getEmail());
+            pst.setString(2, utilisateur.getDob());
+            pst.setString(3, utilisateur.getGender());
+            pst.setString(4, utilisateur.getFirstname());
+            pst.setString(5, utilisateur.getLastname());
+            pst.setString(6, utilisateur.getPassword());
+            pst.setString(7, utilisateur.getRole());
 
             pst.executeUpdate();
 
-            ResultSet rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                int userId = rs.getInt(1);
-                user.setId(userId);
+            // Récupérer l'ID généré par la base de données
+            try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    utilisateur.setId(generatedKeys.getInt(1)); // Définir l'ID de l'utilisateur
+                } else {
+                    throw new SQLException("Échec de la récupération de l'ID généré.");
+                }
             }
+            System.out.println("Utilisateur ajouté avec succès !");
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
@@ -136,7 +143,8 @@ public class UserService implements Iservice<Utilisateur> {
                         rs.getString("gender"),
                         rs.getString("lastname"),
                         rs.getString("firstname"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("role")
                 );
                 utilisateurs.add(user);
             }
@@ -188,15 +196,14 @@ public class UserService implements Iservice<Utilisateur> {
 
     public boolean loginUser(String email, String password) {
         try {
-            String requete = "SELECT * FROM utilisateur WHERE email = ? AND password = ?";
+            String requete = "SELECT password FROM utilisateur WHERE email = ?";
             PreparedStatement pst = connection.prepareStatement(requete);
             pst.setString(1, email);
-            pst.setString(2, password);
 
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                System.out.println("Connexion réussie !");
-                return true;
+                String hashedPassword = rs.getString("password");
+                return BCrypt.checkpw(password, hashedPassword); // Vérifie le mot de passe haché
             } else {
                 System.out.println("Nom d'utilisateur ou mot de passe incorrect !");
                 return false;
@@ -213,11 +220,54 @@ public class UserService implements Iservice<Utilisateur> {
             pst.setString(1, email);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) == 0; // If the count is 0, the email is unique
+                return rs.getInt(1) == 0;
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la vérification de l'unicité de l'email : " + e.getMessage());
         }
         return false;
+    }
+    public String getHashedPasswordByEmail(String email) {
+        String query = "SELECT password FROM utilisateur WHERE email = ?";
+
+        try (
+                PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("password");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+    public int getTotalUsers() {
+        String query = "SELECT COUNT(*) FROM utilisateur";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public int getAdminUsers() {
+        String query = "SELECT COUNT(*) FROM utilisateur WHERE role = 'ADMIN'";
+        try (PreparedStatement pst = connection.prepareStatement(query)) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

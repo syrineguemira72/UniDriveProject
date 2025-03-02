@@ -1,7 +1,9 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.config.AppConfig;
 import edu.unidrive.entities.Profile;
 import edu.unidrive.entities.Utilisateur;
+import edu.unidrive.services.EmailService;
 import edu.unidrive.services.ProfileService;
 import edu.unidrive.services.UserService;
 import javafx.collections.FXCollections;
@@ -14,9 +16,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class SignUpController {
 
@@ -41,7 +43,6 @@ public class SignUpController {
     @FXML
     private TextField txtLastname;
 
-
     @FXML
     public void initialize() {
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Female", "Male");
@@ -58,7 +59,6 @@ public class SignUpController {
                 password.matches(".*\\d.*");
     }
 
-
     @FXML
     void save(ActionEvent event) {
         String email = txtEmail.getText();
@@ -68,19 +68,16 @@ public class SignUpController {
         String pass = password.getText();
         LocalDate dobDate = txtDOB.getValue();
 
-
         if (email.isEmpty() || firstname.isEmpty() || lastname.isEmpty() ||
                 pass.isEmpty() || gender == null || dobDate == null) {
             showAlert(Alert.AlertType.WARNING, "Missing Fields", "Please fill in all the fields.");
             return;
         }
 
-
         if (!isValidEmail(email)) {
             showAlert(Alert.AlertType.ERROR, "Invalid Email", "Please enter a valid email address.");
             return;
         }
-
 
         UserService userService = new UserService();
         if (!userService.isEmailUnique(email)) {
@@ -88,36 +85,57 @@ public class SignUpController {
             return;
         }
 
-
         if (!isValidPassword(pass)) {
             showAlert(Alert.AlertType.ERROR, "Weak Password",
                     "The password must be at least 8 characters long, contain an uppercase letter, and a number.");
             return;
         }
 
-
         if (!gender.equalsIgnoreCase("Male") && !gender.equalsIgnoreCase("Female")) {
             showAlert(Alert.AlertType.ERROR, "Invalid Gender", "Please select 'Male' or 'Female'.");
             return;
         }
 
+        // Vérification de l'âge
+        LocalDate currentDate = LocalDate.now();
+        LocalDate minimumDateOfBirth = currentDate.minusYears(18);
+
+        if (dobDate.isAfter(minimumDateOfBirth)) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Date of Birth", "You must be at least 18 years old to sign up.");
+            return;
+        }
+
+        // Hacher le mot de passe avec BCrypt
+        String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dobString = dobDate.format(formatter);
 
+        // Chemin de l'image par défaut
+        String defaultPhotoPath = "/images/1.png";
 
-        Utilisateur user = new Utilisateur(email, dobString, gender, firstname, lastname, pass);
-        Profile profile = new Profile("default_photo_url", "Default bio", "00000000", email);
-        profile.setUtilisateur(user);
-        user.setProfile(profile);
+        // Définir le rôle en fonction de l'e-mail
+        String role = email.equals(AppConfig.ADMIN_EMAIL) ? "ADMIN" : "USER";
 
-        ProfileService profileService = new ProfileService();
+        // Utiliser le mot de passe haché pour créer l'utilisateur
+        Utilisateur user = new Utilisateur(email, dobString, gender, firstname, lastname, hashedPassword, role); // Utilisez la variable 'role'
 
+        // Ajouter l'utilisateur à la base de données
         try {
-            userService.add(user);
-            profileService.add(profile);
-            showAlert(Alert.AlertType.INFORMATION, "Success", "User successfully registered!");
+            userService.add(user); // L'ID de l'utilisateur est maintenant défini après l'insertion
 
+            // Créer le profil avec l'ID de l'utilisateur
+            Profile profile = new Profile(defaultPhotoPath, "Default bio", "00000000", email);
+            profile.setUtilisateur(user); // Associer le profil à l'utilisateur
+
+            ProfileService profileService = new ProfileService();
+            profileService.add(profile);
+
+            showAlert(Alert.AlertType.INFORMATION, "Success", "User and profile successfully registered!");
+
+            // Envoyer un e-mail de bienvenue
+            EmailService emailService = new EmailService("bhsryhab@gmail.com", "fpov oqjy nfdd gble");
+            emailService.sendWelcomeEmail(email, firstname);
 
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Login.fxml"));
             Parent root = loader.load();
@@ -130,9 +148,6 @@ public class SignUpController {
         }
     }
 
-
-
-
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -140,6 +155,4 @@ public class SignUpController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
 }

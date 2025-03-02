@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.StatisticsController" spacing="10" alignment="CENTER">
+    <Label text="Statistiques de l'application" style="-fx-font-size: 20px; -fx-font-family: Arial;" />
+
+    <!-- Statistiques utilisateurs -->
+    <Label text="Nombre total d'utilisateurs : " fx:id="totalUsersLabel" />
+    <Label text="Nombre d'administrateurs : " fx:id="adminUsersLabel" />
+    <Label text="Nombre d'utilisateurs normaux : " fx:id="normalUsersLabel" />
+
+
+
+    <!-- Graphique pour les utilisateurs -->
+    <PieChart fx:id="usersPieChart" title="Répartition des utilisateurs" />
+</VBox>

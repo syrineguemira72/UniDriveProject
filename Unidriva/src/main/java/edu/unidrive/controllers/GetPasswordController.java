@@ -1,4 +1,7 @@
 package edu.unidrive.controllers;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.UserService;
@@ -17,21 +20,17 @@ import java.io.IOException;
 public class GetPasswordController {
 
     private UserService userService;
+    private String generatedCode;
+    private String userPhoneNumber;
 
-    @FXML
-    private TextField answertxt;
 
     @FXML
     private Button backBtn;
 
-    @FXML
-    private Label errorAnswer;
 
     @FXML
     private Label errorLb;
 
-    @FXML
-    private Button getpswBtn;
 
     @FXML
     private TextField nametxt;
@@ -39,19 +38,21 @@ public class GetPasswordController {
     @FXML
     private TextField passtxt;
 
-    @FXML
-    private TextField questiontxt;
 
-    @FXML
-    private Button searchBtn;
 
     @FXML
     private TextField usernametxt;
 
+    @FXML
+    private TextField codeTxt;
+
+
+    @FXML
+    private Label codeErrorLb;
+
     public GetPasswordController() {
         this.userService = new UserService();
     }
-
 
     @FXML
     void back(ActionEvent event) {
@@ -75,14 +76,22 @@ public class GetPasswordController {
         if (user == null) {
             errorLb.setText("User not found!");
         } else {
-            questiontxt.setText("What is your phone number?");
+
             nametxt.setText(user.getLastname() + " " + user.getFirstname());
+
+            // Générer un code aléatoire
+            generatedCode = String.valueOf((int) (Math.random() * 9000) + 1000);
+            userPhoneNumber = user.getProfile().getTelephone();
+
+            // Envoyer le code par SMS
+            sendSms(userPhoneNumber, "Your verification code is: " + generatedCode);
+            codeErrorLb.setText("Verification code sent to your phone.");
         }
     }
 
     @FXML
     void RetrivePassword(ActionEvent event) {
-        String answer = answertxt.getText().trim();
+        String code = codeTxt.getText().trim();
         String username = usernametxt.getText().trim();
 
         Utilisateur user = userService.getUserByEmail(username);
@@ -92,11 +101,25 @@ public class GetPasswordController {
             return;
         }
 
-        if (user.getProfile() != null && user.getProfile().getTelephone().equals(answer)) {
+        if (generatedCode != null && generatedCode.equals(code)) {
             passtxt.setText(user.getPassword());
+            codeErrorLb.setText("");
         } else {
-            errorAnswer.setText("Incorrect phone number.");
+            codeErrorLb.setText("Incorrect verification code.");
         }
     }
 
+    private void sendSms(String phoneNumber, String message) {
+        try {
+            Twilio.init("ACbc66f19dfeb447b7cb2d0b5d88e58c62", "1818a9b9a44721d555bc5d79cebc324e");
+            Message.creator(
+                    new PhoneNumber(phoneNumber),
+                    new PhoneNumber("+18032192785"),
+                    message
+            ).create();
+        } catch (Exception e) {
+            e.printStackTrace();
+            codeErrorLb.setText("Failed to send SMS.");
+        }
+    }
 }

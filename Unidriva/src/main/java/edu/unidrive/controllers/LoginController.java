@@ -1,6 +1,8 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.UserService;
+import edu.unidrive.tools.JwtUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import javafx.scene.input.MouseEvent;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.io.IOException;
 
 public class LoginController {
@@ -83,16 +85,32 @@ public class LoginController {
         }
 
         UserService userService = new UserService();
-        boolean isAuthenticated = userService.loginUser(email, password);
+        Utilisateur utilisateur = userService.getUserByEmail(email);
 
-        if (isAuthenticated) {
-            System.out.println("Welcome, " + email + " !");
+        if (utilisateur == null) {
+            lblErrors.setText("Incorrect username or password.");
+            lblErrors.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        boolean isPasswordCorrect = BCrypt.checkpw(password, utilisateur.getPassword());
+
+        if (isPasswordCorrect) {
+            String token = JwtUtil.generateToken(utilisateur.getEmail(), utilisateur.getRole());
+
+            if (token == null) {
+                lblErrors.setText("Failed to generate authentication token.");
+                lblErrors.setStyle("-fx-text-fill: red;");
+                return;
+            }
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                 Parent root = loader.load();
 
                 HomeUniDriveController homeController = loader.getController();
                 homeController.setCurrentUserEmail(email);
+                homeController.setJwtToken(token);
 
                 Stage stage = (Stage) login.getScene().getWindow();
                 Scene scene = new Scene(root);
@@ -101,6 +119,8 @@ public class LoginController {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                lblErrors.setText("Failed to load the home page.");
+                lblErrors.setStyle("-fx-text-fill: red;");
             }
         } else {
             lblErrors.setText("Incorrect username or password.");

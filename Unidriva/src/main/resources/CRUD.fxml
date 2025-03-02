@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AjouterAide">
     <stylesheets>
-        <URL value="@Css/style.css" />
+        <URL value="@Css/styleUser.css" />
     </stylesheets>
     <children>
         <!-- Logo Image -->
