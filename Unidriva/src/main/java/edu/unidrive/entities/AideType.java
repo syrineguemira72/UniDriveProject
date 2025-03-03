@@ -1,9 +1,9 @@
 package edu.unidrive.entities;
 
 public enum AideType {
-    ALIMENTAIRE("alimentaire"),
-    FINANCIER("financier"),
-    MEDICAL("médical");
+    ALIMENTAIRE("Dinar"),
+    FINANCIER("Euro"),
+    MEDICAL("Dollar");
 
     private final String type;
 
