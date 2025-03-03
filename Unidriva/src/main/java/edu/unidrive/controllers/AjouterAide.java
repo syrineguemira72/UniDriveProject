@@ -129,7 +129,7 @@ public class AjouterAide {
                 contentStream.newLineAtOffset(100, 710);
 
 // Add details
-                contentStream.showText("Devise: " + currency);
+                contentStream.showText("Currency: " + currency);
                 contentStream.newLineAtOffset(0, -20);
                 contentStream.showText("Description: " + description);
                 contentStream.newLineAtOffset(0, -20);
