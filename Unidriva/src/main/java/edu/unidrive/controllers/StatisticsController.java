@@ -16,11 +16,6 @@ public class StatisticsController {
     @FXML
     private Label normalUsersLabel;
 
-    @FXML
-    private Label totalTripsLabel;
-
-    @FXML
-    private Label totalPostsLabel;
 
     @FXML
     private PieChart usersPieChart;
