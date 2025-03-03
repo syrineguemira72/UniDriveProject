@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Fxml Pages Updated">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/HomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/HomeUniDrive.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/HomeUniDrive.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Fxml Pages Updated" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
