@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="356.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cov.pidev3A8.controllers.ReserverTrajetController">
+<AnchorPane prefHeight="356.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.ReserverTrajetController">
 
     <!-- Barre de recherche par date -->
     <Label layoutX="74.0" layoutY="20.0" text="Rechercher par date:" />
