@@ -1,6 +1,8 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.PostService;
+import edu.unidrive.services.UserService;
 import edu.unidrive.tools.JwtUtil;
 import io.jsonwebtoken.Claims;
 import javafx.event.ActionEvent;
@@ -34,6 +36,7 @@ public class HomeUniDriveController {
 
     @FXML
     private Button statisticsButton;
+
 
     private String jwtToken;// Référence à l'ImageView pour afficher la photo de profil
 
@@ -139,6 +142,11 @@ public class HomeUniDriveController {
         // Ajouter un gestionnaire d'événements pour le clic sur "Forum"
         btnforum.setOnMouseClicked(this::forum);
     }
+    private int getCurrentUserId() {
+        return 40;
+    }
+
+
     @FXML
     void forum(MouseEvent event){
         int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
@@ -164,10 +172,7 @@ public class HomeUniDriveController {
         }
 
     }
-    private int getCurrentUserId() {
-        // Implémentez cette méthode pour récupérer l'ID de l'utilisateur connecté
-        return 39; // Exemple : remplacez par la logique réelle
-    }
+
 
     @FXML
     void aide(MouseEvent event){

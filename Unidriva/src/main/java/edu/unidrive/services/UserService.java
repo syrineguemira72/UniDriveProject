@@ -56,6 +56,16 @@ public class UserService implements Iservice<Utilisateur> {
         }
         return utilisateur;
     }
+    public int getUserIdByEmail(String email) {
+
+
+        Utilisateur user1 = getUserByEmail(email);
+        if (user1 != null) {
+            return user1.getId(); // Retourner l'ID de l'utilisateur
+        } else {
+            throw new RuntimeException("Utilisateur non trouvé avec l'email : " + email);
+        }
+    }
 
     public void add(Utilisateur utilisateur) {
         String requete = "INSERT INTO utilisateur (email, dob, gender, firstname, lastname, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -74,7 +84,8 @@ public class UserService implements Iservice<Utilisateur> {
             // Récupérer l'ID généré par la base de données
             try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    utilisateur.setId(generatedKeys.getInt(1)); // Définir l'ID de l'utilisateur
+                    utilisateur.setId(generatedKeys.getInt(1));
+
                 } else {
                     throw new SQLException("Échec de la récupération de l'ID généré.");
                 }
@@ -84,6 +95,7 @@ public class UserService implements Iservice<Utilisateur> {
             throw new RuntimeException("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
+
 
     @Override
     public void remove(Utilisateur entity) {
@@ -270,4 +282,7 @@ public class UserService implements Iservice<Utilisateur> {
         }
         return 0;
     }
+
+
+
 }
