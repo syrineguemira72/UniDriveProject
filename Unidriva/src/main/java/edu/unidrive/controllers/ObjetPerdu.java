@@ -1,38 +1,35 @@
 package edu.unidrive.controllers;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Duration;
-import org.controlsfx.control.Notifications;
 
 import edu.unidrive.entities.Objet;
+import edu.unidrive.services.CloudinaryService;
 import edu.unidrive.services.ObjetPerduService;
 import edu.unidrive.tools.MyConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -335,5 +332,42 @@ System.out.println("hello");
             recTab.setItems(filteredData);
         }
 
+    }
+
+    @FXML
+    private void CHAT(ActionEvent event) {
+        try {
+            // Load the Chatbot.fxml
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chatbot.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new Stage for the Chatbot interface
+            Stage stage = new Stage();
+            stage.setTitle("Chatbot");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void uploadImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            CloudinaryService cloudinaryService = new CloudinaryService();
+            String imageUrl = cloudinaryService.uploadImage(selectedFile);
+
+            if (imageUrl != null) {
+                showAlert("Success", "Image uploaded successfully!\nURL: " + imageUrl);
+                System.out.println("Uploaded Image URL: " + imageUrl);
+            } else {
+                showAlert("Error", "Image upload failed.");
+            }
+        }
     }
 }
