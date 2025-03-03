@@ -1,12 +1,17 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.PostService;
+import edu.unidrive.services.UserService;
+import edu.unidrive.tools.MyConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.Connection;
+
 
 public class CentresInteretController {
 
@@ -15,10 +20,13 @@ public class CentresInteretController {
 
     private final PostService postService = new PostService();
 
+    private Connection connection;
+
+
     @FXML
     void validerCentresInteret() {
         String centresInteret = centresInteretField.getText().trim();
-
+        this.connection = MyConnection.getInstance().getCnx();
         if (centresInteret.isEmpty()) {
             // Afficher un message d'erreur si le champ est vide
             System.out.println("Veuillez entrer au moins un centre d'intérêt.");
@@ -40,7 +48,8 @@ public class CentresInteretController {
     }
 
     private int getCurrentUserId() {
-        // Implémentez cette méthode pour récupérer l'ID de l'utilisateur connecté
-        return 39; // Exemple : remplacez par la logique réelle
+        return 40;
     }
+
+
 }

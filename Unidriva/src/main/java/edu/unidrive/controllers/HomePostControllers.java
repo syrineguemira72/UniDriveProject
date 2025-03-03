@@ -2,14 +2,18 @@ package edu.unidrive.controllers;
 
 import edu.unidrive.entities.Interaction;
 import edu.unidrive.entities.Post;
+import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.InteractionService;
 import edu.unidrive.services.PostService;
+import edu.unidrive.services.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -18,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
@@ -33,6 +38,7 @@ public class HomePostControllers {
     private ObservableList<Post> postList = FXCollections.observableArrayList();
 
     private final PostService postService = new PostService();
+
 
     @FXML
     public void initialize() {
@@ -190,7 +196,24 @@ public class HomePostControllers {
     }
 
     private int getCurrentUserId() {
-        // Implémentez cette méthode pour récupérer l'ID de l'utilisateur connecté
-        return 39; // Exemple : remplacez par la logique réelle
+
+        return 40;
+    }
+
+    @FXML
+    void goToBack(ActionEvent event) {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
+        try {
+            // Load the new page and set it as the root
+            Parent root = fxmlLoader.load();
+            // Set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
     }
 }
