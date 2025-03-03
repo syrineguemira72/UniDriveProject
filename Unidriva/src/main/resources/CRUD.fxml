@@ -7,9 +7,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AjouterAide">
-    <Label fx:id="lblErrors" text="" layoutX="50" layoutY="250"/>
 
     <stylesheets>
         <URL value="@Css/style.css" />
@@ -28,7 +28,10 @@
         </ImageView>
 
         <!-- Title -->
-        <Label layoutX="321.0" layoutY="44.0" prefHeight="37.0" prefWidth="86.0" styleClass="title-label" text="Ajouter Aide" />
+        <Label layoutX="321.0" layoutY="44.0" prefHeight="37.0" prefWidth="86.0" styleClass="title-label" text="Ajouter Aide">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
 
         <!-- Type Field -->
         <Label layoutX="39.0" layoutY="193.0" prefHeight="16.0" prefWidth="86.0" text="Currency :" />
@@ -48,11 +51,13 @@
         <!-- Admin Page Button -->
         <Button fx:id="AdminButton" layoutX="615.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="admin-button" text="Admin Page" />
 
+
         <!-- Payment Fields -->
         <TextField fx:id="cardNumberField" layoutX="468.0" layoutY="260.0" prefWidth="200" promptText="Card Number" />
         <TextField fx:id="cvcField" layoutX="468.0" layoutY="301.0" prefWidth="200" promptText="CVC" />
         <Label fx:id="statusLabel" layoutX="50" layoutY="300" text="" />
         <Label layoutX="364.0" layoutY="307.0" text="CVC :" />
         <Label layoutX="364.0" layoutY="266.0" text="Card Number :" />
+      <Label layoutX="407.0" layoutY="394.0" prefHeight="16.0" prefWidth="216.0" text="pdf file automatically generated" underline="true" />
     </children>
 </AnchorPane>

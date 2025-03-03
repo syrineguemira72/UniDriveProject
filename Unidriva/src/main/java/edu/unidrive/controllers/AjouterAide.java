@@ -14,7 +14,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -40,6 +44,11 @@ public class AjouterAide {
     private AideService aideService;  // Service class for interacting with the database
 
     private PaymentService paymentService;  // Declare PaymentService
+    @FXML
+    void generatePdfButtonAction(ActionEvent event) {
+        generatePdf(currencytextfield.getText(), descriptiontextfield.getText(), montanttextfield.getText(), "Statut inconnu");
+    }
+
 
     public AjouterAide()
     {
@@ -53,71 +62,105 @@ public class AjouterAide {
         String description = descriptiontextfield.getText().trim();
         String montant = montanttextfield.getText().trim();
 
-        // Validate Empty Fields
         if (currency.isBlank() || description.isBlank() || montant.isBlank()) {
             showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Validate Currency Type
         if (!AideType.isValidType(currency)) {
-            showAlert("Erreur", "La devise doit être 'alimentaire', 'financier', ou 'médical'.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "La devise doit être 'alimentaire', 'financier' ou 'médical'.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Validate Montant (amount should be a valid number)
         if (!montant.matches("\\d+(\\.\\d{1,2})?")) {
             showAlert("Erreur", "Le montant doit être un nombre valide (ex: 100 ou 100.50).", Alert.AlertType.ERROR);
             return;
         }
 
-        // Get PaymentMethod ID (This should be passed from the frontend)
-        String paymentMethodId = cardNumberField.getText().trim();  // PaymentMethod ID, not raw card details
-
-        // Validate PaymentMethod ID
+        String paymentMethodId = cardNumberField.getText().trim();
         if (paymentMethodId.isBlank()) {
             showAlert("Erreur", "Les informations de paiement doivent être complètes.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Add aide to the database first (before payment)
-        aide aide = new aide(currency, description, montant);
-        aideService.addEntity(aide);
+        aide newAide = new aide(currency, description, montant);
+        aideService.addEntity(newAide);
 
         try {
-            // Process Payment with Stripe (using PaymentMethod ID)
+            // Process Payment with Stripe
             String clientSecret = paymentService.createPaymentIntent(paymentMethodId, currency, montant);
+            String paymentStatus = (clientSecret == null || clientSecret.isEmpty()) ? "Échec" : "Réussi";
 
-            // Check if the payment creation was successful
-            if (clientSecret == null || clientSecret.isEmpty()) {
-                showAlert("Succès", "\"La aide et le paiement ont été ajoutés, mais il y a un petit problème de validation du numéro de carte avec Stripe.\"", Alert.AlertType.INFORMATION);
-            } else {
-                // If payment is successful, show success message
-                showAlert("Succès", "L'aide a été ajoutée avec succès et le paiement effectué.", Alert.AlertType.INFORMATION);
-            }
+            showAlert("Succès", "L'aide a été ajoutée avec succès et le paiement effectué.", Alert.AlertType.INFORMATION);
+
+            // Génération du PDF après le paiement
+            generatePdf(currency, description, montant, paymentStatus);
 
         } catch (Exception e) {
-            // Show payment failure alert but still let the aide be added to the database
             showAlert("Erreur", "Paiement échoué: " + e.getMessage(), Alert.AlertType.ERROR);
-        }
-
-        // Navigate to Detail Page
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Detail.fxml"));
-            Parent root = fxmlLoader.load();
-            DetailController detailController = fxmlLoader.getController();
-            detailController.setCurrencytextfield(currency);
-            detailController.setDescriptiontextfield(description);
-            detailController.setMontanttextfield(montant);
-            currencytextfield.getScene().setRoot(root);
-        } catch (IOException e) {
-            showAlert("Erreur", "Erreur lors du chargement de la page de détails.", Alert.AlertType.ERROR);
         }
     }
 
+    @FXML
+    void generatePdf(String currency, String description, String montant, String statut) {
+        String pdfPath = "reçu_paiement.pdf";
 
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage();
+            document.addPage(page);
 
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+// Start writing the title text
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                contentStream.beginText();
+                contentStream.newLineAtOffset(200, 750);
+                contentStream.showText("Reçu de Paiement");
+                contentStream.endText(); // End the title text block
 
+// Now, move to drawing mode to draw the separator line
+                contentStream.setLineWidth(1f);
+                contentStream.moveTo(100, 740); // Starting position for the separator line
+                contentStream.lineTo(500, 740); // Ending position for the separator line
+                contentStream.stroke(); // Actually draw the line
+
+// Start a new text block to add receipt details
+                contentStream.beginText();
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+                contentStream.newLineAtOffset(100, 710);
+
+// Add details
+                contentStream.showText("Devise: " + currency);
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Description: " + description);
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Montant: " + montant + " USD");
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Statut: " + statut);
+
+// Add space at the bottom
+                contentStream.newLineAtOffset(0, -30);
+
+// End the text block first
+                contentStream.endText(); // End the details text block
+
+// Start drawing the footer line
+                contentStream.setLineWidth(1f);
+                contentStream.moveTo(100, 640); // Starting position for footer line
+                contentStream.lineTo(500, 640); // Ending position for footer line
+                contentStream.stroke(); // Draw the footer line
+
+            }
+
+            document.save(pdfPath);
+            showAlert("Succès", "Le reçu PDF a été généré : " + pdfPath, Alert.AlertType.INFORMATION);
+
+            // Ouvrir automatiquement le PDF après la génération
+            java.awt.Desktop.getDesktop().open(new File(pdfPath));
+
+        } catch (IOException ignored) {
+
+        }
+    }
 
 
 
