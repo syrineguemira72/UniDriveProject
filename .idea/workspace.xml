@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Api consomation commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/.idea/workspace.xml" beforeDir="false" />
-    </list>
+    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Fxml Pages Updated" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,12 +19,12 @@
     &quot;assignee&quot;: &quot;syrineguemira72&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/syrineguemira72/UniDriveProject.git&quot;,
-    &quot;accountId&quot;: &quot;334d85d5-2725-48db-b835-a172f734a6a0&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/syrineguemira72/UniDriveProject.git",
+    "accountId": "17327638-1d40-44fd-8a2d-6e00ddc6d400"
   }
-}</component>
+}]]></component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -45,25 +42,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Password.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/khale/IdeaProjects/UnidriveApp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HomeController.executor": "Run",
+    "Application.Password.executor": "Run",
+    "Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/khale/IdeaProjects/UnidriveApp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Java83A8\UnidriveApp\Unidriva\src\main\java\edu\unidrive\controllers" />
@@ -74,6 +69,39 @@
       <recent name="edu.unidrive.interfaces" />
       <recent name="edu.unidrive.controllers" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HomeController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cov.pidev3A8.controllers.HomeController" />
+      <module name="UniDrive" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cov.pidev3A8.controllers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="UnidriveApp" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="UnidriveApp" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HomeController" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -96,8 +124,6 @@
       <workItem from="1740926167483" duration="2643000" />
       <workItem from="1740944892551" duration="1649000" />
       <workItem from="1740946763922" duration="965000" />
-      <workItem from="1740994104065" duration="1638000" />
-      <workItem from="1740995989459" duration="99000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -115,7 +141,31 @@
       <option name="project" value="LOCAL" />
       <updated>1740992456378</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" Fxml Pages Updated">
+      <option name="closed" value="true" />
+      <created>1740992776324</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740992776324</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" Fxml Pages Updated">
+      <option name="closed" value="true" />
+      <created>1740994266521</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1740994266521</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" Fxml Pages Updated">
+      <option name="closed" value="true" />
+      <created>1740994812686</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1740994812686</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +174,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value=" Api consomation commit" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Api consomation commit" />
+    <MESSAGE value=" Fxml Pages Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Fxml Pages Updated" />
   </component>
 </project>

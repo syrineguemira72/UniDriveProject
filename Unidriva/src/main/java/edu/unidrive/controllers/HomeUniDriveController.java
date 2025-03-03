@@ -184,6 +184,20 @@ public class HomeUniDriveController {
 
     }
     @FXML
+    void covoiturage(MouseEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreerTrajet.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) logoutbtn.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @FXML
     void lost(MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Recompense.fxml"));
