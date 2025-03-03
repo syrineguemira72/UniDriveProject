@@ -9,8 +9,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="523.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AjouterAide">
+    <Label fx:id="lblErrors" text="" layoutX="50" layoutY="250"/>
+
     <stylesheets>
-        <URL value="@Css/styleUser.css" />
+        <URL value="@Css/style.css" />
     </stylesheets>
     <children>
         <!-- Logo Image -->
@@ -44,7 +46,7 @@
         <Button layoutX="190.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterAideaction" prefHeight="37.0" prefWidth="98.0" styleClass="submit-button" text="Confirmer" />
 
         <!-- Admin Page Button -->
-        <Button layoutX="615.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="admin-button" text="Admin Page" />
+        <Button fx:id="AdminButton" layoutX="615.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="admin-button" text="Admin Page" />
 
         <!-- Payment Fields -->
         <TextField fx:id="cardNumberField" layoutX="468.0" layoutY="260.0" prefWidth="200" promptText="Card Number" />
