@@ -60,7 +60,7 @@
                      </VBox.margin>
 
                      <children>
-                        <Label fx:id="btncovoiturage" onMouseClicked="#covoiturage" text="Aide" textFill="WHITE" underline="true">
+                        <Label fx:id="btncovoiturage" onMouseClicked="#covoiturage" text="covoiturage" textFill="WHITE" underline="true">
                            <font>
                               <Font name="System Bold Italic" size="17.0" />
                            </font>

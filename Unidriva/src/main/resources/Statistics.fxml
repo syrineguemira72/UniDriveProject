@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.StatisticsController" spacing="10" alignment="CENTER">
-    <Label text="Statistiques de l'application" style="-fx-font-size: 20px; -fx-font-family: Arial;" />
+<AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.StatisticsController">
+
+<VBox alignment="CENTER" prefWidth="860.0" spacing="10" style="-fx-background-color: #cef0ef;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@Css/styleUser.css" />
+    </stylesheets>
+    <Label style="-fx-font-size: 20px; -fx-font-family: Arial;" text="Statistiques de l'application" />
 
     <!-- Statistiques utilisateurs -->
-    <Label text="Nombre total d'utilisateurs : " fx:id="totalUsersLabel" />
-    <Label text="Nombre d'administrateurs : " fx:id="adminUsersLabel" />
-    <Label text="Nombre d'utilisateurs normaux : " fx:id="normalUsersLabel" />
+    <Label fx:id="totalUsersLabel" text="Nombre total d'utilisateurs : " />
+    <Label fx:id="adminUsersLabel" text="Nombre d'administrateurs : " />
+    <Label fx:id="normalUsersLabel" text="Nombre d'utilisateurs normaux : " />
 
 
 
     <!-- Graphique pour les utilisateurs -->
-    <PieChart fx:id="usersPieChart" title="Répartition des utilisateurs" />
+    <PieChart fx:id="usersPieChart" prefWidth="820.0" title="Répartition des utilisateurs" />
 </VBox>
+</AnchorPane>
