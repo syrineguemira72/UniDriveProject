@@ -1,0 +1,84 @@
+/* General Styles */
+.root {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-background-color: #f0f8ff; /* Alice Blue */
+}
+
+/* Title Styles */
+.title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1e3a8a; /* Indigo Blue */
+    -fx-padding: 10 0;
+}
+
+/* Label Styles */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2f855a; /* Green */
+    -fx-font-weight: bold;
+}
+
+/* TextField Styles */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e3a8a; /* Indigo Blue */
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-font-size: 14px;
+}
+
+/* Button General Styles */
+.button {
+    -fx-text-fill: white;
+    -fx-padding: 8 16; /* Réduit la taille du padding */
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 5, 0, 0, 2);
+    -fx-cursor: hand;
+}
+
+/* Submit Button */
+.submit-button {
+    -fx-background-color: #319795; /* Teal */
+}
+
+/* Admin Button */
+.admin-button {
+    -fx-background-color: #2d3748; /* Dark Gray */
+}
+
+/* Button Hover Effects */
+.submit-button:hover {
+    -fx-background-color: #2c7a7b; /* Darker Teal */
+}
+
+.admin-button:hover {
+    -fx-background-color: #4a5568; /* Darker Gray */
+}
+
+/* ListView Styles */
+#postListView {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #1e3a8a; /* Indigo Blue */
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+/* HBox Styles */
+.hbox {
+    -fx-spacing: 10;
+    -fx-alignment: center;
+}
+
+/* Comment, Delete, Update Buttons */
+.comment-button, .delete-button, .update-button {
+    -fx-background-color: #319795; /* Teal */
+    -fx-padding: 6 12; /* Taille réduite */
+}
+
+.comment-button:hover, .delete-button:hover, .update-button:hover {
+    -fx-background-color: #2c7a7b; /* Darker Teal */
+}
