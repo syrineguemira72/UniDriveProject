@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Api consomation commit" />
+    <list default="true" id="4e49bbeb-021c-4483-baf0-d4da8569d482" name="Changes" comment=" Fxml Pages Updated">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740992456378</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" Fxml Pages Updated">
+      <option name="closed" value="true" />
+      <created>1740992776324</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740992776324</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,6 +141,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <MESSAGE value=" Api consomation commit" />
-    <option name="LAST_COMMIT_MESSAGE" value=" Api consomation commit" />
+    <MESSAGE value=" Fxml Pages Updated" />
+    <option name="LAST_COMMIT_MESSAGE" value=" Fxml Pages Updated" />
   </component>
 </project>
