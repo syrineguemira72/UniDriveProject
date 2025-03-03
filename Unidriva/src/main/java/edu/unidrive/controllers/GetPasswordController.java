@@ -111,7 +111,7 @@ public class GetPasswordController {
 
     private void sendSms(String phoneNumber, String message) {
         try {
-
+            Twilio.init("ACbc66f19dfeb447b7cb2d0b5d88e58c62", "1818a9b9a44721d555bc5d79cebc324e");
             Message.creator(
                     new PhoneNumber(phoneNumber),
                     new PhoneNumber("+18032192785"),
