@@ -7,6 +7,12 @@
     <groupId>org.example</groupId>
     <artifactId>UniDrive</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <repositories>
+        <repository>
+            <id>itext</id>
+            <url>https://repo.itextsupport.com/releases</url>
+        </repository>
+    </repositories>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -76,6 +82,10 @@
         <artifactId>unirest-java</artifactId>
         <version>3.11.10</version>
     </dependency>
+
+
+
+
     <dependency>
         <groupId>com.twilio.sdk</groupId>
         <artifactId>twilio</artifactId>
@@ -107,6 +117,23 @@
         <version>2.10.1</version>
     </dependency>
 
+    <!-- ControlsFX Dependency (for JavaFX 11+) -->
+    <dependency>
+        <groupId>org.controlsfx</groupId>
+        <artifactId>controlsfx</artifactId>
+        <version>11.1.2</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.pdfbox</groupId>
+        <artifactId>pdfbox</artifactId>
+        <version>2.0.29</version>
+    </dependency>
+
+
+
+
+
+
 </dependencies>
 
 
@@ -123,10 +150,5 @@
                 </configuration>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-            </resource>
-        </resources>
     </build>
 </project>

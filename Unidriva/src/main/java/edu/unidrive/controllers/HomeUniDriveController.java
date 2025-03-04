@@ -220,7 +220,7 @@ public class HomeUniDriveController {
     @FXML
     void lost(MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Recompense.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ObjetPerdu.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) logoutbtn.getScene().getWindow();
             Scene scene = new Scene(root);
