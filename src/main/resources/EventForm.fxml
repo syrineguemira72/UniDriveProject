@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="726.0" prefWidth="748.0" stylesheets="@../../../../styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cov.pidev3a8.hamza.controllers.EventFormController">
+
+    <!-- Sidebar -->
+    <VBox layoutX="0.0" layoutY="0.0" prefHeight="702.0" prefWidth="200.0" style="-fx-background-color: #2c3e50; -fx-padding: 20px;">
+        <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                <children>
+                    <Button fx:id="EventId" layoutX="22.0" layoutY="30.0" mnemonicParsing="false" onAction="#NavigateToEvent" prefHeight="37.0" prefWidth="135.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-border-radius: 5px;" text="Event" />
+                    <Button fx:id="ActivityId" layoutX="22.0" layoutY="100.0" mnemonicParsing="false" onAction="#NavigateToActtivity" prefHeight="37.0" prefWidth="135.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-border-radius: 5px;" text="Activity" />
+                </children>
+            </AnchorPane>
+        </children>
+    </VBox>
+
+    <VBox alignment="CENTER" layoutX="252.0" layoutY="14.0" prefHeight="450" prefWidth="500" spacing="15" style="-fx-background-color: #ffffff; -fx-padding: 20px; -fx-border-radius: 10px; -fx-border-color: #ddd; -fx-border-width: 1px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 2);">
+        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #444;" text="Add Event" />
+
+        <!-- Title Input -->
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px;" text="Title:" />
+            <TextField fx:id="titreField" promptText="Enter event title" style="-fx-font-size: 14px; -fx-background-color: #fff; -fx-border-radius: 5px; -fx-border-color: #ccc; -fx-padding: 5px;" />
+        </HBox>
+
+        <!-- Description Input -->
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px;" text="Description:" />
+            <TextArea fx:id="descriptionField" prefHeight="100.0" prefWidth="338.0" promptText="Enter event description" style="-fx-font-size: 14px; -fx-background-color: #fff; -fx-border-radius: 5px; -fx-border-color: #ccc; -fx-padding: 5px;" />
+        </HBox>
+
+        <!-- Date Input -->
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px;" text="Date:" />
+            <DatePicker fx:id="datePicker" style="-fx-font-size: 14px; -fx-background-color: #fff; -fx-border-radius: 5px; -fx-border-color: #ccc; -fx-padding: 5px;" />
+        </HBox>
+
+        <Separator />
+
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #444;" text="Select Activity" />
+
+        <!-- Activity ComboBox -->
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px;" text="Activity:" />
+            <ComboBox fx:id="activityComboBox" promptText="Select an activity" style="-fx-font-size: 14px; -fx-background-color: #fff; -fx-border-radius: 5px; -fx-border-color: #ccc; -fx-padding: 5px;" />
+        </HBox>
+
+        <!-- Action Buttons -->
+        <HBox alignment="CENTER" spacing="20">
+            <Button onAction="#handleAddEvent" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5px; -fx-padding: 10px 20px;" text="Add Event" />
+            <Button onAction="#goToEventList" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-border-radius: 5px; -fx-padding: 10px 20px;" text="Go to Event List" />
+        </HBox>
+    </VBox>
+</AnchorPane>
