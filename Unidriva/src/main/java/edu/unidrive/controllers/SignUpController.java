@@ -112,7 +112,7 @@ public class SignUpController {
         String dobString = dobDate.format(formatter);
 
         // Chemin de l'image par défaut
-        String defaultPhotoPath = "/images/profile.jpg";
+        String defaultPhotoPath = "/images/profile.png";
 
         // Définir le rôle en fonction de l'e-mail
         String role = email.equals(AppConfig.ADMIN_EMAIL) ? "ADMIN" : "USER";

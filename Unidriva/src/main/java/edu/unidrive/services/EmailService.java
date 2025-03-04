@@ -27,7 +27,7 @@ public class EmailService {
             }
             String content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
             return content.replace("{{firstname}}", firstname)
-                    .replace("{{logoCid}}", "logo123"); // Placeholder pour l’image
+                    .replace("{{logoCid}}", "logo123");
         } catch (Exception e) {
             throw new RuntimeException("Failed to load HTML template", e);
         }
@@ -66,7 +66,7 @@ public class EmailService {
 
             // Part 2 : Attachement de l’image en CID
             MimeBodyPart imagePart = new MimeBodyPart();
-            DataSource fds = new FileDataSource("src/main/resources/images/Logo.jpg");
+            DataSource fds = new FileDataSource("src/main/resources/images/unidrive.png");
             imagePart.setDataHandler(new DataHandler(fds));
             imagePart.setHeader("Content-ID", "<logo123>");
             multipart.addBodyPart(imagePart);

@@ -16,20 +16,20 @@
     <children>
         <Pane prefHeight="564.0" prefWidth="800.0" style="-fx-background-color: #000080;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label alignment="CENTER" layoutX="128.0" layoutY="51.0" prefHeight="23.0" prefWidth="173.0" text="Sign Up" textFill="WHITE">
+                <Label alignment="CENTER" layoutX="128.0" layoutY="51.0" prefHeight="23.0" prefWidth="173.0" text="Inscription" textFill="WHITE">
                     <font>
                         <Font name="Segoe UI Bold Italic" size="22.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txtFirstname" layoutX="75.0" layoutY="99.0" prefHeight="32.0" prefWidth="278.0" promptText="firstname" />
-                <TextField fx:id="txtLastname" layoutX="75.0" layoutY="151.0" prefHeight="32.0" prefWidth="278.0" promptText="lastname" />
-                <TextField fx:id="txtEmail" layoutX="75.0" layoutY="204.0" prefHeight="32.0" prefWidth="278.0" promptText="email" />
-                <DatePicker fx:id="txtDOB" layoutX="75.0" layoutY="359.0" prefHeight="32.0" prefWidth="278.0" promptText="dob" />
-                <ComboBox fx:id="txtGender" editable="false" layoutX="75.0" layoutY="302.0" prefHeight="32.0" prefWidth="278.0" promptText="gender">
+                <TextField fx:id="txtFirstname" layoutX="75.0" layoutY="99.0" prefHeight="32.0" prefWidth="278.0" promptText="Prénom" />
+                <TextField fx:id="txtLastname" layoutX="75.0" layoutY="151.0" prefHeight="32.0" prefWidth="278.0" promptText="Nom" />
+                <TextField fx:id="txtEmail" layoutX="75.0" layoutY="204.0" prefHeight="32.0" prefWidth="278.0" promptText="Email" />
+                <DatePicker fx:id="txtDOB" layoutX="75.0" layoutY="359.0" prefHeight="32.0" prefWidth="278.0" promptText="Date de naissance" />
+                <ComboBox fx:id="txtGender" editable="false" layoutX="75.0" layoutY="302.0" prefHeight="32.0" prefWidth="278.0" promptText="Genre">
                 </ComboBox>
 
-                <PasswordField fx:id="password" layoutX="75.0" layoutY="253.0" prefHeight="32.0" prefWidth="278.0" promptText="Password" />
-                <Button fx:id="btnSave" layoutX="75.0" layoutY="414.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="278.0" text="Save" />
+                <PasswordField fx:id="password" layoutX="75.0" layoutY="253.0" prefHeight="32.0" prefWidth="278.0" promptText="Mot de passe" />
+                <Button fx:id="btnSave" layoutX="75.0" layoutY="414.0" mnemonicParsing="false" onAction="#save" prefHeight="32.0" prefWidth="278.0" text="Enregistrer" />
                 <ImageView fitHeight="515.0" fitWidth="456.0" layoutX="398.0" layoutY="-5.0">
                     <image>
                         <Image url="@images/received_945642877767257.jpeg" />

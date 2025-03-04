@@ -117,7 +117,7 @@ public class ProfileController {
                         } catch (IOException e) {
                             System.err.println("Failed to load profile photo: " + e.getMessage());
                             // Afficher une image par défaut en cas d'erreur
-                            profileImage.setImage(new Image(getClass().getResource("/images/profile.jpg").toString()));
+                            profileImage.setImage(new Image(getClass().getResource("/images/profile.png").toString()));
                         }
                     } else {
                         System.err.println("Profile photo file not found: " + profile.getPhoto());

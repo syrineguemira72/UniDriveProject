@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SelectionMode?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AdminInterfaceController">
-    <ListView fx:id="badContentListView"/>
-    <Button text="Supprimer les éléments sélectionnés" onAction="#deleteSelectedItems"/>
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.unidrive.controllers.AdminInterfaceController"
+      spacing="15"
+      styleClass="admin-container"
+      stylesheets="@Css/styleforum.css">
+
+    <Button styleClass="back-button" onAction="#goToBack">
+        <graphic>
+            <ImageView fitHeight="20" fitWidth="20">
+                <image>
+                    <Image url="@images/back-arrow.png" />
+                </image>
+            </ImageView>
+        </graphic>
+    </Button>
+
+    <ListView fx:id="badContentListView"
+              styleClass="admin-listview"
+              prefWidth="400.0"
+              prefHeight="300.0" />
+
+    <Button styleClass="delete-button"
+            onAction="#deleteSelectedItems"
+            text="Supprimer les éléments sélectionnés"
+            prefWidth="400.0" />
+
 </VBox>

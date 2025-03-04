@@ -1,32 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.Ajoutercommentairecontrollers">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.unidrive.controllers.Ajoutercommentairecontrollers">
+
    <stylesheets>
       <URL value="@Css/styleforum.css" />
    </stylesheets>
+
    <children>
-      <HBox prefHeight="400.0" prefWidth="600.0">
-         <VBox styleClass="form-section" prefWidth="300.0" prefHeight="400.0">
+      <HBox prefHeight="400.0" prefWidth="600.0" spacing="50.0">
+         <!-- Section Formulaire -->
+         <VBox alignment="CENTER" prefWidth="300.0" styleClass="form-section">
+            <padding>
+               <Insets top="80.0" right="80.0" bottom="80.0" left="80.0"/>
+            </padding>
+
             <children>
-               <TextField fx:id="commentid" styleClass="form-field" promptText="Entrez votre commentaire..." />
-               <Button text="Commenter" styleClass="form-button" onAction="#commentaction" />
+               <Region prefHeight="50.0" prefWidth="350.0" /> <!-- Espacement supérieur -->
+
+               <TextField fx:id="commentid"
+                          promptText="Entrez votre commentaire..."
+                          styleClass="form-field"
+                          prefWidth="150.0"
+                          prefHeight="120.0"/>
+
+               <Region prefHeight="30.0" prefWidth="350.0" /> <!-- Espace intermédiaire -->
+
+               <Button onAction="#commentaction"
+                       styleClass="form-button"
+                       text="Commenter"
+                       prefWidth="200.0"
+                       prefHeight="40.0"/>
             </children>
          </VBox>
 
-         <VBox styleClass="logo-section" prefWidth="300.0" prefHeight="400.0" alignment="CENTER">
+         <VBox alignment="CENTER" prefHeight="375.0" prefWidth="300.0" styleClass="logo-section">
             <children>
-               <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">                  <image>
-                  <Image url="@images/logo.png" />
-               </image>
+               <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">
+                  <image>
+                     <Image url="@images/Logo.jpg" />
+                  </image>
                </ImageView>
             </children>
          </VBox>

@@ -173,21 +173,19 @@ public class InteractionService implements Iservice<Interaction> {
 
     public List<Interaction> getCommentsWithBadWords() {
         List<Interaction> badComments = new ArrayList<>();
-        String query = "SELECT * FROM interaction WHERE content LIKE ?";
+        String query = "SELECT * FROM interaction WHERE content REGEXP '[\\*]{3}'";
+
         try (PreparedStatement pst = cnx.prepareStatement(query)) {
-            for (String badWord : textFilterService.getBadWords()) {
-                pst.setString(1, "%" + badWord + "%");
-                ResultSet rs = pst.executeQuery();
-                while (rs.next()) {
-                    Interaction comment = new Interaction();
-                    comment.setId(rs.getInt("id"));
-                    comment.setContent(rs.getString("content"));
-                    comment.setPostId(rs.getInt("postId"));
-                    badComments.add(comment);
-                }
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Interaction interaction = new Interaction();
+                interaction.setId(rs.getInt("id"));
+                interaction.setContent(rs.getString("content"));
+                // Ajoutez les autres champs nécessaires
+                badComments.add(interaction);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la récupération des commentaires contenant des mots inappropriés : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la récupération des commentaires inappropriés: " + e.getMessage());
         }
         return badComments;
     }

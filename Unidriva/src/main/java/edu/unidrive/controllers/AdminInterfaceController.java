@@ -5,11 +5,18 @@ import edu.unidrive.entities.Post;
 import edu.unidrive.services.InteractionService;
 import edu.unidrive.services.PostService;
 import edu.unidrive.services.TextFilterService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdminInterfaceController {
@@ -86,5 +93,21 @@ public class AdminInterfaceController {
         alert.setTitle(title);
         alert.setHeaderText(message);
         alert.showAndWait();
+    }
+    @FXML
+    void goToBack(ActionEvent event) {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
+        try {
+            // Load the new page and set it as the root
+            Parent root = fxmlLoader.load();
+            // Set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
     }
 }

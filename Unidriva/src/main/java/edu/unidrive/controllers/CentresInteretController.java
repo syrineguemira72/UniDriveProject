@@ -1,4 +1,5 @@
 package edu.unidrive.controllers;
+import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.PostService;
 import edu.unidrive.tools.JwtUtil;
 import edu.unidrive.tools.MyConnection;
@@ -15,44 +16,31 @@ import javafx.stage.Stage;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CentresInteretController {
 
     @FXML
     private TextField centresInteretField;
+    private String currentUserEmail;
 
-    @FXML
-    private Button btnadmin;
+    public void setCurrentUserEmail(String email) {
+        this.currentUserEmail = email;
+        System.out.println("Email of the logged in user: " + currentUserEmail);
+    }
+    private Connection connection;
+
+
+
 
     private final PostService postService = new PostService();
 
-    private Connection connection;
 
-    private String jwtToken;
 
-    public void setJwtToken(String jwtToken) {
-        this.jwtToken = jwtToken;
-        checkAdminAccess();
-    }
 
-    private boolean isAdmin(String token) {
-        try {
-            Claims claims = JwtUtil.validateToken(token);
-            String role = claims.get("role", String.class);
-            return "ADMIN".equals(role);
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
-    public void checkAdminAccess() {
-        if (jwtToken != null) {
-            boolean isAdmin = isAdmin(jwtToken);
-            btnadmin.setVisible(isAdmin); // Afficher ou masquer le bouton Admin en fonction du rôle
-        } else {
-            btnadmin.setVisible(false); // Masquer le bouton Admin si l'utilisateur n'est pas authentifié
-        }
-    }
 
     @FXML
     void validerCentresInteret() {
@@ -79,23 +67,23 @@ public class CentresInteretController {
     }
 
     private int getCurrentUserId() {
-        return 40;
-    }
-
-    @FXML
-    void admin(ActionEvent event) {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AdminInterface.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) btnadmin.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (currentUserEmail == null || currentUserEmail.isEmpty()) {
+            return 52; // Fallback si email non trouvé
         }
+
+        String query = "SELECT id FROM utilisateur WHERE email = ?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setString(1, currentUserEmail);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id"); // Retourne le vrai ID
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+        return 52; // Fallback en cas d'erreur
     }
+
 
 
 }

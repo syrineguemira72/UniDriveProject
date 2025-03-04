@@ -1,0 +1,70 @@
+
+.root {
+    -fx-background-color: #f4f4f4;
+    -fx-font-family: 'Arial';
+}
+
+/* Style du titre */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Style des labels de statistiques */
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+}
+
+.button {
+    -fx-background-color: #000080;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* Style des graphiques */
+.chart {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px;
+}
+
+.chart-title {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+/* Style spécifique pour le PieChart */
+.pie-chart-legend {
+    -fx-font-size: 12px;
+    -fx-text-fill: #34495e;
+}
+
+/* Style pour les sections du PieChart */
+.default-color0.chart-pie { -fx-pie-color: #cef0ef; } /* Couleur pour les administrateurs */
+.default-color1.chart-pie { -fx-pie-color: #2ecc71; } /* Couleur pour les utilisateurs normaux */
+
+/* Style pour les sections côte à côte */
+.hbox-section {
+    -fx-spacing: 20;
+    -fx-alignment: CENTER;
+}
+
+.vbox-section {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 400;
+}
