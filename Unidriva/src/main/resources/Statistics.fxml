@@ -2,26 +2,30 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.StatisticsController">
 
-<VBox alignment="CENTER" prefWidth="860.0" spacing="10" style="-fx-background-color: #cef0ef;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-    <stylesheets>
-        <URL value="@Css/styleUser.css" />
-    </stylesheets>
-    <Label style="-fx-font-size: 20px; -fx-font-family: Arial;" text="Statistiques de l'application" />
+    <VBox alignment="CENTER" prefWidth="860.0" spacing="10" style="-fx-background-color: #cef0ef;">
+        <stylesheets>
+            <URL value="@Css/styleUser.css" />
+        </stylesheets>
+        <Label style="-fx-font-size: 20px; -fx-font-family: Arial;" text="Statistiques de UniDrive" />
 
-    <!-- Statistiques utilisateurs -->
-    <Label fx:id="totalUsersLabel" text="Nombre total d'utilisateurs : " />
-    <Label fx:id="adminUsersLabel" text="Nombre d'administrateurs : " />
-    <Label fx:id="normalUsersLabel" text="Nombre d'utilisateurs normaux : " />
-
-
-
-    <!-- Graphique pour les utilisateurs -->
-    <PieChart fx:id="usersPieChart" prefWidth="820.0" title="Répartition des utilisateurs" />
-</VBox>
+        <!-- Statistiques utilisateurs -->
+        <Label fx:id="totalUsersLabel" text="Nombre total d'utilisateurs : " />
+        <Label fx:id="adminUsersLabel" text="Nombre d'administrateurs : " />
+        <Label fx:id="normalUsersLabel" text="Nombre d'utilisateurs normaux : " />
+        <!-- Graphique pour les utilisateurs -->
+        <PieChart fx:id="usersPieChart" prefWidth="800.0" title="Répartition des utilisateurs" />
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="74.0" style="-fx-background-color: #000080;" text="Back" textFill="WHITE">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+    </VBox>
 </AnchorPane>

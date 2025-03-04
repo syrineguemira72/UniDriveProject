@@ -4,7 +4,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.CentresInteretController">
-    <TextField fx:id="centresInteretField" promptText="Entrez vos centres d'intérêt (séparés par des virgules)"/>
-    <Button text="Valider" onAction="#validerCentresInteret"/>
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.CentresInteretController">
+    <TextField fx:id="centresInteretField" promptText="Entrez vos centres d'intérêt (séparés par des virgules)" />
+    <Button onAction="#validerCentresInteret" text="Valider" />
+    <Button fx:id="btnadmin" onAction="#admin"  text="Admin" visible="false" />
 </VBox>

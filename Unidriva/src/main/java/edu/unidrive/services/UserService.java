@@ -40,7 +40,7 @@ public class UserService implements Iservice<Utilisateur> {
                 utilisateur.setLastname(rs.getString("lastname"));
                 utilisateur.setFirstname(rs.getString("firstname"));
                 utilisateur.setPassword(rs.getString("password"));
-                utilisateur.setRole(rs.getString("role")); // Ajoutez cette ligne
+                utilisateur.setRole(rs.getString("role"));
 
                 Profile profile = new Profile();
                 profile.setId(rs.getInt("profile_id"));

@@ -76,10 +76,6 @@
         <artifactId>unirest-java</artifactId>
         <version>3.11.10</version>
     </dependency>
-
-
-
-
     <dependency>
         <groupId>com.twilio.sdk</groupId>
         <artifactId>twilio</artifactId>
@@ -111,14 +107,6 @@
         <version>2.10.1</version>
     </dependency>
 
-    <!-- ControlsFX Dependency (for JavaFX 11+) -->
-    <dependency>
-        <groupId>org.controlsfx</groupId>
-        <artifactId>controlsfx</artifactId>
-        <version>11.1.2</version>
-    </dependency>
-
-
 </dependencies>
 
 
@@ -135,5 +123,10 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
     </build>
 </project>

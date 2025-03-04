@@ -36,6 +36,9 @@ public class HomeUniDriveController {
 
     @FXML
     private Button statisticsButton;
+    @FXML
+    private Button btnadmin;
+
 
 
     private String jwtToken;// Référence à l'ImageView pour afficher la photo de profil
@@ -87,6 +90,7 @@ public class HomeUniDriveController {
     }
 
 
+
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
         checkAdminAccess(); // Vérifier le rôle de l'utilisateur après avoir défini le token
@@ -113,6 +117,7 @@ public class HomeUniDriveController {
         }
     }
 
+
     @FXML
     void goToStatistics(ActionEvent event) {
         try {
@@ -125,6 +130,7 @@ public class HomeUniDriveController {
             e.printStackTrace();
         }
     }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -148,7 +154,7 @@ public class HomeUniDriveController {
 
 
     @FXML
-    void forum(MouseEvent event){
+    void forum(MouseEvent event) {
         int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
 
         if (!postService.hasUserInterests(userId)) {
@@ -156,6 +162,10 @@ public class HomeUniDriveController {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
                 Parent root = fxmlLoader.load();
+
+                CentresInteretController centresInteretController = fxmlLoader.getController();
+                centresInteretController.setJwtToken(jwtToken); // Set the JWT token for CentresInteretController
+
                 btnforum.getScene().setRoot(root);
             } catch (IOException e) {
                 System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
@@ -171,6 +181,11 @@ public class HomeUniDriveController {
             }
         }
 
+        // Vérifier le rôle de l'utilisateur et afficher ou masquer le bouton Admin
+        if (jwtToken != null) {
+            boolean isAdmin = isAdmin(jwtToken);
+            btnadmin.setVisible(isAdmin);
+        }
     }
 
 
