@@ -58,6 +58,19 @@
   }
 }</component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="UniDrive" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="UniDrive" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UpgradeSpringBoot_3_1" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
       <option name="activeRecipes" value="org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1" />
       <option name="workingDirectory" value="$PROJECT_DIR$/Unidriva" />

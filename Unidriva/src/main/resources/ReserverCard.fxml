@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="tripCard" prefHeight="120.0" prefWidth="700.0" styleClass="trip-card"
+            xmlns="http://javafx.com/javafx/20.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.unidrive.controllers.ReserverCardController">
+
+    <!-- Trip details -->
+    <Label fx:id="departLabel" layoutX="20.0" layoutY="10.0" styleClass="trip-label" />
+    <Label fx:id="arriveeLabel" layoutX="20.0" layoutY="30.0" styleClass="trip-label" />
+    <Label fx:id="dureeLabel" layoutX="20.0" layoutY="50.0" styleClass="trip-label" />
+    <Label fx:id="heureLabel" layoutX="20.0" layoutY="70.0" styleClass="trip-label" />
+    <Label fx:id="placesLabel" layoutX="20.0" layoutY="90.0" styleClass="trip-label" />
+
+    <!-- Reserve button -->
+    <Button fx:id="reserveButton" layoutX="550.0" layoutY="40.0" text="Réserver" styleClass="reserve-button" />
+</AnchorPane>

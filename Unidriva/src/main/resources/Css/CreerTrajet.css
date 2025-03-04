@@ -1,0 +1,76 @@
+/* Style modernisé pour UniDrive */
+
+/* Fond général */
+.root {
+    -fx-background-color: #E3E6E8; /* Bleu-gris clair pour une touche moderne */
+    -fx-padding: 20px;
+}
+
+/* Titre principal */
+.label {
+    -fx-text-fill: #2C3E50; /* Bleu foncé élégant */
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+/* Champs de saisie */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #2C3E50;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* ListView (Suggestions de lieux) */
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #2C3E50;
+    -fx-border-radius: 8px;
+}
+
+/* Boutons généraux */
+.button {
+    -fx-background-color: #3498DB; /* Bleu vif */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-border-radius: 8px;
+}
+
+.button:hover {
+    -fx-background-color: #2980B9; /* Bleu foncé au survol */
+}
+
+/* Bouton spécifique pour création de trajet */
+#creerTrajet {
+    -fx-background-color: #27AE60; /* Vert vif */
+}
+
+#creerTrajet:hover {
+    -fx-background-color: #1E8449; /* Vert foncé */
+}
+
+/* Bouton voir détails */
+#goToDetailButton {
+    -fx-background-color: #8E44AD; /* Violet moderne */
+}
+
+#goToDetailButton:hover {
+    -fx-background-color: #6C3483;
+}
+
+/* Bouton réserver un trajet */
+#goToReservationButton {
+    -fx-background-color: #E67E22; /* Orange dynamique */
+}
+
+#goToReservationButton:hover {
+    -fx-background-color: #D35400;
+}
+
+/* Style pour le logo */
+#logoImage {
+    -fx-padding: 10px;
+}
