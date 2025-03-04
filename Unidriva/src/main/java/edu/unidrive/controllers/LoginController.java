@@ -104,6 +104,10 @@ public class LoginController {
                 return;
             }
 
+            // Affichage du token et du rôle dans la console
+            System.out.println("Token généré : " + token);
+            System.out.println("Rôle de l'utilisateur : " + utilisateur.getRole());
+
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                 Parent root = loader.load();
@@ -111,6 +115,7 @@ public class LoginController {
                 HomeUniDriveController homeController = loader.getController();
                 homeController.setCurrentUserEmail(email);
                 homeController.setJwtToken(token);
+
 
                 Stage stage = (Stage) login.getScene().getWindow();
                 Scene scene = new Scene(root);

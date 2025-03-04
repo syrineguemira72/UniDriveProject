@@ -7,6 +7,7 @@ import edu.unidrive.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -116,12 +117,10 @@ public class ProfileController {
                         } catch (IOException e) {
                             System.err.println("Failed to load profile photo: " + e.getMessage());
                             // Afficher une image par défaut en cas d'erreur
-                            profileImage.setImage(new Image(getClass().getResource("/images/1.png").toString()));
+                            profileImage.setImage(new Image(getClass().getResource("/images/profile.jpg").toString()));
                         }
                     } else {
                         System.err.println("Profile photo file not found: " + profile.getPhoto());
-                        // Afficher une image par défaut si le fichier n'existe pas
-                        profileImage.setImage(new Image(getClass().getResource("/images/1.png").toString()));
                     }
                 }
             } else {
@@ -164,7 +163,7 @@ public class ProfileController {
                         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                         Parent root = loader.load();
                         HomeUniDriveController homeController = loader.getController();
-                        homeController.setProfileImage(selectedFile.toURI().toString()); // Mettre à jour la photo dans HomeUniDriveController
+                        homeController.setProfileImage(selectedFile.toURI().toString()); // Transmettre l'URL de l'image
 
                         Stage stage = (Stage) backbtn.getScene().getWindow();
                         Scene scene = new Scene(root);
@@ -318,11 +317,19 @@ public class ProfileController {
 
     @FXML
     void notifcation(MouseEvent event) {
-        // Logique de notification existante
     }
 
     @FXML
     void password(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("GetPassword.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
