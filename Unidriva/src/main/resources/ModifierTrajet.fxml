@@ -1,34 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="editTripPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.unidrive.controllers.ModifierTrajetController">
-    <Label layoutX="250.0" layoutY="20.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Modifier Trajet" />
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.unidrive.controllers.ModifierTrajetController"
+        >
+    <HBox alignment="CENTER" spacing="30">
+        <!-- Formulaire -->
+        <VBox alignment="CENTER_LEFT" spacing="15">
+            <!-- Titre de la page -->
+            <Label text="Modifier un Trajet">
+                <font>
+                    <Font name="Arial" size="24" />
+                </font>
+            </Label>
 
-    <!-- Form Fields -->
-    <Label layoutX="50.0" layoutY="80.0" text="Point de départ:" />
-    <TextField fx:id="startPointField" layoutX="200.0" layoutY="80.0" prefHeight="26.0" prefWidth="214.0" />
+            <GridPane alignment="CENTER" hgap="15" vgap="15">
+                <!-- Point de Départ -->
+                <Label text="Point de Départ" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="departField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <ListView fx:id="departSuggestionsListView" prefHeight="80" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-    <Label layoutX="50.0" layoutY="120.0" text="Destination:" />
-    <TextField fx:id="destinationField" layoutX="200.0" layoutY="120.0" prefHeight="26.0" prefWidth="214.0" />
+                <!-- Point d'Arrivée -->
+                <Label text="Point d'Arrivée" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="arriveeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ListView fx:id="arriveeSuggestionsListView" prefHeight="80" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-    <Label layoutX="50.0" layoutY="160.0" text="Durée Estimée (min):" />
-    <TextField fx:id="dureeField" layoutX="200.0" layoutY="160.0" prefHeight="26.0" prefWidth="214.0" />
+                <!-- Date de Départ -->
+                <Label text="Date de Départ" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <DatePicker fx:id="dateDepartPicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-    <Label layoutX="50.0" layoutY="200.0" text="Distance (km):" />
-    <TextField fx:id="distanceField" layoutX="200.0" layoutY="200.0" prefHeight="26.0" prefWidth="214.0" />
+                <!-- Heure de Départ -->
+                <Label text="Heure de Départ (HH:mm)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="heureField" promptText="HH:mm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-    <Label layoutX="50.0" layoutY="240.0" text="Places Disponibles:" />
-    <TextField fx:id="seatsField" layoutX="200.0" layoutY="240.0" prefHeight="26.0" prefWidth="214.0" />
+                <!-- Durée Estimée -->
+                <Label text="Durée Estimée (minutes)" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextField fx:id="dureeEstimeeField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-    <Label layoutX="50.0" layoutY="280.0" text="Date Heure:" />
-    <TextField fx:id="dateField" layoutX="200.0" layoutY="280.0" prefHeight="26.0" prefWidth="214.0" />
+                <!-- Distance -->
+                <Label text="Distance (km)" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <TextField fx:id="distanceField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-    <!-- Save Button -->
-    <Button fx:id="saveButton"  layoutX="257.0" layoutY="319.0" prefWidth="100.0" text="Save" onAction="#saveEditedTrip" />
-</AnchorPane>
+                <!-- Places Disponibles -->
+                <Label text="Places Disponibles" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextField fx:id="placesDisponiblesField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            </GridPane>
 
+            <!-- Boutons -->
+            <HBox spacing="10">
+                <Button fx:id="saveButton" onAction="#saveEditedTrip" text="Enregistrer les modifications" />
+            </HBox>
+        </VBox>
+
+        <!-- Logo à droite -->
+        <ImageView fx:id="logoImage" fitHeight="200" fitWidth="200" preserveRatio="true">
+            <image>
+                <Image url="/images/unidrive_logo.jpg" />
+            </image>
+        </ImageView>
+    </HBox>
+</VBox>

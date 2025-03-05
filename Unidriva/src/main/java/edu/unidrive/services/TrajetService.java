@@ -5,6 +5,8 @@ import edu.unidrive.interfaces.Iservice;
 import edu.unidrive.tools.MyConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,16 +80,29 @@ public class TrajetService implements Iservice<Trajet> {
     @Override
     public void deleteEntity(Trajet trajet) {
         try {
-            String req = "DELETE FROM trajet WHERE id = ?";
-            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
-            pst.setInt(1, trajet.getId());
+            // Step 1: Check if there are associated reservations
+            String checkReservationsQuery = "SELECT COUNT(*) FROM reservation WHERE trajet = ?";
+            PreparedStatement checkReservationsStmt = MyConnection.getInstance().getCnx().prepareStatement(checkReservationsQuery);
+            checkReservationsStmt.setInt(1, trajet.getId());
+            ResultSet rs = checkReservationsStmt.executeQuery();
 
-            int rowsDeleted = pst.executeUpdate();
+            if (rs.next() && rs.getInt(1) > 0) {
+                // If there are reservations, throw an exception or return a message
+                throw new SQLException("Ce trajet a des réservations associées. Suppression impossible.");
+            }
+
+            // Step 2: Delete the trip
+            String deleteTripQuery = "DELETE FROM trajet WHERE id = ?";
+            PreparedStatement deleteTripStmt = MyConnection.getInstance().getCnx().prepareStatement(deleteTripQuery);
+            deleteTripStmt.setInt(1, trajet.getId());
+
+            int rowsDeleted = deleteTripStmt.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("Trajet supprimé avec succès !");
             }
         } catch (SQLException e) {
             System.out.println("Erreur lors de la suppression du trajet : " + e.getMessage());
+            throw new RuntimeException(e); // Propagate the exception to the controller
         }
     }
 
@@ -163,5 +178,36 @@ public class TrajetService implements Iservice<Trajet> {
             System.out.println("Erreur lors de la récupération du trajet : " + e.getMessage());
         }
         return trajet;
+    }
+
+    public List<Trajet> getTrajetsByDate(LocalDate selectedDate) {
+        List<Trajet> result = new ArrayList<>();
+        try {
+            // Convert the selectedDate to the start and end of the day
+            LocalDateTime startOfDay = selectedDate.atStartOfDay();
+            LocalDateTime endOfDay = selectedDate.atTime(23, 59, 59);
+
+            String req = "SELECT * FROM trajet WHERE heureDepart BETWEEN ? AND ?";
+            PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(req);
+            pst.setTimestamp(1, Timestamp.valueOf(startOfDay));
+            pst.setTimestamp(2, Timestamp.valueOf(endOfDay));
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Trajet trajet = new Trajet();
+                trajet.setId(rs.getInt("id"));
+                trajet.setPointDepart(rs.getString("pointDepart"));
+                trajet.setPointArrive(rs.getString("pointArrive"));
+                trajet.setHeureDepart(rs.getTimestamp("heureDepart").toLocalDateTime());
+                trajet.setDureeEstimee(rs.getInt("dureeEstimee"));
+                trajet.setDistance(rs.getFloat("distance"));
+                trajet.setPlaceDisponible(rs.getInt("placeDisponible"));
+                result.add(trajet);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la récupération des trajets par date : " + e.getMessage());
+        }
+        return result;
     }
 }

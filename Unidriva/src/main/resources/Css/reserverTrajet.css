@@ -1,0 +1,113 @@
+/* Root style for the entire application */
+.root {
+    -fx-background-color: #f4f4f4; /* Light gray background */
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Style for labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333; /* Dark gray text */
+    -fx-font-weight: bold;
+}
+
+/* Style for the date picker */
+.date-picker {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #4CAF50; /* Green background for the arrow button */
+    -fx-background-radius: 5px;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}
+
+/* Style for buttons */
+.button {
+    -fx-background-color: #4CAF50; /* Green background */
+    -fx-text-fill: white; /* White text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #45a049; /* Darker green on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #3d8b40; /* Even darker green when pressed */
+}
+
+/* Style for the action buttons (Liste Réservations and Retour) */
+.action-button {
+    -fx-background-color: #2196F3; /* Blue background */
+    -fx-text-fill: white;
+}
+
+.action-button:hover {
+    -fx-background-color: #1e88e5; /* Darker blue on hover */
+}
+
+.action-button:pressed {
+    -fx-background-color: #1976d2; /* Even darker blue when pressed */
+}
+
+/* Style for the scroll pane */
+.scroll-pane {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-radius: 5px;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent; /* Transparent viewport */
+}
+
+/* Style for the trip cards */
+.trip-card {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-border-color: #cccccc; /* Light gray border */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 5, 5, 0, 0); /* Subtle shadow */
+
+    -fx-background-image: url("/images/unidrive_logo.jpg"); /* Chemin de ton logo */
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover; /* Couvre toute la surface de la carte */
+    -fx-background-position: center; /* Centre l'image */
+}
+
+.trip-card:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 8, 8, 0, 0); /* Stronger shadow on hover */
+}
+
+/* Style for the trip labels inside the trip card */
+.trip-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555; /* Dark gray text */
+}
+
+/* Style for the reserve button inside the trip card */
+.reserve-button {
+    -fx-background-color: #FF5722; /* Orange background */
+    -fx-text-fill: white;
+}
+
+.reserve-button:hover {
+    -fx-background-color: #e64a19; /* Darker orange on hover */
+}
+
+.reserve-button:pressed {
+    -fx-background-color: #d84315; /* Even darker orange when pressed */
+}

@@ -68,7 +68,7 @@ public class AjouterAide {
         }
 
         if (!AideType.isValidType(currency)) {
-            showAlert("Erreur", "La devise doit être 'alimentaire', 'financier' ou 'médical'.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Currency must be 'Euro' , 'Dollar' or 'Dinar' .", Alert.AlertType.ERROR);
             return;
         }
 
@@ -180,7 +180,22 @@ public class AjouterAide {
             System.out.println("Erreur de navigation : " + e.getMessage());
         }
     }
-
+    @FXML
+    void goToBack(ActionEvent event) {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
+        try {
+            // Load the new page and set it as the root
+            Parent root = fxmlLoader.load();
+            // Set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
+    }
     // Helper method to show alerts
     private void showAlert(String title, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

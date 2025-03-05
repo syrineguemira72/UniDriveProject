@@ -57,3 +57,14 @@
     -fx-background-color: #4a5568; /* Darker Gray */
 }
 
+.back-button {
+    -fx-background-color: #2d3748; /* Dark Gray */
+    -fx-text-fill: white;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5;
+}
+
+.back-button:hover {
+    -fx-background-color: #4a5568; /* Darker Gray */
+}

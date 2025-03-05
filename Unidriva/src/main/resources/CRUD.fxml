@@ -50,7 +50,7 @@
 
         <!-- Admin Page Button -->
         <Button fx:id="AdminButton" layoutX="615.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToAnotherPage" styleClass="admin-button" text="Admin Page" />
-
+        <Button layoutX="13.0" layoutY="472.0" mnemonicParsing="false" onAction="#goToBack" styleClass="back-button" text="Back" />
 
         <!-- Payment Fields -->
         <TextField fx:id="cardNumberField" layoutX="468.0" layoutY="260.0" prefWidth="200" promptText="Card Number" />
