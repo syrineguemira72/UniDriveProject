@@ -41,12 +41,19 @@ public class SignUpController {
     private ComboBox<String> txtGender;
 
     @FXML
+    private ComboBox<String> txtRole;
+
+
+    @FXML
     private TextField txtLastname;
 
     @FXML
     public void initialize() {
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Female", "Male");
         txtGender.setItems(genderOptions);
+
+        ObservableList<String> roleOptions = FXCollections.observableArrayList("Passager", "Conducteur");
+        txtRole.setItems(roleOptions);
     }
 
     private boolean isValidEmail(String email) {

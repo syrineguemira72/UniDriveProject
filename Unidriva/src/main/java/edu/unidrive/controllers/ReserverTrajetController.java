@@ -114,7 +114,7 @@ public class ReserverTrajetController {
                 trajet.setPlaceDisponible(trajet.getPlaceDisponible() - 1);
 
                 // Update the trip in the database
-                trajetService.updateEntity(trajet);
+                trajetService.updateEntity(trajet.getId(),trajet);
 
                 // Create a new reservation
                 Reservation newReservation = new Reservation(
