@@ -103,7 +103,6 @@ public class ReserverTrajetController {
 
     // Method to handle trip reservation
     @FXML
-    // Method to handle trip reservation
     public void reserverTrajet(Trajet trajet) {
         if (trajet != null) {
             // Create a new reservation
