@@ -76,9 +76,9 @@ public class HomePostControllers {
     public void checkAdminAccess() {
         if (jwtToken != null) {
             boolean isAdmin = isAdmin(jwtToken);
-            btnadmin.setVisible(isAdmin); // Afficher ou masquer le bouton Admin en fonction du rôle
+            btnadmin.setVisible(isAdmin);
         } else {
-            btnadmin.setVisible(false); // Masquer le bouton Admin si l'utilisateur n'est pas authentifié
+            btnadmin.setVisible(false);
         }
     }
     @FXML
@@ -101,7 +101,6 @@ public class HomePostControllers {
         boolean isAdmin = isAdmin(jwtToken);
 
         if (!isAdmin) {
-            // Vérifier si l'utilisateur a déjà des centres d'intérêt
             int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
             if (!postService.hasUserInterests(userId)) {
                 // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
@@ -258,7 +257,7 @@ public class HomePostControllers {
 
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 52; // Fallback si email non trouvé
+            return 53;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -266,16 +265,15 @@ public class HomePostControllers {
             pst.setString(1, currentUserEmail);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt("id"); // Retourne le vrai ID
+                return rs.getInt("id");
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 52; // Fallback en cas d'erreur
+        return 53;
     }
     @FXML
     void goToBack(ActionEvent event) {
-        // Load the new FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
         try {
             // Load the new page and set it as the root

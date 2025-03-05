@@ -96,7 +96,6 @@ public class SignUpController {
             return;
         }
 
-        // Vérification de l'âge
         LocalDate currentDate = LocalDate.now();
         LocalDate minimumDateOfBirth = currentDate.minusYears(18);
 
@@ -105,26 +104,20 @@ public class SignUpController {
             return;
         }
 
-        // Hacher le mot de passe avec BCrypt
         String hashedPassword = BCrypt.hashpw(pass, BCrypt.gensalt());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String dobString = dobDate.format(formatter);
 
-        // Chemin de l'image par défaut
         String defaultPhotoPath = "/images/profile.png";
 
-        // Définir le rôle en fonction de l'e-mail
         String role = email.equals(AppConfig.ADMIN_EMAIL) ? "ADMIN" : "USER";
 
-        // Utiliser le mot de passe haché pour créer l'utilisateur
         Utilisateur user = new Utilisateur(email, dobString, gender, firstname, lastname, hashedPassword, role); // Utilisez la variable 'role'
 
-        // Ajouter l'utilisateur à la base de données
         try {
             userService.add(user); // L'ID de l'utilisateur est maintenant défini après l'insertion
 
-            // Créer le profil avec l'ID de l'utilisateur
             Profile profile = new Profile(defaultPhotoPath, "Default bio", "00000000", email);
             profile.setUtilisateur(user); // Associer le profil à l'utilisateur
 
@@ -133,7 +126,6 @@ public class SignUpController {
 
             showAlert(Alert.AlertType.INFORMATION, "Success", "User and profile successfully registered!");
 
-            // Envoyer un e-mail de bienvenue
             EmailService emailService = new EmailService("bhsryhab@gmail.com", "fpov oqjy nfdd gble");
             emailService.sendWelcomeEmail(email, firstname);
 

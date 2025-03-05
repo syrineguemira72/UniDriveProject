@@ -81,13 +81,11 @@ public class StatisticsController {
         totalPostsLabel.setText("Nombre total de posts : " + totalPosts);
         postsWithBadWordsLabel.setText("Nombre de posts avec des mots inappropriés : " + postsWithBadWords);
 
-        // Ajouter les données au BarChart des posts
         XYChart.Series<String, Number> postsSeries = new XYChart.Series<>();
         postsSeries.getData().add(new XYChart.Data<>("Total Posts", totalPosts));
         postsSeries.getData().add(new XYChart.Data<>("Posts avec mots inappropriés", postsWithBadWords));
         postsBarChart.getData().add(postsSeries);
 
-        // Statistiques des trajets
         int totalTrips = trajetService.getAllData().size();
         int totalAvailableSeats = trajetService.getAllData().stream()
                 .mapToInt(Trajet::getPlaceDisponible)
@@ -102,12 +100,9 @@ public class StatisticsController {
     }
     @FXML
     void back(ActionEvent event) {
-        // Load the new FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUnidrive.fxml"));
         try {
-            // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
-            // Set the new scene
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

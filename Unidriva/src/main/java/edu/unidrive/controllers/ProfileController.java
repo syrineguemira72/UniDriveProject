@@ -63,10 +63,10 @@ public class ProfileController {
     private TextField username;
 
     @FXML
-    private ImageView profileImage; // ImageView pour afficher la photo de profil
+    private ImageView profileImage;
 
     @FXML
-    private Button uploadPhotoBtn; // Bouton pour télécharger une nouvelle photo
+    private Button uploadPhotoBtn;
 
     private ProfileService profileService = new ProfileService();
     private UserService userService = new UserService();
@@ -116,7 +116,6 @@ public class ProfileController {
                             profileImage.setImage(image);
                         } catch (IOException e) {
                             System.err.println("Failed to load profile photo: " + e.getMessage());
-                            // Afficher une image par défaut en cas d'erreur
                             profileImage.setImage(new Image(getClass().getResource("/images/profile.png").toString()));
                         }
                     } else {
@@ -142,10 +141,8 @@ public class ProfileController {
         File selectedFile = fileChooser.showOpenDialog(uploadPhotoBtn.getScene().getWindow());
         if (selectedFile != null) {
             try {
-                // Convertir l'image en tableau de bytes
                 byte[] photoBytes = Files.readAllBytes(selectedFile.toPath());
 
-                // Mettre à jour la photo de profil dans la base de données
                 Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
                 if (utilisateur != null) {
                     Profile profile = utilisateur.getProfile();
@@ -153,13 +150,11 @@ public class ProfileController {
                         profile.setPhoto(selectedFile.getAbsolutePath()); // Enregistrer le chemin de l'image
                         profileService.update(profile);
 
-                        // Afficher la nouvelle photo
                         Image image = new Image(selectedFile.toURI().toString());
                         profileImage.setImage(image);
 
                         showAlert(Alert.AlertType.INFORMATION, "Success", "Profile photo updated successfully!");
 
-                        // Retourner à HomeUniDriveController avec la nouvelle photo
                         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
                         Parent root = loader.load();
                         HomeUniDriveController homeController = loader.getController();
@@ -251,7 +246,6 @@ public class ProfileController {
             updated = true;
         }
 
-        // Vérifier si le champ email a été modifié
         String newEmail = email.getText();
         String oldEmail = utilisateur.getEmail();
         if (!newEmail.equals(oldEmail)) {
@@ -260,7 +254,6 @@ public class ProfileController {
             updated = true;
         }
 
-        // Vérifier si le champ phone a été modifié
         String newPhone = phone.getText();
         String oldPhone = profile.getTelephone();
         if (!newPhone.equals(oldPhone)) {
@@ -269,7 +262,6 @@ public class ProfileController {
             updated = true;
         }
 
-        // Vérifier si le champ dob a été modifié
         LocalDate newDob = dob.getValue();
         String oldDobString = utilisateur.getDob();
         if (newDob != null) {

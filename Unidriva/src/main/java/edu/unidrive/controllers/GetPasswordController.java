@@ -78,12 +78,9 @@ public class GetPasswordController {
         } else {
 
             nametxt.setText(user.getLastname() + " " + user.getFirstname());
-
-            // Générer un code aléatoire
             generatedCode = String.valueOf((int) (Math.random() * 9000) + 1000);
             userPhoneNumber = user.getProfile().getTelephone();
 
-            // Envoyer le code par SMS
             sendSms(userPhoneNumber, "Your verification code is: " + generatedCode);
             codeErrorLb.setText("Verification code sent to your phone.");
         }

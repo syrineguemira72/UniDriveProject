@@ -47,16 +47,13 @@ public class CentresInteretController {
         String centresInteret = centresInteretField.getText().trim();
         this.connection = MyConnection.getInstance().getCnx();
         if (centresInteret.isEmpty()) {
-            // Afficher un message d'erreur si le champ est vide
             System.out.println("Veuillez entrer au moins un centre d'intérêt.");
             return;
         }
 
-        // Enregistrer les centres d'intérêt dans la base de données
         int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
         postService.saveUserInterests(userId, centresInteret);
 
-        // Rediriger l'utilisateur vers l'interface principale
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
             Parent root = fxmlLoader.load();
@@ -68,7 +65,7 @@ public class CentresInteretController {
 
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 52; // Fallback si email non trouvé
+            return 53;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -76,12 +73,12 @@ public class CentresInteretController {
             pst.setString(1, currentUserEmail);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt("id"); // Retourne le vrai ID
+                return rs.getInt("id");
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 52; // Fallback en cas d'erreur
+        return 53;
     }
 
 

@@ -42,7 +42,7 @@ public class HomeUniDriveController {
     @FXML
     private Button statisticsButton;
 
-    private String jwtToken;// Référence à l'ImageView pour afficher la photo de profil
+    private String jwtToken;
     private Connection connection;
     @FXML
     private Label btnforum;
@@ -98,7 +98,7 @@ public class HomeUniDriveController {
     }
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
-        checkAdminAccess(); // Vérifier le rôle de l'utilisateur après avoir défini le token
+        checkAdminAccess();
     }
     private boolean isAdmin(String token) {
         try {
@@ -113,9 +113,9 @@ public class HomeUniDriveController {
     public void checkAdminAccess() {
         if (jwtToken != null) {
             boolean isAdmin = isAdmin(jwtToken);
-            statisticsButton.setVisible(isAdmin); // Afficher ou masquer le bouton en fonction du rôle
+            statisticsButton.setVisible(isAdmin);
         } else {
-            statisticsButton.setVisible(false); // Masquer le bouton si l'utilisateur n'est pas authentifié
+            statisticsButton.setVisible(false);
         }
     }
 
@@ -136,18 +136,17 @@ public class HomeUniDriveController {
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null); // Pas de texte d'en-tête
+        alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait(); // Afficher la boîte de dialogue et attendre une réponse
+        alert.showAndWait();
     }
     @FXML
     public void initialize() {
-        // Ajouter un gestionnaire d'événements pour le clic sur "Forum"
         btnforum.setOnMouseClicked(this::forum);
     }
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 52; // Fallback si email non trouvé
+            return 53;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -155,12 +154,12 @@ public class HomeUniDriveController {
             pst.setString(1, currentUserEmail);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt("id"); // Retourne le vrai ID
+                return rs.getInt("id");
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 52; // Fallback en cas d'erreur
+        return 53;
     }
 
 
@@ -168,7 +167,7 @@ public class HomeUniDriveController {
     void forum(MouseEvent event) {
         boolean isAdmin = isAdmin(jwtToken);
 
-        if (!isAdmin) { // Vérification pour les non-admins
+        if (!isAdmin) {
             int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
                 try {
@@ -182,7 +181,6 @@ public class HomeUniDriveController {
             }
         }
 
-        // Redirection vers HomePost pour les admins
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
             Parent root = fxmlLoader.load();

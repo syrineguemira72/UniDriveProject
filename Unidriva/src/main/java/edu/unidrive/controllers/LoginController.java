@@ -104,7 +104,6 @@ public class LoginController {
                 return;
             }
 
-            // Affichage du token et du rôle dans la console
             System.out.println("Token généré : " + token);
             System.out.println("Rôle de l'utilisateur : " + utilisateur.getRole());
 
