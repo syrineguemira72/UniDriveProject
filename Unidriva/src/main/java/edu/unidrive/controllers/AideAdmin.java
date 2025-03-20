@@ -245,7 +245,7 @@ public class AideAdmin {
     @FXML
     void goToAnotherPage(ActionEvent event) {
         // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/BeneficiaireAdminPage.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AssociationAdminPage.fxml"));
         try {
             // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
