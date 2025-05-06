@@ -1,11 +1,26 @@
 package edu.unidrive.controllers;
-
+import edu.unidrive.services.PostService;
+import edu.unidrive.services.TrajetService;
 import edu.unidrive.services.UserService;
+import edu.unidrive.entities.Trajet; // Ajoutez cette ligne
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class StatisticsController {
+    @FXML
+    private Button backBtn;
 
     @FXML
     private Label totalUsersLabel;
@@ -16,12 +31,29 @@ public class StatisticsController {
     @FXML
     private Label normalUsersLabel;
 
+    @FXML
+    private Label totalTripsLabel;
+
+    @FXML
+    private Label availableSeatsLabel;
+
+    @FXML
+    private Label totalPostsLabel;
+
+    @FXML
+    private Label postsWithBadWordsLabel;
 
     @FXML
     private PieChart usersPieChart;
+    @FXML
+    private BarChart<String, Number> postsBarChart;
+
+    @FXML
+    private BarChart<String, Number> tripsBarChart;
 
     private UserService userService = new UserService();
-
+    private PostService postService = new PostService();
+    private TrajetService trajetService = new TrajetService(); // Ajoutez cette ligne
 
     @FXML
     public void initialize() {
@@ -43,8 +75,45 @@ public class StatisticsController {
         PieChart.Data normalData = new PieChart.Data("Utilisateurs normaux", normalUsers);
         usersPieChart.getData().addAll(adminData, normalData);
 
+        int totalPosts = postService.getAllData().size();
+        int postsWithBadWords = postService.getPostsWithBadWords().size();
 
+        totalPostsLabel.setText("Nombre total de posts : " + totalPosts);
+        postsWithBadWordsLabel.setText("Nombre de posts avec des mots inappropriés : " + postsWithBadWords);
 
+        // Ajouter les données au BarChart des posts
+        XYChart.Series<String, Number> postsSeries = new XYChart.Series<>();
+        postsSeries.getData().add(new XYChart.Data<>("Total Posts", totalPosts));
+        postsSeries.getData().add(new XYChart.Data<>("Posts avec mots inappropriés", postsWithBadWords));
+        postsBarChart.getData().add(postsSeries);
 
+        // Statistiques des trajets
+        int totalTrips = trajetService.getAllData().size();
+        int totalAvailableSeats = trajetService.getAllData().stream()
+                .mapToInt(Trajet::getPlaceDisponible)
+                .sum();
+
+        totalTripsLabel.setText("Nombre total de trajets : " + totalTrips);
+        availableSeatsLabel.setText("Nombre total de places disponibles : " + totalAvailableSeats);
+        XYChart.Series<String, Number> tripsSeries = new XYChart.Series<>();
+        tripsSeries.getData().add(new XYChart.Data<>("Total Trajets", totalTrips));
+        tripsSeries.getData().add(new XYChart.Data<>("Places disponibles", totalAvailableSeats));
+        tripsBarChart.getData().add(tripsSeries);
+    }
+    @FXML
+    void back(ActionEvent event) {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUnidrive.fxml"));
+        try {
+            // Load the new page and set it as the root
+            Parent root = fxmlLoader.load();
+            // Set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
     }
 }

@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class  DetailTrajetController implements Initializable {
+public class    DetailTrajetController implements Initializable {
 
     @FXML
     private TableView<Trajet> addedTripsTable;

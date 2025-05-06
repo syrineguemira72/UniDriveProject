@@ -3,100 +3,75 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="500.0" prefWidth="500.0" spacing="20" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="edu.unidrive.controllers.CreerTrajetController">
-    <!-- Titre de la page -->
-    <Label text="Créer un Nouveau Trajet">
-        <font>
-            <Font name="Arial" size="20" />
-        </font>
-    </Label>
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.unidrive.controllers.CreerTrajetController"
+      stylesheets="/Css/CreerTrajet.css">
+    <HBox alignment="CENTER" spacing="30">
+        <!-- Formulaire -->
+        <VBox alignment="CENTER_LEFT" spacing="15">
+            <!-- Titre de la page -->
+            <Label text="Créer un Nouveau Trajet">
+                <font>
+                    <Font name="Arial" size="24" />
+                </font>
+            </Label>
 
-    <!-- Formulaire de création de trajet -->
-    <GridPane alignment="CENTER" hgap="10" vgap="10">
-        <!-- Point de Départ -->
-        <Label text="Point de Départ" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <TextField fx:id="departField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <GridPane alignment="CENTER" hgap="15" vgap="15">
+                <!-- Point de Départ -->
+                <Label text="Point de Départ" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="departField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <ListView fx:id="departSuggestionsListView" prefHeight="80" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-        <!-- Point d'Arrivée -->
-        <Label text="Point d'Arrivée" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="arriveeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <!-- Point d'Arrivée -->
+                <Label text="Point d'Arrivée" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="arriveeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ListView fx:id="arriveeSuggestionsListView" prefHeight="80" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-        <!-- Date de Départ -->
-        <Label text="Date de Départ" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <DatePicker fx:id="dateDepartPicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <!-- Date de Départ -->
+                <Label text="Date de Départ" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <DatePicker fx:id="dateDepartPicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
-        <!-- Heure de Départ -->
-        <Label text="Heure de Départ (HH:mm)" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-        <TextField fx:id="heureField" promptText="HH:mm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <!-- Heure de Départ -->
+                <Label text="Heure de Départ (HH:mm)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="heureField" promptText="HH:mm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-        <!-- Durée Estimée -->
-        <Label text="Durée Estimée (minutes)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-        <TextField fx:id="dureeEstimeeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <!-- Durée Estimée -->
+                <Label text="Durée Estimée (minutes)" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <TextField fx:id="dureeEstimeeField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-        <!-- Distance -->
-        <Label text="Distance (km)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <TextField fx:id="distanceField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <!-- Distance -->
+                <Label text="Distance (km)" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <TextField fx:id="distanceField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-        <!-- Places Disponibles -->
-        <Label text="Places Disponibles" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <TextField fx:id="placesDisponiblesField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
+                <!-- Places Disponibles -->
+                <Label text="Places Disponibles" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                <TextField fx:id="placesDisponiblesField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            </GridPane>
 
-    <!-- Bouton de validation -->
-    <Button onAction="#creerTrajet" text="Créer Trajet">
-        <font>
-            <Font name="Arial" size="14" />
-        </font>
-        <style>
-            -fx-background-color: #4CAF50;
-            -fx-text-fill: white;
-            -fx-padding: 10px 20px;
-        </style>
-    </Button>
-    <!-- Bouton pour voir les détails du trajet -->
-    <Button fx:id="goToDetailButton" onAction="#goToDetailTrajet" text="Voir Détails Trajet">
-        <font>
-            <Font name="Arial" size="14" />
-        </font>
-        <style>
-            -fx-background-color: #008CBA;
-            -fx-text-fill: white;
-            -fx-padding: 10px 20px;
-        </style>
+            <!-- Boutons -->
+            <HBox spacing="10">
+                <Button fx:id="creerTrajet" onAction="#creerTrajet" text="Créer Trajet" />
+                <Button fx:id="goToDetailButton" onAction="#goToDetailTrajet" text="Voir Détails Trajet" />
+                <Button fx:id="goToReservationButton" onAction="#goToReservation" text="Réserver un Trajet" />
+            </HBox>
+        </VBox>
 
-    </Button>
-
-    <!-- Bouton pour aller à la réservation -->
-    <Button fx:id="goToReservationButton" onAction="#goToReservation" text="Réserver un Trajet">
-        <font>
-            <Font name="Arial" size="14" />
-        </font>
-        <style>
-            -fx-background-color: #FFA500;
-            -fx-text-fill: white;
-            -fx-padding: 10px 20px;
-        </style>
-    </Button>
-
+        <!-- Logo à droite -->
+        <ImageView fx:id="logoImage" fitHeight="200" fitWidth="200" preserveRatio="true">
+            <image>
+                <Image url="/images/unidrive_logo.jpg" />
+            </image>
+        </ImageView>
+    </HBox>
 </VBox>

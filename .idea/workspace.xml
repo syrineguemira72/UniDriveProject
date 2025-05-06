@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="WALID style commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/reçu_paiement.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/reçu_paiement.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/BeneficiaireAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Beneficiaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/BeneficiaireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/BeneficiaireAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +33,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -44,20 +47,47 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;OpenRewrite.UpgradeSpringBoot_3_1.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/UnidriveApp&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="UniDrive" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="UniDrive" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UpgradeSpringBoot_3_1" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
+      <option name="activeRecipes" value="org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/Unidriva" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="OpenRewrite.UpgradeSpringBoot_3_1" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -76,6 +106,9 @@
       <updated>1741003691241</updated>
       <workItem from="1741003692300" duration="6238000" />
       <workItem from="1741042535930" duration="172000" />
+      <workItem from="1741087332164" duration="536000" />
+      <workItem from="1741088204870" duration="1634000" />
+      <workItem from="1741089929911" duration="313000" />
     </task>
     <task id="LOCAL-00001" summary="WALID style commit">
       <option name="closed" value="true" />
@@ -85,13 +118,38 @@
       <option name="project" value="LOCAL" />
       <updated>1741042486299</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741081825707</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741081825707</updated>
+    </task>
+    <task id="LOCAL-00003" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741090139884</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741090139884</updated>
+    </task>
+    <task id="LOCAL-00004" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741090232760</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741090232760</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="nothing" />
     <MESSAGE value="WALID style commit" />
     <option name="LAST_COMMIT_MESSAGE" value="WALID style commit" />
   </component>

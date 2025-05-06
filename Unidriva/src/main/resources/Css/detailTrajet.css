@@ -1,0 +1,59 @@
+/* Style général */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* Titre principal */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ScrollPane */
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* Conteneur des cartes */
+#tripsContainer {
+    -fx-padding: 10px;
+}
+
+/* Style des cartes de trajets */
+.trip-card {
+    -fx-background-color: white;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-padding: 15px;
+    -fx-spacing: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 5, 0, 0, 3);
+
+    /* Ajout du logo en arrière-plan */
+    -fx-background-image: url("/images/unidrive_logo.jpg"); /* Chemin de ton logo */
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover; /* Couvre toute la surface de la carte */
+    -fx-background-position: center; /* Centre l'image */
+}
+
+/* Style des labels dans les cartes */
+.trip-card Label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #444;
+}
+
+/* Bouton retour */
+.action-button {
+    -fx-background-color: #007BFF;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px;
+    -fx-border-radius: 8px;
+}
+
+.action-button:hover {
+    -fx-background-color: #0056b3;
+}

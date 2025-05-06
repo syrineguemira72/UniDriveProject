@@ -1,8 +1,11 @@
 package edu.unidrive.services;
-
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.*;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class EmailService {
@@ -15,11 +18,26 @@ public class EmailService {
         this.password = password;
     }
 
+    // Charger le modèle HTML et remplacer les placeholders
+    private String loadHtmlTemplate(String filePath, String firstname) {
+        try {
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
+            if (inputStream == null) {
+                throw new RuntimeException("File not found: " + filePath);
+            }
+            String content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+            return content.replace("{{firstname}}", firstname)
+                    .replace("{{logoCid}}", "logo123");
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load HTML template", e);
+        }
+    }
+
     public void sendWelcomeEmail(String recipientEmail, String firstname) {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com"); // Remplacez par votre serveur SMTP
+        props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(props, new Authenticator() {
@@ -34,8 +52,29 @@ public class EmailService {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Welcome to Unidrive!");
-            message.setText("Dear " + firstname + ",\n\nWelcome to Unidrive! We are excited to have you on board.\n\nBest regards,\nThe Unidrive Team");
 
+            // Charger le modèle HTML
+            String htmlContent = loadHtmlTemplate("html/emailUser.html", firstname);
+
+            // Création du multipart (HTML + Image)
+            MimeMultipart multipart = new MimeMultipart("related");
+
+            // Part 1 : Contenu HTML
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent(htmlContent, "text/html");
+            multipart.addBodyPart(messageBodyPart);
+
+            // Part 2 : Attachement de l’image en CID
+            MimeBodyPart imagePart = new MimeBodyPart();
+            DataSource fds = new FileDataSource("src/main/resources/images/unidrive.png");
+            imagePart.setDataHandler(new DataHandler(fds));
+            imagePart.setHeader("Content-ID", "<logo123>");
+            multipart.addBodyPart(imagePart);
+
+            // Ajouter le multipart au message
+            message.setContent(multipart);
+
+            // Envoyer l’e-mail
             Transport.send(message);
 
             System.out.println("Welcome email sent successfully to " + recipientEmail);

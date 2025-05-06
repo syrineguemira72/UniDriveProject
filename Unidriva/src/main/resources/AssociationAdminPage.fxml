@@ -9,7 +9,7 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@Css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.BeneficiaireAdmin">
+<AnchorPane prefHeight="523.0" prefWidth="727.0" stylesheets="@Css/styleAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.AssociationAdmin">
 
     <children>
         <Button fx:id="deleteColumn1" layoutX="315.0" layoutY="213.0" mnemonicParsing="false" onAction="#deleteSelectedRow" prefHeight="37.0" prefWidth="66.0" styleClass="delete-button" text="Delete" />
@@ -17,65 +17,51 @@
         <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" onAction="#goToBack" styleClass="back-button" text="Back" />
 
         <!-- New fields for Bénéficiaire -->
-        <TextField fx:id="nomtextfield" layoutX="156.0" layoutY="60.0" prefHeight="26.0" prefWidth="197.0" promptText="Nom" />
-        <TextField fx:id="prenomtextfield" layoutX="155.0" layoutY="97.0" prefHeight="26.0" prefWidth="198.0" promptText="Prenom" />
-        <TextField fx:id="agetextfield" layoutX="155.0" layoutY="134.0" prefHeight="26.0" prefWidth="198.0" promptText="Age" />
-        <TextField fx:id="adressetextfield" layoutX="155.0" layoutY="171.0" prefHeight="26.0" prefWidth="198.0" promptText="Adresse" />
+        <TextField fx:id="nomtextfield" layoutX="153.0" layoutY="96.0" prefHeight="26.0" prefWidth="197.0" promptText="Nom" />
+        <TextField fx:id="adressetextfield" layoutX="152.0" layoutY="142.0" prefHeight="26.0" prefWidth="198.0" promptText="Adresse" />
         <TextField fx:id="telephonetextfield" layoutX="453.0" layoutY="82.0" prefHeight="26.0" prefWidth="198.0" promptText="Telephone" />
         <TextField fx:id="emailtextfield" layoutX="453.0" layoutY="119.0" prefHeight="26.0" prefWidth="198.0" promptText="Email" />
 
         <!-- New ChoiceBox for Aide -->
         <ChoiceBox fx:id="aideChoiceBox" layoutX="453.0" layoutY="156.0" prefHeight="37.0" prefWidth="198.0" />
 
-        <Label layoutX="66.0" layoutY="64.0" prefHeight="18.0" prefWidth="73.0" text="Nom :" />
-        <Label layoutX="66.0" layoutY="101.0" prefHeight="18.0" prefWidth="74.0" text="Prenom :" />
-        <Label layoutX="66.0" layoutY="138.0" prefHeight="18.0" prefWidth="74.0" text="Age :" />
-        <Label layoutX="66.0" layoutY="175.0" prefHeight="18.0" prefWidth="74.0" text="Adresse :" />
+        <Label layoutX="63.0" layoutY="100.0" prefHeight="18.0" prefWidth="73.0" text="Nom :" />
+        <Label layoutX="63.0" layoutY="146.0" prefHeight="18.0" prefWidth="74.0" text="Adresse :" />
         <Label layoutX="364.0" layoutY="86.0" prefHeight="18.0" prefWidth="74.0" text="Telephone :" />
         <Label layoutX="364.0" layoutY="123.0" prefHeight="18.0" prefWidth="74.0" text="Email :" />
         <Label layoutX="364.0" layoutY="166.0" prefHeight="18.0" prefWidth="74.0" text="Aide ID :" />
 
-        <Button layoutX="66.0" layoutY="213.0" mnemonicParsing="false" onAction="#ajouterBeneficiaireAction" text="Ajouter Bénéficiaire" />
+        <Button layoutX="66.0" layoutY="213.0" mnemonicParsing="false" onAction="#ajouterAssociationAction" text="Ajouter Association" />
 
         <!-- TableView for Bénéficiaire -->
-        <TableView fx:id="beneficiaireTable" layoutX="14.0" layoutY="272.0" prefHeight="238.0" prefWidth="700.0">
+        <TableView fx:id="associationTable" layoutX="47.0" layoutY="270.0" prefHeight="238.0" prefWidth="633.0">
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="27.999969482421875" text="ID">
                     <cellValueFactory>
                         <PropertyValueFactory property="id" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="nomColumn" prefWidth="73.59997177124023" text="Nom">
+                <TableColumn fx:id="nomColumn" prefWidth="90.39996337890625" text="Nom">
                     <cellValueFactory>
                         <PropertyValueFactory property="nom" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="prenomColumn" prefWidth="91.20001220703125" text="Prenom">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="prenom" />
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="ageColumn" prefWidth="43.20002746582031" text="Age">
-                    <cellValueFactory>
-                        <PropertyValueFactory property="age" />
-                    </cellValueFactory>
-                </TableColumn>
-                <TableColumn fx:id="adresseColumn" prefWidth="120.0" text="Adresse">
+                <TableColumn fx:id="adresseColumn" prefWidth="122.39997863769531" text="Adresse">
                     <cellValueFactory>
                         <PropertyValueFactory property="adresse" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="telephoneColumn" prefWidth="108.79998779296875" text="Telephone">
+                <TableColumn fx:id="telephoneColumn" prefWidth="104.79998779296875" text="Telephone">
                     <cellValueFactory>
                         <PropertyValueFactory property="telephone" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="159.20001220703125" text="Email">
+                <TableColumn fx:id="emailColumn" minWidth="0.0" prefWidth="172.800048828125" text="Email">
                     <cellValueFactory>
                         <PropertyValueFactory property="email" />
                     </cellValueFactory>
                 </TableColumn>
-                <TableColumn fx:id="aideIdColumn" prefWidth="65.59991455078125" text="Aide ID">
+                <TableColumn fx:id="aideIdColumn" prefWidth="69.5999755859375" text="Aide ID">
                     <cellValueFactory>
                         <PropertyValueFactory property="aideId" />
                     </cellValueFactory>
@@ -83,9 +69,8 @@
             </columns>
         </TableView>
       <Label layoutX="419.0" layoutY="225.0" styleClass="label" text="Search :" />
-        <TextField fx:id="searchField" layoutX="481.0" layoutY="218.0" prefHeight="26.0" prefWidth="218.0"
-                   promptText="Search Beneficiary" styleClass="text-field" />
+        <TextField fx:id="searchField" layoutX="481.0" layoutY="218.0" prefHeight="30.0" prefWidth="198.0" promptText="Search Association" styleClass="text-field" />
 
-        <Label layoutX="278.0" layoutY="16.0" prefHeight="38.0" prefWidth="151.0" styleClass="title-label" text="Interface Bénéficiaires" />
+        <Label layoutX="278.0" layoutY="16.0" prefHeight="38.0" prefWidth="151.0" styleClass="title-label" text="Interface Association" />
     </children>
 </AnchorPane>

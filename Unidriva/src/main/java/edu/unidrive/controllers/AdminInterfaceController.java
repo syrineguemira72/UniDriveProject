@@ -30,17 +30,21 @@ public class AdminInterfaceController {
 
     @FXML
     public void initialize() {
+        // Activer la sélection multiple dans la ListView
         badContentListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        // Charger les posts et commentaires contenant des mots inappropriés
         loadBadContent();
     }
 
     private void loadBadContent() {
+        // Récupérer les posts contenant des mots inappropriés
         List<Post> badPosts = postService.getPostsWithBadWords();
         for (Post post : badPosts) {
             badContentListView.getItems().add("Post: " + post.getTitle() + " - " + post.getDescription());
         }
 
+        // Récupérer les commentaires contenant des mots inappropriés
         List<Interaction> badComments = interactionService.getCommentsWithBadWords();
         for (Interaction comment : badComments) {
             badContentListView.getItems().add("Commentaire: " + comment.getContent());
@@ -49,6 +53,7 @@ public class AdminInterfaceController {
 
     @FXML
     void deleteSelectedItems() {
+        // Récupérer les éléments sélectionnés dans la ListView
         List<String> selectedItems = badContentListView.getSelectionModel().getSelectedItems();
 
         if (selectedItems.isEmpty()) {
@@ -56,14 +61,17 @@ public class AdminInterfaceController {
             return;
         }
 
+        // Supprimer les éléments sélectionnés
         for (String item : selectedItems) {
             if (item.startsWith("Post:")) {
+                // Supprimer un post
                 String title = item.split(" - ")[0].replace("Post: ", "");
                 Post post = postService.getPostByTitle(title);
                 if (post != null) {
                     postService.removeEntity(post);
                 }
             } else if (item.startsWith("Commentaire:")) {
+                // Supprimer un commentaire
                 String content = item.replace("Commentaire: ", "");
                 Interaction comment = interactionService.getCommentByContent(content);
                 if (comment != null) {
@@ -72,9 +80,11 @@ public class AdminInterfaceController {
             }
         }
 
+        // Rafraîchir la liste après suppression
         badContentListView.getItems().clear();
         loadBadContent();
 
+        // Afficher un message de succès
         showAlert("Succès", "Les éléments sélectionnés ont été supprimés avec succès.");
     }
 
@@ -86,9 +96,12 @@ public class AdminInterfaceController {
     }
     @FXML
     void goToBack(ActionEvent event) {
+        // Load the new FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
         try {
+            // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
+            // Set the new scene
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

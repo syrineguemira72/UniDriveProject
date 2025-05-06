@@ -20,17 +20,17 @@
       <Pane layoutX="488.0" layoutY="100.0" AnchorPane.bottomAnchor="73.0" AnchorPane.topAnchor="100.0">
          <children>
             <TextField fx:id="txtUsername" layoutX="7.0" prefHeight="34.0" prefWidth="275.0" promptText="Email" />
-            <Label fx:id="btnForgot" alignment="CENTER" layoutX="9.0" layoutY="128.0" onMouseClicked="#Forgot" prefHeight="23.0" prefWidth="248.0" text="Forgot Password" textFill="#5383ff" underline="true" />
+            <Label fx:id="btnForgot" alignment="CENTER" layoutX="9.0" layoutY="128.0" onMouseClicked="#Forgot" prefHeight="23.0" prefWidth="248.0" text="Mot de passe oublié ?" textFill="#5383ff" underline="true" />
 
-            <Button fx:id="login" layoutX="4.0" layoutY="206.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="275.0" style="-fx-background-color: #000080;" text="Login" textFill="WHITE" />
+            <Button fx:id="login" layoutX="4.0" layoutY="206.0" mnemonicParsing="false" onAction="#login" prefHeight="34.0" prefWidth="275.0" style="-fx-background-color: #000080;" text="Connexion" textFill="WHITE" />
             <Separator layoutX="7.0" layoutY="172.0" prefHeight="7.0" prefWidth="275.0" />
-            <Label alignment="CENTER" layoutX="126.0" layoutY="164.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="Or" textFill="#5b5a5a">
+            <Label alignment="CENTER" layoutX="126.0" layoutY="164.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="Ou" textFill="#5b5a5a">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
             </Label>
             <Separator layoutY="270.0" prefHeight="7.0" prefWidth="275.0" />
-            <Label alignment="CENTER" layoutX="122.0" layoutY="262.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="Or" textFill="#5b5a5a">
+            <Label alignment="CENTER" layoutX="122.0" layoutY="262.0" prefHeight="23.0" prefWidth="31.0" style="-fx-background-color: #fff;" text="Ou" textFill="#5b5a5a">
                <font>
                   <Font name="Segoe UI" size="12.0" />
                </font>
@@ -40,8 +40,8 @@
                   <Font name="Segoe UI" size="10.0" />
                </font>
             </Label>
-            <Button fx:id="signUp" layoutX="4.0" layoutY="301.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="34.0" prefWidth="275.0" text="Sign up" />
-            <PasswordField fx:id="txtPassword" layoutX="8.0" layoutY="56.0" prefHeight="34.0" prefWidth="275.0" promptText="Password" />
+            <Button fx:id="signUp" layoutX="4.0" layoutY="301.0" mnemonicParsing="false" onAction="#SignUp" prefHeight="34.0" prefWidth="275.0" text="S'inscrire" />
+            <PasswordField fx:id="txtPassword" layoutX="8.0" layoutY="56.0" prefHeight="34.0" prefWidth="275.0" promptText="Mot de passe" />
          </children>
       </Pane>
       <ImageView fitHeight="533.0" fitWidth="439.0" layoutX="-2.0">
