@@ -101,9 +101,8 @@ public class HomePostControllers {
         boolean isAdmin = isAdmin(jwtToken);
 
         if (!isAdmin) {
-            int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
+            int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
-                // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
                     Parent root = fxmlLoader.load();
@@ -113,7 +112,6 @@ public class HomePostControllers {
                     System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
                 }
             } else {
-                // Charger la liste des posts
                 refreshPostList();
             }
         }
@@ -257,7 +255,7 @@ public class HomePostControllers {
 
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 53;
+            return 49;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -270,15 +268,13 @@ public class HomePostControllers {
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 53;
+        return 49;
     }
     @FXML
     void goToBack(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
         try {
-            // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
-            // Set the new scene
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

@@ -80,7 +80,7 @@
     -fx-background-color: transparent;
 }
 
-
+/* Animations */
 @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -104,7 +104,6 @@
     -fx-transition: all 0.3s ease;
 }
 
-
 .back-button {
     -fx-background-color: #4A90E2; /* Bleu moderne */
     -fx-text-fill: white;
@@ -126,8 +125,8 @@
 
 .hbox .button {
     -fx-min-width: 100px;
-    -fx-padding: 10px 0px;
-    -fx-font-size: 10px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
 }
 
 .post-button {
@@ -182,9 +181,26 @@
     -fx-background-color: rgba(231, 76, 60, 0.1);
 }
 
-
+.delete-button {
+    -fx-background-color: linear-gradient(to right, #E74C3C, #C0392B);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-font-size: 14px;
+}
 
 .delete-button:hover {
     -fx-background-color: linear-gradient(to right, #C0392B, #A93226);
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 0);
+
+}
+.action-button {
+    -fx-pref-width: 110px; /* Largeur uniforme */
+    -fx-padding: 8px 12px;
+    -fx-font-size: 13px;
+    -fx-graphic-text-gap: 8px;
+}
+.action-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

@@ -148,7 +148,7 @@ public class InteractionService implements Iservice<Interaction> {
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la récupération du commentaire par contenu : " + e.getMessage());
         }
-        return null; // Retourne null si aucun commentaire n'est trouvé
+        return null;
     }
 
     public List<Interaction> getCommentsByPostId(int postId) {
@@ -181,7 +181,6 @@ public class InteractionService implements Iservice<Interaction> {
                 Interaction interaction = new Interaction();
                 interaction.setId(rs.getInt("id"));
                 interaction.setContent(rs.getString("content"));
-                // Ajoutez les autres champs nécessaires
                 badComments.add(interaction);
             }
         } catch (SQLException e) {

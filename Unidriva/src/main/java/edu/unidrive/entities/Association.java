@@ -2,22 +2,18 @@ package edu.unidrive.entities;
 
 import javafx.beans.property.*;
 
-public class Beneficiaire {
+public class Association {
     private IntegerProperty id;
     private StringProperty nom;
-    private StringProperty prenom;
-    private IntegerProperty age;
     private StringProperty adresse;
     private StringProperty telephone;
     private StringProperty email;
     private IntegerProperty aideId;
 
     // Default Constructor
-    public Beneficiaire() {
+    public Association() {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty();
-        this.prenom = new SimpleStringProperty();
-        this.age = new SimpleIntegerProperty();
         this.adresse = new SimpleStringProperty();
         this.telephone = new SimpleStringProperty();
         this.email = new SimpleStringProperty();
@@ -25,11 +21,9 @@ public class Beneficiaire {
     }
 
     // Constructor with parameters
-    public Beneficiaire(String nom, String prenom, int age, String adresse, String telephone, String email, int aideId) {
+    public Association(String nom, String adresse, String telephone, String email, int aideId) {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty(nom);
-        this.prenom = new SimpleStringProperty(prenom);
-        this.age = new SimpleIntegerProperty(age);
         this.adresse = new SimpleStringProperty(adresse);
         this.telephone = new SimpleStringProperty(telephone);
         this.email = new SimpleStringProperty(email);
@@ -59,30 +53,6 @@ public class Beneficiaire {
 
     public void setNom(String nom) {
         this.nom.set(nom);
-    }
-
-    public String getPrenom() {
-        return prenom.get();
-    }
-
-    public StringProperty prenomProperty() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom.set(prenom);
-    }
-
-    public int getAge() {
-        return age.get();
-    }
-
-    public IntegerProperty ageProperty() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age.set(age);
     }
 
     public String getAdresse() {
@@ -124,7 +94,6 @@ public class Beneficiaire {
     public Integer getAideId() {
         return aideId.get() == 0 ? null : aideId.get(); // Return null if it's 0 (or another default value)
     }
-
 
     public IntegerProperty aideIdProperty() {
         return aideId;

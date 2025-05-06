@@ -68,7 +68,7 @@
         <!-- Logo à droite -->
         <ImageView fx:id="logoImage" fitHeight="200" fitWidth="200" preserveRatio="true">
             <image>
-                <Image url="/images/unidrive_logo.jpg" />
+                <Image url="/images/unidrive.png" />
             </image>
         </ImageView>
     </HBox>

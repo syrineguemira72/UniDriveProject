@@ -35,6 +35,10 @@ public class ReserverCardController {
         updateUI();
     }
 
+    public Trajet getTrajet() {
+        return trajet;
+    }
+
     // Set the parent controller
     public void setReserverTrajetController(ReserverTrajetController reserverTrajetController) {
         this.reserverTrajetController = reserverTrajetController;
@@ -54,6 +58,12 @@ public class ReserverCardController {
                 reserverTrajetController.reserverTrajet(trajet);
             }
         });
+    }
+
+    public void refreshCard() {
+        if (trajet != null) {
+            updateUI();
+        }
     }
 
     // Helper method to show alerts

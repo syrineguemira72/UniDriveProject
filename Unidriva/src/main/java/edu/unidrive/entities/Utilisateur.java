@@ -2,6 +2,9 @@ package edu.unidrive.entities;
 
 public class Utilisateur {
 
+    public static final String ROLE_PASSAGER = "PASSAGER";
+    public static final String ROLE_CONDUCTEUR = "CONDUCTEUR";
+
     private int id;
     private String email;
     private String dob;
