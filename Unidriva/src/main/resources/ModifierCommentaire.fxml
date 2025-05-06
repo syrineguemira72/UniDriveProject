@@ -21,11 +21,10 @@
                     <Button text="Mettre à jour" styleClass="form-button" onAction="#updatecomment" />
                 </children>
             </VBox>
-
-            <VBox styleClass="logo-section" prefWidth="300.0" prefHeight="400.0" alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="375.0" prefWidth="300.0" styleClass="logo-section">
                 <children>
-                    <ImageView fitHeight="318.0" fitWidth="277.0" preserveRatio="true">                        <image>
-                        <Image url="@images/logo.png" />
+                    <ImageView fitHeight="324.0" fitWidth="277.0" preserveRatio="true">                        <image>
+                        <Image url="@images/Logo.jpg" />
                     </image>
                     </ImageView>
                 </children>

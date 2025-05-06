@@ -4,6 +4,7 @@ import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.PostService;
 import edu.unidrive.services.UserService;
 import edu.unidrive.tools.JwtUtil;
+import edu.unidrive.tools.MyConnection;
 import io.jsonwebtoken.Claims;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,10 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class HomeUniDriveController {
 
@@ -37,8 +42,14 @@ public class HomeUniDriveController {
     @FXML
     private Button statisticsButton;
 
+    private String jwtToken;
+    private Connection connection;
+    @FXML
+    private Label btnforum;
+    @FXML
+    private Button btnadmin;
 
-    private String jwtToken;// Référence à l'ImageView pour afficher la photo de profil
+    private final PostService postService = new PostService();
 
     @FXML
     void Logout(MouseEvent event) {
@@ -85,33 +96,28 @@ public class HomeUniDriveController {
             profileImage.setImage(image);
         }
     }
-
-
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
-        checkAdminAccess(); // Vérifier le rôle de l'utilisateur après avoir défini le token
+        checkAdminAccess();
     }
-
-
-
     private boolean isAdmin(String token) {
         try {
             Claims claims = JwtUtil.validateToken(token);
             String role = claims.get("role", String.class);
             return "ADMIN".equals(role);
         } catch (Exception e) {
-            return false; // Le token est invalide ou a expiré
+            return false;
         }
     }
 
     public void checkAdminAccess() {
         if (jwtToken != null) {
             boolean isAdmin = isAdmin(jwtToken);
-            statisticsButton.setVisible(isAdmin); // Afficher ou masquer le bouton en fonction du rôle
-        } else {
-            statisticsButton.setVisible(false); // Masquer le bouton si l'utilisateur n'est pas authentifié
+            statisticsButton.setVisible(isAdmin);
+            statisticsButton.setVisible(false);
         }
     }
+
 
     @FXML
     void goToStatistics(ActionEvent event) {
@@ -125,55 +131,65 @@ public class HomeUniDriveController {
             e.printStackTrace();
         }
     }
+
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null); // Pas de texte d'en-tête
+        alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait(); // Afficher la boîte de dialogue et attendre une réponse
+        alert.showAndWait();
     }
     @FXML
-    private Label btnforum;
-
-    private final PostService postService = new PostService();
-
-    @FXML
     public void initialize() {
-        // Ajouter un gestionnaire d'événements pour le clic sur "Forum"
         btnforum.setOnMouseClicked(this::forum);
     }
     private int getCurrentUserId() {
-        return 40;
+        if (currentUserEmail == null || currentUserEmail.isEmpty()) {
+            return 49;
+        }
+
+        String query = "SELECT id FROM utilisateur WHERE email = ?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setString(1, currentUserEmail);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+        return 49;
     }
 
 
     @FXML
-    void forum(MouseEvent event){
-        int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
+    void forum(MouseEvent event) {
+        boolean isAdmin = isAdmin(jwtToken);
 
-        if (!postService.hasUserInterests(userId)) {
-            // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
-                Parent root = fxmlLoader.load();
-                btnforum.getScene().setRoot(root);
-            } catch (IOException e) {
-                System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
-            }
-        } else {
-            // Rediriger l'utilisateur vers l'interface principale des posts
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
-                Parent root = fxmlLoader.load();
-                btnforum.getScene().setRoot(root);
-            } catch (IOException e) {
-                System.err.println("Erreur lors du chargement de l'interface principale des posts : " + e.getMessage());
+        if (!isAdmin) {
+            int userId = getCurrentUserId();
+            if (!postService.hasUserInterests(userId)) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
+                    Parent root = fxmlLoader.load();
+                    btnforum.getScene().setRoot(root);
+                    return;
+                } catch (IOException e) {
+                    System.err.println("Erreur chargement centres d'intérêt : " + e.getMessage());
+                }
             }
         }
 
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
+            Parent root = fxmlLoader.load();
+            HomePostControllers homePostControllers = fxmlLoader.getController();
+            homePostControllers.setJwtToken(jwtToken);
+            btnforum.getScene().setRoot(root);
+        } catch (IOException e) {
+            System.err.println("Erreur chargement HomePost : " + e.getMessage());
+        }
     }
-
-
     @FXML
     void aide(MouseEvent event){
         try {
@@ -215,4 +231,4 @@ public class HomeUniDriveController {
             e.printStackTrace();
         }
     }
-    }
+}

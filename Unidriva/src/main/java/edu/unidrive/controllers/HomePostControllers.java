@@ -6,6 +6,8 @@ import edu.unidrive.entities.Utilisateur;
 import edu.unidrive.services.InteractionService;
 import edu.unidrive.services.PostService;
 import edu.unidrive.services.UserService;
+import edu.unidrive.tools.MyConnection;
+import io.jsonwebtoken.Claims;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,8 +26,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import edu.unidrive.tools.JwtUtil;
+
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import javafx.fxml.FXML;
@@ -33,29 +41,79 @@ import javafx.scene.control.ListView;
 
 public class HomePostControllers {
     @FXML
+    private Button btnadmin;
+    @FXML
     private ListView<Post> postListView;
+    private String currentUserEmail;
+
+    public void setCurrentUserEmail(String email) {
+        this.currentUserEmail = email;
+        System.out.println("Email of the logged in user: " + currentUserEmail);
+    }
 
     private ObservableList<Post> postList = FXCollections.observableArrayList();
 
     private final PostService postService = new PostService();
+    private Connection connection;
 
+
+    private String jwtToken;
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
+        checkAdminAccess();
+    }
+    private boolean isAdmin(String token) {
+        try {
+            Claims claims = JwtUtil.validateToken(token);
+            String role = claims.get("role", String.class);
+            return "ADMIN".equals(role);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void checkAdminAccess() {
+        if (jwtToken != null) {
+            boolean isAdmin = isAdmin(jwtToken);
+            btnadmin.setVisible(isAdmin);
+        } else {
+            btnadmin.setVisible(false);
+        }
+    }
+    @FXML
+    void admin(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("AdminInterface.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) btnadmin.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void initialize() {
-        // Vérifier si l'utilisateur a déjà des centres d'intérêt
-        int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
-        if (!postService.hasUserInterests(userId)) {
-            // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
-                Parent root = fxmlLoader.load();
-                postListView.getScene().setRoot(root);
-            } catch (IOException e) {
-                System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
+        boolean isAdmin = isAdmin(jwtToken);
+
+        if (!isAdmin) {
+            int userId = getCurrentUserId();
+            if (!postService.hasUserInterests(userId)) {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
+                    Parent root = fxmlLoader.load();
+                    postListView.getScene().setRoot(root);
+                    return;
+                } catch (IOException e) {
+                    System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
+                }
+            } else {
+                refreshPostList();
             }
-        } else {
-            // Charger la liste des posts
-            refreshPostList();
         }
 
         postListView.setCellFactory(new Callback<>() {
@@ -196,18 +254,27 @@ public class HomePostControllers {
     }
 
     private int getCurrentUserId() {
+        if (currentUserEmail == null || currentUserEmail.isEmpty()) {
+            return 49;
+        }
 
-        return 40;
+        String query = "SELECT id FROM utilisateur WHERE email = ?";
+        try (PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(query)) {
+            pst.setString(1, currentUserEmail);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur SQL : " + e.getMessage());
+        }
+        return 49;
     }
-
     @FXML
     void goToBack(ActionEvent event) {
-        // Load the new FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
         try {
-            // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
-            // Set the new scene
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

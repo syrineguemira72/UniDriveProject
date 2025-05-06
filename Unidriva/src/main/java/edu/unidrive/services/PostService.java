@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostService implements Iservice<Post> {
+    private final TextFilterService textFilterService = new TextFilterService(); // Ajoutez cette ligne
 
     private final Connection cnx = MyConnection.getInstance().getCnx(); // Singleton
-    private final edu.unidrive.services.TextFilterService textFilterService = new TextFilterService(); // Ajoutez cette ligne
 
     public List<String> getInterestedUsers(String postTitle) {
         List<String> interestedUsers = new ArrayList<>();
@@ -178,13 +178,13 @@ public class PostService implements Iservice<Post> {
         return null; // Retourne null si aucun post n'est trouvé
     }
     public void saveUserInterests(int userId, String centresInteret) {
-        String[] interests = centresInteret.split(","); // Séparez les centres d'intérêt par une virgule
+        String[] interests = centresInteret.split(",");
         String query = "INSERT INTO user_interests (user_id, interest) VALUES (?, ?)";
 
         try (PreparedStatement pst = cnx.prepareStatement(query)) {
             for (String interest : interests) {
                 pst.setInt(1, userId);
-                pst.setString(2, interest.trim()); // Supprime les espaces inutiles
+                pst.setString(2, interest.trim());
                 pst.executeUpdate();
             }
         } catch (SQLException e) {
@@ -197,7 +197,7 @@ public class PostService implements Iservice<Post> {
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt(1) > 0; // Retourne true si l'utilisateur a des centres d'intérêt
+                return rs.getInt(1) > 0;
             }
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la vérification des centres d'intérêt : " + e.getMessage());
@@ -229,22 +229,18 @@ public class PostService implements Iservice<Post> {
 
     public List<Post> getPostsWithBadWords() {
         List<Post> badPosts = new ArrayList<>();
-        String query = "SELECT * FROM post WHERE title LIKE ? OR description LIKE ?";
+        String query = "SELECT * FROM post WHERE title REGEXP '[\\*]{3}' OR description REGEXP '[\\*]{3}'";
         try (PreparedStatement pst = cnx.prepareStatement(query)) {
-            for (String badWord : textFilterService.getBadWords()) {
-                pst.setString(1, "%" + badWord + "%");
-                pst.setString(2, "%" + badWord + "%");
-                ResultSet rs = pst.executeQuery();
-                while (rs.next()) {
-                    Post post = new Post();
-                    post.setId(rs.getInt("id"));
-                    post.setTitle(rs.getString("title"));
-                    post.setDescription(rs.getString("description"));
-                    badPosts.add(post);
-                }
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Post post = new Post();
+                post.setId(rs.getInt("id"));
+                post.setTitle(rs.getString("title"));
+                post.setDescription(rs.getString("description"));
+                badPosts.add(post);
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la récupération des posts contenant des mots inappropriés : " + e.getMessage());
+            throw new RuntimeException("Erreur lors de la récupération des posts inappropriés: " + e.getMessage());
         }
         return badPosts;
     }

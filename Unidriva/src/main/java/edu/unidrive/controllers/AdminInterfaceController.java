@@ -5,11 +5,18 @@ import edu.unidrive.entities.Post;
 import edu.unidrive.services.InteractionService;
 import edu.unidrive.services.PostService;
 import edu.unidrive.services.TextFilterService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AdminInterfaceController {
@@ -23,21 +30,17 @@ public class AdminInterfaceController {
 
     @FXML
     public void initialize() {
-        // Activer la sélection multiple dans la ListView
         badContentListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // Charger les posts et commentaires contenant des mots inappropriés
         loadBadContent();
     }
 
     private void loadBadContent() {
-        // Récupérer les posts contenant des mots inappropriés
         List<Post> badPosts = postService.getPostsWithBadWords();
         for (Post post : badPosts) {
             badContentListView.getItems().add("Post: " + post.getTitle() + " - " + post.getDescription());
         }
 
-        // Récupérer les commentaires contenant des mots inappropriés
         List<Interaction> badComments = interactionService.getCommentsWithBadWords();
         for (Interaction comment : badComments) {
             badContentListView.getItems().add("Commentaire: " + comment.getContent());
@@ -46,7 +49,6 @@ public class AdminInterfaceController {
 
     @FXML
     void deleteSelectedItems() {
-        // Récupérer les éléments sélectionnés dans la ListView
         List<String> selectedItems = badContentListView.getSelectionModel().getSelectedItems();
 
         if (selectedItems.isEmpty()) {
@@ -54,17 +56,14 @@ public class AdminInterfaceController {
             return;
         }
 
-        // Supprimer les éléments sélectionnés
         for (String item : selectedItems) {
             if (item.startsWith("Post:")) {
-                // Supprimer un post
                 String title = item.split(" - ")[0].replace("Post: ", "");
                 Post post = postService.getPostByTitle(title);
                 if (post != null) {
                     postService.removeEntity(post);
                 }
             } else if (item.startsWith("Commentaire:")) {
-                // Supprimer un commentaire
                 String content = item.replace("Commentaire: ", "");
                 Interaction comment = interactionService.getCommentByContent(content);
                 if (comment != null) {
@@ -73,11 +72,9 @@ public class AdminInterfaceController {
             }
         }
 
-        // Rafraîchir la liste après suppression
         badContentListView.getItems().clear();
         loadBadContent();
 
-        // Afficher un message de succès
         showAlert("Succès", "Les éléments sélectionnés ont été supprimés avec succès.");
     }
 
@@ -86,5 +83,18 @@ public class AdminInterfaceController {
         alert.setTitle(title);
         alert.setHeaderText(message);
         alert.showAndWait();
+    }
+    @FXML
+    void goToBack(ActionEvent event) {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
+        try {
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
     }
 }
