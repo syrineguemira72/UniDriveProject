@@ -89,14 +89,6 @@ public class CreerTrajetController {
                 arriveeSuggestionsListView.getItems().clear();
             }
         });
-
-        // Add a listener to the date picker to prevent selecting a past date
-        dateDepartPicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && newValue.isBefore(LocalDate.now())) {
-                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
-                dateDepartPicker.setValue(LocalDate.now()); // Reset to today's date
-            }
-        });
     }
 
     private void fetchAutocompleteSuggestions(String input, ListView<String> suggestionsListView) {
@@ -160,8 +152,8 @@ public class CreerTrajetController {
 
             // Update the distance and duration fields
             Platform.runLater(() -> {
-                distanceField.setText("%.2f%s".formatted(result[0], KM_SUFFIX));
-                dureeEstimeeField.setText("%.0f%s".formatted(result[1], MINUTES_SUFFIX));
+                distanceField.setText(String.format("%.2f%s", result[0], KM_SUFFIX));
+                dureeEstimeeField.setText(String.format("%.0f%s", result[1], MINUTES_SUFFIX));
             });
         } catch (IOException e) {
             showAlert("Erreur", "Impossible de calculer la distance et la durée. Veuillez vérifier les noms des villes.", Alert.AlertType.ERROR);
@@ -181,12 +173,6 @@ public class CreerTrajetController {
                     placesDisponiblesField.getText().isEmpty() || distanceField.getText().isEmpty() ||
                     dureeEstimeeField.getText().isEmpty()) {
                 showAlert("Erreur", "Veuillez remplir tous les champs.", Alert.AlertType.ERROR);
-                return;
-            }
-
-            // Validate that the selected date is not in the past
-            if (dateDepartPicker.getValue().isBefore(LocalDate.now())) {
-                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
                 return;
             }
 
