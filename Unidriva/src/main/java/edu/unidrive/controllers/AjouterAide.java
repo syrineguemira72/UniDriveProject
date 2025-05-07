@@ -111,7 +111,7 @@ public class AjouterAide {
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
 // Start writing the title text
-                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
+                //contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16);
                 contentStream.beginText();
                 contentStream.newLineAtOffset(200, 750);
                 contentStream.showText("Reçu de Paiement");
@@ -125,7 +125,7 @@ public class AjouterAide {
 
 // Start a new text block to add receipt details
                 contentStream.beginText();
-                contentStream.setFont(PDType1Font.HELVETICA, 12);
+              //  contentStream.setFont(PDType1Font.HELVETICA, 12);
                 contentStream.newLineAtOffset(100, 710);
 
 // Add details

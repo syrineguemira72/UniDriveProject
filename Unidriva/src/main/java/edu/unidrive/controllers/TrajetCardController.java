@@ -48,10 +48,10 @@ public class TrajetCardController {
         heureLabel.setText("Heure de départ: " + trajet.getHeureDepart().toLocalTime().toString());
 
         // Add event handlers for the buttons
-        modifierButton.setOnAction(event -> detailTrajetController.openModifierTrajetWindow(trajet));
+       // modifierButton.setOnAction(event -> detailTrajetController.openModifierTrajetWindow(trajet));
         annulerButton.setOnAction(event -> {
             try {
-                detailTrajetController.deleteTrip(trajet);
+           //     detailTrajetController.deleteTrip(trajet);
             } catch (RuntimeException e) {
                 // Show an alert to the user
                 showAlert("Erreur", e.getMessage(), Alert.AlertType.ERROR);
