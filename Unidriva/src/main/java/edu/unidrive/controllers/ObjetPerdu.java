@@ -24,9 +24,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
-import javax.swing.table.TableColumn;
-import javax.swing.text.TableView;
-import java.awt.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -169,11 +169,11 @@ public class ObjetPerdu implements Initializable{
 
     @FXML
     void deleteDestination(ActionEvent event) throws SQLException {
-        Objet selected = recTab.getSelectionModel().getSelectedItem();
+        Object selected = recTab.getSelectionModel().getSelectedItem();
         if (selected != null) {
             ObjetPerduService service = new ObjetPerduService();
 
-            service.supprimerObjet(selected.getId());
+            service.supprimerObjet(selected.getClass().getModifiers());
             showAlert("Success", "Objet deleted successfully!");
             loadDestinations();
         } else {
@@ -265,8 +265,8 @@ System.out.println("hello");
         }
     }
 
-    public Objet gettempReclamation(TableColumn.CellEditEvent edittedCell) {
-        Objet test = recTab.getSelectionModel().getSelectedItem();
+    public Object gettempReclamation(TableColumn.CellEditEvent edittedCell) {
+        Object test = recTab.getSelectionModel().getSelectedItem();
         return test;
     }
 
