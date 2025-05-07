@@ -7,6 +7,7 @@ import edu.unidrive.services.ReservationService;
 import edu.unidrive.services.TrajetService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -43,7 +44,6 @@ public class ReserverTrajetController {
         loadTrajets(); // Load trips when the view is initialized
     }
 
-    // Method to load trips dynamically
     private void loadTrajets() {
         trajetsContainer.getChildren().clear(); // Clear existing cards
 
@@ -65,6 +65,9 @@ public class ReserverTrajetController {
                 ReserverCardController cardController = loader.getController();
                 cardController.setTrajet(trajet); // Set the trip data
                 cardController.setReserverTrajetController(this); // Pass the parent controller
+
+                // Store the controller in the card's properties
+                tripCard.getProperties().put("controller", cardController);
 
                 // Add the trip card to the VBox
                 trajetsContainer.getChildren().add(tripCard);
@@ -103,25 +106,43 @@ public class ReserverTrajetController {
 
     // Method to handle trip reservation
     @FXML
-    // Method to handle trip reservation
     public void reserverTrajet(Trajet trajet) {
         if (trajet != null) {
-            // Create a new reservation
-            Reservation newReservation = new Reservation(
-                    0,  // ID will be auto-generated
-                    trajet,
-                    Etat.En_attente,  // Initial state
-                    LocalDate.now()   // Reservation date
-            );
+            // Check if there are available seats
+            if (trajet.getPlaceDisponible() > 0) {
+                // Decrement the number of available seats
+                trajet.setPlaceDisponible(trajet.getPlaceDisponible() - 1);
 
-            reservationService.addEntity(newReservation);
+                // Update the trip in the database
+                trajetService.updateEntity(trajet.getId(),trajet);
 
-            // Show a confirmation message
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Réservation réussie");
-            alert.setHeaderText("Votre réservation a été enregistrée avec succès");
-            alert.setContentText("Vous avez réservé le trajet : " + trajet);
-            alert.showAndWait();
+                // Create a new reservation
+                Reservation newReservation = new Reservation(
+                        0,  // ID will be auto-generated
+                        trajet,
+                        Etat.En_attente,  // Initial state
+                        LocalDate.now()   // Reservation date
+                );
+
+                reservationService.addEntity(newReservation);
+
+                // Show a confirmation message
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Réservation réussie");
+                alert.setHeaderText("Votre réservation a été enregistrée avec succès");
+                alert.setContentText("Vous avez réservé le trajet : " + trajet);
+                alert.showAndWait();
+
+                // Refresh the reservation card
+                refreshReservationCard(trajet);
+            } else {
+                // Show a warning if no seats are available
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Plus de places disponibles");
+                alert.setHeaderText("Aucune place disponible");
+                alert.setContentText("Désolé, il n'y a plus de places disponibles pour ce trajet.");
+                alert.showAndWait();
+            }
         } else {
             // Show a warning if no trip is selected
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -129,6 +150,20 @@ public class ReserverTrajetController {
             alert.setHeaderText("Aucun trajet sélectionné");
             alert.setContentText("Veuillez sélectionner un trajet avant de réserver.");
             alert.showAndWait();
+        }
+    }
+
+    // Method to refresh the reservation card
+    private void refreshReservationCard(Trajet trajet) {
+        for (Node node : trajetsContainer.getChildren()) {
+            if (node instanceof AnchorPane) {
+                AnchorPane card = (AnchorPane) node;
+                ReserverCardController cardController = (ReserverCardController) card.getProperties().get("controller");
+                if (cardController != null && cardController.getTrajet().equals(trajet)) {
+                    cardController.refreshCard();
+                    break;
+                }
+            }
         }
     }
 

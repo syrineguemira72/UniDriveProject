@@ -62,6 +62,13 @@ public class ModifierTrajetController {
     private DetailTrajetController detailTrajetController;
 
 
+    public TextField getDepartField() {
+        return departField;
+    }
+
+    public TextField getArriveeField() {
+        return arriveeField;
+    }
     @FXML
     public void initialize() {
         // Add a delay to avoid triggering the calculation too frequently

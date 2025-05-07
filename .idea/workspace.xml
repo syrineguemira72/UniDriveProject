@@ -4,21 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="WALID style commit">
+    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="m commit">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/CentresInteretController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/HomePostControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/HomePostControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/HomeUniDriveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/HomeUniDriveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/TrajetCardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/TrajetCardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/tools/MyConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/tools/MyConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/CentresInteret.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,12 +29,12 @@
     &quot;assignee&quot;: &quot;walidismail1&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/syrineguemira72/UniDriveProject.git",
-    "accountId": "a965d9ea-b466-4764-8645-5f64ff29943c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/syrineguemira72/UniDriveProject.git&quot;,
+    &quot;accountId&quot;: &quot;17327638-1d40-44fd-8a2d-6e00ddc6d400&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -42,7 +42,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2to1cNfsWMS5Af3nNB0snvNxRzE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -99,7 +101,8 @@
       <workItem from="1741087332164" duration="536000" />
       <workItem from="1741088204870" duration="1634000" />
       <workItem from="1741089929911" duration="313000" />
-      <workItem from="1746601629431" duration="2757000" />
+      <workItem from="1741141826161" duration="7356000" />
+      <workItem from="1743859550029" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="WALID style commit">
       <option name="closed" value="true" />
@@ -133,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741090232760</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="m commit">
+      <option name="closed" value="true" />
+      <created>1741161936499</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741161936499</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +153,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nothing" />
     <MESSAGE value="WALID style commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="WALID style commit" />
+    <MESSAGE value="m commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="m commit" />
   </component>
 </project>
