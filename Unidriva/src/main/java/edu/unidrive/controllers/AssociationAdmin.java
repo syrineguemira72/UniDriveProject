@@ -1,8 +1,6 @@
 package edu.unidrive.controllers;
 
 import edu.unidrive.entities.Association;
-import edu.unidrive.entities.aide;
-import edu.unidrive.services.AideService;
 import edu.unidrive.services.AssociationService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,233 +22,191 @@ import java.util.Optional;
 
 public class AssociationAdmin {
 
-    @FXML
-    private TextField nomtextfield, adressetextfield, telephonetextfield, emailtextfield;
+    @FXML private TextField nomTextField;
+    @FXML private TextField adresseTextField;
+    @FXML private TextField telephoneTextField;
+    @FXML private TextField emailTextField;
+    @FXML private TextArea descriptionTextArea;
+    @FXML private TextField imageTextField;
 
-    @FXML
-    private TextField searchField;
+    @FXML private TextField searchField;
 
-    @FXML
-    private ChoiceBox<aide> aideChoiceBox;
-
-    @FXML
-    private TableView<Association> associationTable;
-
-    @FXML
-    private TableColumn<Association, Integer> idColumn;
-    @FXML
-    private TableColumn<Association, String> nomColumn, adresseColumn, telephoneColumn, emailColumn;
+    @FXML private TableView<Association> associationTable;
+    @FXML private TableColumn<Association, Integer> idColumn;
+    @FXML private TableColumn<Association, String> nomColumn;
+    @FXML private TableColumn<Association, String> adresseColumn;
+    @FXML private TableColumn<Association, String> telephoneColumn;
+    @FXML private TableColumn<Association, String> emailColumn;
+    @FXML private TableColumn<Association, String> descriptionColumn;
+    @FXML private TableColumn<Association, String> imageColumn;
 
     private AssociationService associationService;
-    private AideService aideService;
 
     public AssociationAdmin() {
-        associationService = new AssociationService();
-        aideService = new AideService();
+        this.associationService = new AssociationService();
     }
 
     @FXML
     private void initialize() {
-        // Set cell value factories for table columns
+        // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nomColumn.setCellValueFactory(new PropertyValueFactory<>("nom"));
         adresseColumn.setCellValueFactory(new PropertyValueFactory<>("adresse"));
         telephoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephone"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
 
-        loadData();  // Load data into the table
-        loadAideData();  // Load data for choice box
+        loadData();
 
-        // Create a filtered list for searching
+        // Setup search
         FilteredList<Association> filteredData = new FilteredList<>(associationTable.getItems(), p -> true);
-
-        // Add listener for search field text changes
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(association -> {
-                // If the search field is empty, return all associations
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                // Check if the fields contain the text input by the user (case-insensitive)
-                return association.getNom().toLowerCase().contains(lowerCaseFilter) ||
-                        association.getAdresse().toLowerCase().contains(lowerCaseFilter) ||
-                        association.getTelephone().toLowerCase().contains(lowerCaseFilter) ||
-                        association.getEmail().toLowerCase().contains(lowerCaseFilter) ||
-                        String.valueOf(association.getId()).contains(lowerCaseFilter) || // Check against the ID
-                        (association.getAideId() != null && String.valueOf(association.getAideId()).contains(lowerCaseFilter)); // Check against aideId
+        searchField.textProperty().addListener((obs, old, val) -> {
+            String filter = (val == null) ? "" : val.toLowerCase();
+            filteredData.setPredicate(assoc -> {
+                if (filter.isEmpty()) return true;
+                return assoc.getNom().toLowerCase().contains(filter)
+                        || assoc.getAdresse().toLowerCase().contains(filter)
+                        || assoc.getTelephone().toLowerCase().contains(filter)
+                        || assoc.getEmail().toLowerCase().contains(filter)
+                        || String.valueOf(assoc.getId()).contains(filter);
             });
         });
-
-        // Create a SortedList to allow sorting in the TableView
         SortedList<Association> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(associationTable.comparatorProperty());
         associationTable.setItems(sortedData);
 
-        // Add listener to populate fields when an association is selected from the table
-        associationTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                populateFields(newValue);  // Populate fields with selected association data
-            }
+        associationTable.getSelectionModel().selectedItemProperty().addListener((obs, old, selected) -> {
+            if (selected != null) populateFields(selected);
         });
     }
 
-
-
-    private void populateFields(Association association) {
-        nomtextfield.setText(association.getNom());
-        adressetextfield.setText(association.getAdresse());
-        telephonetextfield.setText(association.getTelephone());
-        emailtextfield.setText(association.getEmail());
-
-        for (aide a : aideChoiceBox.getItems()) {
-            if (a.getId() == association.getAideId()) {
-                aideChoiceBox.setValue(a);
-                break;
-            }
-        }
+    private void populateFields(Association assoc) {
+        nomTextField.setText(assoc.getNom());
+        adresseTextField.setText(assoc.getAdresse());
+        telephoneTextField.setText(assoc.getTelephone());
+        emailTextField.setText(assoc.getEmail());
+        descriptionTextArea.setText(assoc.getDescription());
+        imageTextField.setText(assoc.getImage());
     }
 
     private void loadData() {
-        List<Association> associations = associationService.getallData();
-        ObservableList<Association> associationList = FXCollections.observableArrayList(associations);
-        associationTable.setItems(associationList);
-    }
-
-    private void loadAideData() {
-        List<aide> aides = aideService.getallData();
-        ObservableList<aide> aideList = FXCollections.observableArrayList(aides);
-        aideChoiceBox.setItems(aideList);
-        aideChoiceBox.setConverter(new javafx.util.StringConverter<aide>() {
-            @Override
-            public String toString(aide aide) {
-                return aide != null ? String.valueOf(aide.getId()) : "";
-            }
-            @Override
-            public aide fromString(String string) {
-                return null;
-            }
-        });
+        List<Association> list = associationService.getallData();
+        ObservableList<Association> obsList = FXCollections.observableArrayList(list);
+        associationTable.setItems(obsList);
     }
 
     @FXML
     void ajouterAssociationAction(ActionEvent event) {
-        String nom = nomtextfield.getText();
-        String adresse = adressetextfield.getText();
-        String telephone = telephonetextfield.getText();
-        String email = emailtextfield.getText();
-        aide selectedAide = aideChoiceBox.getValue();
-        int aideId = selectedAide != null ? selectedAide.getId() : -1;
+        String nom = nomTextField.getText();
+        String adresse = adresseTextField.getText();
+        String telephone = telephoneTextField.getText();
+        String email = emailTextField.getText();
+        String description = descriptionTextArea.getText();
+        String image = imageTextField.getText();
 
         if (nom.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
-            showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
+            showAlert("Erreur", "Tous les champs obligatoires doivent être remplis.", Alert.AlertType.ERROR);
             return;
         }
-
         if (!telephone.matches("\\d{8}")) {
             showAlert("Erreur", "Le numéro de téléphone doit contenir exactement 8 chiffres.", Alert.AlertType.ERROR);
             return;
         }
-
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             showAlert("Erreur", "L'email doit être valide.", Alert.AlertType.ERROR);
             return;
         }
 
-        Association association = new Association(nom, adresse, telephone, email, aideId);
-        associationService.addEntity(association);
-        showAlert("Succès", "L'association a été ajoutée.", Alert.AlertType.INFORMATION);
+        Association assoc = new Association(nom, adresse, telephone, email, description, image);
+        associationService.addEntity(assoc);
+        showAlert("Succès", "Association ajoutée.", Alert.AlertType.INFORMATION);
         loadData();
+        clearFields();
     }
 
     @FXML
     void deleteSelectedRow(ActionEvent event) {
-        Association selectedAssociation = associationTable.getSelectionModel().getSelectedItem();
-        if (selectedAssociation != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Voulez-vous supprimer cette association?", ButtonType.YES, ButtonType.NO);
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.YES) {
-                associationService.deleteEntity(selectedAssociation.getId(), selectedAssociation);
-                loadData();
-                showAlert("Succès", "Association supprimée.", Alert.AlertType.INFORMATION);
-            }
-        } else {
-            showAlert("Erreur", "Veuillez sélectionner une association à supprimer.", Alert.AlertType.ERROR);
-        }
-    }
-    @FXML
-    void updateAction(ActionEvent event) {
-        Association selectedAssociation = associationTable.getSelectionModel().getSelectedItem();
-        if (selectedAssociation == null) {
+        Association selected = associationTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
             showAlert("Erreur", "Veuillez sélectionner une association.", Alert.AlertType.ERROR);
             return;
         }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION, "Supprimer cette association?", ButtonType.YES, ButtonType.NO);
+        Optional<ButtonType> res = confirm.showAndWait();
+        if (res.isPresent() && res.get() == ButtonType.YES) {
+            associationService.deleteEntity(selected.getId(), selected);
+            showAlert("Succès", "Association supprimée.", Alert.AlertType.INFORMATION);
+            loadData();
+        }
+    }
 
-        String nom = nomtextfield.getText();
-        String adresse = adressetextfield.getText();
-        String telephone = telephonetextfield.getText();
-        String email = emailtextfield.getText();
-
-        // Validation des champs obligatoires
-        if (nom.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
-            showAlert("Erreur", "Tous les champs doivent être remplis.", Alert.AlertType.ERROR);
+    @FXML
+    void updateAction(ActionEvent event) {
+        Association selected = associationTable.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Erreur", "Veuillez sélectionner une association.", Alert.AlertType.ERROR);
             return;
         }
+        String nom = nomTextField.getText();
+        String adresse = adresseTextField.getText();
+        String telephone = telephoneTextField.getText();
+        String email = emailTextField.getText();
+        String description = descriptionTextArea.getText();
+        String image = imageTextField.getText();
 
-        // Validation du numéro de téléphone (8 chiffres)
+        if (nom.isEmpty() || adresse.isEmpty() || telephone.isEmpty() || email.isEmpty()) {
+            showAlert("Erreur", "Tous les champs obligatoires doivent être remplis.", Alert.AlertType.ERROR);
+            return;
+        }
         if (!telephone.matches("\\d{8}")) {
             showAlert("Erreur", "Le numéro de téléphone doit contenir exactement 8 chiffres.", Alert.AlertType.ERROR);
             return;
         }
-
-        // Validation du format de l'email
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-            showAlert("Erreur", "L'email doit être dans un format valide (ex: exemple@domaine.com).", Alert.AlertType.ERROR);
+            showAlert("Erreur", "L'email doit être valide.", Alert.AlertType.ERROR);
             return;
         }
 
-            // Mise à jour du Association
-            selectedAssociation.setNom(nom);
-            selectedAssociation.setAdresse(adresse);
-            selectedAssociation.setTelephone(telephone);
-            selectedAssociation.setEmail(email);
+        selected.setNom(nom);
+        selected.setAdresse(adresse);
+        selected.setTelephone(telephone);
+        selected.setEmail(email);
+        selected.setDescription(description);
+        selected.setImage(image);
 
-            // Mise à jour de l'aide sélectionnée
-            aide selectedAide = aideChoiceBox.getValue();
-            if (selectedAide != null) {
-                selectedAssociation.setAideId(selectedAide.getId());
-            } else {
-                selectedAssociation.setAideId(null);
-            }
-
-            // Mise à jour dans la base de données
-            associationService.updateEntity(selectedAssociation.getId(), selectedAssociation);
-            showAlert("Succès", "Association mis à jour avec succès.", Alert.AlertType.INFORMATION);
-            loadData();
-
+        associationService.updateEntity(selected.getId(), selected);
+        showAlert("Succès", "Association mise à jour.", Alert.AlertType.INFORMATION);
+        loadData();
     }
+
     @FXML
     void goToBack(ActionEvent event) {
-        // Load the new FXML file
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AideAdminPage.fxml"));
         try {
-            // Load the new page and set it as the root
-            Parent root = fxmlLoader.load();
-            // Set the new scene
+            Parent root = FXMLLoader.load(getClass().getResource("/AideAdminPage.fxml"));
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Erreur de navigation : " + e.getMessage());
+            System.err.println("Navigation error: " + e.getMessage());
         }
     }
-    private void showAlert(String title, String content, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
+
+    private void clearFields() {
+        nomTextField.clear();
+        adresseTextField.clear();
+        telephoneTextField.clear();
+        emailTextField.clear();
+        descriptionTextArea.clear();
+        imageTextField.clear();
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText(content);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

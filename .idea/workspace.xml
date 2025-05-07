@@ -4,18 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="WALID style commit">
+    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="walid table association change">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/BeneficiaireAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Beneficiaire.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/BeneficiaireService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/BeneficiaireAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/aide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/aide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AideService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/PaymentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/AideAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AideAdminPage.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaFXApplication" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -60,23 +73,11 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.externalResources&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="UniDrive" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="UniDrive" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UpgradeSpringBoot_3_1" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
       <option name="activeRecipes" value="org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1" />
       <option name="workingDirectory" value="$PROJECT_DIR$/Unidriva" />
@@ -109,6 +110,12 @@
       <workItem from="1741087332164" duration="536000" />
       <workItem from="1741088204870" duration="1634000" />
       <workItem from="1741089929911" duration="313000" />
+      <workItem from="1746362976477" duration="665000" />
+      <workItem from="1746536025061" duration="414000" />
+      <workItem from="1746551171874" duration="5500000" />
+      <workItem from="1746607519785" duration="2865000" />
+      <workItem from="1746612904002" duration="523000" />
+      <workItem from="1746620312230" duration="460000" />
     </task>
     <task id="LOCAL-00001" summary="WALID style commit">
       <option name="closed" value="true" />
@@ -142,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741090232760</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="walid table association change">
+      <option name="closed" value="true" />
+      <created>1742474105658</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742474105658</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +166,11 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nothing" />
     <MESSAGE value="WALID style commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="WALID style commit" />
+    <MESSAGE value="walid table association change" />
+    <option name="LAST_COMMIT_MESSAGE" value="walid table association change" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

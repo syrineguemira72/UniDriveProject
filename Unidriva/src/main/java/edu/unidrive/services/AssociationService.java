@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AssociationService implements Iservice<Association> {
-
     private Connection cnx;
 
     public AssociationService() {
@@ -17,136 +16,126 @@ public class AssociationService implements Iservice<Association> {
     }
 
     @Override
-    public void add(Association entity) {
+    public void addEntity(Association assoc) {
+        String sql = "INSERT INTO association (nom, adresse, telephone, email, description, image) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement pst = cnx.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pst.setString(1, assoc.getNom());
+            pst.setString(2, assoc.getAdresse());
+            pst.setString(3, assoc.getTelephone());
+            pst.setString(4, assoc.getEmail());
+            pst.setString(5, assoc.getDescription());
+            pst.setString(6, assoc.getImage());
 
+            pst.executeUpdate();
+            try (ResultSet keys = pst.getGeneratedKeys()) {
+                if (keys.next()) {
+                    assoc.setId(keys.getInt(1));
+                }
+            }
+            System.out.println("Association ajoutée avec succès (ID=" + assoc.getId() + ")");
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de l'ajout de l'association: " + e.getMessage());
+        }
     }
 
     @Override
-    public void remove(Association entity) {
-
+    public void deleteEntity(int id, Association assoc) {
+        String sql = "DELETE FROM association WHERE id = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(sql)) {
+            pst.setInt(1, id);
+            int affected = pst.executeUpdate();
+            if (affected > 0) {
+                System.out.println("Association supprimée (ID=" + id + ")");
+            } else {
+                System.out.println("Aucune association trouvée pour l'ID=" + id);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la suppression de l'association: " + e.getMessage());
+        }
     }
 
     @Override
-    public void update(Association entity) {
+    public void updateEntity(int id, Association assoc) {
+        String sql = "UPDATE association SET nom = ?, adresse = ?, telephone = ?, email = ?, description = ?, image = ? WHERE id = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(sql)) {
+            pst.setString(1, assoc.getNom());
+            pst.setString(2, assoc.getAdresse());
+            pst.setString(3, assoc.getTelephone());
+            pst.setString(4, assoc.getEmail());
+            pst.setString(5, assoc.getDescription());
+            pst.setString(6, assoc.getImage());
+            pst.setInt(7, id);
 
+            int affected = pst.executeUpdate();
+            if (affected > 0) {
+                System.out.println("Association mise à jour (ID=" + id + ")");
+            } else {
+                System.out.println("Aucune association trouvée pour l'ID=" + id);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la mise à jour de l'association: " + e.getMessage());
+        }
     }
 
     @Override
     public List<Association> getAllData() {
-        return List.of();
-    }
-
-    @Override
-    public void removeEntity(Association entity) {
-
-    }
-
-    @Override
-    public void updateEntity(Association entity) {
-
-    }
-
-    @Override
-    public void addEntity(Association association) {
-        String requete = "INSERT INTO association (nom, adresse, telephone, email, aide_id) VALUES (?, ?, ?, ?, ?)";
-
-        try (PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS)) {
-            pst.setString(1, association.getNom());
-            pst.setString(2, association.getAdresse());
-            pst.setString(3, association.getTelephone());
-            pst.setString(4, association.getEmail());
-            pst.setInt(5, association.getAideId());  // Set the aide_id
-
-            pst.executeUpdate();
-            System.out.println("Association ajouté avec succès!");
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de l'ajout: " + e.getMessage());
-        }
-    }
-
-
-    @Override
-    public void deleteEntity(int id, Association association) {
-        String requete = "DELETE FROM association WHERE id = ?";
-
-        try (PreparedStatement pst = cnx.prepareStatement(requete)) {
-            pst.setInt(1, id);
-            int rowsAffected = pst.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Association supprimé avec succès!");
-            } else {
-                System.out.println("Aucune association trouvé avec cet ID.");
+        List<Association> list = new ArrayList<>();
+        String sql = "SELECT * FROM association";
+        try (Statement st = cnx.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                Association assoc = new Association(
+                        rs.getString("nom"),
+                        rs.getString("adresse"),
+                        rs.getString("telephone"),
+                        rs.getString("email"),
+                        rs.getString("description"),
+                        rs.getString("image")
+                );
+                assoc.setId(rs.getInt("id"));
+                list.add(assoc);
             }
         } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression: " + e.getMessage());
+            System.err.println("Erreur lors de la récupération des associations: " + e.getMessage());
         }
+        return list;
     }
-
-    @Override
-    public void updateEntity(int id, Association association) {
-        String requete = "UPDATE association SET nom = ?, adresse = ?, telephone = ?, email = ?, aide_id = ? WHERE id = ?";
-
-        try (PreparedStatement pst = cnx.prepareStatement(requete)) {
-            pst.setString(1, association.getNom());
-            pst.setString(2, association.getAdresse());
-            pst.setString(3, association.getTelephone());
-            pst.setString(4, association.getEmail());
-
-            // Correctly handle aide_id (can be NULL)
-            if (association.getAideId() == null) {
-                pst.setNull(5, java.sql.Types.INTEGER);
-            } else {
-                pst.setInt(5, association.getAideId());
-            }
-
-            pst.setInt(6, id);
-
-            int rowsAffected = pst.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Association mis à jour avec succès!");
-            } else {
-                System.out.println("Aucun Assocation trouvé avec cet ID.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la mise à jour: " + e.getMessage());
-        }
-    }
-
-
-
 
     @Override
     public List<Association> getallData() {
-        List<Association> result = new ArrayList<>();
-        String requete = "SELECT * FROM association";
-
-        try (Statement st = cnx.createStatement();
-             ResultSet rs = st.executeQuery(requete)) {
-
-            while (rs.next()) {
-                Association b = new Association();
-                b.setId(rs.getInt("id"));
-                b.setNom(rs.getString("nom"));
-                b.setAdresse(rs.getString("adresse"));
-                b.setTelephone(rs.getString("telephone"));
-                b.setEmail(rs.getString("email"));
-                b.setAideId(rs.getInt("aide_id"));  // Retrieve the aide_id
-                result.add(b);
-            }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la récupération des données: " + e.getMessage());
-        }
-        return result;
+        return getAllData();
     }
 
     @Override
     public Association getEntity(int id) {
+        String sql = "SELECT * FROM association WHERE id = ?";
+        try (PreparedStatement pst = cnx.prepareStatement(sql)) {
+            pst.setInt(1, id);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    Association assoc = new Association(
+                            rs.getString("nom"),
+                            rs.getString("adresse"),
+                            rs.getString("telephone"),
+                            rs.getString("email"),
+                            rs.getString("description"),
+                            rs.getString("image")
+                    );
+                    assoc.setId(rs.getInt("id"));
+                    return assoc;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération de l'association: " + e.getMessage());
+        }
         return null;
     }
 
-    @Override
-    public void deleteEntity(Association association) {
-
-    }
-
+    // Legacy interface methods delegate to modern implementations
+    @Override public void add(Association entity) { addEntity(entity); }
+    @Override public void remove(Association entity) { deleteEntity(entity.getId(), entity); }
+    @Override public void update(Association entity) { updateEntity(entity.getId(), entity); }
+    @Override public void removeEntity(Association entity) { deleteEntity(entity.getId(), entity); }
+    @Override public void updateEntity(Association entity) { updateEntity(entity.getId(), entity); }
+    @Override public void deleteEntity(Association entity) { deleteEntity(entity.getId(), entity); }
 }
