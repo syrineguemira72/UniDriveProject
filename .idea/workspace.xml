@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="walid table association change">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="m commit">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AideAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AjouterAide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/AssociationAdmin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/Association.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/aide.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/entities/aide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AideService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/AssociationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/services/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/AideAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AideAdminPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/AssociationAdminPage.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaFXApplication" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -42,7 +32,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/syrineguemira72/UniDriveProject.git&quot;,
-    &quot;accountId&quot;: &quot;334d85d5-2725-48db-b835-a172f734a6a0&quot;
+    &quot;accountId&quot;: &quot;17327638-1d40-44fd-8a2d-6e00ddc6d400&quot;
   }
 }</component>
   <component name="ProblemsViewState">
@@ -52,7 +42,9 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2to1cNfsWMS5Af3nNB0snvNxRzE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,7 +65,6 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.externalResources&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -110,12 +101,8 @@
       <workItem from="1741087332164" duration="536000" />
       <workItem from="1741088204870" duration="1634000" />
       <workItem from="1741089929911" duration="313000" />
-      <workItem from="1746362976477" duration="665000" />
-      <workItem from="1746536025061" duration="414000" />
-      <workItem from="1746551171874" duration="5500000" />
-      <workItem from="1746607519785" duration="2865000" />
-      <workItem from="1746612904002" duration="523000" />
-      <workItem from="1746620312230" duration="460000" />
+      <workItem from="1741141826161" duration="7356000" />
+      <workItem from="1743859550029" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="WALID style commit">
       <option name="closed" value="true" />
@@ -149,13 +136,13 @@
       <option name="project" value="LOCAL" />
       <updated>1741090232760</updated>
     </task>
-    <task id="LOCAL-00005" summary="walid table association change">
+    <task id="LOCAL-00005" summary="m commit">
       <option name="closed" value="true" />
-      <created>1742474105658</created>
+      <created>1741161936499</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1742474105658</updated>
+      <updated>1741161936499</updated>
     </task>
     <option name="localTasksCounter" value="6" />
     <servers />
@@ -166,11 +153,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="nothing" />
     <MESSAGE value="WALID style commit" />
-    <MESSAGE value="walid table association change" />
-    <option name="LAST_COMMIT_MESSAGE" value="walid table association change" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
+    <MESSAGE value="m commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="m commit" />
   </component>
 </project>

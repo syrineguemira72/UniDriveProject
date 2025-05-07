@@ -23,7 +23,7 @@ public class AjouterPostControllers {
 
     private edu.unidrive.controllers.HomePostControllers homePostControllers;
     private final TextFilterService textFilterService = new TextFilterService();
-    private final PostService postService = new PostService(); // Déclarer postService
+    private final PostService postService = new PostService();
 
     public void setHomePostControllers(edu.unidrive.controllers.HomePostControllers homePostControllers) {
         this.homePostControllers = homePostControllers;
@@ -49,11 +49,9 @@ public class AjouterPostControllers {
         }
 
 
-        // Filtrer les mots inappropriés dans le titre et la description
         String filteredTitle = textFilterService.filterBadWords(title);
         String filteredDescription = textFilterService.filterBadWords(description);
 
-        // Créer un nouveau post avec le texte filtré
         Post post = new Post(filteredTitle, filteredDescription);
         PostService postservice = new PostService();
         postService.addEntity(post);

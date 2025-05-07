@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -86,6 +87,14 @@ public class CreerTrajetController {
             if (newValue != null) {
                 arriveeField.setText(newValue);
                 arriveeSuggestionsListView.getItems().clear();
+            }
+        });
+
+        // Add a listener to the date picker to prevent selecting a past date
+        dateDepartPicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && newValue.isBefore(LocalDate.now())) {
+                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
+                dateDepartPicker.setValue(LocalDate.now()); // Reset to today's date
             }
         });
     }
@@ -172,6 +181,12 @@ public class CreerTrajetController {
                     placesDisponiblesField.getText().isEmpty() || distanceField.getText().isEmpty() ||
                     dureeEstimeeField.getText().isEmpty()) {
                 showAlert("Erreur", "Veuillez remplir tous les champs.", Alert.AlertType.ERROR);
+                return;
+            }
+
+            // Validate that the selected date is not in the past
+            if (dateDepartPicker.getValue().isBefore(LocalDate.now())) {
+                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
                 return;
             }
 

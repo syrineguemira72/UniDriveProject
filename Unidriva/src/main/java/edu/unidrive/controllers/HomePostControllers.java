@@ -76,9 +76,9 @@ public class HomePostControllers {
     public void checkAdminAccess() {
         if (jwtToken != null) {
             boolean isAdmin = isAdmin(jwtToken);
-            btnadmin.setVisible(isAdmin); // Afficher ou masquer le bouton Admin en fonction du rôle
+            btnadmin.setVisible(isAdmin);
         } else {
-            btnadmin.setVisible(false); // Masquer le bouton Admin si l'utilisateur n'est pas authentifié
+            btnadmin.setVisible(false);
         }
     }
     @FXML
@@ -98,13 +98,14 @@ public class HomePostControllers {
 
     @FXML
     public void initialize() {
+        // Vérifier d'abord si l'utilisateur est admin
         boolean isAdmin = isAdmin(jwtToken);
+        btnadmin.setVisible(isAdmin);
 
+        // Si l'utilisateur n'est pas admin, vérifier les centres d'intérêt
         if (!isAdmin) {
-            // Vérifier si l'utilisateur a déjà des centres d'intérêt
-            int userId = getCurrentUserId(); // Récupérer l'ID de l'utilisateur connecté
+            int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
-                // Rediriger l'utilisateur vers l'interface de saisie des centres d'intérêt
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
                     Parent root = fxmlLoader.load();
@@ -113,12 +114,13 @@ public class HomePostControllers {
                 } catch (IOException e) {
                     System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
                 }
-            } else {
-                // Charger la liste des posts
-                refreshPostList();
             }
         }
 
+        // Charger les posts dans tous les cas (admin ou utilisateur avec centres d'intérêt)
+        refreshPostList();
+
+        // Configurer la ListView
         postListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Post> call(ListView<Post> param) {
@@ -142,7 +144,7 @@ public class HomePostControllers {
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Ajoutercommentaire.fxml"));
                                     Parent root = fxmlLoader.load();
 
-                                    edu.unidrive.controllers.Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
+                                    Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
                                     ajouterCommentaireControllers.setPostId(post.getId());
 
                                     postListView.getScene().setRoot(root);
@@ -258,7 +260,7 @@ public class HomePostControllers {
 
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 52; // Fallback si email non trouvé
+            return 49;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -266,21 +268,18 @@ public class HomePostControllers {
             pst.setString(1, currentUserEmail);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt("id"); // Retourne le vrai ID
+                return rs.getInt("id");
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 52; // Fallback en cas d'erreur
+        return 49;
     }
     @FXML
     void goToBack(ActionEvent event) {
-        // Load the new FXML file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
         try {
-            // Load the new page and set it as the root
             Parent root = fxmlLoader.load();
-            // Set the new scene
             Scene scene = new Scene(root);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(scene);

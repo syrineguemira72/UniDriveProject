@@ -1,6 +1,4 @@
-/* styleforum.css */
 
-/* Palette de couleurs */
 .root {
     -fx-primary: #2A2D43;
     -fx-secondary: #44BBA4;
@@ -10,7 +8,6 @@
     -fx-background-color: #f5f5f5;
 }
 
-/* Styles communs pour les formulaires */
 .form-section {
     -fx-background-color: rgba(255, 255, 255, 0.95);
     -fx-border-radius: 15;
@@ -59,7 +56,6 @@
     -fx-translate-y: -1px;
 }
 
-/* Section Logo */
 .logo-section {
     -fx-background-color: linear-gradient(to bottom right, #2A2D43, #1A1C26);
     -fx-border-radius: 15;
@@ -67,13 +63,11 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
 }
 
-/* ImageView styling */
 .image-view {
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0.3, 0, 0);
     -fx-background-radius: 15;
 }
 
-/* TextArea multi-ligne */
 .text-area {
     -fx-background-color: #f8f9fa;
     -fx-border-color: #dee2e6;
@@ -96,16 +90,13 @@
     -fx-animation: fade-in 0.4s ease-out;
 }
 
-/* Styles spécifiques pour les titres */
 .section-title {
     -fx-font-size: 24px;
     -fx-text-fill: -fx-primary;
     -fx-font-weight: 800;
     -fx-padding: 0 0 20 0;
 }
-/* Ajoutez ces styles à votre fichier styleforum.css */
 
-/* Style général pour tous les boutons */
 .button {
     -fx-background-radius: 15px;
     -fx-font-weight: bold;
@@ -113,7 +104,6 @@
     -fx-transition: all 0.3s ease;
 }
 
-/* Bouton Back */
 .back-button {
     -fx-background-color: #4A90E2; /* Bleu moderne */
     -fx-text-fill: white;
@@ -124,7 +114,6 @@
     -fx-background-color: #357ABD;
 }
 
-/* Bouton Admin */
 #btnadmin {
     -fx-background-color: #9B59B6; /* Violet */
     -fx-text-fill: white;
@@ -134,46 +123,39 @@
     -fx-background-color: #8E44AD;
 }
 
-/* Boutons d'action */
 .hbox .button {
     -fx-min-width: 100px;
-    -fx-padding: 10px 0px;
-    -fx-font-size: 10px;
+    -fx-padding: 10px 20px;
+    -fx-font-size: 14px;
 }
 
-/* Bouton Poster */
 .post-button {
     -fx-background-color: #2ECC71; /* Vert */
     -fx-text-fill: white;
 }
-/* Bouton Modifier */
 .edit-button {
     -fx-background-color: #F1C40F; /* Jaune doré */
     -fx-text-fill: black;
 }
 
-/* Bouton Supprimer */
 .delete-button {
     -fx-background-color: #E74C3C; /* Rouge */
     -fx-text-fill: white;
 }
 
 
-/* Effets hover */
 .hbox .button:hover {
     -fx-opacity: 0.9;
     -fx-scale-x: 1.05;
     -fx-scale-y: 1.05;
 }
 
-/* Titre */
 #homepage {
     -fx-text-fill: #2C3E50;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
-/* Style du conteneur principal */
 .admin-container {
     -fx-padding: 20px;
     -fx-background-color: -fx-light;
@@ -182,7 +164,6 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
 }
 
-/* Personnalisation de la ListView */
 .admin-listview {
     -fx-background-color: rgba(244, 247, 246, 0.1);
     -fx-border-color: -fx-accent;
@@ -200,9 +181,26 @@
     -fx-background-color: rgba(231, 76, 60, 0.1);
 }
 
-
+.delete-button {
+    -fx-background-color: linear-gradient(to right, #E74C3C, #C0392B);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 25px;
+    -fx-font-size: 14px;
+}
 
 .delete-button:hover {
     -fx-background-color: linear-gradient(to right, #C0392B, #A93226);
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 0);
+
+}
+.action-button {
+    -fx-pref-width: 110px; /* Largeur uniforme */
+    -fx-padding: 8px 12px;
+    -fx-font-size: 13px;
+    -fx-graphic-text-gap: 8px;
+}
+.action-button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

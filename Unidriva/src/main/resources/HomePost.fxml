@@ -1,74 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.HomePostControllers">
-    <Button layoutX="14.0" layoutY="14.0" onAction="#goToBack" styleClass="back-button" text="Back">
-        <graphic>
-            <ImageView fitHeight="20" fitWidth="20">
-                <image>
-                    <Image url="@images/back-arrow.png" />
-                </image>
-            </ImageView>
-        </graphic>
-    </Button>
-    <Button fx:id="btnadmin" ellipsisString="" layoutX="508.0" layoutY="12.0" onAction="#admin" text="Admin">
-        <graphic>
-            <ImageView fitHeight="20" fitWidth="20">
-                <image>
-                    <Image url="@images/admin-shield.png" />
-                </image>
-            </ImageView>
-        </graphic>
-    </Button>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="edu.unidrive.controllers.HomePostControllers">
 
     <stylesheets>
         <URL value="@Css/styleforum.css" />
     </stylesheets>
-    <children>
-        <Label fx:id="homepage" layoutX="181.0" layoutY="14.0" prefHeight="30.0" prefWidth="199.0" text="Bienvenue dans Notre Forum" textAlignment="CENTER">
-            <font>
-                <Font size="19.0" />
-            </font></Label>
 
-        <ListView fx:id="postListView" layoutX="22.0" layoutY="56.0" prefHeight="287.0" prefWidth="556.0" />
+    <Button styleClass="back-button" layoutX="20" layoutY="20">
 
-        <HBox layoutX="140.0" layoutY="350.0" prefHeight="30.0" prefWidth="630.0" spacing="5">
-            <Button styleClass="post-button"  mnemonicParsing="false" onAction="#createe" prefHeight="15.0" prefWidth="140.0" text="Poster" >
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20">
-                        <image>
-                            <Image url="@images/plus.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button styleClass="edit-button" mnemonicParsing="false" onAction="#updatee" prefHeight="15.0" prefWidth="140.0" text="Modifier" >
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20">
-                        <image>
-                            <Image url="@images/stylo.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
-            <Button  styleClass="delete-button" mnemonicParsing="false" onAction="#removee" prefHeight="15.0" prefWidth="140.0" text="supprimer" >
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20">
-                        <image>
-                            <Image url="@images/trash-bin.png" />
-                        </image>
-                    </ImageView>
-                </graphic>
-            </Button>
-        </HBox>
-    </children>
+    </Button>
+
+    <Button fx:id="btnadmin" styleClass="admin-button" layoutX="520" layoutY="20">
+
+    </Button>
+
+    <Label fx:id="homepage" styleClass="page-title" layoutX="200" layoutY="20" text="Bienvenue dans Notre Forum" />
+
+    <ListView fx:id="postListView" styleClass="main-listview" layoutX="20" layoutY="70" prefHeight="280" prefWidth="560" />
+
+    <HBox layoutX="150" layoutY="350" spacing="15" alignment="CENTER">
+        <Button styleClass="action-button post-button" onAction="#createe" text="Poster">
+
+        </Button>
+
+        <Button styleClass="action-button edit-button" onAction="#updatee" text="Modifier">
+
+        </Button>
+
+        <Button styleClass="action-button delete-button" onAction="#removee" text="Supprimer">
+
+        </Button>
+    </HBox>
+
 </AnchorPane>

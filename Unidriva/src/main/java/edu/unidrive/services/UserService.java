@@ -56,16 +56,9 @@ public class UserService implements Iservice<Utilisateur> {
         }
         return utilisateur;
     }
-    public int getUserIdByEmail(String email) {
 
 
-        Utilisateur user1 = getUserByEmail(email);
-        if (user1 != null) {
-            return user1.getId(); // Retourner l'ID de l'utilisateur
-        } else {
-            throw new RuntimeException("Utilisateur non trouvé avec l'email : " + email);
-        }
-    }
+
 
     public void add(Utilisateur utilisateur) {
         String requete = "INSERT INTO utilisateur (email, dob, gender, firstname, lastname, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)";
