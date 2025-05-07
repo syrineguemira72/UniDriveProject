@@ -171,7 +171,7 @@ public class HomeUniDriveController {
             int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
                 try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/CentresInteret.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
                     Parent root = fxmlLoader.load();
                     btnforum.getScene().setRoot(root);
                     return;

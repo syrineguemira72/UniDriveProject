@@ -89,14 +89,6 @@ public class CreerTrajetController {
                 arriveeSuggestionsListView.getItems().clear();
             }
         });
-
-        // Add a listener to the date picker to prevent selecting a past date
-        dateDepartPicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null && newValue.isBefore(LocalDate.now())) {
-                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
-                dateDepartPicker.setValue(LocalDate.now()); // Reset to today's date
-            }
-        });
     }
 
     private void fetchAutocompleteSuggestions(String input, ListView<String> suggestionsListView) {
@@ -181,12 +173,6 @@ public class CreerTrajetController {
                     placesDisponiblesField.getText().isEmpty() || distanceField.getText().isEmpty() ||
                     dureeEstimeeField.getText().isEmpty()) {
                 showAlert("Erreur", "Veuillez remplir tous les champs.", Alert.AlertType.ERROR);
-                return;
-            }
-
-            // Validate that the selected date is not in the past
-            if (dateDepartPicker.getValue().isBefore(LocalDate.now())) {
-                showAlert("Erreur", "Vous ne pouvez pas sélectionner une date passée.", Alert.AlertType.ERROR);
                 return;
             }
 

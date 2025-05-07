@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="m commit">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/images/unidrive_logo.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/CreerTrajetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/CreerTrajetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/CreerTrajet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/CreerTrajet.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,17 +59,23 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/UnidriveApp&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/khale/IdeaProjects/UniDriveFinal/Unidriva/src/main/resources/images&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;xml.catalog&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\khale\IdeaProjects\UniDriveFinal\Unidriva\src\main\resources\images" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="UpgradeSpringBoot_3_1" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
       <option name="activeRecipes" value="org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1" />
@@ -103,6 +111,10 @@
       <workItem from="1741089929911" duration="313000" />
       <workItem from="1741141826161" duration="7356000" />
       <workItem from="1743859550029" duration="11000" />
+      <workItem from="1746617522237" duration="3008000" />
+      <workItem from="1746620635128" duration="2332000" />
+      <workItem from="1746623089373" duration="2689000" />
+      <workItem from="1746625948142" duration="975000" />
     </task>
     <task id="LOCAL-00001" summary="WALID style commit">
       <option name="closed" value="true" />
@@ -155,5 +167,9 @@
     <MESSAGE value="WALID style commit" />
     <MESSAGE value="m commit" />
     <option name="LAST_COMMIT_MESSAGE" value="m commit" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
