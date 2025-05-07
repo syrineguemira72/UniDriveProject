@@ -16,7 +16,6 @@
    <children>
       <BorderPane layoutX="-1.0" prefHeight="479.0" prefWidth="634.0">
 
-         <!-- Barre du haut -->
          <top>
             <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="115.0" prefWidth="634.0" style="-fx-background-color: #cef0ef;" BorderPane.alignment="CENTER">
 
@@ -48,7 +47,6 @@
             </HBox>
          </top>
 
-         <!-- Menu latéral gauche -->
          <left>
             <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="250.0" style="-fx-background-color: #cef0ef;" BorderPane.alignment="CENTER">
 
@@ -132,7 +130,6 @@
             </VBox>
          </left>
 
-         <!-- Zone centrale -->
          <center>
             <Label text="Welcome to UniDrive " BorderPane.alignment="CENTER">
                <font>

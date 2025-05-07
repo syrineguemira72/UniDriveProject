@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Unidrive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 10px 0;
+            background-color:  #cef0ef;
+            color: #000000;
+            border-radius: 8px 8px 0 0;
+        }
+        .header img {
+            max-width: 350px;
+            height: auto;
+        }
+        .content {
+            padding: 20px;
+            color: #333333;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777777;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color:  #cef0ef;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <img src="cid:logo123" alt="Unidrive Logo" style="max-width: 120px; display: block; margin: auto;">
+        <h1>Welcome to Unidrive!</h1>
+    </div>
+    <div class="content">
+        <p>Dear {{firstname}},</p>
+        <p>We are thrilled to welcome you to Unidrive! Our platform is designed to make your experience seamless and enjoyable.</p>
+        <p>Feel free to explore all the features we offer. If you have any questions, don't hesitate to contact us.</p>
+    </div>
+    <div class="footer">
+        <p>Best regards,</p>
+        <p>The Unidrive Team</p>
+    </div>
+</div>
+</body>
+</html>

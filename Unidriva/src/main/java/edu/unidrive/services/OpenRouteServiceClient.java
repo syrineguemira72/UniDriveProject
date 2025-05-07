@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class OpenRouteServiceClient implements IDistanceService {
@@ -65,6 +67,38 @@ public class OpenRouteServiceClient implements IDistanceService {
     }
 
     @Override
+    public List<String> getAutocompleteSuggestions(String input) throws IOException {
+        String encodedInput = URLEncoder.encode(input, "UTF-8");
+        String urlString = "https://api.openrouteservice.org/geocode/autocomplete?api_key=" + API_KEY + "&text=" + encodedInput;
+        URL url = new URL(urlString);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/json");
+
+        StringBuilder response = new StringBuilder();
+        try (Scanner scanner = new Scanner(url.openStream())) {
+            while (scanner.hasNext()) {
+                response.append(scanner.nextLine());
+            }
+        }
+
+        // Parse the JSON response
+        JSONObject jsonResponse = new JSONObject(response.toString());
+        JSONArray features = jsonResponse.getJSONArray("features");
+
+        // Extract location names from the features
+        List<String> suggestions = new ArrayList<>();
+        for (int i = 0; i < features.length(); i++) {
+            JSONObject feature = features.getJSONObject(i);
+            String name = feature.getJSONObject("properties").getString("label");
+            suggestions.add(name);
+        }
+
+        return suggestions;
+    }
+
+    @Override
     public double[] getCoordinates(String cityName) throws IOException {
         String encodedCityName = URLEncoder.encode(cityName, "UTF-8");
         String urlString = "https://api.openrouteservice.org/geocode/search?api_key=" + API_KEY + "&text=" + encodedCityName;
@@ -81,11 +115,14 @@ public class OpenRouteServiceClient implements IDistanceService {
             }
         }
 
+        // Debug: Print the API response
+        System.out.println("API Response for " + cityName + ": " + response.toString());
+
         JSONObject jsonResponse = new JSONObject(response.toString());
         JSONArray features = jsonResponse.getJSONArray("features");
 
         if (features.length() == 0) {
-            throw new IOException("No coordinates found for: " + cityName);
+            return null; // Location not recognized
         }
 
         JSONObject firstFeature = features.getJSONObject(0);

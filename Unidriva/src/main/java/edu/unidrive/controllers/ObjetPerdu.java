@@ -41,13 +41,13 @@ import java.util.logging.Logger;
 public class ObjetPerdu implements Initializable{
 
     @FXML
-    private TableColumn<?, ?> User;
+    private TableColumn User;
     @FXML
     private AnchorPane recpane;
 
 
     @FXML
-    private TableColumn<?, ?> description;
+    private TableColumn description;
 
     @FXML
     private TextField desctf;
@@ -60,21 +60,21 @@ public class ObjetPerdu implements Initializable{
     private TextField filterField;
 
     @FXML
-    private TableColumn<?, ?> nom;
+    private TableColumn nom;
 
     @FXML
-    private TableColumn<?, ?> idcol;
+    private TableColumn idcol;
 
     @FXML
     private TextField nomtf;
 
     @FXML
-    private TableView<Objet> recTab;
+    private TableView recTab;
 
     @FXML
-    private TableColumn<?, ?> status;
+    private TableColumn status;
     @FXML
-    private TableColumn<?, ?> dateCol;
+    private TableColumn dateCol;
 
     @FXML
     void NavRecompense(ActionEvent event) throws IOException {

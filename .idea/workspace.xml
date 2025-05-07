@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="7f6ca83f-dd95-4b66-b1eb-426b176185ce" name="Changes" comment="" />
+=======
+    <list default="true" id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="m commit">
+      <change afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/images/unidrive_logo.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/CreerTrajetController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/java/edu/unidrive/controllers/CreerTrajetController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unidriva/src/main/resources/CreerTrajet.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Unidriva/src/main/resources/CreerTrajet.fxml" afterDir="false" />
+    </list>
+>>>>>>> 7984c08ba985d551b034737da9d40bd1ac70b42c
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,6 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
     "state": "OPEN",
@@ -44,10 +54,35 @@
 }]]></component>
   <component name="ProjectId" id="2to2MK4XCHdbSdBBErKN7tuktyw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+=======
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;walidismail1&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/syrineguemira72/UniDriveProject.git&quot;,
+    &quot;accountId&quot;: &quot;17327638-1d40-44fd-8a2d-6e00ddc6d400&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2to1cNfsWMS5Af3nNB0snvNxRzE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+>>>>>>> 7984c08ba985d551b034737da9d40bd1ac70b42c
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Home.executor": "Run",
@@ -80,16 +115,136 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.UniDrive [org.openjfx:javafx-maven-plugin:0.0.8:run].executor&quot;: &quot;Run&quot;,
+    &quot;OpenRewrite.UpgradeSpringBoot_3_1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/khale/IdeaProjects/UniDriveFinal/Unidriva/src/main/resources/images&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;xml.catalog&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\khale\IdeaProjects\UniDriveFinal\Unidriva\src\main\resources\images" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="UpgradeSpringBoot_3_1" type="OpenRewriteRunConfigurationType" factoryName="OpenRewrite" temporary="true" nameIsGenerated="true">
+      <option name="activeRecipes" value="org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_1" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/Unidriva" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="OpenRewrite.UpgradeSpringBoot_3_1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+>>>>>>> 7984c08ba985d551b034737da9d40bd1ac70b42c
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+<<<<<<< HEAD
       <changelist id="7f6ca83f-dd95-4b66-b1eb-426b176185ce" name="Changes" comment="" />
       <created>1741004060603</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741004060603</updated>
     </task>
+=======
+      <changelist id="a5af5171-aed7-4f61-8ea0-b8a887bfa834" name="Changes" comment="WALID style commit" />
+      <created>1741003691241</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741003691241</updated>
+      <workItem from="1741003692300" duration="6238000" />
+      <workItem from="1741042535930" duration="172000" />
+      <workItem from="1741087332164" duration="536000" />
+      <workItem from="1741088204870" duration="1634000" />
+      <workItem from="1741089929911" duration="313000" />
+      <workItem from="1741141826161" duration="7356000" />
+      <workItem from="1743859550029" duration="11000" />
+      <workItem from="1746617522237" duration="3008000" />
+      <workItem from="1746620635128" duration="2332000" />
+      <workItem from="1746623089373" duration="2689000" />
+      <workItem from="1746625948142" duration="975000" />
+    </task>
+    <task id="LOCAL-00001" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741042486299</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741042486299</updated>
+    </task>
+    <task id="LOCAL-00002" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741081825707</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741081825707</updated>
+    </task>
+    <task id="LOCAL-00003" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741090139884</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741090139884</updated>
+    </task>
+    <task id="LOCAL-00004" summary="WALID style commit">
+      <option name="closed" value="true" />
+      <created>1741090232760</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741090232760</updated>
+    </task>
+    <task id="LOCAL-00005" summary="m commit">
+      <option name="closed" value="true" />
+      <created>1741161936499</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741161936499</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+>>>>>>> 7984c08ba985d551b034737da9d40bd1ac70b42c
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="nothing" />
+    <MESSAGE value="WALID style commit" />
+    <MESSAGE value="m commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="m commit" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

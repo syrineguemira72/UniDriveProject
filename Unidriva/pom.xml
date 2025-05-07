@@ -111,6 +111,12 @@
         <version>2.10.1</version>
     </dependency>
 
+    <!-- ControlsFX Dependency (for JavaFX 11+) -->
+    <dependency>
+        <groupId>org.controlsfx</groupId>
+        <artifactId>controlsfx</artifactId>
+        <version>11.1.2</version>
+    </dependency>
 
 
 </dependencies>

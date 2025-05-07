@@ -17,21 +17,24 @@
    <children>
       <BorderPane minWidth="-Infinity" prefHeight="400.0" prefWidth="190.0">
          <left>
-            <VBox prefHeight="400.0" prefWidth="246.0" style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="400.0" prefWidth="500.0" style="-fx-background-color: #000080;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="184.0" prefWidth="215.0">
                      <children>
                         <!-- Ajouter un ImageView pour afficher la photo de profil -->
                         <ImageView fx:id="profileImage" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <VBox.margin>
                               <Insets left="50.0" top="10.0" />
                            </VBox.margin>
+                           <image>
+                              <Image url="@images/profile.png" />
+                           </image>
                         </ImageView>
 
                         <!-- Ajouter un bouton pour télécharger une nouvelle photo -->
-                        <Button fx:id="uploadPhotoBtn" mnemonicParsing="false" onAction="#uploadPhoto" text="Upload Photo">
+                        <Button fx:id="uploadPhotoBtn" mnemonicParsing="false" onAction="#uploadPhoto" prefHeight="26.0" prefWidth="150.0" text="Télécharger une photo">
                            <VBox.margin>
-                              <Insets left="60.0" top="10.0" />
+                              <Insets left="20.0" top="10.0" />
                            </VBox.margin>
                         </Button>
                         <Label fx:id="name" text="Label" textFill="WHITE">
@@ -53,7 +56,7 @@
                                     <Insets left="50.0" top="50.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="profilebtn" prefHeight="18.0" prefWidth="153.0" text="Profile" textFill="WHITE">
+                              <Label fx:id="profilebtn" prefHeight="18.0" prefWidth="153.0" text="Profil" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets right="10.0" top="50.0" />
                                  </HBox.margin>
@@ -73,7 +76,7 @@
                                     <Insets left="50.0" top="5.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="passwordbtn" prefHeight="18.0" prefWidth="156.0" text="Password" textFill="WHITE">
+                              <Label fx:id="passwordbtn" onMouseClicked="#password" prefHeight="18.0" prefWidth="156.0" text="Mot de passe" textFill="WHITE">
                                  <padding>
                                     <Insets left="10.0" right="50.0" />
                                  </padding>
@@ -93,7 +96,7 @@
                                     <Insets left="50.0" top="10.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="notificationbtn" prefHeight="18.0" prefWidth="156.0" text="Notification" textFill="WHITE">
+                              <Label fx:id="notificationbtn" prefHeight="18.0" prefWidth="156.0" text="Notifications" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets top="10.0" />
                                  </HBox.margin>
@@ -113,7 +116,7 @@
                                     <Insets left="45.0" right="5.0" top="10.0" />
                                  </HBox.margin>
                               </ImageView>
-                              <Label fx:id="backbtn" onMouseClicked="#back" prefHeight="18.0" prefWidth="156.0" text="Back" textFill="WHITE">
+                              <Label fx:id="backbtn" onMouseClicked="#back" prefHeight="18.0" prefWidth="156.0" text="Retour" textFill="WHITE">
                                  <HBox.margin>
                                     <Insets top="10.0" />
                                  </HBox.margin>
@@ -131,7 +134,7 @@
       </BorderPane>
       <VBox layoutX="200.0" prefHeight="400.0" prefWidth="402.0">
          <children>
-            <Label text="Profile Settings">
+            <Label minHeight="-Infinity" minWidth="300.0" prefHeight="88.0" prefWidth="270.0" text="Paramètres du profil">
                <padding>
                   <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
                </padding>
@@ -144,7 +147,7 @@
             </Label>
             <VBox prefHeight="68.0" prefWidth="402.0">
                <children>
-                  <Label text="Profile Details" underline="true">
+                  <Label text="Détails du profil" underline="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -154,7 +157,7 @@
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="UserName">
+                        <Label text="Nom d'utilisateur">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -174,7 +177,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Date of Birth">
+                        <Label text="Date de naissance">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -201,7 +204,7 @@
             </VBox>
             <VBox prefHeight="68.0" prefWidth="402.0">
                <children>
-                  <Label text="Contact info " underline="true">
+                  <Label text="Informations de contact" underline="true">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -211,7 +214,7 @@
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Label text="Phone">
+                        <Label text="Téléphone">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -261,12 +264,12 @@
             </VBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="deletebtn" mnemonicParsing="false" onAction="#delete" text="Delete">
+                  <Button fx:id="deletebtn" mnemonicParsing="false" onAction="#delete" text="Supprimer">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="editbtn" mnemonicParsing="false" onAction="#edit" text="Edit Profile">
+                  <Button fx:id="editbtn" mnemonicParsing="false" onAction="#edit" text="Modifier le profil">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>

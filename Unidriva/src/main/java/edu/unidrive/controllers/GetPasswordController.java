@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GetPasswordController {
 
@@ -80,7 +81,7 @@ public class GetPasswordController {
             nametxt.setText(user.getLastname() + " " + user.getFirstname());
 
             // Générer un code aléatoire
-            generatedCode = String.valueOf((int) (Math.random() * 9000) + 1000);
+            generatedCode = String.valueOf((int) (ThreadLocalRandom.current().nextDouble() * 9000) + 1000);
             userPhoneNumber = user.getProfile().getTelephone();
 
             // Envoyer le code par SMS

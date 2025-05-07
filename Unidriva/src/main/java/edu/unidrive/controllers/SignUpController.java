@@ -41,12 +41,19 @@ public class SignUpController {
     private ComboBox<String> txtGender;
 
     @FXML
+    private ComboBox<String> txtRole;
+
+
+    @FXML
     private TextField txtLastname;
 
     @FXML
     public void initialize() {
         ObservableList<String> genderOptions = FXCollections.observableArrayList("Female", "Male");
         txtGender.setItems(genderOptions);
+
+        ObservableList<String> roleOptions = FXCollections.observableArrayList("Passager", "Conducteur");
+        txtRole.setItems(roleOptions);
     }
 
     private boolean isValidEmail(String email) {
@@ -112,7 +119,7 @@ public class SignUpController {
         String dobString = dobDate.format(formatter);
 
         // Chemin de l'image par défaut
-        String defaultPhotoPath = "/images/1.png";
+        String defaultPhotoPath = "/images/profile.png";
 
         // Définir le rôle en fonction de l'e-mail
         String role = email.equals(AppConfig.ADMIN_EMAIL) ? "ADMIN" : "USER";
