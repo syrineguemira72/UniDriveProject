@@ -160,8 +160,8 @@ public class CreerTrajetController {
 
             // Update the distance and duration fields
             Platform.runLater(() -> {
-                distanceField.setText(String.format("%.2f%s", result[0], KM_SUFFIX));
-                dureeEstimeeField.setText(String.format("%.0f%s", result[1], MINUTES_SUFFIX));
+                distanceField.setText("%.2f%s".formatted(result[0], KM_SUFFIX));
+                dureeEstimeeField.setText("%.0f%s".formatted(result[1], MINUTES_SUFFIX));
             });
         } catch (IOException e) {
             showAlert("Erreur", "Impossible de calculer la distance et la durée. Veuillez vérifier les noms des villes.", Alert.AlertType.ERROR);

@@ -156,8 +156,7 @@ public class ReserverTrajetController {
     // Method to refresh the reservation card
     private void refreshReservationCard(Trajet trajet) {
         for (Node node : trajetsContainer.getChildren()) {
-            if (node instanceof AnchorPane) {
-                AnchorPane card = (AnchorPane) node;
+            if (node instanceof AnchorPane card) {
                 ReserverCardController cardController = (ReserverCardController) card.getProperties().get("controller");
                 if (cardController != null && cardController.getTrajet().equals(trajet)) {
                     cardController.refreshCard();

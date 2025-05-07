@@ -8,7 +8,7 @@ public class MyConnection {
     private static MyConnection instance;
     private Connection cnx;
 
-    private final String URL = "jdbc:mysql://localhost:3306/unidriveff";
+    private final String URL = "jdbc:mysql://localhost:3306/unidrive";
     private final String USER = "root";
     private final String PASSWORD = "";
 

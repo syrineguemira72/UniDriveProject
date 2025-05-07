@@ -1,9 +1,9 @@
 package edu.unidrive.services;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.*;
-import javax.mail.internet.*;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
