@@ -9,12 +9,5 @@
         <module name="UniDrive" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-<<<<<<< HEAD
-      <module name="UniDriveAppFinal" target="17" />
-=======
-      <module name="UniDriveFinal" target="17" />
->>>>>>> 7984c08ba985d551b034737da9d40bd1ac70b42c
-    </bytecodeTargetLevel>
   </component>
 </project>
