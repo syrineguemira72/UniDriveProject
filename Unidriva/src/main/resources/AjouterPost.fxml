@@ -3,6 +3,8 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
+
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,8 +24,9 @@
                <TextField fx:id="titlepost" styleClass="form-field" />
                <Label styleClass="form-label" text="Description:" />
                <TextField fx:id="descriptionpost" prefHeight="100.0" styleClass="form-field" />
-               <Button onAction="#ajouterpost" prefHeight="40.0" prefWidth="142.0" styleClass="form-button" text="Créer Post" />
-            </children>
+               <Label styleClass="form-label" text="Catégorie:" />
+               <ComboBox fx:id="categoryComboBox" styleClass="form-field" />
+               <Button onAction="#ajouterpost" prefHeight="40.0" prefWidth="142.0" styleClass="form-button" text="Créer Post" />            </children>
          </VBox>
 
          <VBox alignment="CENTER" prefHeight="375.0" prefWidth="300.0" styleClass="logo-section">

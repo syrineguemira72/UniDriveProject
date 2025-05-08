@@ -4,7 +4,17 @@ public class Post {
     private int id;
     private String title;
     private String description;
+    private String category; // Ajout du champ category
+    private int userId; // Ajout de l'ID utilisateur
 
+    // Ajoutez le getter et setter
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public Post() {
 
@@ -20,7 +30,13 @@ public class Post {
         this.description = description;
         this.title = title;
     }
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
     public String getTitle() {
         return title;
     }
@@ -51,6 +67,7 @@ public class Post {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }

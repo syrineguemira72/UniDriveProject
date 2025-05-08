@@ -42,7 +42,7 @@ public class HomeUniDriveController {
     @FXML
     private Button statisticsButton;
 
-    private String jwtToken;
+    private String jwtToken;// Référence à l'ImageView pour afficher la photo de profil
     private Connection connection;
     @FXML
     private Label btnforum;
@@ -50,9 +50,6 @@ public class HomeUniDriveController {
     private Button btnadmin;
 
     private final PostService postService = new PostService();
-
-    private Utilisateur currentUser;
-
 
     @FXML
     void Logout(MouseEvent event) {
@@ -101,9 +98,7 @@ public class HomeUniDriveController {
     }
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
-        if (currentUser == null) {
-            checkAdminAccess();
-        }
+        checkAdminAccess(); // Vérifier le rôle de l'utilisateur après avoir défini le token
     }
     private boolean isAdmin(String token) {
         try {
@@ -118,9 +113,9 @@ public class HomeUniDriveController {
     public void checkAdminAccess() {
         if (jwtToken != null) {
             boolean isAdmin = isAdmin(jwtToken);
-            statisticsButton.setVisible(isAdmin);
+            statisticsButton.setVisible(isAdmin); // Afficher ou masquer le bouton en fonction du rôle
         } else {
-            statisticsButton.setVisible(false);
+            statisticsButton.setVisible(false); // Masquer le bouton si l'utilisateur n'est pas authentifié
         }
     }
 
@@ -141,17 +136,18 @@ public class HomeUniDriveController {
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
-        alert.setHeaderText(null);
+        alert.setHeaderText(null); // Pas de texte d'en-tête
         alert.setContentText(message);
-        alert.showAndWait();
+        alert.showAndWait(); // Afficher la boîte de dialogue et attendre une réponse
     }
     @FXML
     public void initialize() {
+        // Ajouter un gestionnaire d'événements pour le clic sur "Forum"
         btnforum.setOnMouseClicked(this::forum);
     }
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 52;
+            return 52; // Fallback si email non trouvé
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -159,12 +155,12 @@ public class HomeUniDriveController {
             pst.setString(1, currentUserEmail);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getInt("id");
+                return rs.getInt("id"); // Retourne le vrai ID
             }
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 52;
+        return 52; // Fallback en cas d'erreur
     }
 
 
@@ -172,7 +168,7 @@ public class HomeUniDriveController {
     void forum(MouseEvent event) {
         boolean isAdmin = isAdmin(jwtToken);
 
-        if (!isAdmin) {
+        if (!isAdmin) { // Vérification pour les non-admins
             int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
                 try {
@@ -186,6 +182,7 @@ public class HomeUniDriveController {
             }
         }
 
+        // Redirection vers HomePost pour les admins
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomePost.fxml"));
             Parent root = fxmlLoader.load();
@@ -236,13 +233,5 @@ public class HomeUniDriveController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void setCurrentUser(Utilisateur utilisateur) {
-        this.currentUser = utilisateur;
-        this.currentUserEmail = utilisateur.getEmail();
-        setProfileImage(utilisateur.getImageUrl());
-        checkAdminAccess(); // Vérifier les droits admin
-        System.out.println("User logged in: " + utilisateur.getEmail());
     }
 }
