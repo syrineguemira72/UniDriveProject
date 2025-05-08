@@ -73,7 +73,7 @@ public class SignUpController {
         String email = txtEmail.getText();
         String firstname = txtFirstname.getText();
         String lastname = txtLastname.getText();
-        String gender = txtGender.getSelectionModel().getSelectedItem();
+        String gender = txtGender.getSelectionModel().getSelectedItem().toString();
         String pass = password.getText();
         //String phoneNumber = txtPhoneNumber.getText();
         //String street = txtStreet.getText();

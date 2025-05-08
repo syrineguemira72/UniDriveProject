@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,6 +23,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,16 +38,16 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ObjetPerdu implements Initializable {
+public class ObjetPerdu implements Initializable{
 
     @FXML
-    private TableColumn<?, ?> User;
+    private TableColumn User;
     @FXML
     private AnchorPane recpane;
 
 
     @FXML
-    private TableColumn<?, ?> description;
+    private TableColumn description;
 
     @FXML
     private TextField desctf;
@@ -56,21 +60,21 @@ public class ObjetPerdu implements Initializable {
     private TextField filterField;
 
     @FXML
-    private TableColumn<?, ?> nom;
+    private TableColumn nom;
 
     @FXML
-    private TableColumn<?, ?> idcol;
+    private TableColumn idcol;
 
     @FXML
     private TextField nomtf;
 
     @FXML
-    private TableView<Objet> recTab;
+    private TableView recTab;
 
     @FXML
-    private TableColumn<?, ?> status;
+    private TableColumn status;
     @FXML
-    private TableColumn<?, ?> dateCol;
+    private TableColumn dateCol;
 
     @FXML
     void NavRecompense(ActionEvent event) throws IOException {
@@ -165,11 +169,11 @@ public class ObjetPerdu implements Initializable {
 
     @FXML
     void deleteDestination(ActionEvent event) throws SQLException {
-        Objet selected = recTab.getSelectionModel().getSelectedItem();
+        Object selected = recTab.getSelectionModel().getSelectedItem();
         if (selected != null) {
             ObjetPerduService service = new ObjetPerduService();
 
-            service.supprimerObjet(selected.getId());
+            service.supprimerObjet(selected.getClass().getModifiers());
             showAlert("Success", "Objet deleted successfully!");
             loadDestinations();
         } else {
@@ -261,8 +265,8 @@ System.out.println("hello");
         }
     }
 
-    public Objet gettempReclamation(TableColumn.CellEditEvent edittedCell) {
-        Objet test = recTab.getSelectionModel().getSelectedItem();
+    public Object gettempReclamation(TableColumn.CellEditEvent edittedCell) {
+        Object test = recTab.getSelectionModel().getSelectedItem();
         return test;
     }
 
