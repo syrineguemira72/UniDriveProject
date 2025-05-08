@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -273,6 +274,22 @@ public class CreerTrajetController {
         dureeEstimeeField.clear();
         heureField.clear();
         placesDisponiblesField.clear();
+    }
+    @FXML
+    void goToBack(ActionEvent event) {
+        // Load the new FXML file
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/HomeUniDrive.fxml"));
+        try {
+            // Load the new page and set it as the root
+            Parent root = fxmlLoader.load();
+            // Set the new scene
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Erreur de navigation : " + e.getMessage());
+        }
     }
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {

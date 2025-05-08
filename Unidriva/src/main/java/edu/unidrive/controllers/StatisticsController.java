@@ -66,14 +66,14 @@ public class StatisticsController {
         int adminUsers = userService.getAdminUsers();
         int normalUsers = totalUsers - adminUsers;
 
-        totalUsersLabel.setText("Nombre total d'utilisateurs : " + totalUsers);
+       totalUsersLabel.setText("Nombre total d'utilisateurs : " + totalUsers);
         adminUsersLabel.setText("Nombre d'administrateurs : " + adminUsers);
         normalUsersLabel.setText("Nombre d'utilisateurs normaux : " + normalUsers);
 
         // Ajouter les données au PieChart
         PieChart.Data adminData = new PieChart.Data("Administrateurs", adminUsers);
         PieChart.Data normalData = new PieChart.Data("Utilisateurs normaux", normalUsers);
-        usersPieChart.getData().addAll(adminData, normalData);
+       usersPieChart.getData().addAll(adminData, normalData);
 
         int totalPosts = postService.getAllData().size();
         int postsWithBadWords = postService.getPostsWithBadWords().size();

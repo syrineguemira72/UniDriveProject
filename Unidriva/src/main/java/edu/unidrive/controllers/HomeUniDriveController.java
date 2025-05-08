@@ -51,6 +51,9 @@ public class HomeUniDriveController {
 
     private final PostService postService = new PostService();
 
+    private Utilisateur currentUser;
+
+
     @FXML
     void Logout(MouseEvent event) {
         try {
@@ -98,7 +101,9 @@ public class HomeUniDriveController {
     }
     public void setJwtToken(String jwtToken) {
         this.jwtToken = jwtToken;
-        checkAdminAccess();
+        if (currentUser == null) {
+            checkAdminAccess();
+        }
     }
     private boolean isAdmin(String token) {
         try {
@@ -146,7 +151,7 @@ public class HomeUniDriveController {
     }
     private int getCurrentUserId() {
         if (currentUserEmail == null || currentUserEmail.isEmpty()) {
-            return 53;
+            return 52;
         }
 
         String query = "SELECT id FROM utilisateur WHERE email = ?";
@@ -159,7 +164,7 @@ public class HomeUniDriveController {
         } catch (SQLException e) {
             System.err.println("Erreur SQL : " + e.getMessage());
         }
-        return 53;
+        return 52;
     }
 
 
@@ -231,5 +236,13 @@ public class HomeUniDriveController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setCurrentUser(Utilisateur utilisateur) {
+        this.currentUser = utilisateur;
+        this.currentUserEmail = utilisateur.getEmail();
+        setProfileImage(utilisateur.getImageUrl());
+        checkAdminAccess(); // Vérifier les droits admin
+        System.out.println("User logged in: " + utilisateur.getEmail());
     }
 }

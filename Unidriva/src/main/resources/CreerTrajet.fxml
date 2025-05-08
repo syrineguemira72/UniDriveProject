@@ -17,6 +17,7 @@
 <VBox alignment="CENTER" prefHeight="700.0" prefWidth="900.0" spacing="20" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="edu.unidrive.controllers.CreerTrajetController"
       stylesheets="/Css/CreerTrajet.css">
+
     <HBox alignment="CENTER" spacing="30">
         <!-- Formulaire -->
         <VBox alignment="CENTER_LEFT" spacing="15">
@@ -64,6 +65,7 @@
                 <Button fx:id="creerTrajet" onAction="#creerTrajet" text="Créer Trajet" />
                 <Button fx:id="goToDetailButton" onAction="#goToDetailTrajet" text="Voir Détails Trajet" />
                 <Button fx:id="goToReservationButton" onAction="#goToReservation" text="Réserver un Trajet" />
+
             </HBox>
         </VBox>
 

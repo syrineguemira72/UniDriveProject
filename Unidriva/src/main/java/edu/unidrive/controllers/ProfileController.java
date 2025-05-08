@@ -1,8 +1,6 @@
 package edu.unidrive.controllers;
 
-import edu.unidrive.entities.Profile;
 import edu.unidrive.entities.Utilisateur;
-import edu.unidrive.services.ProfileService;
 import edu.unidrive.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import javafx.scene.input.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -68,7 +65,6 @@ public class ProfileController {
     @FXML
     private Button uploadPhotoBtn;
 
-    private ProfileService profileService = new ProfileService();
     private UserService userService = new UserService();
 
     private String currentUserEmail;
@@ -90,40 +86,28 @@ public class ProfileController {
             if (name != null) {
                 name.setText(utilisateur.getFirstname() + " " + utilisateur.getLastname());
             }
-            if (dob != null) {
-                String dobString = utilisateur.getDob();
-                if (dobString != null && !dobString.isEmpty()) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    LocalDate dobDate = LocalDate.parse(dobString, formatter);
-                    dob.setValue(dobDate);
-                }
+            if (dob != null && utilisateur.getDob() != null) {
+                dob.setValue(utilisateur.getDob());
             }
             if (this.email != null) {
                 this.email.setText(utilisateur.getEmail());
             }
-
-            Profile profile = utilisateur.getProfile();
-            if (profile != null) {
-                if (phone != null) {
-                    phone.setText(profile.getTelephone());
-                }
-                if (profileImage != null && profile.getPhoto() != null) {
-                    // Vérifier si le fichier existe avant de le charger
-                    File photoFile = new File(profile.getPhoto());
-                    if (photoFile.exists()) {
-                        try {
-                            Image image = new Image(new FileInputStream(photoFile));
-                            profileImage.setImage(image);
-                        } catch (IOException e) {
-                            System.err.println("Failed to load profile photo: " + e.getMessage());
-                            profileImage.setImage(new Image(getClass().getResource("/images/profile.png").toString()));
-                        }
-                    } else {
-                        System.err.println("Profile photo file not found: " + profile.getPhoto());
+            if (phone != null) {
+                phone.setText(utilisateur.getPhoneNumber());
+            }
+            if (profileImage != null && utilisateur.getImageUrl() != null) {
+                File photoFile = new File(utilisateur.getImageUrl());
+                if (photoFile.exists()) {
+                    try {
+                        Image image = new Image(new FileInputStream(photoFile));
+                        profileImage.setImage(image);
+                    } catch (IOException e) {
+                        System.err.println("Failed to load profile photo: " + e.getMessage());
+                        profileImage.setImage(new Image(getClass().getResource("/images/profile.png").toString()));
                     }
+                } else {
+                    System.err.println("Profile photo file not found: " + utilisateur.getImageUrl());
                 }
-            } else {
-                System.out.println("No profiles found for user ID : " + utilisateur.getId());
             }
         } else {
             System.out.println("User not found!");
@@ -141,36 +125,32 @@ public class ProfileController {
         File selectedFile = fileChooser.showOpenDialog(uploadPhotoBtn.getScene().getWindow());
         if (selectedFile != null) {
             try {
-                byte[] photoBytes = Files.readAllBytes(selectedFile.toPath());
-
                 Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
                 if (utilisateur != null) {
-                    Profile profile = utilisateur.getProfile();
-                    if (profile != null) {
-                        profile.setPhoto(selectedFile.getAbsolutePath()); // Enregistrer le chemin de l'image
-                        profileService.update(profile);
+                    utilisateur.setImageUrl(selectedFile.getAbsolutePath());
+                    userService.update(utilisateur);
 
-                        Image image = new Image(selectedFile.toURI().toString());
-                        profileImage.setImage(image);
+                    Image image = new Image(selectedFile.toURI().toString());
+                    profileImage.setImage(image);
 
-                        showAlert(Alert.AlertType.INFORMATION, "Success", "Profile photo updated successfully!");
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Profile photo updated successfully!");
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
-                        Parent root = loader.load();
-                        HomeUniDriveController homeController = loader.getController();
-                        homeController.setProfileImage(selectedFile.toURI().toString()); // Transmettre l'URL de l'image
+                    FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
+                    Parent root = loader.load();
+                    HomeUniDriveController homeController = loader.getController();
+                    homeController.setProfileImage(selectedFile.toURI().toString());
 
-                        Stage stage = (Stage) backbtn.getScene().getWindow();
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                    }
+                    Stage stage = (Stage) backbtn.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                 }
             } catch (IOException e) {
                 showAlert(Alert.AlertType.ERROR, "Error", "Failed to upload photo: " + e.getMessage());
             }
         }
     }
+
     @FXML
     void delete(ActionEvent event) {
         Utilisateur utilisateur = userService.getUserByEmail(currentUserEmail);
@@ -179,35 +159,30 @@ public class ProfileController {
             return;
         }
 
-        Profile profile = utilisateur.getProfile();
-        if (profile == null) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Profil Not Found!");
-            return;
-        }
-
         boolean deleted = false;
 
         if (phone.getText().isEmpty()) {
             System.out.println("Phone field is empty.");
-            profile.setTelephone("");
+            utilisateur.setPhoneNumber("");
             deleted = true;
         }
 
         if (email.getText().isEmpty()) {
             System.out.println("Email field is empty.");
-            profile.setAdresse("");
+            utilisateur.setEmail("");
             deleted = true;
         }
 
         if (username.getText().isEmpty()) {
             System.out.println("Username field is empty.");
+            utilisateur.setFirstname("");
             utilisateur.setLastname("");
             deleted = true;
         }
 
         if (dob.getValue() == null) {
             System.out.println("Date of Birth field is cleared.");
-            utilisateur.setDob("");
+            utilisateur.setDob(null);
             deleted = true;
         }
 
@@ -216,7 +191,6 @@ public class ProfileController {
             return;
         }
 
-        profileService.update(profile);
         userService.update(utilisateur);
         showAlert(Alert.AlertType.INFORMATION, "Delete", "Field deleted successfully !");
     }
@@ -229,20 +203,16 @@ public class ProfileController {
             return;
         }
 
-        Profile profile = utilisateur.getProfile();
-        if (profile == null) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Profil Not Found !");
-            return;
-        }
-
         boolean updated = false;
 
         // Vérifier si le champ username a été modifié
-        String newUsername = username.getText();
-        String oldUsername = utilisateur.getFirstname() + " " + utilisateur.getLastname();
-        if (!newUsername.equals(oldUsername)) {
+        String newFullName = username.getText();
+        String oldFullName = utilisateur.getFirstname() + " " + utilisateur.getLastname();
+        if (!newFullName.equals(oldFullName)) {
             System.out.println("Username field is updated.");
-            utilisateur.setLastname(newUsername);
+            String[] names = newFullName.split(" ", 2);
+            utilisateur.setFirstname(names[0]);
+            utilisateur.setLastname(names.length > 1 ? names[1] : "");
             updated = true;
         }
 
@@ -255,23 +225,19 @@ public class ProfileController {
         }
 
         String newPhone = phone.getText();
-        String oldPhone = profile.getTelephone();
+        String oldPhone = utilisateur.getPhoneNumber();
         if (!newPhone.equals(oldPhone)) {
             System.out.println("Phone field is updated.");
-            profile.setTelephone(newPhone);
+            utilisateur.setPhoneNumber(newPhone);
             updated = true;
         }
 
         LocalDate newDob = dob.getValue();
-        String oldDobString = utilisateur.getDob();
-        if (newDob != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String newDobString = newDob.format(formatter);
-            if (!newDobString.equals(oldDobString)) {
-                System.out.println("Date of Birth field is updated.");
-                utilisateur.setDob(newDobString);
-                updated = true;
-            }
+        LocalDate oldDob = utilisateur.getDob();
+        if (newDob != null && !newDob.equals(oldDob)) {
+            System.out.println("Date of Birth field is updated.");
+            utilisateur.setDob(newDob);
+            updated = true;
         }
 
         if (!updated) {
@@ -279,19 +245,13 @@ public class ProfileController {
             return;
         }
 
-        profileService.update(profile);
         userService.update(utilisateur);
-
         showAlert(Alert.AlertType.INFORMATION, "Mise à jour", "The selected field has been updated successfully!");
     }
 
-
-
     @FXML
     void back(MouseEvent event) {
-
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("HomeUniDrive.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -301,14 +261,11 @@ public class ProfileController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-
-
 
     @FXML
     void notifcation(MouseEvent event) {
+        // Implementation for notification
     }
 
     @FXML
@@ -323,8 +280,6 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
-
-
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
         Alert alert = new Alert(alertType);

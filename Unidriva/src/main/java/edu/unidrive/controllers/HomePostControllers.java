@@ -98,11 +98,8 @@ public class HomePostControllers {
 
     @FXML
     public void initialize() {
-        // Vérifier d'abord si l'utilisateur est admin
         boolean isAdmin = isAdmin(jwtToken);
-        btnadmin.setVisible(isAdmin);
 
-        // Si l'utilisateur n'est pas admin, vérifier les centres d'intérêt
         if (!isAdmin) {
             int userId = getCurrentUserId();
             if (!postService.hasUserInterests(userId)) {
@@ -114,13 +111,11 @@ public class HomePostControllers {
                 } catch (IOException e) {
                     System.err.println("Erreur lors du chargement de l'interface de saisie des centres d'intérêt : " + e.getMessage());
                 }
+            } else {
+                refreshPostList();
             }
         }
 
-        // Charger les posts dans tous les cas (admin ou utilisateur avec centres d'intérêt)
-        refreshPostList();
-
-        // Configurer la ListView
         postListView.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Post> call(ListView<Post> param) {
@@ -144,7 +139,7 @@ public class HomePostControllers {
                                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Ajoutercommentaire.fxml"));
                                     Parent root = fxmlLoader.load();
 
-                                    Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
+                                    edu.unidrive.controllers.Ajoutercommentairecontrollers ajouterCommentaireControllers = fxmlLoader.getController();
                                     ajouterCommentaireControllers.setPostId(post.getId());
 
                                     postListView.getScene().setRoot(root);

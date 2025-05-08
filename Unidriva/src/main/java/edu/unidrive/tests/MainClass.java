@@ -1,10 +1,6 @@
 package edu.unidrive.tests;
 
-import edu.unidrive.entities.Profile;
-import edu.unidrive.entities.Utilisateur;
-import edu.unidrive.services.ProfileService;
 import edu.unidrive.services.UserService;
-import edu.unidrive.tools.MyConnection;
 
 public class MainClass {
     public static void main(String[] args) {
@@ -27,10 +23,8 @@ public class MainClass {
         // us.remove(user);
 
         // Créer un service profile
-        ProfileService ps = new ProfileService();
 
         // Ajouter un utilisateur
-        Profile p = new Profile(1,"image","car","21564789","mourouj");
         // ps.add(p);
 
         /*Modifier profile
@@ -38,7 +32,6 @@ public class MainClass {
         ps.update(p);*/
 
         // Supprimer l'utilisateur
-        ps.remove(p);
 
 
     }
