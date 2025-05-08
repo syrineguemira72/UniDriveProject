@@ -1,9 +1,10 @@
 package edu.unidrive.controllers;
 
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ChoiceDialog;
 
-public class ComboBox<T> {
+public class ComboBox<T> extends Node {
     public ChoiceDialog<Object> getSelectionModel() {
         return null;
     }
@@ -20,5 +21,13 @@ public class ComboBox<T> {
     }
 
     public void setValue(Object o) {
+    }
+
+    public void setOnAction(Object o) {
+    }
+
+    @Override
+    public Node getStyleableNode() {
+        return super.getStyleableNode();
     }
 }
