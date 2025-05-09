@@ -1,32 +1,36 @@
 package edu.unidrive.tools;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class MyConnection {
-    private String url = "jdbc:mysql://localhost:3306/unidrive";
-    private String login = "root";
-    private String pwd = "";
-    private Connection cnx ;
     private static MyConnection instance;
-    public Connection getCnx() {
-        return cnx;
+    private Connection cnx;
+
+    private final String URL = "jdbc:mysql://localhost:3306/unidrive";
+    private final String USER = "root";
+    private final String PASSWORD = ""; // Replace par votre mot de passe
+
+    public MyConnection() {
+        try {
+            cnx = DriverManager.getConnection(URL, USER, PASSWORD);
+            System.out.println("Connect à la base de données!");
+        } catch (SQLException e) {
+            System.err.println("Check de la connexion à la base de données: " + e.getMessage());
+            e.printStackTrace();
+            cnx = null;
+        }
     }
+
     public static MyConnection getInstance() {
-        if (instance == null){
+        if (instance == null) {
             instance = new MyConnection();
         }
-        return instance ;
+        return instance;
     }
-    public MyConnection() {
 
-        try {
-           cnx= DriverManager.getConnection(url, login, pwd);
-            System.out.println("Connection established!");
-
-        } catch (SQLException e) {
-System.out.println(e.getMessage());        }
-
+    public Connection getCnx() {
+        return cnx;
     }
 }

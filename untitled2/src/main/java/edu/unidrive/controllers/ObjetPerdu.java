@@ -1,31 +1,34 @@
 package edu.unidrive.controllers;
 
 import edu.unidrive.entities.Objet;
+import edu.unidrive.services.CloudinaryService;
 import edu.unidrive.services.ObjetPerduService;
 import edu.unidrive.tools.MyConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,45 +36,171 @@ import java.util.logging.Logger;
 public class ObjetPerdu implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> User;
+    private TableColumn<Objet, String> lieuCol;
     @FXML
     private AnchorPane recpane;
-
-
     @FXML
-    private TableColumn<?, ?> description;
-
+    private TableColumn<Objet, String> descriptionCol;
     @FXML
-    private TextField desctf;
+    private TextField descriptionTf;
     @FXML
-    private DatePicker datetf;
+    private DatePicker dateTf;
     @FXML
-    private TextField idtf;
-
+    private TextField idTf;
     @FXML
     private TextField filterField;
-
     @FXML
-    private TableColumn<?, ?> nom;
-
+    private TableColumn<Objet, String> nomCol;
     @FXML
-    private TableColumn<?, ?> idcol;
-
+    private TableColumn<Objet, Integer> idCol;
     @FXML
-    private TextField nomtf;
-
+    private TextField nomTf;
     @FXML
     private TableView<Objet> recTab;
+    @FXML
+    private TableColumn<Objet, String> statusCol;
+    @FXML
+    private TableColumn<Objet, String> dateCol;
+    @FXML
+    private TableColumn<Objet, String> categorieCol;
+    @FXML
+    private TextField categorieTf;
+    @FXML
+    private TextField imagePathTf;
+
+    private ObservableList<Objet> objetList = FXCollections.observableArrayList();
+    private Connection connection;
+    private ObjetPerduService service;
+    private CloudinaryService cloudinaryService;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        connection = MyConnection.getInstance().getCnx();
+        service = new ObjetPerduService();
+        cloudinaryService = new CloudinaryService();
+        initializeTable();
+        loadObjets();
+        recherche();
+    }
+
+    private void initializeTable() {
+        idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        lieuCol.setCellValueFactory(new PropertyValueFactory<>("lieu"));
+        categorieCol.setCellValueFactory(new PropertyValueFactory<>("categorie"));
+    }
+
+    private void loadObjets() {
+        objetList.clear();
+        objetList.addAll(service.afficherObjets());
+        recTab.setItems(objetList);
+    }
 
     @FXML
-    private TableColumn<?, ?> status;
-    @FXML
-    private TableColumn<?, ?> dateCol;
+    void addObjet(ActionEvent event) {
+        if (controlSaisie()) {
+            String nom = nomTf.getText();
+            String status = "Pending"; // Default status
+            String date = dateTf.getValue().toString();
+            String description = descriptionTf.getText();
+            String lieu = descriptionTf.getText(); // Using descriptionTf for lieu
+            String categorie = categorieTf.getText();
+            String imagePath = imagePathTf.getText();
+
+            Objet objet = new Objet(nom, status, date, description, lieu, categorie, imagePath);
+            service.ajouterObjet(objet);
+            showAlert("Success", "Objet added successfully!");
+            clearFields();
+            loadObjets();
+        }
+    }
 
     @FXML
-    void NavRecompense(ActionEvent event) throws IOException {
+    void deleteObjet(ActionEvent event) {
+        Objet selected = recTab.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            service.supprimerObjet(selected.getId());
+            showAlert("Success", "Objet deleted successfully!");
+            loadObjets();
+        } else {
+            showAlert("Error", "Please select an objet to delete!");
+        }
+    }
 
+    @FXML
+    void updateObjet(ActionEvent event) {
+        if (controlSaisie()) {
+            try {
+                int id = Integer.parseInt(idTf.getText());
+                String nom = nomTf.getText();
+                String status = "Pending"; // Default or retrieve from UI if needed
+                String date = dateTf.getValue().toString();
+                String description = descriptionTf.getText();
+                String lieu = descriptionTf.getText();
+                String categorie = categorieTf.getText();
+                String imagePath = imagePathTf.getText();
 
+                Objet objet = new Objet(id, nom, status, date, description, lieu, categorie, imagePath);
+                service.modifierObjet(id, objet);
+                showAlert("Success", "Objet updated successfully!");
+                clearFields();
+                loadObjets();
+            } catch (NumberFormatException e) {
+                showAlert("Error", "Invalid ID format!");
+            }
+        }
+    }
+
+    @FXML
+    void find(ActionEvent event) {
+        try {
+            String objectId = idTf.getText().trim();
+            if (objectId.isEmpty()) {
+                showNotification("Erreur", "Veuillez entrer un ID valide.", NotificationType.ERROR);
+                return;
+            }
+
+            int id = Integer.parseInt(objectId);
+            int rowsUpdated = service.updateEtat(id, "trouvé");
+
+            if (rowsUpdated > 0) {
+                clearFields();
+                loadObjets();
+                showNotification("Succès", "Objet marqué comme trouvé !", NotificationType.SUCCESS);
+            } else {
+                showNotification("Attention", "Aucun objet trouvé avec cet ID.", NotificationType.WARNING);
+            }
+        } catch (NumberFormatException e) {
+            showNotification("Erreur", "ID doit être un nombre.", NotificationType.ERROR);
+        } catch (SQLException e) {
+            showNotification("Erreur", "Une erreur s'est produite: " + e.getMessage(), NotificationType.ERROR);
+        }
+    }
+
+    @FXML
+    void uploadImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", ".png", ".jpg", "*.jpeg"));
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            String imageUrl = cloudinaryService.uploadImage(selectedFile);
+
+            if (imageUrl != null) {
+                imagePathTf.setText(imageUrl);
+                showAlert("Success", "Image uploaded successfully!\nURL: " + imageUrl);
+            } else {
+                showAlert("Error", "Image upload failed.");
+            }
+        }
+    }
+
+    @FXML
+    void NavRecompense(ActionEvent event) {
         try {
             Stage stage = new Stage();
             stage.setTitle("Consultation");
@@ -80,238 +209,107 @@ public class ObjetPerdu implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
-            System.out.println(ex);
+            Logger.getLogger(ObjetPerdu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    @FXML
+    void CHAT(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/chatbot.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Chatbot");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            Logger.getLogger(ObjetPerdu.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }
 
     @FXML
-    private TextField usertf;
-    private ObservableList<Objet> destinationList = FXCollections.observableArrayList();
-    private Connection connection;
+    private void getSelected(javafx.scene.input.MouseEvent event) {
+        Objet selected = recTab.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            idTf.setText(String.valueOf(selected.getId()));
+            nomTf.setText(selected.getNom());
+            descriptionTf.setText(selected.getDescription());
+            categorieTf.setText(selected.getCategorie());
+            imagePathTf.setText(selected.getImagePath());
+            try {
+                dateTf.setValue(LocalDate.parse(selected.getDate()));
+            } catch (Exception e) {
+                dateTf.setValue(null);
+            }
+        }
+    }
 
-    public boolean controlSaisie() {
-    // Vérification de la chaîne de caractères (par exemple, le champ pour le nom ou autre)
-        if (datetf.getValue()==null){
+    @FXML
+    public void recherche() {
+        String filter = filterField.getText().toLowerCase();
+        if (filter.isEmpty()) {
+            recTab.setItems(objetList);
+        } else {
+            ObservableList<Objet> filteredData = FXCollections.observableArrayList();
+            for (Objet item : objetList) {
+                if (item.getNom().toLowerCase().contains(filter) ||
+                        item.getStatus().toLowerCase().contains(filter) ||
+                        item.getCategorie().toLowerCase().contains(filter)) {
+                    filteredData.add(item);
+                }
+            }
+            recTab.setItems(filteredData);
+        }
+    }
+
+    private boolean controlSaisie() {
+        if (dateTf.getValue() == null) {
             showAlert("Erreur", "Date ne peut pas être vide.");
             return false;
         }
-        if (nomtf.getText()==null || nomtf.getText().trim().isEmpty()){
-            showAlert("Erreur", "nom ne peut pas être vide.");
+        if (nomTf.getText().trim().isEmpty()) {
+            showAlert("Erreur", "Nom ne peut pas être vide.");
             return false;
         }
-        if (usertf.getText()==null || usertf.getText().trim().isEmpty()){
-            showAlert("Erreur", "Lieu ne peut pas être vide.");
+        if (descriptionTf.getText().trim().isEmpty()) {
+            showAlert("Erreur", "Description ne peut pas être vide.");
+            return false;
+        }
+        if (categorieTf.getText().trim().isEmpty()) {
+            showAlert("Erreur", "Catégorie ne peut pas être vide.");
             return false;
         }
         return true;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        connection = MyConnection.getInstance().getCnx();
-        initializeTable();
-        loadDestinations();
-        setupSearchFilter();
-    }
-
-    private void initializeTable() {
-        User.setCellValueFactory(new PropertyValueFactory<>("idP"));
-        idcol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        description.setCellValueFactory(new PropertyValueFactory<>("lieuP"));
-        nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-    }
-
-    private void loadDestinations() {
-        destinationList.clear();
-        try {
-            ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM objets_perdu");
-            while (rs.next()) {
-                destinationList.add(new Objet( rs.getInt("id"),rs.getString("nom"),rs.getInt("idP"), rs.getString("lieuP"),  rs.getString("date"), rs.getString("status")));
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(ObjetPerdu.class.getName()).log(Level.SEVERE, null, e);
-        }
-        recTab.setItems(destinationList);
-    }
-
-    @FXML
-    void addDestination(ActionEvent event) throws SQLException {
-       if(controlSaisie()) {
-           String name = nomtf.getText();
-           String description = usertf.getText();
-           String user = usertf.getText();
-           String date = datetf.getValue().toString();
-           String status = "Pending"; // Default status
-
-           if (name.isEmpty() || description.isEmpty() || date.isEmpty()) {
-               showAlert("Error", "All fields must be filled!");
-               return;
-           }
-
-           ObjetPerduService service = new ObjetPerduService();
-           Objet destination = new Objet(name, 1, description, date, status);
-           service.ajouterObjet(destination);
-           showAlert("Success", "Objet added successfully!");
-           loadDestinations();
-       }
-    }
-
-    @FXML
-    void deleteDestination(ActionEvent event) throws SQLException {
-        Objet selected = recTab.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            ObjetPerduService service = new ObjetPerduService();
-
-            service.supprimerObjet(selected.getId());
-            showAlert("Success", "Objet deleted successfully!");
-            loadDestinations();
-        } else {
-            showAlert("Error", "Please select an object to delete!");
-        }
-    }
-    @FXML
-    public void recherche(){
-        ObjetPerduService ff= new ObjetPerduService();
-        List<Objet>results = new ArrayList<>();
-        results = ff.afficherObjets();
-        FilteredList<Objet> filteredData = new FilteredList<>(destinationList , b -> true);
-        Objet r = new Objet();
-        // 2. Set the filter Predicate whenever the filter changes.
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(feedback -> {
-                // If filter text is empty, display all persons.
-
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-
-                // Compare first name and last name of every person with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                if (feedback.getStatus().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-                    return true; // Filter matches last name.
-                }
-                else if (String.valueOf(r.getStatus()).indexOf(lowerCaseFilter)!=-1)
-                    return true;
-                else
-                    return false; // Does not match.
-            });
-        });
-
-        // 3. Wrap the FilteredList in a SortedList.
-        SortedList<Objet> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        // 	  Otherwise, sorting the TableView would have no effect.
-        sortedData.comparatorProperty().bind(recTab.comparatorProperty());
-
-        // 5. Add sorted (and filtered) data to the table.
-        recTab.setItems(sortedData);
-
-
-    }
-
-
-    private void setupSearchFilter() {
-        FilteredList<Objet> filteredData = new FilteredList<>(destinationList, b -> true);
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(destination -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-                return destination.getNom().toLowerCase().contains(lowerCaseFilter) ||
-                        destination.getLieuP().toLowerCase().contains(lowerCaseFilter) ;
-            });
-        });
-
-        SortedList<Objet> sortedData = new SortedList<>(filteredData);
-        sortedData.comparatorProperty().bind(recTab.comparatorProperty());
-        recTab.setItems(sortedData);
-    }
-
     private void showAlert(String title, String message) {
-       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private Connection cnx = null;
-    private PreparedStatement pst = null ;
-    private ResultSet rs = null ;
-    @FXML
-    void updateDestination(ActionEvent event) {
-        try {
-            cnx = MyConnection.getInstance().getCnx();
-            String value0 = idtf.getText();
-            String value1 = nomtf.getText();
 
-            String value2 = usertf.getText();
-            String value4 = datetf.getValue().toString();
-
-System.out.println("hello");
-            String sql = "update objets_perdu set nom= '"+value1+"',lieuP= '"+value2+"',date= '"+value4+"' where id='"+value0+"' ";
-            pst= cnx.prepareStatement(sql);
-            pst.execute();
-            System.out.println(sql);
-
-            nomtf.setText("");
-
-            idtf.setText("");
-
-            desctf.setText("");
-            loadDestinations();
-
-
-        } catch ( SQLException e) {
-        }
-    }
-    @FXML
-    void approveDestination(ActionEvent event) {
-        if (controlSaisie()) {
-            try {
-                cnx = MyConnection.getInstance().getCnx();
-                String value0 = idtf.getText();
-
-                String value1 = "trouvé";
-                String value2 = "2";
-
-                String sql = "update objets_perdu set status='" + value1 + "',idT='" + value2 + "'  where id='" + value0 + "' ";
-                System.out.println(sql);
-
-                pst = cnx.prepareStatement(sql);
-                pst.execute();
-
-                nomtf.setText("");
-
-                idtf.setText("");
-
-                desctf.setText("");
-                loadDestinations();
-
-
-            } catch (SQLException e) {
-            }
-        }
-    }
-    public Objet gettempReclamation(TableColumn.CellEditEvent edittedCell) {
-        Objet test = recTab.getSelectionModel().getSelectedItem();
-        return test;
+    private void showNotification(String title, String message, NotificationType type) {
+        Notifications notification = Notifications.create()
+                .title(title)
+                .text(message)
+                .hideAfter(Duration.seconds(4))
+                .position(Pos.TOP_RIGHT)
+                .onAction(e -> System.out.println("Notification clicked!"));
+        notification.show();
     }
 
-    @FXML
-    private void getSelected(javafx.scene.input.MouseEvent event) {
-        int index = recTab.getSelectionModel().getSelectedIndex();
-        if (index <= -1){
+    private void clearFields() {
+        idTf.clear();
+        nomTf.clear();
+        descriptionTf.clear();
+        categorieTf.clear();
+        imagePathTf.clear();
+        dateTf.setValue(null);
+    }
 
-            return;
-        }
-        idtf.setText(idcol.getCellData(index).toString());
-        nomtf.setText(nom.getCellData(index).toString());
-        usertf.setText(description.getCellData(index).toString());
+    enum NotificationType {
+        SUCCESS, ERROR, WARNING
     }
 }

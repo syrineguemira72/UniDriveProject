@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.unidrive.controllers.MinimalController">
+    <children>
+        <Label layoutX="50.0" layoutY="50.0" text="Nom" />
+        <TextField fx:id="nomTf" layoutX="50.0" layoutY="70.0" prefWidth="150.0" promptText="Entrez un nom" />
+        <Button layoutX="50.0" layoutY="110.0" onAction="#addNom" text="Ajouter" />
+    </children>
+</AnchorPane>

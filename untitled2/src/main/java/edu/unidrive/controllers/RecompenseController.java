@@ -1,5 +1,6 @@
 package edu.unidrive.controllers;
 
+import edu.unidrive.entities.Objet;
 import edu.unidrive.tools.MyConnection;
 import edu.unidrive.services.RecompenseService;
 import edu.unidrive.entities.Recompense;
@@ -7,6 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXMLLoader;
+import javafx.print.PrinterJob;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -14,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.net.URL;
@@ -206,44 +211,41 @@ public class RecompenseController implements Initializable {
 
 
     }
-    @FXML
-    void recherche() {
-        System.out.println("dd");
-        RecompenseService re = new RecompenseService();
-        List<Recompense> results = re.afficherRecompenses();
-        ObservableList<Recompense> observableResults = FXCollections.observableArrayList(results);
 
-        // Initialize FilteredList with results
-        FilteredList<Recompense> filteredData = new FilteredList<>(observableResults, b -> true);
-        Recompense r = new Recompense();
-
-        // Set the filter Predicate whenever the filter changes
-        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Filter changed: " + newValue); // Debugging line
-
-            filteredData.setPredicate(reclamation -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true; // Show all if filter is empty
+        @FXML
+        public void recherche(){
+            if (filterField == null || filterField.getText().isEmpty()) {
+                recTab.setItems(List);  // Show all data if no filter
+            } else {
+                ObservableList<Recompense> filteredData = FXCollections.observableArrayList();
+                for (Recompense item : List) {
+                    if (String.valueOf(item.getReduction()).toLowerCase().contains(filterField.getText().toLowerCase()) ||
+                            String.valueOf(item.getIdOP()).toLowerCase().contains(filterField.getText().toLowerCase())) {
+                        filteredData.add(item);
+                    }
                 }
+                recTab.setItems(filteredData);
+            }
 
-                String lowerCaseFilter = newValue.toLowerCase();
+        }
 
-                // Check if idOP or reduction contains the filter
-                return String.valueOf(reclamation.getIdOP()).toLowerCase().contains(lowerCaseFilter) ||
-                        String.valueOf(reclamation.getReduction()).toLowerCase().contains(lowerCaseFilter);
-            });
-        });
+    private Stage primaryStage;
 
-        // Wrap the FilteredList in a SortedList
-        SortedList<Recompense> sortedData = new SortedList<>(filteredData);
+    @FXML
+    private void printRecompense(ActionEvent event) {
 
-        // Bind the SortedList comparator to the TableView comparator
-        sortedData.comparatorProperty().bind(recTab.comparatorProperty());
+        System.out.println("To Printer!");
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if(job != null){
+            Window primaryStage = null;
+            job.showPrintDialog(this.primaryStage);
 
-        // Add sorted (and filtered) data to the table
-        recTab.setItems(sortedData);
+            Node root = this.recTab;
+            job.printPage(root);
+            job.endJob();
+        }
+
     }
-
     private Connection cnx = null;
     private PreparedStatement pst = null ;
     private ResultSet rs = null ;

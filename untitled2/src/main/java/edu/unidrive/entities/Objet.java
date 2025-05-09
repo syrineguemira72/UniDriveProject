@@ -1,119 +1,130 @@
 package edu.unidrive.entities;
 
-   public class Objet {
+public class Objet {
+    public int id;
+    public String nom;
+    public String status;
+    public String date;
+    public String description;
+    public String lieu;
+    public String categorie;
+    public String imagePath;
 
+    public Objet(int id, String nom, String status, String date, String description, String lieu, String categorie, String imagePath) {
+        this.id = id;
+        this.nom = nom;
+        this.status = status;
+        this.date = date;
+        this.description = description;
+        this.lieu = lieu;
+        this.categorie = categorie;
+        this.imagePath = imagePath;
+    }
 
-   public int id;
-   public String nom ;
-   public int idP ;
-   public String lieuP;
-       public String date;
-       public String status;
+    public Objet(String nom, String status, String date, String description, String lieu, String categorie, String imagePath) {
+        this.nom = nom;
+        this.status = status;
+        this.date = date;
+        this.description = description;
+        this.lieu = lieu;
+        this.categorie = categorie;
+        this.imagePath = imagePath;
+    }
 
-public int idT;
+    public Objet() {}
 
-       public Objet(int id, String nom, int idP, String lieuP, String date,String status) {
-           this.id = id;
-           this.nom = nom;
-           this.idP = idP;
-           this.lieuP = lieuP;
-           this.date = date;
-           this.status=status;
-       }
-       public Objet(String nom, int idP, String lieuP, String date,String status) {
-           this.nom = nom;
-           this.idP = idP;
-           this.lieuP = lieuP;
-           this.date = date;
-           this.status=status;
+    public Objet(String id) {
+        this.id = Integer.parseInt(id);
+    }
 
-       }
+    public Objet(String description, int i, String type, String finder, String owner) {
+    }
 
-   public Objet() {}
+    public int getId() {
+        return this.id;
+    }
 
-       public Objet(String id) {
+    public String getNom() {
+        return nom;
+    }
 
-       }
+    public String getStatus() {
+        return status;
+    }
 
+    public String getDate() {
+        return date;
+    }
 
-       public int getId() {
-           return this.id;
-       }
-       public String getStatus() {
-           return this.status;
-       }
+    public String getDescription() {
+        return description;
+    }
 
-   public String getNom() {
-       return nom;
-   }
+    public String getLieu() {
+        return lieu;
+    }
 
-   public int getIdP() {
-       return idP;
-   }
+    public String getCategorie() {
+        return categorie;
+    }
 
-   public String getLieuP() {
-       return lieuP;
-   }
+    public String getImagePath() {
+        return imagePath;
+    }
 
-   public String getDate() {
-       return date;
-   }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-       public int getIdT() {
-           return idT;
-       }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-       public void setIdT(int idT) {
-           this.idT = idT;
-       }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-       public void setId(int id) {
-           this.id = id;
-       }
-       public void setStatus(String status) {
-           this.status = status;
-       }
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-   public void setNom(String nom) {
-       this.nom = nom;
-   }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-   public void setIdP(int idP) {
-       this.idP = idP;
-   }
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
+    }
 
-   public void setLieuP(String lieuP) {
-       this.lieuP = lieuP;
-   }
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
 
-   public void setDate(String date) {
-       this.date = date;
-   }
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
 
+    @Override
+    public String toString() {
+        return "Objet{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", status='" + status + '\'' +
+                ", date='" + date + '\'' +
+                ", description='" + description + '\'' +
+                ", lieu='" + lieu + '\'' +
+                ", categorie='" + categorie + '\'' +
+                ", imagePath='" + imagePath + '\'' +
+                '}';
+    }
 
-   @Override
-   public String toString() {
-       return "Objet{" +
-               "id=" + id +
-               ", nom='" + nom + '\'' +
-               ", idP=" + idP +
-               ", lieuP='" + lieuP + '\'' +
-               ", date=" + date +
-               ", idT=" + idT +
-               '}';
-   }
-
-   @Override
-   public boolean equals(Object o) {
-       if (this == o) return true;
-       if (o == null || getClass() != o.getClass()) return false;
-       Objet objet = (Objet) o;
-       return id == objet.id &&
-               idP == objet.idP &&
-               date == objet.date;
-   }
-
-
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Objet objet = (Objet) o;
+        return id == objet.id &&
+                nom.equals(objet.nom) &&
+                date.equals(objet.date);
+    }
 }
-

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ObjetController {
+public class ObjectController {
 
 
     public class Home extends Application {

@@ -17,23 +17,24 @@ public class ObjetPerduService implements ObjetPerduInterface {
     @Override
     public void ajouterObjet(Objet op) {
         try {
-            String requete = "INSERT INTO `objets_perdu`(`nom`, `idP`, `LieuP`, `Date` ,`status`) " +
-                    "VALUES (?, ?, ?, ?,?)";
+            String requete = "INSERT INTO objets_perdu (nom, status, date, description, lieu, categorie, imagePath) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pst = MyConnection.getInstance().getCnx().prepareStatement(requete);
 
             // Setting values using PreparedStatement
             pst.setString(1, op.getNom());
-            pst.setInt(2, op.getIdP());    // Set the idP
-            pst.setString(3, op.getLieuP()); // Set the lieuP
-            pst.setString(4, op.getDate());   // Set the date
-
-            pst.setString(5, op.getStatus());   // Set the date
+            pst.setString(2, op.getStatus());
+            pst.setString(3, op.getDate());
+            pst.setString(4, op.getDescription());
+            pst.setString(5, op.getLieu());
+            pst.setString(6, op.getCategorie());
+            pst.setString(7, op.getImagePath());
 
             // Execute the update
             pst.executeUpdate();
 
-            System.out.println("objet ajouté aves succés");
+            System.out.println("Objet ajouté avec succès");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -42,20 +43,21 @@ public class ObjetPerduService implements ObjetPerduInterface {
     @Override
     public void modifierObjet(int id, Objet op) {
         try {
-            String req = "UPDATE `objets_perdu` SET `nom`=?,  `idP`=?," +
-                    " `lieuP`=?, `date`=? ,`status`=? WHERE `id`=?";
+            String req = "UPDATE objets_perdu SET nom=?, status=?, date=?, description=?, lieu=?, categorie=?, imagePath=? WHERE id=?";
             PreparedStatement pre = cnx.prepareStatement(req);
 
-            pre.setString(1, op.getNom()); // Set the nom
-            pre.setInt(2, op.getIdP());    // Set the idP
-            pre.setString(3, op.getLieuP()); // Set the lieuP
-            pre.setString(4, op.getDate());   // Set the date
-            pre.setString(5, op.getStatus());   // Set the date
-            pre.setInt(6, id);
+            pre.setString(1, op.getNom());
+            pre.setString(2, op.getStatus());
+            pre.setString(3, op.getDate());
+            pre.setString(4, op.getDescription());
+            pre.setString(5, op.getLieu());
+            pre.setString(6, op.getCategorie());
+            pre.setString(7, op.getImagePath());
+            pre.setInt(8, id);
 
             pre.executeUpdate();
-            System.out.println("reclamation Modfié !");
-        } catch(SQLException ex) {
+            System.out.println("Objet modifié !");
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
@@ -63,12 +65,13 @@ public class ObjetPerduService implements ObjetPerduInterface {
     @Override
     public void supprimerObjet(int id) {
         try {
-            String req = "DELETE FROM `objets_perdu` WHERE id="+id+"";
+            String req = "DELETE FROM objets_perdu WHERE id=?";
             PreparedStatement pst = cnx.prepareStatement(req);
+            pst.setInt(1, id);
 
             pst.executeUpdate();
-            System.out.println("objets_perdu Supprimé !");
-        } catch(SQLException ex) {
+            System.out.println("Objet supprimé !");
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
@@ -81,10 +84,18 @@ public class ObjetPerduService implements ObjetPerduInterface {
             Statement st = cnx.createStatement();
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                list.add(new Objet(rs.getInt("id"), rs.getString("nom"), rs.getInt("idP"), rs.getString("lieuP"), rs.getString("date"), rs.getString("status")));
-
+                list.add(new Objet(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("status"),
+                        rs.getString("date"),
+                        rs.getString("description"),
+                        rs.getString("lieu"),
+                        rs.getString("categorie"),
+                        rs.getString("imagePath")
+                ));
             }
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
@@ -94,31 +105,41 @@ public class ObjetPerduService implements ObjetPerduInterface {
     @Override
     public Objet trouverObjet(int id) {
         Objet o = null;
-         try {
-            String requete = "SELECT * FROM objets_perdu where id="+id+"";
-            Statement st = cnx.createStatement();
-            ResultSet rs = st.executeQuery(requete);
-            while (rs.next()) {
-                 o =  new  Objet(rs.getInt("id"), rs.getString("nom"), rs.getInt("idP"), rs.getString("lieuP"), rs.getString("date"), rs.getString("status"));
+        try {
+            String requete = "SELECT * FROM objets_perdu WHERE id=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                o = new Objet(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("status"),
+                        rs.getString("date"),
+                        rs.getString("description"),
+                        rs.getString("lieu"),
+                        rs.getString("categorie"),
+                        rs.getString("imagePath")
+                );
             }
-        } catch(SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
 
-        return o;    }
+        return o;
+    }
 
     @Override
     public int updateEtat(int id, String status) throws SQLException {
-        String requestUpdate = "UPDATE `objets_perdu` SET `status`=?   WHERE `id`=?";
+        String requestUpdate = "UPDATE objets_perdu SET status=? WHERE id=?";
         PreparedStatement pst = cnx.prepareStatement(requestUpdate);
 
-        pst.setString(1, "trouvé");
+        pst.setString(1, status);
         pst.setInt(2, id);
-         return pst.executeUpdate();
+        return pst.executeUpdate();
     }
 
-
     public void addEntity(Objet op) {
-
+        ajouterObjet(op);
     }
 }
