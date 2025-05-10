@@ -46,6 +46,10 @@ public class aide {
         this.associationId = new SimpleIntegerProperty(associationId);
     }
 
+    public aide(String updatedCurrency, String updatedDescription, String updatedMontant) {
+
+    }
+
     // Getters & Setters for id
     public int getId() {
         return id.get();

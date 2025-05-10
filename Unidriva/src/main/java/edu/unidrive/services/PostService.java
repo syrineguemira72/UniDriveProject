@@ -14,46 +14,26 @@ public class PostService implements Iservice<Post> {
 
     private final Connection cnx = MyConnection.getInstance().getCnx(); // Singleton
 
-    public List<String> getInterestedUsers(String postTitle) {
-        List<String> interestedUsers = new ArrayList<>();
-        String query = "SELECT u.email FROM utilisateur u JOIN user_interests ui ON u.id = ui.user_id WHERE ui.interest LIKE ?";
-        try (PreparedStatement pst = cnx.prepareStatement(query)) {
-            pst.setString(1, "%" + postTitle + "%");
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                interestedUsers.add(rs.getString("email"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la récupération des utilisateurs intéressés : " + e.getMessage());
-        }
-        return interestedUsers;
-    }
 
-    @Override
     public void addEntity(Post entity) {
         try {
-            String requete = "INSERT INTO `post`(`title`, `description`) VALUES (?,?)";
+            String requete = "INSERT INTO post (title, description, category, user_id) VALUES (?, ?, ?, ?)";
             PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, entity.getTitle());
             pst.setString(2, entity.getDescription());
+            pst.setString(3, entity.getCategory());
+            pst.setInt(4, entity.getUserId()); // Important: fournir l'ID utilisateur
             pst.executeUpdate();
+
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 entity.setId(rs.getInt(1));
             }
-            System.out.println("Success!");
-
-            List<String> interestedUsers = getInterestedUsers(entity.getTitle());
-            edu.unidrive.services.EmailPService emailPService = new edu.unidrive.services.EmailPService();
-            for (String userEmail : interestedUsers) {
-                emailPService.sendEmail(userEmail, "Nouveau post ajouté", "Un nouveau post a été ajouté: " + entity.getTitle());
-            }
-
+            System.out.println("Post ajouté avec succès !");
         } catch (SQLException e) {
-            throw new RuntimeException("error" + e.getMessage());
+            throw new RuntimeException("Erreur lors de l'ajout du post : " + e.getMessage());
         }
     }
-
     @Override
     public void deleteEntity(int id, Post post) {
 
@@ -98,19 +78,14 @@ public class PostService implements Iservice<Post> {
 
     @Override
     public void updateEntity(Post entity) {
-        String requete = "UPDATE `post` SET `title` = ?, `description` = ? WHERE `id` = ?";
+        String requete = "UPDATE `post` SET `title` = ?, `description` = ?, `category` = ? WHERE `id` = ?";
         try {
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, entity.getTitle());
             pst.setString(2, entity.getDescription());
-            pst.setInt(3, entity.getId());
-
-            int rowsAffected = pst.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Post mis à jour avec succès !");
-            } else {
-                System.out.println("Aucun post trouvé avec cet ID.");
-            }
+            pst.setString(3, entity.getCategory());
+            pst.setInt(4, entity.getId());
+            pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException("Erreur lors de la mise à jour du post : " + e.getMessage());
         }
@@ -142,7 +117,8 @@ public class PostService implements Iservice<Post> {
                 Post p = new Post();
                 p.setId(rs.getInt("id"));
                 p.setTitle(rs.getString("title"));
-                p.setDescription(rs.getString(3));
+                p.setDescription(rs.getString("description"));
+                p.setCategory(rs.getString("category")); // Ajout de la catégorie
                 result.add(p);
             }
         } catch (SQLException e) {
@@ -177,33 +153,7 @@ public class PostService implements Iservice<Post> {
         }
         return null; // Retourne null si aucun post n'est trouvé
     }
-    public void saveUserInterests(int userId, String centresInteret) {
-        String[] interests = centresInteret.split(",");
-        String query = "INSERT INTO user_interests (user_id, interest) VALUES (?, ?)";
 
-        try (PreparedStatement pst = cnx.prepareStatement(query)) {
-            for (String interest : interests) {
-                pst.setInt(1, userId);
-                pst.setString(2, interest.trim());
-                pst.executeUpdate();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de l'enregistrement des centres d'intérêt : " + e.getMessage());
-        }
-    }
-    public boolean hasUserInterests(int userId) {
-        String query = "SELECT COUNT(*) FROM user_interests WHERE user_id = ?";
-        try (PreparedStatement pst = cnx.prepareStatement(query)) {
-            pst.setInt(1, userId);
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("Erreur lors de la vérification des centres d'intérêt : " + e.getMessage());
-        }
-        return false;
-    }
 
     public List<Interaction> getCommentsByPostId(int postId) {
         List<Interaction> comments = new ArrayList<>();
@@ -215,7 +165,14 @@ public class PostService implements Iservice<Post> {
                 Interaction interaction = new Interaction();
                 interaction.setId(rs.getInt("id"));
                 interaction.setContent(rs.getString("content"));
-                interaction.setDate(rs.getDate("date").toLocalDate());
+                // Vérifiez si la colonne date existe avant de l'utiliser
+                try {
+                    if (rs.getDate("date") != null) {
+                        interaction.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    }
+                } catch (SQLException e) {
+                    // La colonne date n'existe pas, on continue sans
+                }
                 interaction.setPostId(rs.getInt("postId"));
                 comments.add(interaction);
             }
@@ -224,7 +181,6 @@ public class PostService implements Iservice<Post> {
         }
         return comments;
     }
-
 
 
     public List<Post> getPostsWithBadWords() {

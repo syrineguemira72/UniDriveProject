@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import java.time.LocalDateTime;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import edu.unidrive.services.TextFilterService;
@@ -17,14 +18,20 @@ public class Ajoutercommentairecontrollers {
 
     @FXML
     private TextField commentid;
-
     private int postId;
+    private int currentUserId;
+
     private final TextFilterService textFilterService = new TextFilterService();
 
 
     public void setPostId(int postId) {
         this.postId = postId;
     }
+
+    public void setCurrentUserId(int userId) {
+        this.currentUserId = userId;
+    }
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -45,8 +52,8 @@ public class Ajoutercommentairecontrollers {
 
         String filteredContent = textFilterService.filterBadWords(content);
 
-        LocalDate date = LocalDate.now();
-        Interaction interaction = new Interaction(filteredContent, date, postId);
+        LocalDateTime created_at = LocalDateTime.now();  // Changed to LocalDateTime
+        Interaction interaction = new Interaction(filteredContent, created_at, postId, currentUserId);
 
         InteractionService interactionService = new InteractionService();
         try {

@@ -3,6 +3,7 @@ package edu.unidrive.services;
 import edu.unidrive.entities.Interaction;
 import edu.unidrive.interfaces.Iservice;
 import edu.unidrive.tools.MyConnection;
+import java.time.LocalDateTime;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,11 +16,12 @@ public class InteractionService implements Iservice<Interaction> {
     @Override
     public void addEntity(Interaction entity) {
         try {
-            String requete = "INSERT INTO `interaction`(`content`, `date`, `postId`) VALUES (?, ?, ?)";
+            String requete = "INSERT INTO `interaction`(`content`, `created_at`, `postId`,`user_idc`) VALUES (?, ?, ?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, entity.getContent());
-            pst.setDate(2, Date.valueOf(entity.getDate()));
+            pst.setTimestamp(2, Timestamp.valueOf(entity.getCreatedAt()));  // Changed to use Timestamp
             pst.setInt(3, entity.getPostId());
+            pst.setInt(4, entity.getUser_idc());
 
             pst.executeUpdate();
 
@@ -79,12 +81,19 @@ public class InteractionService implements Iservice<Interaction> {
 
     @Override
     public void updateEntity(Interaction entity) {
-        String requete = "UPDATE `interaction` SET `content` = ?, `date` = ? WHERE `id` = ?";
-        try {
+        if (entity.getCreatedAt() == null) {
+            // Soit utiliser la date actuelle si null
+            entity.setCreatedAt(LocalDateTime.now());
+            // Soit lancer une exception
+            // throw new IllegalArgumentException("La date de création ne peut pas être null");
+        }
+        String requete = "UPDATE `interaction` SET `content` = ?, `created_at` = ?, `postId` = ?, `user_idc` = ? WHERE `id` = ?";        try {
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, entity.getContent());
-            pst.setDate(2, Date.valueOf(entity.getDate()));
-            pst.setInt(3, entity.getId());
+            pst.setTimestamp(2, Timestamp.valueOf(entity.getCreatedAt()));
+            pst.setInt(3, entity.getPostId());
+            pst.setInt(4, entity.getUser_idc());// Changed to use Timestamp
+            pst.setInt(5, entity.getId());
 
             int rowsAffected = pst.executeUpdate();
             if (rowsAffected > 0) {
@@ -123,8 +132,10 @@ public class InteractionService implements Iservice<Interaction> {
                 Interaction t = new Interaction();
                 t.setId(rs.getInt("id"));
                 t.setContent(rs.getString("content"));
-                t.setDate(rs.getDate("date").toLocalDate());
+                t.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());  // Changed to getTimestamp
                 t.setPostId(rs.getInt("postId"));
+                t.setUser_idc(rs.getInt("user_idc")); // Note: nom de colonne différent
+
                 result.add(t);
             }
         } catch (SQLException e) {
@@ -141,8 +152,10 @@ public class InteractionService implements Iservice<Interaction> {
                 Interaction comment = new Interaction();
                 comment.setId(rs.getInt("id"));
                 comment.setContent(rs.getString("content"));
-                comment.setDate(rs.getDate("date").toLocalDate());
+                comment.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());  // Changed to getTimestamp
                 comment.setPostId(rs.getInt("postId"));
+                comment.setUser_idc(rs.getInt("user_idc")); // Note: nom de colonne différent
+
                 return comment;
             }
         } catch (SQLException e) {
@@ -161,8 +174,11 @@ public class InteractionService implements Iservice<Interaction> {
             while (rs.next()) {
                 Interaction t = new Interaction();
                 t.setContent(rs.getString("content"));
-                t.setDate(rs.getDate("date").toLocalDate());
+                t.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());  // Changed to getTimestamp
                 t.setPostId(rs.getInt("postId"));
+                t.setUser_idc(rs.getInt("user_idc")); // Note: nom de colonne différent
+
+
                 result.add(t);
             }
         } catch (SQLException e) {

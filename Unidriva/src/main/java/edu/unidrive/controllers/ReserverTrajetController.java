@@ -198,7 +198,7 @@ public class ReserverTrajetController {
     private void goToCreerTrajet() {
         try {
             // Load the CreerTrajet.fxml page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreerTrajet.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeUnidrive.fxml"));
             Stage stage = (Stage) btnRetour.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);

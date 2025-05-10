@@ -18,18 +18,17 @@ public class JwtUtil {
         try {
             return Jwts.builder()
                     .setSubject(email)
-                    .claim("role", role) // Ajouter le rôle comme claim
+                    .claim("role", role)
                     .setIssuedAt(new Date())
                     .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                     .signWith(SECRET_KEY)
                     .compact();
         } catch (Exception e) {
             e.printStackTrace();
-            return null; // Retourner null en cas d'erreur
+            return null;
         }
     }
 
-    // Valider un JWT et extraire les informations
     public static Claims validateToken(String token) {
         try {
             return Jwts.parserBuilder()
@@ -39,7 +38,7 @@ public class JwtUtil {
                     .getBody();
         } catch (Exception e) {
             e.printStackTrace();
-            return null; // Retourner null en cas d'erreur
+            return null;
         }
     }
 }

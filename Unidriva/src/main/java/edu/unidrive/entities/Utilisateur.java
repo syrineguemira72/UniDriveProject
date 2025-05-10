@@ -1,11 +1,9 @@
 package edu.unidrive.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Utilisateur {
 
-
+    public static final String ROLE_PASSAGER = "PASSAGER";
+    public static final String ROLE_CONDUCTEUR = "CONDUCTEUR";
 
     private int id;
     private String email;
@@ -16,9 +14,6 @@ public class Utilisateur {
     private String password;
     private String role; // Nouvel attribut pour le rôle
     private Profile profile;
-
-    private List<Trajet> trajets = new ArrayList<>();
-    private List<Reservation> reservations = new ArrayList<>();
 
     public Utilisateur() {
     }
@@ -116,32 +111,6 @@ public class Utilisateur {
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
-
-    public List<Trajet> getTrajets() {
-        return trajets;
-    }
-
-    public void setTrajets(List<Trajet> trajets) {
-        this.trajets = trajets;
-    }
-
-
-    public void removeTrajet(Trajet trajet) {
-        if (trajets.remove(trajet)) {
-            trajet.setUser(null);
-        }
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
-
-
-
 
     @Override
     public String toString() {

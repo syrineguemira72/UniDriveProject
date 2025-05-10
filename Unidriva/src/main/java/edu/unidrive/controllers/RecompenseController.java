@@ -137,13 +137,12 @@ public class RecompenseController implements Initializable {
 
         // Vérification de la chaîne de caractères (par exemple, le champ pour le nom ou autre)
 
-        if (combo.getValue()==null){
-
+        if (!combo.getValue()) {  // If false, show error
             showAlert("Erreur", "Objet perdu ne peut pas être vide.");
             return false;
         }
-
         return true;
+
     }
 
 
@@ -152,7 +151,7 @@ public class RecompenseController implements Initializable {
         int value4=0;
         int value5=0;
         Connection cnx = MyConnection.getInstance().getCnx();
-        rs = cnx.createStatement().executeQuery("SELECT id,idT FROM objets_perdu where nom ='"+combo.getValue().toString()+"' ");
+        rs = cnx.createStatement().executeQuery("SELECT id,idT FROM objets_perdu where nom ='"+ combo.getValue() +"' ");
         while(rs.next()) {
             value4 = rs.getInt("id");
 
@@ -252,7 +251,7 @@ public class RecompenseController implements Initializable {
         cnx = MyConnection.getInstance().getCnx();
 
         Connection cnx = MyConnection.getInstance().getCnx();
-        rs = cnx.createStatement().executeQuery("SELECT id FROM objets_perdu where nom='"+combo.getValue().toString()+"'");
+        rs = cnx.createStatement().executeQuery("SELECT id FROM objets_perdu where nom='"+ combo.getValue() +"'");
         while(rs.next())
             value4 = rs.getInt("id");
         rs = cnx.createStatement().executeQuery("SELECT nom FROM user where id='"+value4+"'");
@@ -268,7 +267,7 @@ public class RecompenseController implements Initializable {
 
     }
     @FXML
-    void updateRecompense(ActionEvent event) {
+    boolean updateRecompense(ActionEvent event) {
         int value4 = 0 ;
         int value5 = 0 ;
         try {
@@ -282,22 +281,36 @@ public class RecompenseController implements Initializable {
 
             if(controlSaisie()){
                 Connection cnx = MyConnection.getInstance().getCnx();
-                rs = cnx.createStatement().executeQuery("SELECT id,idT FROM objets_perdu where nom='"+combo.getValue().toString()+"'");
+                String sql = "SELECT id, idT FROM objets_perdu WHERE nom=?";
+                try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+                    pstmt.setString(1, String.valueOf(combo.getValue()));
+                    rs = pstmt.executeQuery();
+                    // Process results...
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
                 while(rs.next()) {
                     value4 = rs.getInt("id");
 
                     value5 = rs.getInt("id");
                 }
-                String sql = "update recompense set idOP= '"+value4+"',idUser= '"+value5+"',reductionn='"+value1+"' where id='"+value0+"' ";
-                pst= cnx.prepareStatement(sql);
-                System.out.println(sql);
+                sql = "UPDATE recompense SET idOP=?, idUser=?, reductionn=? WHERE id=?";
+                try (PreparedStatement pstmt = cnx.prepareStatement(sql)) {
+                    // Set parameters in order (1-based index)
+                    pstmt.setInt(1, Integer.parseInt(String.valueOf(value4)));    // Assuming idOP is numeric
+                    pstmt.setInt(2, Integer.parseInt(String.valueOf(value5)));    // Assuming idUser is numeric
+                    pstmt.setString(3, value1);                  // Assuming reductionn is string
+                    pstmt.setInt(4, Integer.parseInt(value0));   // Assuming id is numeric
 
-                pst.execute();
+                    int rowsAffected = pstmt.executeUpdate();
+                    return rowsAffected > 0;  // Returns true if update was successful
+                } catch (SQLException | NumberFormatException e) {
+                    e.printStackTrace();
+                    return false;
+                }
 
 
-                idtf.setText("");
- reductiontf.setText("");
-                showAlert("Success", "recompense updated successfully!");
             }
 
             combo.setValue(null);
@@ -306,5 +319,6 @@ public class RecompenseController implements Initializable {
 
         } catch ( SQLException e) {
         }
+        return false;
     }
 }

@@ -12,6 +12,7 @@ import edu.unidrive.services.TextFilterService;
 
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class ModifierCommentaireControllers {
 
@@ -27,6 +28,7 @@ public class ModifierCommentaireControllers {
         this.commentToUpdate = comment;
         textcomment.setText(comment.getContent());
     }
+
     private edu.unidrive.controllers.HomePostControllers homePostControllers;
 
     public void setHomePostControllers( edu.unidrive.controllers.HomePostControllers homePostControllers) {
@@ -42,6 +44,9 @@ public class ModifierCommentaireControllers {
             String filteredContent = textFilterService.filterBadWords(newContent);
 
             commentToUpdate.setContent(filteredContent);
+            if (commentToUpdate.getCreatedAt() == null) {
+                commentToUpdate.setCreatedAt(LocalDateTime.now());
+            }
             InteractionService interactionService = new InteractionService();
             interactionService.updateEntity(commentToUpdate);
             showAlert("Succès", "Le commentaire a été mis à jour avec succès.");

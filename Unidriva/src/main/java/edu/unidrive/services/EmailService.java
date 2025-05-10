@@ -18,7 +18,6 @@ public class EmailService {
         this.password = password;
     }
 
-    // Charger le modèle HTML et remplacer les placeholders
     private String loadHtmlTemplate(String filePath, String firstname) {
         try {
             InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
@@ -53,28 +52,22 @@ public class EmailService {
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
             message.setSubject("Welcome to Unidrive!");
 
-            // Charger le modèle HTML
             String htmlContent = loadHtmlTemplate("html/emailUser.html", firstname);
 
-            // Création du multipart (HTML + Image)
             MimeMultipart multipart = new MimeMultipart("related");
 
-            // Part 1 : Contenu HTML
             BodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent(htmlContent, "text/html");
             multipart.addBodyPart(messageBodyPart);
 
-            // Part 2 : Attachement de l’image en CID
             MimeBodyPart imagePart = new MimeBodyPart();
             DataSource fds = new FileDataSource("src/main/resources/images/unidrive.png");
             imagePart.setDataHandler(new DataHandler(fds));
             imagePart.setHeader("Content-ID", "<logo123>");
             multipart.addBodyPart(imagePart);
 
-            // Ajouter le multipart au message
             message.setContent(multipart);
 
-            // Envoyer l’e-mail
             Transport.send(message);
 
             System.out.println("Welcome email sent successfully to " + recipientEmail);
