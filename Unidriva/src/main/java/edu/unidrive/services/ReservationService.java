@@ -20,7 +20,7 @@ public class ReservationService implements Iservice<Reservation> {
             pst.setInt(1, reservation.getId());
             pst.setInt(2, reservation.getTrajet().getId());
             pst.setString(3, reservation.getEtat().name());
-            pst.setDate(4, reservation.getDateReservation());
+            pst.setDate(4, Date.valueOf(reservation.getDateReservation()));
 
             pst.executeUpdate();
             System.out.println("Réservation ajoutée avec succès");
@@ -42,7 +42,7 @@ public class ReservationService implements Iservice<Reservation> {
 
             pst.setInt(1, reservation.getTrajet().getId());
             pst.setString(2, reservation.getEtat().name());
-            pst.setDate(3, Date.valueOf(reservation.getDateReservation().toLocalDate()));
+            pst.setDate(3, Date.valueOf(reservation.getDateReservation()));
             pst.setInt(4, id);
 
             int rowsUpdated = pst.executeUpdate();

@@ -1,6 +1,5 @@
 package edu.unidrive.entities;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class Reservation {
@@ -45,11 +44,11 @@ public class Reservation {
         this.trajet = trajet;
     }
 
-    public Etat getStatus() {
+    public Etat getEtat() {
         return status;
     }
 
-    public void setStatus(Etat status) {
+    public void setEtat(Etat status) {
         this.status = status;
     }
 
