@@ -116,14 +116,13 @@ public class ReserverTrajetController {
                 // Update the trip in the database
                 trajetService.updateEntity(trajet.getId(),trajet);
 
-                // Create a new reservation
                 Reservation newReservation = new Reservation(
-                        0,  // ID will be auto-generated
+                        0,
+                        LocalDate.now(),// ID will be auto-generated
                         trajet,
-                        Etat.En_attente,  // Initial state
-                        LocalDate.now()   // Reservation date
+                        Etat.pending  // Reservation date
                 );
-
+                
                 reservationService.addEntity(newReservation);
 
                 // Show a confirmation message

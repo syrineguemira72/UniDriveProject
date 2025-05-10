@@ -1,33 +1,40 @@
 package edu.unidrive.entities;
 
-
-import javax.print.attribute.standard.PresentationDirection;
 import java.sql.Date;
 import java.time.LocalDate;
 
 public class Reservation {
-    private int id;
+    private Integer id;
+    private LocalDate dateReservation;
     private Trajet trajet;
-    private Etat etat;
-    private Date dateReservation;
+    private Etat status;
+    private Utilisateur user;
 
-
-
-    public Reservation(int id, Trajet trajet, Etat etat, LocalDate dateReservation) {
-        this.id = id;
-        this.trajet = trajet;
-        this.etat = etat;
-        this.dateReservation = Date.valueOf(dateReservation);
+    public Reservation() {
     }
-    public Reservation(){}
 
+    public Reservation(Integer id, LocalDate dateReservation, Trajet trajet, Etat status) {
+        this.id = id;
+        this.dateReservation = dateReservation;
+        this.trajet = trajet;
+        this.status = status;
+    }
 
-    public int getId() {
+    // Getters and Setters
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public LocalDate getDateReservation() {
+        return dateReservation;
+    }
+
+    public void setDateReservation(LocalDate dateReservation) {
+        this.dateReservation = dateReservation;
     }
 
     public Trajet getTrajet() {
@@ -38,29 +45,40 @@ public class Reservation {
         this.trajet = trajet;
     }
 
-    public Etat getEtat() {
-        return etat;
+    public Etat getStatus() {
+        return status;
     }
 
-    public void setEtat(Etat status) {
-        this.etat = status;
+    public void setStatus(Etat status) {
+        this.status = status;
     }
 
-    public Date  getDateReservation() {
-        return dateReservation;
+    public Utilisateur getUser() {
+        return user;
     }
 
-    public void setDateReservation(LocalDate dateReservation) {
-        this.dateReservation = Date.valueOf(dateReservation);
+    public void setUser(Utilisateur user) {
+        // Remove from previous user's reservations
+        if (this.user != null) {
+            this.user.getReservations().remove(this);
+        }
+
+        // Set new user
+        this.user = user;
+
+        // Add to new user's reservations
+        if (user != null && !user.getReservations().contains(this)) {
+            user.getReservations().add(this);
+        }
     }
 
     @Override
     public String toString() {
         return "Reservation{" +
                 "id=" + id +
-                ", trajet=" + trajet +
-                ", status='" + etat + '\'' +
                 ", dateReservation=" + dateReservation +
+                ", trajet=" + trajet +
+                ", status=" + status +
                 '}';
     }
 }

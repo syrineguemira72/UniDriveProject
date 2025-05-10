@@ -6,18 +6,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trajet {
-    private int id;
+    private Integer id;
     private String pointDepart;
     private String pointArrive;
     private Timestamp heureDepart;
-    private int dureeEstimee;
-    private float distance;
-    private int placeDisponible;
-    private List<Reservation> reservations;
+    private Integer dureeEstimee;
+    private Float distance;
+    private Integer placeDisponible;
+    private String preferences;
+    private Float prix;
+    private List<Reservation> reservations = new ArrayList<>();
+    private Utilisateur user;
 
+    public Trajet() {
+    }
 
-
-    public Trajet (int id, String pointDepart, String pointArrive, LocalDateTime heureDepart, int dureeEstimee, float distance, int placeDisponible) {
+    public Trajet(Integer id, String pointDepart, String pointArrive, LocalDateTime heureDepart,
+                  Integer dureeEstimee, Float distance, Integer placeDisponible,
+                  String preferences, Float prix) {
         this.id = id;
         this.pointDepart = pointDepart;
         this.pointArrive = pointArrive;
@@ -25,34 +31,16 @@ public class Trajet {
         this.dureeEstimee = dureeEstimee;
         this.distance = distance;
         this.placeDisponible = placeDisponible;
+        this.preferences = preferences;
+        this.prix = prix;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        List<Reservation> validReservations = new  ArrayList<>();
-
-        for (Reservation reservation : reservations) {
-            if (this.placeDisponible > 0) {
-                validReservations.add(reservation);
-                this.placeDisponible--;
-            } else {
-                System.out.println("Réservation refusée, il n'y a pas de places disponibles !");
-            }
-        }
-
-        this.reservations = validReservations;
-    }
-
-    public Trajet() {}
-
-    public int getId() {
+    // Getters and Setters
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,35 +61,106 @@ public class Trajet {
     }
 
     public LocalDateTime getHeureDepart() {
-        return heureDepart.toLocalDateTime();
+        return heureDepart != null ? heureDepart.toLocalDateTime() : null;
     }
 
     public void setHeureDepart(LocalDateTime heureDepart) {
         this.heureDepart = Timestamp.valueOf(heureDepart);
     }
 
-    public int getDureeEstimee() {
+    public Integer getDureeEstimee() {
         return dureeEstimee;
     }
 
-    public void setDureeEstimee(int dureeEstimee) {
+    public void setDureeEstimee(Integer dureeEstimee) {
         this.dureeEstimee = dureeEstimee;
     }
 
-    public float getDistance() {
+    public Float getDistance() {
         return distance;
     }
 
-    public int getPlaceDisponible() {
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public Integer getPlaceDisponible() {
         return placeDisponible;
     }
 
-    public void setPlaceDisponible(int placeDisponible) {
+    public void setPlaceDisponible(Integer placeDisponible) {
         this.placeDisponible = placeDisponible;
     }
 
-    public void setDistance(float distance) {
-        this.distance = distance;
+    public String getPreferences() {
+        return preferences;
+    }
+
+    public void setPreferences(String preferences) {
+        this.preferences = preferences;
+    }
+
+    public Float getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Float prix) {
+        this.prix = prix;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+        reservation.setTrajet(this);
+    }
+
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
+        reservation.setTrajet(null);
+    }
+
+    public LocalDateTime getHeureArrive() {
+        if (heureDepart == null || dureeEstimee == null) {
+            return null;
+        }
+        return heureDepart.toLocalDateTime().plusMinutes(dureeEstimee);
+    }
+
+    public String getFormattedTravelTime() {
+        LocalDateTime arrival = getHeureArrive();
+        if (heureDepart == null || arrival == null) {
+            return "Heure non définie";
+        }
+        return String.format("%s - %s (%d min)",
+                heureDepart.toLocalDateTime().toLocalTime(),
+                arrival.toLocalTime(),
+                dureeEstimee);
+    }
+
+    public Utilisateur getUser() {
+        return user;
+    }
+
+    public void setUser(Utilisateur user) {
+        // Remove from previous user's trajets
+        if (this.user != null) {
+            this.user.getTrajets().remove(this);
+        }
+
+        // Set new user
+        this.user = user;
+
+        // Add to new user's trajets
+        if (user != null && !user.getTrajets().contains(this)) {
+            user.getTrajets().add(this);
+        }
     }
 
     @Override
@@ -113,7 +172,9 @@ public class Trajet {
                 ", heureDepart=" + heureDepart +
                 ", dureeEstimee=" + dureeEstimee +
                 ", distance=" + distance +
-                ", placesDisponibles=" + placeDisponible +
+                ", placeDisponible=" + placeDisponible +
+                ", preferences='" + preferences + '\'' +
+                ", prix=" + prix +
                 '}';
     }
 }
