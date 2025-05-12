@@ -1,48 +1,57 @@
-🚀 UniDrive - Plateforme Multiservices Étudiante ESPRIT (Version JavaFX)
+# 🚀 UniDrive - Plateforme Multiservices Étudiante ESPRIT
+📌 Esprit School of Engineering Projet PIDEV 3A 
+*« Votre vie étudiante, simplifiée en une plateforme »*
 
-« Votre vie étudiante, simplifiée en une application desktop »
 
-📌 Table des Matières
+## 📌 Table des Matières
+- [✨ Fonctionnalités](#-fonctionnalités)
+- [🚀 Démarrage Rapide](#-démarrage-rapide)
+-  [👥 Équipe](#-équipe)
+- [🤝 Contribution](#-contribution)
+  
 
-✨ Fonctionnalités
+---
+
+## ✨ Fonctionnalités
+| Module           | Description                                                                 |
+|------------------|-----------------------------------------------------------------------------|
+| 🚗 **Trajet**    | Covoiturage intelligent entre campus                                        |
+| 📅 **Événement** | Organisation d'événements étudiants                                        |
+| 💬 **Forum**     | Espace de discussion par filières                                           |
+| 🆘 **Aide**      | Système d'entraide entre étudiants                                         |
+| 🏷️ **Lost&Found**| Gestion des objets perdus                                                  |
+| 👤 **Utilisateur**| Profils vérifiés avec authentification ESPRIT                              |
+
+---
+
 
 🚀 Démarrage Rapide
+### Prérequis
+-Java
+-JavaFX
+-SceneBuilder
+-XAMPP
 
 👥 Équipe
+🧑‍💻 Développeurs Principaux
 
-🤝 Contribution
-
-📄 licence
-
-✨ Fonctionnalités
-Module	Description
-
-🚗 Trajet	Covoiturage intelligent entre campus
-
-📅 Événement	Organisation d'événements étudiants
-
-💬 Forum	Espace de discussion par filières
-
-🆘 Aide	Système d'entraide entre étudiants
-
-🏷️ Lost&Found	Gestion des objets perdus
-
-👤 Utilisateur	Authentification sécurisée
+- **Syrine Guemira(https://github.com/syrineguemira72)
+  
+- **Rihab Bel Hadj Slimen(https://github.com/rihab-belhadj)
+  
+- **Khaled Ganoun(https://github.com/khaled424)
+  
+- **Walid Ismail(https://github.com/walidismail1)
+  
+- **Hamza Jlassi(https://github.com/hamzA00JLASSI)
+  
+- **Syrine Mami (https://github.com/1syrine)
 
 
-🚀 Démarrage Rapide
-Prérequis
 
-Java
 
-JavaFX
-
-SceneBuilder
-
-XAMPP
-
-**Installation
-**bash
+### Installation
+```bash
 
 # 1. Cloner le dépôt
 git clone [https://github.com/rihab-belhadj/UnidriveJava.git](https://github.com/syrineguemira72/UniDriveProject.git)
@@ -68,31 +77,10 @@ cd UnidriveJava
 
 # - Exécuter MainApp.java
 
-- **Configuration Scene Builder
+Configuration Scene Builder
   
-- **Ouvrir les fichiers .fxml avec Scene Builder
+Ouvrir les fichiers .fxml avec Scene Builder
   
-- **Vérifier les contrôleurs associés
+Vérifier les contrôleurs associés
   
-- **Prévisualiser le design
-
-👥 Équipe
-🧑‍💻 Développeurs Principaux
-
-- **Syrine Guemira
-  
-- **Rihab Bel Hadj Slimen
-  
-- **Khaled Ganoun
-  
-- **Walid Ismail
-  
-- **Hamza Jlassi
-  
-- **Syrine Mami 
-
-
-📄 Licence
-Licence MIT
-
-© 2024 UniDrive Java Team - ESPRIT
+Prévisualiser le design
