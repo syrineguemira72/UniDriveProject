@@ -1,30 +1,60 @@
-# 🚗📚 UniDrive - Votre Compagnon de Déplacements Étudiants
+🚀 UniDrive - Plateforme Multiservices Étudiante ESPRIT (Version JavaFX)
+« Votre vie étudiante, simplifiée en une application desktop »
 
-**Conçu par et pour les étudiants d'ESPRIT**  
-*Simplifiez vos trajets, partagez vos routes et gagnez du temps précieux !*
+📌 Table des Matières
+✨ Fonctionnalités
+🚀 Démarrage Rapide
+👥 Équipe
+🤝 Contribution
+📄 licence
 
----
+✨ Fonctionnalités
+Module	Description
+🚗 Trajet	Covoiturage intelligent entre campus
+📅 Événement	Organisation d'événements étudiants
+💬 Forum	Espace de discussion par filières
+🆘 Aide	Système d'entraide entre étudiants
+🏷️ Lost&Found	Gestion des objets perdus
+👤 Utilisateur	Authentification sécurisée
 
-## 🌟 Fonctionnalités Clés
-- **🚘 Covoiturage Intelligent**  
-  Trouvez des trajets correspondant à votre emploi du temps universitaire
+🚀 Démarrage Rapide
+Prérequis
+Java
+JavaFX
+SceneBuilder
+XAMPP
 
-- **📍 Suivi en Temps Réel**  
-  Visualisez les positions et retards en direct (⌚ + 📍)
+**Installation
+**bash
+# 1. Cloner le dépôt
+git clone https://github.com/rihab-belhadj/UnidriveJava.git
+cd UnidriveJava
+# 2. Configurer la base de données
+# - Démarrer XAMPP
+# - Activer Apache et MySQL
+# - Importer le fichier SQL fourni dans phpMyAdmin
+# 3. Lancer l'application
+# Avec IntelliJ IDEA :
+# - Ouvrir le projet
+# - Configurer le SDK Java 17+
+# - Ajouter JavaFX comme library
+# - Exécuter MainApp.java
 
-- **💳 Paiement Sécurisé**  
-  Système intégré de transactions étudiantes (🎓🤝💸)
+- **Configuration Scene Builder
+- **Ouvrir les fichiers .fxml avec Scene Builder
+- **Vérifier les contrôleurs associés
+- **Prévisualiser le design
 
-- **👥 Communauté Fiable**  
-  Réservé exclusivement aux étudiants vérifiés d'ESPRIT
+👥 Équipe
+🧑‍💻 Développeurs Principaux
+- **Syrine Guemira 
+- **Rihab Bel Hadj Slimen 
+- **Khaled Ganoun 
+- **Walid Ismail 
+- **Hamza Jlassi 
+- **Syrine Mami 
 
----
+📄 Licence
+Licence MIT
 
-## � Pourquoi Choisir UniDrive?
-- **⏱️ Gain de temps** optimal entre les campus et logements étudiants
-- **📉 Réduction des coûts** de transport jusqu'à 70%
-- **🌱 Solution écologique** par l'optimisation des trajets
-- **🔒 Environnement sécurisé** avec authentification ESPRIT
-
----
-
+© 2024 UniDrive Java Team - ESPRIT
